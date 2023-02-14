@@ -1,22 +1,18 @@
 import React,{useEffect} from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import NavigationOptions from '../NavigationOptions';
-import HomeScreen from '../../screens/Drawer/Home/HomeScreen';
-import TabNavigator from '../TabNavigator';
-
+import LibraryScreen from '../../screens/Drawer/Library/LibraryScreen';
 const Stack = createStackNavigator();
 
-const MainNavigator = () => {
+const LibraryNavigator = () => {
   useEffect(() => {
   }, []);
   return (
     <Stack.Navigator screenOptions={NavigationOptions}>
-      <Stack.Screen name={"TabNavigator"} component={TabNavigator}
-      options={{headerShown: false}}
-      />
+      <Stack.Screen name={"LibraryScreen"} component={LibraryScreen}/>
   
     </Stack.Navigator>
   );
 };
 
-export default MainNavigator;
+export default LibraryNavigator;

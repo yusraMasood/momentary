@@ -2,21 +2,18 @@ import React,{useEffect} from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import NavigationOptions from '../NavigationOptions';
 import HomeScreen from '../../screens/Drawer/Home/HomeScreen';
-import TabNavigator from '../TabNavigator';
-
+import FriendNetworkScreen from '../../screens/Drawer/FriendNetwork/FriendNetworkScreen';
 const Stack = createStackNavigator();
 
-const MainNavigator = () => {
+const FriendNavigator = () => {
   useEffect(() => {
   }, []);
   return (
     <Stack.Navigator screenOptions={NavigationOptions}>
-      <Stack.Screen name={"TabNavigator"} component={TabNavigator}
-      options={{headerShown: false}}
-      />
+      <Stack.Screen name={"FriendNetworkScreen"} component={FriendNetworkScreen}/>
   
     </Stack.Navigator>
   );
 };
 
-export default MainNavigator;
+export default FriendNavigator;

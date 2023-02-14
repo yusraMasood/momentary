@@ -2,6 +2,7 @@ export const colors = {
   general:{
     black:"#000",
     white:"#FFF",
+    red:"#FF0000"
 
   },
   themeColor:{
@@ -9,11 +10,19 @@ export const colors = {
 
   },
   text:{
-    offwhite:"#DADADA"
+    offwhite:"#DADADA",
+    grey:"#929293",
+    darkGrey:"#999999",
+    greyDesc:"#CECECE"
 
   },
   input:{
-    greyBorder:"#707070"
+    greyBorder:"#707070",
+    greyBackground:"rgba(252,252,252,0.09)",
+    greyPlaceholder:"#7B7B7B"
+  },
+  border:{
+    // grey:"#707070"
   }
 };
 export const linearColors = {

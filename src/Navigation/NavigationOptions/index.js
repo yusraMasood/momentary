@@ -6,116 +6,65 @@ import {
   icons,
   sampleImages,
 } from '../../assets/images';
+import DamionRegular from '../../components/Texts/DamionRegular';
 import PragmaticaRegular from '../../components/Texts/RobotoSemiBold';
 import RippleHOC from '../../components/wrappers/Ripple';
-import {vw} from '../../utils/dimensions';
+import { colors } from '../../utils/appTheme';
+import {vh, vw} from '../../utils/dimensions';
 import styles from './styles';
 
-const routesWithBackIconAndTitle = {
-  PaymentScreen: 'Payment',
- 
-  UserInformation: 'Consultation',
-  ConfirmationScreen: 'Consultation',
 
-  BookingDetails: 'Booking Details',
-  ReportBooking: 'Report Booking',
-  ProductDetail: 'Product Details',
-  // CartScreen: 'Cart',
-  CheckoutScreen: 'Checkout',
-  EditProfileScreen: 'Edit Profile',
-  ChangePassword: 'ChangePassword',
-  OrderDetails: 'Order Details',
-  ProductDetails: 'ProductDetails',
-  ListOfResources: 'List Of Resources',
-  RatingAndReviews:"Rating And Reviews"
-  // CategoryDetailScreen:"Capsules"
-  // DocumentsDownload:"Document Download"
-};
 const routesWithTitle = {
-
- 
-  DocumentsDownload: 'Document Download',
-
-  // ProfileScreen: 'Profile',
 };
 const titles = {
-  ContactUs: 'Contact Us',
-  AboutUs: 'About Us',
-  MyOrdersScreen: 'My Orders',
-  MyBookings: 'My Bookings',
-  ChooseAppointment: 'Consultation',
-  EducationScreen: 'Education',
-  CategoryScreen: 'Categories',
-  ShopScreen: 'Shop',
-  GeoGeneticsScreen: 'Geo Genetics',
+  HomeScreen:"Momentary",
+  FriendNetworkScreen:"Friends Network"
+
 };
 const routesWithImage = {
-  GeoGeneticsScreen: 'Geo Genetics',
-  EducationScreen: 'EducationScreen',
-  ProfileScreen: 'ProfileScreen',
-  HomeScreen: 'HomeScreen',
-  DocumentsDownload: 'DocumentsDownload',
-  ContactUs: 'ContactUs',
-  AboutUs: 'AboutUs',
-  // ChatScreen:"ChatScreen",
-  // CartScreen: 'Cart',
 
-  // ProfileScreen:"ProfileScreen"
 };
-const routesWithDrawer = {
-  CartScreen: 'Cart',
-  HomeScreen: 'HomeScreen',
-  ProfileScreen: 'ProfileScreen',
-  ChatScreen: 'ChatScreen',
-  ContactUs: 'ContactUs',
-  AboutUs: 'AboutUs',
-  MyOrdersScreen: 'MyOrdersScreen',
-  MyBookings: 'MyBookings',
-  ChooseAppointment: 'ChooseAppointment',
-  EventScreen:"EventScreen",
-  CategoryScreen:"CategoryScreen",
-  EducationScreen: 'EducationScreen',
-  ShopScreen:"ShopScreen",
-  GeoGeneticsScreen: 'GeoGeneticsScreen',
-  EventsScreen:"EventsScreen"
-};
-// const routesWithUserImage = {
-//   EducationScreen:"EducationScreen",
-//   GeoGeneticsScreen: 'GeoGeneticsScreen',
-// };
-
+const routesWithSetting = {
+  HomeScreen:"HomeScreen",
+  FriendNetworkScreen:"FriendNetworkScreen"
+}
+const routesWithNotification = {
+  HomeScreen:"HomeScreen",
+  FriendNetworkScreen:"FriendNetworkScreen"
+}
 const NavigationOptions = navProps => {
   return {
     headerTitle: () => renderTitle(navProps),
     headerRight: () => renderheaderRight(navProps),
-    headerLeft: () => renderLeftTitleWithImage(navProps),
+    headerLeft: () => renderHeaderLeft(navProps),
     headerTitleAlign: 'center',
     headerLeftContainerStyle: {paddingLeft: 4 * vw},
     headerRightContainerStyle: {paddingRight: 4 * vw},
+    // headerStyle:{backgroundColor: colors.general.black}
+    headerStyle: {
+      backgroundColor: colors.general.black,
+      shadowColor: 'transparent',
+      // height: vh * 14,
+    },
   };
 };
 const renderTitle = props => {
   if (titles[props?.route?.name]) {
     return (
       <View>
-        <PragmaticaRegular style={styles.titleCenterText}>
+        <DamionRegular style={styles.titleCenterText}>
           {titles[props?.route?.name]}
-        </PragmaticaRegular>
+        </DamionRegular>
       </View>
     );
   }
 };
-const renderLeftTitleWithImage = props => {
-  if (routesWithBackIconAndTitle[props?.route?.name]) {
+const renderHeaderLeft = props => {
+  if (routesWithSetting[props?.route?.name]) {
     return (
-      <View style={styles.titleImageContainer}>
         <RippleHOC onPress={() => props.navigation.goBack()}>
-          <Image source={icons.backicon} style={styles.backIcon} />
+          <Image source={icons.setting} style={styles.backIcon} />
         </RippleHOC>
-        <PragmaticaRegular style={styles.paymentText}>
-          {routesWithBackIconAndTitle[props?.route?.name]}
-        </PragmaticaRegular>
-      </View>
     );
   }
   if (routesWithTitle[props?.route?.name]) {
@@ -125,24 +74,6 @@ const renderLeftTitleWithImage = props => {
       </PragmaticaRegular>
     );
   }
-  if (routesWithDrawer[props?.route?.name]) {
-    return (
-      <RippleHOC onPress={() => props.navigation.toggleDrawer()}>
-        <Image source={drawerIcons.drawer} style={styles.iconStyle} />
-      </RippleHOC>
-    );
-  }
-  // if (routesWithBackIcon[props?.route?.name]) {
-  //   return (
-  //     <View></View>
-  //   );
-  // }
-  // if (routesWithMenuIcon[props?.route?.name]) {
-  //   return (
-  //     <View style={styles.iconsContainer}>
-  //     </View>
-  //   );
-  // }
 };
 
 const renderheaderRight = props => {
@@ -156,13 +87,18 @@ const renderheaderRight = props => {
       </RippleHOC>
     );
   }
-  // if (routesWithUserImage[props?.route?.name]) {
-  //   return (
-  //   <View>
-  //     <Image source={}/>
-  //   </View>
-  //   );
-  // }
+  if (routesWithNotification[props?.route?.name]) {
+    return (
+      <RippleHOC
+        onPress={() => props.navigation.navigate('NotificationScreen')}
+        style={styles.imgContainer}
+      >
+        <Image source={icons.notification} style={styles.backIcon} />
+       <View style={styles.circleNotification}/>
+      </RippleHOC>
+    );
+  }
+  
 };
 
 export const drawerRoutes = {

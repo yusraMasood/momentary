@@ -1,6 +1,6 @@
 export const generalImages = {
     userImage: require('./generalImages/userImage.png'),
-    // logout: require('./generalImages/logout.png'),
+    bookcover: require('./generalImages/bookcover.png'),
     // loginImg: require('./generalImages/loginImg.png'),
     // star: require('./generalImages/star.png'),
     // finance: require('./generalImages/finance.png'),
@@ -22,12 +22,12 @@ export const generalImages = {
     fingerprint: require('./icons/fingerprint.png'),
     camera: require('./icons/camera.png'),
     info: require('./icons/info.png'),
-    // google: require('./icons/google.png'),
-    // back: require('./icons/back.png'),
-    // store: require('./icons/store.png'),
-    // star: require('./icons/star.png'),
-    // whiteStar: require('./icons/whiteStar.png'),
-    // arrowLeft: require('./icons/arrowLeft.png'),
+    setting: require('./icons/setting.png'),
+    notification: require('./icons/notification.png'),
+    edit: require('./icons/edit.png'),
+    mapPin: require('./icons/mapPin.png'),
+    comment: require('./icons/comment.png'),
+    send: require('./icons/send.png'),
     // arrowRight: require('./icons/arrowRight.png'),
     // backicon: require('./icons/backicon.png'),
     // down: require('./icons/down.png'),
@@ -52,11 +52,11 @@ export const generalImages = {
   };
   
   export const tabIcons = {
-    // menu: require('./tabIcons/menu.png'),
-    // chat: require('./tabIcons/chat.png'),
-    // notification: require('./tabIcons/notification.png'),
-    // person: require('./tabIcons/person.png'),
-    // planning: require('./tabIcons/planning.png'),
+    friend: require('./tabIcons/friend.png'),
+  global: require('./tabIcons/global.png'),
+    library: require('./tabIcons/library.png'),
+    store: require('./tabIcons/store.png'),
+    home: require('./tabIcons/home.png'),
 };
   
   export const drawerIcons = {

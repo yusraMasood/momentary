@@ -9,7 +9,7 @@ const ParentNavigator = () => {
   return (
     <ParentStack.Navigator screenOptions={{headerShown: false}}>
         <ParentStack.Screen name="AuthNavigator" component={AuthNavigator} />
-        {/* <ParentStack.Screen name="MainNavigator" component={MainNavigator} /> */}
+        <ParentStack.Screen name="MainNavigator" component={MainNavigator} />
     </ParentStack.Navigator>
   );
 };

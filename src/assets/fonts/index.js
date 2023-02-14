@@ -2,7 +2,7 @@ import {Platform} from 'react-native';
 
 export const fonts = {
   poppins:{
-    regular:'Poppins-Black',
+    regular:'Poppins-Regular',
     semiBold:'Poppins-SemiBold',
     bold:'Poppins-Bold',
     medium:"Poppins-Medium",
