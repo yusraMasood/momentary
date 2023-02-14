@@ -114,7 +114,14 @@ const InputField = props => {
           </TouchableOpacity>
         )}
         <PragmaticaRegular style={[styles.withoutLeftIcon , props.labelStyle]}>{props.label}</PragmaticaRegular>     
-        </View>
+       {props.questionIcon &&
+        <Image
+              source={icons.info}
+              style={styles.rghtIcon}
+            />
+       
+       }
+</View>
     </View>
   );
 };

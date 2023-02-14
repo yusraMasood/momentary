@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
         
       },
       switchOn: {
-        backgroundColor: colors.general.white,
-        borderColor: colors.white,
+        // backgroundColor: colors.general.white,
+        borderColor: colors.general.white,
         borderWidth:1,
         alignItems: 'flex-end',
         paddingRight: 0.5 * vw,

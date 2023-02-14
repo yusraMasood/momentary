@@ -21,7 +21,7 @@ export const generalImages = {
     faceRecognition: require('./icons/faceRecognition.png'),
     fingerprint: require('./icons/fingerprint.png'),
     camera: require('./icons/camera.png'),
-    // facebook: require('./icons/facebook.png'),
+    info: require('./icons/info.png'),
     // google: require('./icons/google.png'),
     // back: require('./icons/back.png'),
     // store: require('./icons/store.png'),

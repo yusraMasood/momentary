@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     // paddingVertical: vh * 1.4,
     flex: 1,
     padding: 0,
-    color: colors.black,
+    color: colors.text.offwhite,
     // fontFamily: fonts.recolita.regular,
     fontSize: vh * 1.85,
   },

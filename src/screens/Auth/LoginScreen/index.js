@@ -27,7 +27,7 @@ const LoginScreen = (props) => {
       </View>
       <RobotoMedium style={styles.signinText}>Sign In</RobotoMedium>
       <InputField
-      placeholder={"Enter Email"}
+      placeholder={"Enter Email Address"}
       label={"Email"}
       value={email}
       onChangeText={setEmail}
@@ -56,11 +56,11 @@ const LoginScreen = (props) => {
       <View style={styles.signupContainer}>
       <Image source={icons.fingerprint} style={styles.fingerPrintStyle}/>
       <View style={styles.registerContainer}>
-<RobotoRegular style={styles.newAuthorText}>New Author ? 
+<RobotoRegular style={styles.newAuthorText}>New Author? {" "} 
   </RobotoRegular>
 
   <RippleHOC onPress={()=> props.navigation.navigate("SignupScreen")}>
-<RobotoRegular style={styles.registerText} > Register here</RobotoRegular>
+<RobotoRegular style={styles.registerText} >Register here</RobotoRegular>
   </RippleHOC>
       </View>
       <RippleHOC >

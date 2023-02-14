@@ -5,7 +5,7 @@ import { vh, vw } from '../../../utils/dimensions'
 const styles = StyleSheet.create({
     container:{
         paddingHorizontal: vw*4,
-        paddingTop: vh*4,
+        paddingTop: vh*5.7,
     },
     momentaryText:{
         color: colors.themeColor.yellow,
@@ -20,17 +20,52 @@ const styles = StyleSheet.create({
         color:colors.text.offwhite,
         fontSize: vh*3,
     },
+    usernameText:{
+        color: colors.general.white,
+        fontSize: vh*1.6
+    },
+    usernameFocusText:{
+        color: colors.themeColor.yellow
+    },
     userimage:{
       marginTop: vh*2,
-      height: vh*12,
-      width: vw*25,
+      height: vh*10.5,
+      width: vw*21,
       resizeMode: "contain",
       borderRadius: vh*6
     },
     cameraIcon:{
-      height: vh*2,
-      width: vw*4,
+      height: vh*1.3,
+      width: vw*3.2,
       resizeMode: "contain"
+    },
+    cameraContainer:{
+        paddingHorizontal: vh*0.8,
+        paddingVertical: vh*0.9,
+        borderRadius: vh*4,
+        position: "absolute",
+        bottom: vh*0.6,
+        left: vw*16,
+    },
+    usernameArrayContainer:{
+        flexDirection: "row",
+        marginTop: vh*1,
+        flexWrap: "wrap",
+        justifyContent: "space-between"
+    },
+    usernameContainer:{
+        borderWidth:1,
+        paddingHorizontal: vw*0.9,
+        paddingVertical: vh*0.2,
+        borderRadius: vh*0.5,
+        marginRight: vw*0.4,
+        borderColor: colors.general.white
+    },
+    usernameFocusContainer:{
+        borderColor: colors.themeColor.yellow
+    },
+    alignBtn:{
+        marginTop: vh*5,
     },
     // forgotPasswordText:{
     //     color: colors.themeColor.yellow,

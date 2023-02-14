@@ -14,9 +14,19 @@ import { linearColors } from '../../../utils/appTheme';
 import styles from './styles';
 
 const SignupScreen = (props) => {
-  const passwordRef = useRef(null);
+ 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [itemIndex,setItemIndex] =useState('RobMcDonnell')
+  const [username,setUsername] =useState(itemIndex?itemIndex: "")
+  const usernameArray=["RobMcDonnell","RobMcl213", "RobMcl256","RobMcl856"]
+
+  const emailRef=useRef(null)
+  const confirmPasswordRef =useRef(null)
+  const passwordRef = useRef(null);
+  const phoneRef = useRef(null);
+
+
 
 
   const onSubmit=()=>{
@@ -30,19 +40,42 @@ const SignupScreen = (props) => {
       <RobotoMedium style={styles.signinText}>Sign Up</RobotoMedium>
       <View>
         <Image source={generalImages.userImage} style={styles.userimage}/>
-        <LinearGradient colors={linearColors.yellow}>
+        <LinearGradient colors={linearColors.yellow} style={styles.cameraContainer}>
           <Image source={icons.camera} style={styles.cameraIcon}/>
         </LinearGradient>
       </View>
       <InputField
+      placeholder={"Enter Username"}
+      questionIcon
+      label={"Username"}
+      value={username}
+      onSubmitEditing={()=> phoneRef.current.focus()}
+      onChangeText={setUsername}
+      />
+      <View style={styles.usernameArrayContainer}>
+      {usernameArray.map((item,index)=>{
+        const focus=itemIndex==item
+        return(
+          <RippleHOC onPress={()=> setItemIndex(item)} style={[styles.usernameContainer, focus && styles.usernameFocusContainer]} key={index}>
+            <RobotoRegular style={[styles.usernameText, focus && styles.usernameFocusText]}>{item}</RobotoRegular>
+          </RippleHOC>
+        )
+      })}
+      </View>
+      <InputField
+      reference={phoneRef}
       placeholder={"Enter Phone"}
+      questionIcon
       label={"Phone"}
+      keyboardType={"number-pad"}
       value={email}
       onChangeText={setEmail}
-      onSubmitEditing={()=> passwordRef.current.focus()}
+      onSubmitEditing={()=> emailRef.current.focus()}
       />
       <InputField
-      placeholder={"Enter Email"}
+      reference={emailRef}
+      placeholder={"Enter Email Address"}
+      questionIcon
       label={"Email"}
       value={email}
       keyboardType={"email-address"}
@@ -51,29 +84,34 @@ const SignupScreen = (props) => {
       />
        <InputField
        reference={passwordRef}
-       onSubmitEditing={onSubmit}
+      //  onSubmitEditing={onSubmit}
+       questionIcon
       placeholder={"Enter Password"}
+      onSubmitEditing={()=> confirmPasswordRef.current.focus()}
+
       isPassword
       rightIcon
       label={"Password"}
       />
       <InputField
-       reference={passwordRef}
+       reference={confirmPasswordRef}
        onSubmitEditing={onSubmit}
-      placeholder={"Enter Password"}
+       questionIcon
+      placeholder={"Enter Confirm Password"}
       isPassword
       rightIcon
-      label={"Password"}
+      label={"Confirm Password"}
       />
       
-      <CustomButton text={"Sign Up"}  onPress={onSubmit}/>
+      <CustomButton text={"Sign Up"}  onPress={onSubmit} alignStyle={styles.alignBtn}/>
+      <View style={styles.alignContent}>
       <View style={styles.registerContainer}>
-<RobotoRegular style={styles.newAuthorText}>Have an account already? 
-  </RobotoRegular>
+<RobotoRegular style={styles.newAuthorText}>Have an account already?{" "}</RobotoRegular>
 
   <RippleHOC onPress={()=> props.navigation.navigate("SignupScreen")}>
-<RobotoRegular style={styles.registerText} > Login Now</RobotoRegular>
+<RobotoRegular style={styles.registerText} >Login Now</RobotoRegular>
   </RippleHOC>
+      </View>
       </View>
     </ScreenWrapper>
   );
