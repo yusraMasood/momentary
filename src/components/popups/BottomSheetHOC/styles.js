@@ -8,8 +8,9 @@ export const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
+    // backgroundColor: "red",
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
   },
 
   blurBackground: {
@@ -24,69 +25,52 @@ export const styles = StyleSheet.create({
   },
 
   absolute: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
+    height: 100 * vh,
+    width: 100 * vw,
   },
 
   modalInnerContainer: {
-    width: vw * 100,
-    backgroundColor: '#FFF',
+    width: vw * 90,
+    borderRadius: vh*2,
+    backgroundColor: colors.general.black,
     position: 'absolute',
-    bottom: 0,
     paddingTop: vh * 2,
     paddingBottom:vh*4,
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    borderTopLeftRadius: vw * 8,
-    borderTopRightRadius: vw * 8,
-    zIndex: 99999,
-    shadowColor: '#000',
-    shadowOffset: {width: 2, height: 2},
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-    elevation: 2,
-    borderColor: '#CCC',
-    borderWidth: 1,
   },
-  optionContainer: {
-    // flexDirection: 'row',
-    marginRight: vw*10,
-    // alignItems: 'center',
-    // borderBottomColor: '#999',
-    // borderStyle: 'solid',
-    // borderBottomWidth: 0.3,
-    // width: vw * 100,
-    // paddingHorizontal: vw * 4,
-    // paddingVertical: vh * 2,
+  imageContainer:{
+    borderWidth:1,
+    borderColor: colors.input.greyBorder,
+    paddingVertical: vh*1,
+    paddingHorizontal: vw*3,
+    borderRadius: vh*3,
+    marginLeft: vw*5,
   },
-//   optionIcon: {
-//     width: vw * 6,
-//     height: vw * 6,
-//     marginRight: vw * 4,
-//   },
-//   optionText: {
-//     // fontFamily: fonts.Rubik.Regular,
-//     fontSize: 17,
-//     color: colors.lightPink,
-//   },
-  profileContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: "space-between",
-    paddingHorizontal:vw*5,
-    paddingTop: vh*2
-  },
-  deleteIcon:{
-    height: vh*2.4,
-    width: vh*2.4,
+  crossIcon:{
+    height: vh*3,
+    position: "absolute",
+    right: vw*4.5,
+    width: vw*4,
     resizeMode: "contain"
+
   },
-  profileText:{
-    color: colors.black,
-    fontSize: vh*2
+  image: {
+    height: vh*3.5,
+    width: vw*4.5,
+    resizeMode: "contain"
+
+   
+  },
+  alignContent:{
+    alignItems: "flex-end",
+    paddingRight: vw*7,
+    // position: "absolute"
+
+  },
+  photoText:{
+    color: colors.text.offwhite,
+    fontSize: vh*3,
+    paddingLeft: vw*5,
+    paddingTop: vh*0.9,
   },
   imgStyle:{
     height: vh*2.6,
@@ -96,8 +80,8 @@ export const styles = StyleSheet.create({
   alignContainer:{
     flexDirection: "row",
     // justifyContent: "space-between",
-    paddingTop: vh*4,
-    paddingHorizontal: vw*6,
+    paddingTop: vh*2,
+    // paddingHorizontal: vw*6,
     // backgroundColor: "red"
   }
 });

@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   textIcon:{
     height: vh*3.5,
     width: vw*7,
-    backgroundColor: "blue",
+    // backgroundColor: "blue",
     resizeMode: "contain"
   },
   editContainer:{
