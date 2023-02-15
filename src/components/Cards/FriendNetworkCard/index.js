@@ -2,6 +2,7 @@ import React from 'react';
 import {Image, View} from 'react-native';
 import {generalImages, icons} from '../../../assets/images';
 import PoppinsRegular from '../../Texts/PoppinsRegular';
+import RobotoMedium from '../../Texts/RobotoMedium';
 import RobotoRegular from '../../Texts/RobotoRegular';
 import styles from './styles';
 
@@ -17,27 +18,31 @@ const FriendNetworkCard = () => {
           <View style={styles.editContainer}>
             <Image source={icons.edit} style={styles.editIcon} />
             <RobotoRegular style={styles.dateText}>
-              {" "}January 31, 2022 - 03:00 pm
+              {""}January 31, 2022 - 03:00 pm
             </RobotoRegular>
           </View>
         </View>
         <View style={styles.editContainer}>
           <Image source={icons.mapPin} style={styles.locationIcon} />
           <RobotoRegular style={styles.dateText}>
-           {" "} Exact location of user
+           Approximate Locations
           </RobotoRegular>
         </View>
       </View>
-      <RobotoRegular style={styles.descText}>
+      <RobotoRegular style={styles.descText}> 
         Lorem ipsum dolor sit amet, consectetur are it adipiscing elit. Aenean
         euismod bibendum laoreet. Proin gravida dolor sitom
       </RobotoRegular>
       <View style={styles.alignComment}>
+      <RobotoMedium style={styles.headerText}>Add To library</RobotoMedium>
+      </View>
+
+      {/* <View style={styles.alignComment}>
         <View style={styles.commentContainer}>
           <Image source={icons.comment} style={styles.commentIcon} />
           <PoppinsRegular style={styles.commentText}>Comment</PoppinsRegular>
         </View>
-      </View>
+      </View> */}
     </View>
   );
 };

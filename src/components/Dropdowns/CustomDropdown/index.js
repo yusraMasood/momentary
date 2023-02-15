@@ -5,26 +5,27 @@ import RippleHOC from '../../wrappers/Ripple';
 import styles from './styles'
 
 const CustomDropdown = (props) => {
+    const [dropdown,setDropdown] =useState(false)
     // console.log("props", props);
     const savedropdownValue = (item) => {
         props.setDropdownValue(item)
-        props.setDropdown(false)
+        setDropdown(false)
     }
     return (
         <View>
-            <RippleHOC style={[styles.statusContainer, props.statusStyle]} onPress={() => props.setDropdown(!props.dropdown)}>
-                <Text style={[styles.statusText, props.titleStyle]}>
+            <RippleHOC style={[styles.statusContainer, props.statusStyle]} onPress={() => setDropdown(!dropdown)}>
+                <Text style={[styles.statusText, !props.dropdownValue && styles.statusFocusText,props.titleStyle]}>
                   {props.dropdownValue?props.dropdownValue: props.dropdownTitle}
                 </Text>
-                <Image source={icons.down} style={[styles.icon, props.iconStyle]} />
+                <Image source={icons.arrowDown} style={[styles.icon, props.iconStyle]} />
             </RippleHOC>
             <View style={[styles.dropdownContainer]}>
-            {props?.dropdown &&
+            {dropdown &&
                 <View style={[styles.dropdownValues,props.openDrawerStyle]}>
                     {props?.array.map((item, index) => {
                         return (
                             <TouchableOpacity  key={index} onPress={()=> savedropdownValue(item)}  style={styles.noOfTimes}>
-                                <Text>{item}</Text>
+                                <Text style={styles.noOfTimesText}>{item}</Text>
                             </TouchableOpacity>
                         )
                     })}

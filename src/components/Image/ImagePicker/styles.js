@@ -5,7 +5,7 @@ import { vh, vw } from "../../../utils/dimensions";
 
 export const styles= StyleSheet.create({
     input:{
-        // fontFamily: fonts.Euclid.bold,
+        fontFamily: fonts.Euclid.bold,
         fontSize: vh*1.5,
         flex:1,
         color: colors.black,

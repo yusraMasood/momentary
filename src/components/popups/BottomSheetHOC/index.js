@@ -5,7 +5,6 @@ import { styles } from './styles';
 import { useNavigation } from '@react-navigation/native'
 import { BlurView } from '@react-native-community/blur';
 import { icons } from '../../../assets/images';
-import Icon from '../../Icon';
 
 
 
@@ -41,7 +40,7 @@ const BottomSheetHOC = (props) => {
                         // console.warn(item);
                         return (
                      
-                          <Icon
+                          <Image
                           key={index}
                            icon={item?.image} 
                            style={styles.optionContainer}

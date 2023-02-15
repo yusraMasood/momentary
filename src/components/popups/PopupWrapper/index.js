@@ -1,6 +1,6 @@
 import React, {useState, useImperativeHandle} from 'react';
 import {Modal, StyleSheet, TouchableOpacity, View, Image} from 'react-native';
-// import {BlurView} from '@react-native-community/blur';
+import {BlurView} from '@react-native-community/blur';
 import {vh, vw} from '../../../utils/dimensions';
 import {colors, themeShadow} from '../../../utils/appTheme';
 import {icons} from '../../../assets/images';
@@ -47,9 +47,9 @@ const PopupWrapper = props => {
           activeOpacity={0.9}
           style={styles.backdropContainer}
         >
-          {/* <BlurView blurType="light"  style={styles.blur} 
+          <BlurView blurType="light"  style={styles.blur} 
             reducedTransparencyFallbackColor="orange"
-          /> */}
+          />
         </TouchableOpacity>
         <View style={[styles.contentContainer, props.contentContainerStyle]}>
         

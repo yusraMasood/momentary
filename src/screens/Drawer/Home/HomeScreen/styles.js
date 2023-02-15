@@ -25,13 +25,23 @@ const styles=StyleSheet.create({
         color: colors.text.grey,
         // width: vw*40,
         textAlign: "center",
-        fontSize: vh*1.6
+        paddingLeft: vw*1,
+        fontSize: vh*1.7
     },
     descText:{
         color: colors.text.grey,
         width: vw*40,
         textAlign: "center",
         fontSize: vh*1.6
+    },
+    calendarContainer:{
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    calendarIcon:{
+        height: vh*2,
+        width: vw*4,
+        resizeMode: "contain"
     }
 })
 export default styles

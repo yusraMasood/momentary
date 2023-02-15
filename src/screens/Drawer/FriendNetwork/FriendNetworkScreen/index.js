@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Image, FlatList,TextInput} from 'react-native';
 import { generalImages, icons } from '../../../../assets/images';
 import FriendNetworkCard from '../../../../components/Cards/FriendNetworkCard';
+import SearchInput from '../../../../components/Inputs/SearchInput';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import { colors } from '../../../../utils/appTheme';
@@ -15,8 +16,18 @@ const FriendNetworkScreen = () => {
   };
 const renderHeader=()=>{
     return(
+      <View>
+        <SearchInput placeholder={"Search Locations or Tags"}/>
+        <View style={styles.alignContent}>
         <View style={styles.headerContainer}>
+          <Image source={icons.user} style={styles.sendIcon}/>
+          <View style={styles.headerContainer}>
+          <RobotoMedium style={styles.headerText}>Me</RobotoMedium>
+          <RobotoMedium style={styles.dashText}>-</RobotoMedium>
             <RobotoMedium style={styles.headerText}>My Friends</RobotoMedium>
+            </View>
+        </View>
+        </View>
         </View>
     )
 }
@@ -27,7 +38,7 @@ const renderHeader=()=>{
       ListHeaderComponent={renderHeader}
       contentContainerStyle={styles.flatListContainer}
       renderItem={renderFriendCard} />
-      <View style={styles.textInputContainer}>
+      {/* <View style={styles.textInputContainer}>
         <Image source={generalImages.userImage} style={styles.userImage}/>
         <View style={styles.inputContainer}>
         <TextInput
@@ -37,7 +48,7 @@ const renderHeader=()=>{
         />
         <Image source={icons.send} style={styles.sendIcon}/>
         </View>
-      </View>
+      </View> */}
     </ScreenWrapper>
   );
 };

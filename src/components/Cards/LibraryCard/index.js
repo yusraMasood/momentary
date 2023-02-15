@@ -5,22 +5,22 @@ import RobotoMedium from '../../Texts/RobotoMedium'
 import RobotoRegular from '../../Texts/RobotoRegular'
 import styles from './styles'
 
-const LibraryCard=()=>{
-    const renderImages=()=>{
+const LibraryCard=(props)=>{
+    const renderImages=({item})=>{
         return(
             <View style={styles.imageContainer}>
-                <Image source={generalImages.bookcover} style={styles.bookImage}/>
+                <Image source={item?item: generalImages?.bookcover} style={styles.bookImage}/>
             </View>
         )
     }
     return(
         <View>
             <View style={styles.headingContainer}>
-                <RobotoMedium style={styles.headingText}>All Entries</RobotoMedium>
+                <RobotoMedium style={styles.headingText}>{props?.heading}</RobotoMedium>
                 <RobotoRegular style={styles.viewText}>View All</RobotoRegular>
             </View>
             <FlatList
-            data={[1,2,3,4]}
+            data={props?.images}
             horizontal={true}
             renderItem={renderImages}
             />

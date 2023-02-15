@@ -22,7 +22,6 @@ export const colors = {
     greyPlaceholder:"#7B7B7B"
   },
   border:{
-    // grey:"#707070"
   }
 };
 export const linearColors = {

@@ -18,19 +18,28 @@ const routesWithTitle = {
 };
 const titles = {
   HomeScreen:"Momentary",
-  FriendNetworkScreen:"Friends Network"
+  FriendNetworkScreen:"My Network",
+  LibraryScreen:"Library",
+  GlobalNetworkScreen:"Global Network",
+  NewEntry:"Add Entry"
 
 };
+const routesWithBackIcon={
+  LibraryScreen:"LibraryScreen",
+  NewEntry:"NewEntry"
+}
 const routesWithImage = {
 
 };
 const routesWithSetting = {
   HomeScreen:"HomeScreen",
-  FriendNetworkScreen:"FriendNetworkScreen"
+  FriendNetworkScreen:"FriendNetworkScreen",
+  GlobalNetworkScreen:"GlobalNetworkScreen"
 }
 const routesWithNotification = {
   HomeScreen:"HomeScreen",
-  FriendNetworkScreen:"FriendNetworkScreen"
+  FriendNetworkScreen:"FriendNetworkScreen",
+  GlobalNetworkScreen:"GlobalNetworkScreen"
 }
 const NavigationOptions = navProps => {
   return {
@@ -64,6 +73,13 @@ const renderHeaderLeft = props => {
     return (
         <RippleHOC onPress={() => props.navigation.goBack()}>
           <Image source={icons.setting} style={styles.backIcon} />
+        </RippleHOC>
+    );
+  }
+  if (routesWithBackIcon[props?.route?.name]) {
+    return (
+        <RippleHOC onPress={() => props.navigation.goBack()}>
+          <Image source={icons.back} style={styles.backIcon} />
         </RippleHOC>
     );
   }

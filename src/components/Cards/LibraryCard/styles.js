@@ -16,16 +16,17 @@ const styles =StyleSheet.create({
     headingContainer:{
         flexDirection: "row",
         justifyContent: "space-between",
-        marginVertical: vh*2,
+        marginBottom: vh*1,
+        marginTop: vh*2,
         alignItems: "center"
     },
     bookImage:{
-        height: vh*17,
-        width: vw*24.5,
+        height: vh*14,
+        width: vw*20.5,
         resizeMode: "contain"
     },
     imageContainer:{
-        borderRadius: vh*2,
+        borderRadius: vh*1.4,
         // backgroundColor: "blue",
         marginRight: vw*2,
         overflow: "hidden"

@@ -4,19 +4,20 @@ import { vh, vw } from '../../../utils/dimensions';
 
 const styles = StyleSheet.create({
     dropdownValues:{
-        // marginLeft: vw*2,
-        // borderWidth:1,
-        // borderColor: colors.greyBtnOrder,
-        backgroundColor: colors.white,
-        // borderRadius: vw*2.4,
-        // ...themeShadow,
-        borderColor: colors.greyInputBorder,
         borderWidth:1,
+        borderColor: colors.input.greyBorder,
         padding: vh*1,
+    },
+    noOfTimesText:{
+
+      color: colors.text.offwhite,
+      fontSize: vh*1.8
     },
     noOfTimes:{
       // paddingBottom: vh*1,
       paddingHorizontal: vw*2.2,
+    
+
       paddingVertical: vh*1,
 
       // alignItems: "center"
@@ -32,12 +33,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: colors.white,
+        // backgroundColor: colors.white,
         marginTop: vh*2,
         paddingVertical: vh*1.7,
         paddingHorizontal: vw*5,
         borderWidth:1,
-        borderColor: colors.greyInputBorder
+        borderColor: colors.input.greyBorder,
+        // marginBottom: vh*2,
       },
       fromContainer:{
           width: vw*60,
@@ -45,9 +47,14 @@ const styles = StyleSheet.create({
 
       },
       statusText: {
-        color: colors.grayTextColor,
+        color: colors.text.offwhite,
         fontSize: vh*1.6,
         paddingRight: vw*19,
       },
+      statusFocusText:{
+        color: colors.text.grey,
+
+
+      }
 })
 export default styles

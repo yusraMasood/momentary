@@ -10,6 +10,7 @@ const styles =StyleSheet.create({
         borderBottomWidth:1,
         borderBottomColor: colors.input.greyBorder
     },
+
     userDetailsContainer:{
         flexDirection: "row",
         paddingBottom: vh*2,
@@ -72,6 +73,11 @@ const styles =StyleSheet.create({
         color: colors.themeColor.yellow,
         fontSize: vh*1.55,
         paddingLeft: vw*1,
-    }
+    },
+    headerText:{
+        color: colors.themeColor.yellow,
+        textDecorationLine: "underline",
+        fontSize: vh*1.6
+    },
 })
 export default styles

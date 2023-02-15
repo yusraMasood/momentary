@@ -6,36 +6,49 @@ import { vh, vw } from '../../../../utils/dimensions'
 const styles=StyleSheet.create({
     container:{
         paddingHorizontal: vw*4,
-        paddingTop: vh*2.5,
+        // paddingTop: vh*2.5,
     },
     flatListContainer:{
         paddingBottom: vh*2,
     },
     headerContainer:{
-        alignItems: "flex-end"
+        // alignItems: "flex-end"
+        flexDirection: "row",
+        alignItems: "center"
     },
     headerText:{
         color: colors.themeColor.yellow,
         textDecorationLine: "underline",
-        fontSize: vh*1.9
+        fontSize: vh*1.8,
+        marginLeft: vw*1,
     },
-    userImage:{
-        height: vh*5,
-        width: vw*10,
-        resizeMode: "contain",
-        borderRadius: vh*4,
+    dashText:{
+        color: colors.themeColor.yellow,
+        // textDecorationLine: "underline",
+        fontSize: vh*1.8,
+        marginLeft: vw*1,
+
     },
-    textInputContainer:{
-        flexDirection: "row",
-        alignItems: "center",
-        // marginTop: vh*2,
+    alignContent:{
+        alignItems: "flex-end"
     },
-    input:{
-        flex:1,
-        color: colors.general.white,
-        fontFamily: fonts.roboto.regular
-        // backgroundColor: "red"
-    },
+    // userImage:{
+    //     height: vh*5,
+    //     width: vw*10,
+    //     resizeMode: "contain",
+    //     borderRadius: vh*4,
+    // },
+    // textInputContainer:{
+    //     flexDirection: "row",
+    //     alignItems: "center",
+    //     // marginTop: vh*2,
+    // },
+    // input:{
+    //     flex:1,
+    //     color: colors.general.white,
+    //     fontFamily: fonts.roboto.regular
+    //     // backgroundColor: "red"
+    // },
     inputContainer:{
         // marginTop: vh*2,
         marginLeft: vw*3,
@@ -47,8 +60,8 @@ const styles=StyleSheet.create({
         paddingHorizontal: vw*4,
     },
     sendIcon:{
-        height: vh*2,
-        width: vw*4,
+        height: vh*1.7,
+        width: vw*3,
         resizeMode: "contain"
     }
 })
