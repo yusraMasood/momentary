@@ -21,12 +21,17 @@ const titles = {
   FriendNetworkScreen:"My Network",
   LibraryScreen:"Library",
   GlobalNetworkScreen:"Global Network",
-  NewEntry:"Add Entry"
+  NewEntry:"Add Entry",
+  NotificationScreen:"Notification",
+  AddNewJournal:"Create Journal",
+  StoreScreen:"Store"
 
 };
 const routesWithBackIcon={
   LibraryScreen:"LibraryScreen",
-  NewEntry:"NewEntry"
+  NewEntry:"NewEntry",
+  NotificationScreen:"NotificationScreen",
+  AddNewJournal:"AddNewJournal"
 }
 const routesWithImage = {
 
@@ -34,12 +39,14 @@ const routesWithImage = {
 const routesWithSetting = {
   HomeScreen:"HomeScreen",
   FriendNetworkScreen:"FriendNetworkScreen",
-  GlobalNetworkScreen:"GlobalNetworkScreen"
+  GlobalNetworkScreen:"GlobalNetworkScreen",
+  StoreScreen:"StoreScreen"
 }
 const routesWithNotification = {
   HomeScreen:"HomeScreen",
   FriendNetworkScreen:"FriendNetworkScreen",
-  GlobalNetworkScreen:"GlobalNetworkScreen"
+  GlobalNetworkScreen:"GlobalNetworkScreen",
+  StoreScreen:"StoreScreen"
 }
 const NavigationOptions = navProps => {
   return {

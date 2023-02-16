@@ -36,6 +36,8 @@ const renderHeader=()=>{
 
       <FlatList data={[1, 2, 3, 4, 5]} 
       ListHeaderComponent={renderHeader}
+      key={"friendArar"}
+      keyExtractor={(item,index)=> index}
       contentContainerStyle={styles.flatListContainer}
       renderItem={renderFriendCard} />
       {/* <View style={styles.textInputContainer}>

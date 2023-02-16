@@ -14,19 +14,22 @@ const styles = StyleSheet.create({
     container: {
         paddingVertical:vh*1.5,
         paddingHorizontal: vw*9,
-        backgroundColor: colors.themeRed,
+        // backgroundColor: colors.themeRed,
+        borderWidth:1,
+        borderColor: colors.themeColor.yellow,
         alignItems: "center",
         justifyContent: "center",
         borderRadius: (vh*3.3)/2,
     },
     text: {
-        color: colors.white,
+        color: colors.themeColor.yellow,
         fontSize:vh*2.1
-        // paddingRight: vw*10,
     },
     alignContent:{
-        alignItems: "center",
-        marginVertical: vh*2,
+        // marginBottom: vh*2,
+        marginTop: vh*2,
+        // alignItems: "center",
+        // marginVertical: vh*2,
     },
     iconStyle:{
         height: vh*2,

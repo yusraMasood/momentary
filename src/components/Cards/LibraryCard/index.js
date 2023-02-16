@@ -21,6 +21,8 @@ const LibraryCard=(props)=>{
             </View>
             <FlatList
             data={props?.images}
+            key={"librarycardArray"}
+            keyExtractor={(item,index)=> index}
             horizontal={true}
             renderItem={renderImages}
             />

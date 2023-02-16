@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import NavigationOptions from '../NavigationOptions';
-import HomeScreen from '../../screens/Drawer/Home/HomeScreen';
+import StoreScreen from '../../screens/Drawer/Store/StoreScreen';
 const Stack = createStackNavigator();
 
 const StoreNavigator = () => {
@@ -9,7 +9,7 @@ const StoreNavigator = () => {
   }, []);
   return (
     <Stack.Navigator screenOptions={NavigationOptions}>
-      <Stack.Screen name={"HomeScreen"} component={HomeScreen}/>
+      <Stack.Screen name={"StoreScreen"} component={StoreScreen}/>
   
     </Stack.Navigator>
   );

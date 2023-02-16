@@ -1,16 +1,17 @@
 import React from 'react';
 import {View, Image, FlatList} from 'react-native';
 import { generalImages } from '../../../../assets/images';
+import BasicButton from '../../../../components/Buttons/BasicButton';
 import CustomButton from '../../../../components/Buttons/CustomButton';
 import LibraryCard from '../../../../components/Cards/LibraryCard';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
 
-const LibraryScreen = () => {
+const LibraryScreen = (props) => {
   const headingArray = [
     {
       heading: 'All Entries',
-      images:[generalImages?.bookcover,generalImages?.bookcover2,generalImages?.bookCover9,generalImages?.bookCover3]
+      images:[generalImages?.bookcover]
     },
     {
       heading: 'Journals',
@@ -27,6 +28,11 @@ const LibraryScreen = () => {
       images:[generalImages?.bookcover9,generalImages?.bookcover2,generalImages?.bookcover,generalImages?.bookCover3]
 
     },
+    {
+      heading: 'Now In Print',
+      images:[generalImages?.bookCover3]
+
+    },
   ];
 
   const renderCards = ({item}) => {
@@ -35,8 +41,16 @@ const LibraryScreen = () => {
      />;
   };
   const renderFooter = () => {
-    return <CustomButton text="Add New Journal" />;
-  };
+    return (
+
+    
+    <View style={styles.buttonContainer}>
+      <CustomButton text="Add New Journal"  style={styles.btn} textStyle={styles.btnText}
+      onPress={()=> props.navigation.navigate("AddNewJournal")}
+      />
+      <BasicButton text=" Add New Entry" style={styles.btn} textStyle={styles.btnText}/>
+      </View>
+  )};
   return (
     <ScreenWrapper style={styles.container}>
       <FlatList

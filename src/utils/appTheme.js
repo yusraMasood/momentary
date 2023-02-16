@@ -2,7 +2,10 @@ export const colors = {
   general:{
     black:"#000",
     white:"#FFF",
-    red:"#FF0000"
+    red:"#FF0000",
+    lightBlack:"#0E0E0E",
+    green:"#58DFA2",
+    lightRed:"#FF6E6E"
 
   },
   themeColor:{
@@ -13,7 +16,8 @@ export const colors = {
     offwhite:"#DADADA",
     grey:"#929293",
     darkGrey:"#999999",
-    greyDesc:"#CECECE"
+    greyDesc:"#CECECE",
+    grayDesc:"#EFEFEF"
 
   },
   input:{

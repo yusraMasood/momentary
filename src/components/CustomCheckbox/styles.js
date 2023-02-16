@@ -4,10 +4,11 @@ import { vh, vw } from '../../utils/dimensions';
 
 export const styles = StyleSheet.create({
     checkboxContainer:{
-        height: vh*1.7,
-        width: vw*3.4,
+        height: vh*2.3,
+        width: vw*4.6,
         // backgroundColor: "red"
-        borderColor: colors.themeRed,
+        borderColor: colors.input.greyBorder,
+
         borderWidth: 1,
         borderRadius: vh*0.5,
         alignItems: "center",
@@ -18,7 +19,8 @@ export const styles = StyleSheet.create({
         height: vh*1.6,
         width: vw*3.3,
         borderRadius: vh*0.5,
-        backgroundColor: colors.themeRed,
+        borderColor: colors.input.greyBorder,
+
         alignItems: "center",
         justifyContent: "center"
     },
@@ -33,8 +35,8 @@ export const styles = StyleSheet.create({
         color:colors.greyText
     },
     tickImg:{
-        height: vh*0.8,
-        width: vh*0.8,
+        height: vh*1.3,
+        width: vh*1.3,
         resizeMode: "contain",
         // tintColor: colors.black
     }

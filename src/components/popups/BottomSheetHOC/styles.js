@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
     borderWidth:1,
     borderColor: colors.input.greyBorder,
     paddingVertical: vh*1,
-    paddingHorizontal: vw*3,
+    paddingHorizontal: vw*3.4,
     borderRadius: vh*3,
     marginLeft: vw*5,
   },
@@ -65,6 +65,13 @@ export const styles = StyleSheet.create({
     paddingRight: vw*7,
     // position: "absolute"
 
+  },
+  crossIcon:{
+    height: vh*3,
+    position: "absolute",
+    right: vw*4.5,
+    width: vw*4,
+    resizeMode: "contain"
   },
   photoText:{
     color: colors.text.offwhite,

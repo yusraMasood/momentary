@@ -10,7 +10,7 @@ const SearchInput = props => {
       <TextInput
         placeholder={props.placeholder}
         placeholderTextColor={colors.text.grey}
-        style={styles.input}
+        style={[styles.input,props.inputStyle]}
         value={props.value}
         onChangeText={props.onChangeText}
       />

@@ -13,6 +13,7 @@ import {useNavigation} from '@react-navigation/native';
 import {BlurView} from '@react-native-community/blur';
 import {icons} from '../../../assets/images';
 import RobotoMedium from '../../Texts/RobotoMedium';
+import RippleHOC from '../../wrappers/Ripple';
 
 const BottomSheetHOC = props => {
   const navigation = useNavigation();
@@ -53,17 +54,19 @@ const BottomSheetHOC = props => {
             {props.list.map((item, index) => {
               // console.warn(item);
               return (
-                <View style={styles.imageContainer}>
+                <RippleHOC 
+                onPress={() => {
+                    item?.onClick();
+                    props.setVisibility(false);
+                  }}
+                style={styles.imageContainer}>
                   <Image
                     key={index}
                     source={item?.image}
                     style={styles.image}
-                    onPress={() => {
-                      item?.onClick();
-                      props.setVisibility(false);
-                    }}
+                  
                   />
-                </View>
+                </RippleHOC>
               );
             })}
           </View>

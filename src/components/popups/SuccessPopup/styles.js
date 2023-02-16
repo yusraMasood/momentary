@@ -3,63 +3,32 @@ import { colors } from '../../../utils/appTheme';
 import { vh, vw } from '../../../utils/dimensions';
 
 const styles = StyleSheet.create({
-  dropImage:{
-    height: vh*14,
-    width: vw*30,
-    resizeMode: "contain",
-    // backgroundColor: "red",
-
-    // marginTop: vh*2
-    // marginBottom: vh*1
+  container:{
+    height: vh*21
   },
-  successImage:{
-      height: vh*16,
-      width: vw*42,
-      resizeMode: "cover",
-      // backgroundColor: "red",
-      marginTop: vh*2
-      // marginBottom: vh*1
+  successText:{
+    color: colors.text.offwhite,
+    fontSize: vh*2.3,
+    paddingBottom: vh*0.7,
   },
-  crossIcon:{
-    height: vh*5,
-    width: vh*5,
-    resizeMode: "contain",
-   
-
+  descText:{
+    color: colors.text.grey,
+    width: vw*50,
+    fontSize: vh*1.8,
+    // textAlign: "center"
   },
-  crossContainer:{
-    position: "absolute",
-    left: vw*1.9,
-    top: vh*1.1,
+  childrenStyle:{
+    paddingTop: vh*2.5,
+    paddingHorizontal: vw*4,
   },
-  text: {
-    // marginVertical: vh * 2,
-    marginTop: vh*1,
-    // marginBottom: vh*2,
-    color: colors.black,
-    fontSize: vh*1.7,
-    textAlign: "center",
-    width: vw*55
-  },
-  titleText: {
-    fontSize: vh * 2.08,
-    letterSpacing:vh*0.05,
-    marginTop: vh*1,
-    color: colors.black,
-    textAlign: 'center'
-  },
-
-  buttonNo:{
-    // marginTop: vh*2,
-    width: vw*29,
+  alignBtn:{
+    alignItems: "center"
+},
+nextBtn:{
     paddingVertical: vh*1.2,
-  },
- 
-  container: {
-    height: vh * 35,
-    alignItems: 'center',
-    justifyContent: "center"
-  },
+    paddingHorizontal: vw*14.9,
+    borderRadius: vh*1.2,
+}
 });
 
 export default styles;

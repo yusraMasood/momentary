@@ -21,9 +21,10 @@ const styles =StyleSheet.create({
         alignItems: "center"
     },
     bookImage:{
-        height: vh*14,
-        width: vw*20.5,
-        resizeMode: "contain"
+        height: vh*15,
+        width: vw*30,
+        // resizeMode: "cover"
+        resizeMode: "stretch"
     },
     imageContainer:{
         borderRadius: vh*1.4,

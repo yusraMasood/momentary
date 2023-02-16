@@ -45,15 +45,19 @@ const PopupWrapper = props => {
         <TouchableOpacity
           onPress={hide}
           activeOpacity={0.9}
-          style={styles.backdropContainer}
+          style={styles.backdropContainer} 
         >
           <BlurView blurType="light"  style={styles.blur} 
             reducedTransparencyFallbackColor="orange"
           />
         </TouchableOpacity>
         <View style={[styles.contentContainer, props.contentContainerStyle]}>
-        
+        <View style={styles.alignContent}>
+        <Image source={icons.cross} style={styles.crossIcon}/>
+        </View>
+        <View style={props.childrenStyle}>
           {props.children}
+          </View>
         </View>
       </View>
     </Modal>
@@ -81,10 +85,18 @@ const styles = StyleSheet.create({
     // top: 0,
     // left: 0,
   },
-  crossIcon: {
-    height: vh * 1.4,
-    width: vh * 1.4,
-    resizeMode: 'contain',
+  alignContent:{
+    alignItems: "flex-end",
+
+  },
+  crossIcon:{
+    height: vh*2.1,
+    width: vw*3.2,
+    position: "absolute",
+    right: vw*4,
+    top: vh*1.8,
+    
+    resizeMode: "contain"
   },
  
   blur: {
@@ -92,24 +104,11 @@ const styles = StyleSheet.create({
     width: 100 * vw,
   },
   contentContainer: {
-    backgroundColor: colors.white,
-    width: vw * 100,
-    // bottom: 0,
+    backgroundColor: colors.general.black,
+    width: vw * 87,
     position: 'absolute',
-    bottom: 0,
     height: vh * 50,
-    // borderTopEndRadius: vh * 4,
-    // borderTopStartRadius: vh * 4,
     borderRadius: vh * 2.4,
-    // ...themeShadow,
-    shadowColor: colors.black,
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.14,
-    shadowRadius: 4.65,
-    elevation: 10,
   },
 });
 export default PopupWrapper;
