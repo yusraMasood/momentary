@@ -7,6 +7,7 @@ import {
   sampleImages,
 } from '../../assets/images';
 import DamionRegular from '../../components/Texts/DamionRegular';
+import RobotoRegular from '../../components/Texts/RobotoRegular';
 import PragmaticaRegular from '../../components/Texts/RobotoSemiBold';
 import RippleHOC from '../../components/wrappers/Ripple';
 import { colors } from '../../utils/appTheme';
@@ -24,14 +25,27 @@ const titles = {
   NewEntry:"Add Entry",
   NotificationScreen:"Notification",
   AddNewJournal:"Create Journal",
-  StoreScreen:"Store"
+  StoreScreen:"Store",
+  PagesDesign:"Page Designs",
+  JournalCovers:"Journal Covers",
+  Typography:"Font Packs",
+  BookPrinting:"Book Printing",
+  // PostByLocation:"Global Network"
 
 };
+const titleWithDescription={
+  PostByLocation:"Global Network"
+}
 const routesWithBackIcon={
   LibraryScreen:"LibraryScreen",
   NewEntry:"NewEntry",
   NotificationScreen:"NotificationScreen",
-  AddNewJournal:"AddNewJournal"
+  AddNewJournal:"AddNewJournal",
+  PagesDesign:"PagesDesign",
+  JournalCovers:"JournalCovers",
+  Typography:"Typography",
+  BookPrinting:"BookPrinting",
+  PostByLocation:"PostByLocation"
 }
 const routesWithImage = {
 
@@ -74,6 +88,16 @@ const renderTitle = props => {
       </View>
     );
   }
+  if (titleWithDescription[props?.route?.name]) {
+    return (
+      <View  >
+        <DamionRegular style={styles.titleCenterText}>
+          {titleWithDescription[props?.route?.name]}
+        </DamionRegular>
+        <RobotoRegular style={styles.anonymousText}>Anonymous Entry From Region</RobotoRegular>
+      </View>
+    );
+  }
 };
 const renderHeaderLeft = props => {
   if (routesWithSetting[props?.route?.name]) {
@@ -90,13 +114,13 @@ const renderHeaderLeft = props => {
         </RippleHOC>
     );
   }
-  if (routesWithTitle[props?.route?.name]) {
-    return (
-      <PragmaticaRegular style={styles.paymentText}>
-        {routesWithTitle[props?.route?.name]}
-      </PragmaticaRegular>
-    );
-  }
+  // if (routesWithTitle[props?.route?.name]) {
+  //   return (
+  //     <PragmaticaRegular style={styles.paymentText}>
+  //       {routesWithTitle[props?.route?.name]}
+  //     </PragmaticaRegular>
+  //   );
+  // }
 };
 
 const renderheaderRight = props => {

@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {View, Image} from 'react-native';
+import {View, Image,ScrollView} from 'react-native';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import {RichEditor, actions, RichToolbar} from 'react-native-pell-rich-editor';
 import styles from './styles';
@@ -28,10 +28,16 @@ const NewEntry = () => {
   const hashTagRef = useRef(null);
   const successPopup = useRef(null);
   const settingRef=useRef(null)
+  const scrollRef=useRef(null)
 
   return (
     <ScreenWrapper>
-      <ContentContainer style={styles.container}>
+      {/* <ContentContainer style={styles.container}> */}
+      <ScrollView
+      usecontainer = {true}
+      style={styles.container}
+      
+      >
         <CustomDropdown
           array={documentsArray}
           dropdownValue={dropdownValue}
@@ -62,6 +68,9 @@ const NewEntry = () => {
             ]}
           />
           <RichEditor
+          onCursorPosition={()=>{
+            scrollRef.current.scrollTo({y: scrollY - 30, animated: true});
+          }}
             ref={richText}
             editorStyle={styles.editorText}
             placeholder={'Type here...'}
@@ -113,7 +122,7 @@ const NewEntry = () => {
         <EntrySettingPopup
         reference={settingRef}
         />
-      </ContentContainer>
+   </ScrollView>
     </ScreenWrapper>
   );
 };

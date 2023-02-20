@@ -17,7 +17,8 @@ export const colors = {
     grey:"#929293",
     darkGrey:"#999999",
     greyDesc:"#CECECE",
-    grayDesc:"#EFEFEF"
+    grayDesc:"#EFEFEF",
+    greyBorder:"rgba(97,97,97,0.45)"
 
   },
   input:{

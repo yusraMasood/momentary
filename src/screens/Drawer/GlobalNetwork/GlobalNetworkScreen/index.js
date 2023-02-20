@@ -7,7 +7,7 @@ import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
 
-const GlobalNetworkScreen = () => {
+const GlobalNetworkScreen = (props) => {
   const imagesArray = [1, 2, 3, 4];
   return (
     <ScreenWrapper style={styles.container}>
@@ -15,7 +15,7 @@ const GlobalNetworkScreen = () => {
 
       <RippleHOC
         style={styles.locationPopcontainer}
-        onPress={() => props.navigation.navigate('')}
+        onPress={() => props.navigation.navigate('PostByLocation')}
       >
         <RobotoRegular style={styles.locationText}>
           Location: City, Country

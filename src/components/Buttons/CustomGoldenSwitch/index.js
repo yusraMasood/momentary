@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {View, LayoutAnimation} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import { linearColors } from '../../../utils/appTheme';
 import RippleHOC from '../../wrappers/Ripple';
 import styles from './styles';
@@ -16,7 +17,7 @@ const CustomGoldenSwitch = props => {
   };
   return (
     <RippleHOC
-    style={{overflow:"hidden"}}
+    // style={{overflow:"hidden"}}
       onPress={pressSwitch}>
         <LinearGradient
           style={[

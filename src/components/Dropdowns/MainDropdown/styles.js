@@ -4,22 +4,20 @@ import { vh, vw } from '../../../utils/dimensions';
 
 const styles = StyleSheet.create({
     dropdownValues:{
-        // marginLeft: vw*2,
-        // borderWidth:1,
-        // borderColor: colors.greyBtnOrder,
-        backgroundColor: colors.white,
-        borderColor: colors.categoryBlueBorder,
-        backgroundColor: colors.categoryBlueBackground,
-        // borderRadius: vw*2.4,
-        // ...themeShadow,
-        // borderColor: colors.greyInputBorder,
         borderWidth:1,
+        borderColor: colors.input.greyBorder,
         padding: vh*1,
-        borderRadius: vh*1.8,
+    },
+    noOfTimesText:{
+
+      color: colors.text.offwhite,
+      fontSize: vh*1.8
     },
     noOfTimes:{
       // paddingBottom: vh*1,
       paddingHorizontal: vw*2.2,
+    
+
       paddingVertical: vh*1,
 
       // alignItems: "center"
@@ -29,20 +27,20 @@ const styles = StyleSheet.create({
     icon: {
         height: vh * 1.5,
         width: vh * 1.5,
-        tintColor: colors.black,
         resizeMode: 'contain',
       },
       statusContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+        borderRadius: vh*1,
         justifyContent: 'space-between',
-        marginTop: vh*2,
-        paddingVertical: vh*1,
-        paddingHorizontal: vw*4,
+        // backgroundColor: colors.white,
+        marginTop: vh*1.5,
+        paddingVertical: vh*1.8,
+        paddingHorizontal: vw*5,
         borderWidth:1,
-        borderRadius: vh*1.8,
-        borderColor: colors.categoryBlueBorder,
-        backgroundColor: colors.categoryBlueBackground,
+        borderColor: colors.input.greyBorder,
+        // marginBottom: vh*2,
       },
       fromContainer:{
           width: vw*60,
@@ -50,10 +48,24 @@ const styles = StyleSheet.create({
 
       },
       statusText: {
-        color: colors.blackText,
-        fontSize: vh*1.6,
-        paddingRight: vw*8,
+        color: colors.text.offwhite,
+        fontSize: vh*2,
+        paddingRight: vw*19,
       },
+      priecText:{
+        color: colors.text.offwhite,
+        fontSize: vh*2,
+        // paddingLeft: vw*4,
+        paddingRight: vw*4,
+      },
+      statusFocusText:{
+        color: colors.text.grey,
 
+
+      },
+      imageContainer:{
+        flexDirection: "row",
+        alignItems: "center"
+      }
 })
 export default styles

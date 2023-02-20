@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import { Text, View,TouchableOpacity,Image } from 'react-native';
 import { icons } from '../../../assets/images';
+import RobotoMedium from '../../Texts/RobotoMedium';
 import RippleHOC from '../../wrappers/Ripple';
 import styles from './styles'
 
@@ -14,9 +15,9 @@ const CustomDropdown = (props) => {
     return (
         <View>
             <RippleHOC style={[styles.statusContainer, props.statusStyle]} onPress={() => setDropdown(!dropdown)}>
-                <Text style={[styles.statusText, !props.dropdownValue && styles.statusFocusText,props.titleStyle]}>
+                <RobotoMedium style={[styles.statusText, !props.dropdownValue && styles.statusFocusText,props.titleStyle]}>
                   {props.dropdownValue?props.dropdownValue: props.dropdownTitle}
-                </Text>
+                </RobotoMedium>
                 <Image source={icons.arrowDown} style={[styles.icon, props.iconStyle]} />
             </RippleHOC>
             <View style={[styles.dropdownContainer]}>

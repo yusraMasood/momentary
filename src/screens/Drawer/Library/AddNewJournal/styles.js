@@ -7,12 +7,14 @@ const styles =StyleSheet.create({
         paddingHorizontal: vw*4,
     },
     entryContainer:{
-        alignItems: "flex-end"
+        alignItems: "flex-end",
+        marginTop: vh*4.5,
+        marginBottom: vh*2,
     },
     entryText:{
         color: colors.themeColor.yellow,
         textDecorationLine: "underline",
-        fontSize: vh*1.6
+        fontSize: vh*1.62
     },
     imageContainer:{
         flexDirection: "row",
@@ -20,14 +22,27 @@ const styles =StyleSheet.create({
         alignItems: "center"
     },
     journalImg:{
-        height: vh*15,
+        height: vh*25,
         width: vw*90,
-        resizeMode: "contain",
-        borderRadius: vh*2,
+        resizeMode: "cover",
+        borderRadius: vh*2.5,
     },
     imgText:{
         color: colors.text.offwhite,
-        fontSize: vh*1.6,
+        fontSize: vh*2,
+    },
+    inputContainer:{
+        paddingTop: 0,
+        paddingBottom: vh*2,
+    },
+    inputInnerContainer:{
+        marginVertical: 0
+    },
+    journalContainer:{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginVertical: vh*2,
     }
 
 })

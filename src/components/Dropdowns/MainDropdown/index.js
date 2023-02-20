@@ -1,30 +1,35 @@
 import React,{useState} from 'react';
 import { Text, View,TouchableOpacity,Image } from 'react-native';
 import { icons } from '../../../assets/images';
+import RobotoMedium from '../../Texts/RobotoMedium';
 import RippleHOC from '../../wrappers/Ripple';
 import styles from './styles'
 
 const MainDropdown = (props) => {
     // console.log("props", props);
+    const [dropdown,setDropdown] =useState(false)
     const savedropdownValue = (item) => {
         props.setDropdownValue(item)
-        props.setDropdown(false)
+        setDropdown(false)
     }
     return (
         <View>
-            <RippleHOC style={[styles.statusContainer, props.statusStyle]} onPress={() => props.setDropdown(!props.dropdown)}>
-                <Text style={[styles.statusText, props.titleStyle]}>
+            <RippleHOC style={[styles.statusContainer, props.statusStyle]} onPress={() => setDropdown(!dropdown)}>
+                <RobotoMedium style={[styles.statusText, props.titleStyle]}>
                   {props.dropdownValue?props.dropdownValue: props.dropdownTitle}
-                </Text>
+                </RobotoMedium>
+                <View style={styles.imageContainer}>
+                <RobotoMedium style={styles.priecText}>$5</RobotoMedium>
                 <Image source={icons.down} style={[styles.icon, props.iconStyle]} />
+                </View>
             </RippleHOC>
             <View style={[styles.dropdownContainer]}>
-            {props?.dropdown &&
+            {dropdown &&
                 <View style={[styles.dropdownValues,props.openDrawerStyle]}>
                     {props?.array.map((item, index) => {
                         return (
                             <TouchableOpacity  key={index} onPress={()=> savedropdownValue(item)}  style={styles.noOfTimes}>
-                                <Text>{item}</Text>
+                                <RobotoMedium style={styles.statusText}>{item}</RobotoMedium>
                             </TouchableOpacity>
                         )
                     })}

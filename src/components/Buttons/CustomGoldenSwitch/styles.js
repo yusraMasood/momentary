@@ -9,22 +9,22 @@ const styles = StyleSheet.create({
     },
    
       switchCircle:{
-        height: 1.6 * vh,
-        width: 1.7 * vh,
+        height: 1.8 * vh,
+        width: 1.8 * vh,
         borderRadius: 1 * vh,
        
         
       },
       switchOn: {
         // backgroundColor: colors.general.white,
-        borderColor: colors.general.white,
+        // borderColor: colors.general.white,
         borderWidth:1,
         alignItems: 'flex-end',
         paddingRight: 0.5 * vw,
       },
       switchOff: {
         // backgroundColor: colors.defaultRed,
-        borderColor: colors.general.white,
+        // borderColor: colors.general.white,
         borderWidth:1,
         alignItems: 'flex-start',
         paddingLeft: 0.5 * vw,
@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
           
       },
       switch: {
-        width: 8.2 * vw,
-        height: 2.4 * vh,
+        width: 8.6 * vw,
+        height: 2.9 * vh,
         borderRadius: 4.5 * vw,
         // backgroundColor: "red",
         // borderWidth:vh*0.23,

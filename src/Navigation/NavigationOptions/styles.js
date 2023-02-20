@@ -6,8 +6,15 @@ const styles = StyleSheet.create({
 
   titleCenterText:{
     fontSize: vh*3.5,
-    color: colors.themeColor.yellow
+    color: colors.themeColor.yellow,
+
   },
+  anonymousText:{
+    color: colors.text.grey,
+    paddingTop: 0,
+    fontSize: vh*1.6
+  },
+
   titleText:{
     fontSize: vh*1.85,
     color: colors.black,

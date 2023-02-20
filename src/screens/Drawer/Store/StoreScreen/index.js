@@ -1,10 +1,11 @@
 import React from 'react';
 import {View, Image, FlatList} from 'react-native';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
+import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
 
-const StoreScreen = () => {
+const StoreScreen = (props) => {
     const storeArray=[
         {
         name:"Subscription",
@@ -12,27 +13,27 @@ const StoreScreen = () => {
     },
     {
         name:"Pages",
-        navigate:"Subscription"
+        navigate:"PagesDesign"
     },
     {
         name:"Covers",
-        navigate:"Subscription"
+        navigate:"JournalCovers"
     },
     {
         name:"Typography",
-        navigate:"Subscription"
+        navigate:"Typography"
     },
     {
         name:"Book Printing",
-        navigate:"Subscription"
+        navigate:"BookPrinting"
     },
 
 ]
     const renderStoreCard=({item})=>{
         return(
-            <View style={styles.storeCard}>
+            <RippleHOC  onPress={()=> props.navigation.navigate(item?.navigate)} style={styles.storeCard}>
                 <RobotoMedium style={styles.storeText}>{item?.name}</RobotoMedium>
-            </View>
+            </RippleHOC>
         )
     }
 

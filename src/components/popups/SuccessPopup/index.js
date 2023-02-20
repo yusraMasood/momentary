@@ -37,9 +37,9 @@ const SuccessPopup = props => {
       childrenStyle={styles.childrenStyle}
       contentContainerStyle={styles.container}
     >
-      <RobotoMedium style={styles.successText}>Success</RobotoMedium>
+      <RobotoMedium style={styles.successText}>{props.title}</RobotoMedium>
       <RobotoRegular style={styles.descText}>
-        Your entry has been published successfully.
+        {props.desc}
       </RobotoRegular>
       <CustomButton
         text={'Ok'}

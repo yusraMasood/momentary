@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import NavigationOptions from '../NavigationOptions';
 import HomeScreen from '../../screens/Drawer/Home/HomeScreen';
 import GlobalNetworkScreen from '../../screens/Drawer/GlobalNetwork/GlobalNetworkScreen';
+import PostByLocation from '../../screens/Drawer/GlobalNetwork/PostByLocation';
 const Stack = createStackNavigator();
 
 const GlobalNavigator = () => {
@@ -11,6 +12,8 @@ const GlobalNavigator = () => {
   return (
     <Stack.Navigator screenOptions={NavigationOptions}>
       <Stack.Screen name={"GlobalNetworkScreen"} component={GlobalNetworkScreen}/>
+      <Stack.Screen name={"PostByLocation"} component={PostByLocation}/>
+
   
     </Stack.Navigator>
   );
