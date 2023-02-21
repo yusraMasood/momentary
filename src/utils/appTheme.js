@@ -34,7 +34,8 @@ export const linearColors = {
   white: ['#fff', '#fff'],
   yellow: ['#E1CA80', '#B09D5E','#95844C'],
   defaultRed: ['#CA0420', '#83031C'],
-  defaultRed2: ['#83031C', '#CA0420'],
+  defaultRed2: ['#F86C6D', '#B92F30'],
+  red:['#F86C6D', '#B92F30']
   // lightPink:["|"],
 };
 export const themeShadow = {

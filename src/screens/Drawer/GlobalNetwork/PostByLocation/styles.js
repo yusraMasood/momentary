@@ -132,18 +132,20 @@ const styles = StyleSheet.create({
     textInputContainer:{
         flexDirection: "row",
         alignItems: "center",
-        // marginTop: vh*2,
+        marginTop: vh*2,
     },
     input:{
-        flex:1,
+        // flex:1,
+        width: vw*63,
         color: colors.general.white,
+        // backgroundColor: "red",
         fontFamily: fonts.roboto.regular
         // backgroundColor: "red"
     },
     inputContainer:{
       // marginTop: vh*2,
       marginLeft: vw*3,
-      width: vw*80,
+      // width: vw*80,
       backgroundColor: colors.input.greyBackground,
       borderRadius: vh*4,
       flexDirection: "row",

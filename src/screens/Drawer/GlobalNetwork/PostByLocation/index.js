@@ -16,8 +16,8 @@ const PostByLocation = () => {
   const [share,setShare] =useState(false)
 
   return (
-    <ScreenWrapper >
-      <ContentContainer style={styles.container}>
+    <ScreenWrapper style={styles.container}>
+      <ContentContainer >
       <View style={styles.userDetailsContainer}>
         <View>
           <RobotoRegular style={styles.nameText}>Anonymous123</RobotoRegular>

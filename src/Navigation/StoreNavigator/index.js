@@ -6,6 +6,7 @@ import Typography from '../../screens/Drawer/Store/Typography';
 import BookPrinting from '../../screens/Drawer/Store/BookPrinting';
 import PagesDesign from '../../screens/Drawer/Store/PagesDesign';
 import JournalCovers from '../../screens/Drawer/Store/JournalCovers';
+import Subscription from '../../screens/Drawer/Store/Subscription';
 const Stack = createStackNavigator();
 
 const StoreNavigator = () => {
@@ -18,6 +19,8 @@ const StoreNavigator = () => {
       <Stack.Screen name={"BookPrinting"} component={BookPrinting}/>
       <Stack.Screen name={"PagesDesign"} component={PagesDesign}/>
       <Stack.Screen name={"JournalCovers"} component={JournalCovers}/>
+      <Stack.Screen name={"Subscription"} component={Subscription}/>
+
 
   
     </Stack.Navigator>

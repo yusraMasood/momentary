@@ -16,7 +16,7 @@ const CustomButton = props => {
   return (
     <View style={[styles.alignContent, props.alignStyle]}>
       <RippleHOC onPress={handleOnPress}>
-        <LinearGradient colors={linearColors.yellow} style={[styles.container, props.style]}>
+        <LinearGradient colors={props.colors?props.colors:linearColors.yellow} style={[styles.container, props.style]}>
           <RobotoBold style={[styles.text, props.textStyle]}>
             {props.text}
           </RobotoBold>

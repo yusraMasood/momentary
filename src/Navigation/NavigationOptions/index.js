@@ -30,6 +30,7 @@ const titles = {
   JournalCovers:"Journal Covers",
   Typography:"Font Packs",
   BookPrinting:"Book Printing",
+  SettingScreen:"Settings"
   // PostByLocation:"Global Network"
 
 };
@@ -45,7 +46,8 @@ const routesWithBackIcon={
   JournalCovers:"JournalCovers",
   Typography:"Typography",
   BookPrinting:"BookPrinting",
-  PostByLocation:"PostByLocation"
+  PostByLocation:"PostByLocation",
+  SettingScreen:"SettingScreen"
 }
 const routesWithImage = {
 
@@ -60,7 +62,8 @@ const routesWithNotification = {
   HomeScreen:"HomeScreen",
   FriendNetworkScreen:"FriendNetworkScreen",
   GlobalNetworkScreen:"GlobalNetworkScreen",
-  StoreScreen:"StoreScreen"
+  StoreScreen:"StoreScreen",
+  SettingScreen:"SettingScreen"
 }
 const NavigationOptions = navProps => {
   return {
@@ -102,7 +105,7 @@ const renderTitle = props => {
 const renderHeaderLeft = props => {
   if (routesWithSetting[props?.route?.name]) {
     return (
-        <RippleHOC onPress={() => props.navigation.goBack()}>
+        <RippleHOC onPress={() => props.navigation.navigate("SettingNavigator")}>
           <Image source={icons.setting} style={styles.backIcon} />
         </RippleHOC>
     );

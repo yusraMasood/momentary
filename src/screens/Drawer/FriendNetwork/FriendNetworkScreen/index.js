@@ -40,7 +40,7 @@ const renderHeader=()=>{
       keyExtractor={(item,index)=> index}
       contentContainerStyle={styles.flatListContainer}
       renderItem={renderFriendCard} />
-      <View style={styles.textInputContainer}>
+      {/* <View style={styles.textInputContainer}>
         <Image source={generalImages.userImage} style={styles.userImage}/>
         <View style={styles.inputContainer}>
         <TextInput
@@ -50,7 +50,7 @@ const renderHeader=()=>{
         />
         <Image source={icons.send} style={styles.sendIcon}/>
         </View>
-      </View>
+      </View> */}
     </ScreenWrapper>
   );
 };

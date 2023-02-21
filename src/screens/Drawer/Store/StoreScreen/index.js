@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Image, FlatList} from 'react-native';
+import StoreCard from '../../../../components/Cards/StoreCard';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
@@ -31,12 +32,15 @@ const StoreScreen = (props) => {
 ]
     const renderStoreCard=({item})=>{
         return(
-            <RippleHOC  onPress={()=> props.navigation.navigate(item?.navigate)} style={styles.storeCard}>
-                <RobotoMedium style={styles.storeText}>{item?.name}</RobotoMedium>
-            </RippleHOC>
+       <StoreCard
+       onPress={()=> props.navigation.navigate(item?.navigate)}
+       name={item?.name}
+       />
         )
     }
-
+//     <RippleHOC  onPress={()=> props.navigation.navigate(item?.navigate)} style={styles.storeCard}>
+//     <RobotoMedium style={styles.storeText}>{item?.name}</RobotoMedium>
+// </RippleHOC>
   return (
     <ScreenWrapper style={styles.container}>
         <FlatList

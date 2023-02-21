@@ -4,6 +4,7 @@ import NavigationOptions from '../NavigationOptions';
 import HomeScreen from '../../screens/Drawer/Home/HomeScreen';
 import TabNavigator from '../TabNavigator';
 import NotificationScreen from '../../screens/Drawer/NotificationScreen';
+import SettingNavigator from '../SettingNavigator';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,9 @@ const MainNavigator = () => {
       options={{headerShown: false}}
       />
        <Stack.Screen name={"NotificationScreen"} component={NotificationScreen}
+      />
+        <Stack.Screen name={"SettingNavigator"} component={SettingNavigator}
+        options={{headerShown: false}}
       />
   
     </Stack.Navigator>
