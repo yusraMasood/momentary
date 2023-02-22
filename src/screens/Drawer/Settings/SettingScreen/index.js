@@ -6,7 +6,7 @@ import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper'
 import { colors, linearColors } from '../../../../utils/appTheme'
 import styles from './styles'
 
-const SettingScreen=()=>{
+const SettingScreen=(props)=>{
     const settingArray=[
         {
             name:"Account",
@@ -48,6 +48,7 @@ const SettingScreen=()=>{
             <CustomButton
             text={"Log Out"}
             textStyle={styles.btnText}
+            onPress={()=> props.navigation.navigate("AuthNavigator")}
             colors={linearColors.red}
             />
         )

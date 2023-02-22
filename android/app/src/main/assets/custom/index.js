@@ -2,7 +2,7 @@ import {Platform} from 'react-native';
 
 export const fonts = {
   poppins:{
-    regular:'Poppins-Black',
+    regular:'Poppins-Regular',
     semiBold:'Poppins-SemiBold',
     bold:'Poppins-Bold',
     medium:"Poppins-Medium",
@@ -15,6 +15,9 @@ export const fonts = {
     light:"Roboto-Light"
   },
   damion:{
-    regular:"Damion-Regular" 
+    regular:Platform.select({
+      android:"Damion-Regular",
+      ios: "Damion"
+    })
   },
 };

@@ -108,7 +108,7 @@ const SignupScreen = (props) => {
       <View style={styles.registerContainer}>
 <RobotoRegular style={styles.newAuthorText}>Have an account already?{" "}</RobotoRegular>
 
-  <RippleHOC onPress={()=> props.navigation.navigate("SignupScreen")}>
+  <RippleHOC onPress={()=> props.navigation.navigate("LoginScreen")}>
 <RobotoRegular style={styles.registerText} >Login Now</RobotoRegular>
   </RippleHOC>
       </View>

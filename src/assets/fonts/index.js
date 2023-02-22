@@ -15,6 +15,9 @@ export const fonts = {
     light:"Roboto-Light"
   },
   damion:{
-    regular:"Damion-Regular" 
+    regular:Platform.select({
+      android:"Damion-Regular",
+      ios: "Damion"
+    })
   },
 };

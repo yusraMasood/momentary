@@ -108,7 +108,7 @@ const InputField = props => {
           activeOpacity={0.8}
           onPress={() => setIsPassword(!isPassword)}>
             <Image
-              source={isPassword ? icons.eyeClose : icons.eyeClose}
+              source={isPassword ? icons.eyeClose : icons.eyeOpen}
               style={styles.rghtIcon}
             />
           </TouchableOpacity>

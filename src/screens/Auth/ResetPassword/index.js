@@ -18,7 +18,7 @@ const ResetPassword = (props) => {
 
 
   const onSubmit=()=>{
-    props.navigation.navigate("VerificationCode")
+    props.navigation.navigate("LoginScreen")
   }
   return (
     <ScreenWrapper style={styles.container}>

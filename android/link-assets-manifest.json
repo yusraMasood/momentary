@@ -6,10 +6,6 @@
       "sha1": "a8c6798e092e97765f138d8e772ea530e343c3a2"
     },
     {
-      "path": "src/assets/fonts/index.js",
-      "sha1": "31e1b1442f2eb57312dc239299180b109f534e3d"
-    },
-    {
       "path": "src/assets/fonts/Poppins-Black.ttf",
       "sha1": "645e04c53c6b5b35bce654a811ebce16af8aa721"
     },
@@ -60,6 +56,10 @@
     {
       "path": "src/assets/fonts/Roboto-Regular.ttf",
       "sha1": "56c5c0d38bde4c1f1549dda43db37b09c608aad3"
+    },
+    {
+      "path": "src/assets/fonts/index.js",
+      "sha1": "cb4c4728bf7b932f5e57a5b4a8d01f2edd3e0b17"
     }
   ]
 }

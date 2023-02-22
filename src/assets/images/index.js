@@ -46,7 +46,7 @@ export const generalImages = {
     likeBtn: require('./icons/likeBtn.png'),
     commentBtn:require('./icons/commentBtn.png'),
     share:require('./icons/share.png'),
-    // // unsuccess:require('./icons/unsuccess.png'),
+    eyeOpen:require('./icons/eyeOpen.png'),
     // close:require('./icons/close.png'),
     // cross:require('./icons/cross.png'),
   };

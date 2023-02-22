@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     width: vh * 2,
     resizeMode: 'contain',
     marginLeft: vw * 2.3,
+    tintColor: colors.text.grey,
   },
   input: {
     // paddingVertical: vh * 1.4,
