@@ -8,9 +8,10 @@ import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import { colors } from '../../../../utils/appTheme';
 import styles from './styles';
 
-const FriendNetworkScreen = () => {
+const FriendNetworkScreen = (props) => {
   const renderFriendCard = () => {
     return <FriendNetworkCard 
+    onPress={()=> props.navigation.navigate("MyProfile")}
     
     />;
   };

@@ -4,12 +4,13 @@ import {generalImages, icons} from '../../../assets/images';
 import PoppinsRegular from '../../Texts/PoppinsRegular';
 import RobotoMedium from '../../Texts/RobotoMedium';
 import RobotoRegular from '../../Texts/RobotoRegular';
+import RippleHOC from '../../wrappers/Ripple';
 import styles from './styles';
 
-const FriendNetworkCard = () => {
+const FriendNetworkCard = (props) => {
   return (
     <View style={styles.container}>
-      <View style={styles.userDetailsContainer}>
+      <RippleHOC onPress={props.onPress} style={styles.userDetailsContainer}>
         <View style={styles.userImageContainer}>
           <Image source={generalImages.userImage} style={styles.userImage} />
         </View>
@@ -28,7 +29,7 @@ const FriendNetworkCard = () => {
            Approximate Locations
           </RobotoRegular>
         </View>
-      </View>
+      </RippleHOC>
       <RobotoRegular style={styles.descText}> 
         Lorem ipsum dolor sit amet, consectetur are it adipiscing elit. Aenean
         euismod bibendum laoreet. Proin gravida dolor sitom

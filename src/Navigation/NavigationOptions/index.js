@@ -30,7 +30,8 @@ const titles = {
   JournalCovers:"Journal Covers",
   Typography:"Font Packs",
   BookPrinting:"Book Printing",
-  SettingScreen:"Settings"
+  SettingScreen:"Settings",
+  MyProfile:"Account Settings"
   // PostByLocation:"Global Network"
 
 };
@@ -47,7 +48,8 @@ const routesWithBackIcon={
   Typography:"Typography",
   BookPrinting:"BookPrinting",
   PostByLocation:"PostByLocation",
-  SettingScreen:"SettingScreen"
+  SettingScreen:"SettingScreen",
+  MyProfile:"MyProfile"
 }
 const routesWithImage = {
 
