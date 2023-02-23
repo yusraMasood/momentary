@@ -15,6 +15,7 @@ import MyNetworkPopup from '../../../../components/popups/MyNetworkPopup';
 import HashtagPopup from '../../../../components/popups/HashtagPopup';
 import SuccessPopup from '../../../../components/popups/SuccessPopup';
 import EntrySettingPopup from '../../../../components/popups/EntrySettingPopup';
+import PublishQuestionPopup from '../../../../components/popups/PublishQuestionPopup';
 
 const NewEntry = () => {
   const richText = useRef(null);
@@ -29,6 +30,8 @@ const NewEntry = () => {
   const successPopup = useRef(null);
   const settingRef=useRef(null)
   const scrollRef=useRef(null)
+  const globalRef=useRef(null)
+  const pageDesignRef=useRef(null)
 
   return (
     <ScreenWrapper>
@@ -104,23 +107,32 @@ const NewEntry = () => {
         <PulishEntryPopup
           reference={publishEntry}
           onAccept={() => networkPopup.current.show()}
-          // onReject={() => globalPopup.current.show()}
-        />
+          onReject={()=> globalRef.current.show()}
+
+                  />
         <MyNetworkPopup
           reference={networkPopup}
           onAccept={() => hashTagRef.current.show()}
         />
         <HashtagPopup
-          reference={networkPopup}
+          reference={hashTagRef}
           onAccept={() => successPopup.current.show()}
         />
 
         <SuccessPopup reference={successPopup}
-        onAccept={()=> props.navigation.navigate("ViewEntry")}
-        
+        onAccept={()=> props.navigation.navigate("MyEntries")}
+        title={"Success"}
+        desc={"Your entry has been published\nsuccessfully."}
         />
         <EntrySettingPopup
         reference={settingRef}
+        onPressDesign={()=> pageDesignRef.current.show()}
+
+        />
+        <PublishQuestionPopup
+        reference={globalRef}
+        title={"Publish"}
+        desc={`Entries published on the Momentary Global Network are anonymized and will not include your user information or metadata from your photos.\n\nIdentifying information you have written in the entry itself will still be visible, as we do not censor or otherwise modify your writing.\n\nAre you sure you want to publish to Global Network?`}
         />
    </ScrollView>
     </ScreenWrapper>

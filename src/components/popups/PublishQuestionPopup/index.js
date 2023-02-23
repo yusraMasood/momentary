@@ -1,6 +1,10 @@
 import React, {useRef, useImperativeHandle} from 'react';
 import {Image, ImageBackground, View} from 'react-native';
 import {generalImages, icons} from '../../../assets/images';
+import BasicButton from '../../Buttons/BasicButton';
+import CustomButton from '../../Buttons/CustomButton';
+import RobotoMedium from '../../Texts/RobotoMedium';
+import RobotoRegular from '../../Texts/RobotoRegular';
 import RippleHOC from '../../wrappers/Ripple';
 import PopupWrapper from '../PopupWrapper';
 import styles from './styles';
@@ -27,27 +31,20 @@ const PublishQuestionPopup = props => {
     }
     hide();
   };
+  const onNo = () => {
+    if (props?.onReject) {
+      props?.onReject();
+    }
+    hide();
+  };
 
   return (
-    <PopupWrapper reference={popup}>
-      <View style={styles.container}>
-<View>
-
-  {/* <ImageBackground source={icons.thumbBack} style={styles.thumbBackground}>
-    <Image source={icons.thumb} style={styles.dropImage}/>
-    </ImageBackground> */}
-
-</View>
-{props.unsuccess?
-        <ImageBackground source={generalImages.unsuccess} style={styles.dropImage} >
-          <RippleHOC onPress={hide} style={styles.crossContainer}>
-        <Image source={icons.cross} style={styles.crossIcon}/>
-        </RippleHOC>
-          </ImageBackground>
-          :
-          <Image source={generalImages.success} style={styles.successImage}/>
-
-}
+    <PopupWrapper reference={popup}  contentContainerStyle={styles.container} childrenStyle={styles.childrenContainer}>
+      <RobotoMedium style={styles.successText}>{props.title}</RobotoMedium>
+      <RobotoRegular style={styles.descText}>{props.desc}</RobotoRegular>
+      <View style={styles.btnContainer}>
+      <BasicButton text={'Yes'} style={styles.buttonStyle} onPress={onYes}/>
+      <CustomButton text={'No'} style={styles.buttonStyle} onPress={onNo} />
       </View>
     </PopupWrapper>
   );

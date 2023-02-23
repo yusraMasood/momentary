@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
 
     ButtonWrapper: {
         paddingVertical: vh * 1.3,
-        borderRadius: vw * 2,
+        borderRadius: vw * 1,
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.themeRed,
         alignItems: "center",
         justifyContent: "center",
-        borderRadius: (vh*3.3)/2,
+        borderRadius: vh*1.3,
     },
     text: {
         color: colors.general.black,

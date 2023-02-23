@@ -31,7 +31,12 @@ const titles = {
   Typography:"Font Packs",
   BookPrinting:"Book Printing",
   SettingScreen:"Settings",
-  MyProfile:"Account Settings"
+  MyProfile:"Account Settings",
+  EditProfile:"Account Settings",
+  ChangePassword:"Change Password",
+  MyEntries:"My Entries",
+  Account:"Account",
+  AppUI:"App/UI"
   // PostByLocation:"Global Network"
 
 };
@@ -49,7 +54,11 @@ const routesWithBackIcon={
   BookPrinting:"BookPrinting",
   PostByLocation:"PostByLocation",
   SettingScreen:"SettingScreen",
-  MyProfile:"MyProfile"
+  MyProfile:"MyProfile",
+  EditProfile:"EditProfile",
+  ChangePassword:"ChangePassword",
+  Account:"Account",
+  AppUI:"AppUI"
 }
 const routesWithImage = {
 
@@ -58,14 +67,20 @@ const routesWithSetting = {
   HomeScreen:"HomeScreen",
   FriendNetworkScreen:"FriendNetworkScreen",
   GlobalNetworkScreen:"GlobalNetworkScreen",
-  StoreScreen:"StoreScreen"
+  StoreScreen:"StoreScreen",
+  MyEntries:"MyEntries"
 }
 const routesWithNotification = {
   HomeScreen:"HomeScreen",
   FriendNetworkScreen:"FriendNetworkScreen",
   GlobalNetworkScreen:"GlobalNetworkScreen",
   StoreScreen:"StoreScreen",
-  SettingScreen:"SettingScreen"
+  SettingScreen:"SettingScreen",
+  MyEntries:"MyEntries"
+}
+const routesWithSaveIcon={
+  NewEntry:"NewEntry"
+
 }
 const NavigationOptions = navProps => {
   return {
@@ -148,6 +163,25 @@ const renderheaderRight = props => {
         <Image source={icons.notification} style={styles.backIcon} />
        <View style={styles.circleNotification}/>
       </RippleHOC>
+    );
+  }
+  if(routesWithSaveIcon[props?.route?.name]){
+
+    return (
+<View style={styles.rightContainer}>
+  <RippleHOC onPress={()=> props.navigation.navigate("MyEntries")}
+  >
+<Image source={icons.pin} style={styles.entryIcon}/>
+  </RippleHOC>
+  <RippleHOC onPress={()=> props.navigation.navigate("MyEntries")}
+  >
+<Image source={icons.save} style={styles.saveIcon}/>
+  </RippleHOC>
+  <RippleHOC onPress={()=> props.navigation.navigate("MyEntries")}
+  >
+<Image source={icons.cloud} style={styles.entryIcon}/>
+  </RippleHOC>
+</View>
     );
   }
   

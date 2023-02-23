@@ -5,6 +5,7 @@ import { vh, vw } from '../../../utils/dimensions'
 const styles = StyleSheet.create({
     container:{
         paddingHorizontal: vw*4,
+        // alignItems: "center",
         paddingTop: vh*16,
     },
     momentaryText:{

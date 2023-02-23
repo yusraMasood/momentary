@@ -10,6 +10,7 @@ export const colors = {
   },
   themeColor:{
     yellow:"#EED68A",
+    grey:"#1C1C1C"
 
   },
   text:{

@@ -1,12 +1,130 @@
-import React from 'react'
-import { View,Image } from 'react-native'
-import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper'
+import React, {useState} from 'react';
+import {View, Image, FlatList} from 'react-native';
+import {generalImages, icons} from '../../../../assets/images';
+import SearchInput from '../../../../components/Inputs/SearchInput';
+import EuclidCircularARegular from '../../../../components/Texts/EuclidCircularARegular';
+import RobotoMedium from '../../../../components/Texts/RobotoMedium';
+import RobotoRegular from '../../../../components/Texts/RobotoRegular';
+import RippleHOC from '../../../../components/wrappers/Ripple';
+import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
+import MasonryList from '@react-native-seoul/masonry-list';
+import styles from './styles';
+import {vh} from '../../../../utils/dimensions';
+import NoteCard from '../../../../components/Cards/NoteCard';
 
-const MyEntries =()=>{
-    return(
-        <ScreenWrapper>
+const MyEntries = () => {
+  const [list, setList] = useState(false);
+  const gridArray = [1, 2, 3, 4, 5];
+  const renderHeader = () => {
+    return (
+      <View>
+        <SearchInput placeholder={'Search '} style={styles.searchInput} />
+        <View style={styles.alignGridContainer}>
+          <View style={styles.gridMainContainer}>
+            <RippleHOC
+              onPress={() => setList(true)}
+              style={styles.gridContainer}
+            >
+              <Image
+                source={icons.list}
+                style={[styles.gridIcon, list && styles.gridFocusIcon]}
+              />
+              <EuclidCircularARegular
+                style={[styles.listText, list && styles.listFocusText]}
+              >
+                List
+              </EuclidCircularARegular>
+            </RippleHOC>
+            <RippleHOC
+              onPress={() => setList(false)}
+              style={styles.gridContainer}
+            >
+              <Image
+                source={icons.grid}
+                style={[styles.gridIcon, !list && styles.gridFocusIcon]}
+              />
+              <EuclidCircularARegular
+                style={[styles.listText, !list && styles.listFocusText]}
+              >
+                Grid
+              </EuclidCircularARegular>
+            </RippleHOC>
+          </View>
+        </View>
+      </View>
+    );
+  };
 
-        </ScreenWrapper>
-    )
-}
-export default MyEntries
+  const renderNotes = ({item, index}) => {
+    // const even=index%2==0;
+    return <NoteCard />;
+  };
+  const renderAddEntry = () => {
+    return (
+      <View>
+        <View style={styles.addEntryContainer}>
+          <RobotoMedium style={styles.entryText}>Add Entry</RobotoMedium>
+        </View>
+        <Image source={generalImages.girl} style={styles.girlImg} />
+      </View>
+    );
+  };
+  const renderAddEntryCard = () => {
+    return (
+      <View>
+        <FlatList
+          data={[1, 2, 3, 4]}
+          key={'gridArray'}
+          //   numColumns={2}
+          ListHeaderComponent={renderAddEntry}
+          contentContainerStyle={styles.contentContainer}
+          keyExtractr={(item, index) => index}
+          renderItem={renderNotes}
+        />
+      </View>
+    );
+  };
+  const renderGridNotes = ({item, index}) => {
+    // console.log(gridArray.length - 1 == index, gridArray.length - 1, index);
+    // const even=index%2==0;
+    return (
+      <View>
+        {gridArray.length - 1 == index ? (
+            <View style={styles.lastEntryContainer}>
+              <View style={styles.alignEntryText}>
+
+              <RobotoMedium style={styles.lastEntryText}>Add Entry</RobotoMedium>
+              </View>
+            <Image source={generalImages.girl} style={styles.girlImgGrid} />
+            </View>
+        ) : (
+          <NoteCard
+            list={true}
+            index={index}
+            listStyle={[styles.listNoteContainer]}
+            deleteIconStyle={styles.deleteIcon}
+          />
+        )}
+      </View>
+    );
+  };
+
+  const renderGridCard = () => {
+    return (
+      <FlatList
+        data={gridArray}
+        renderItem={renderGridNotes}
+        key={'gridArray'}
+        numColumns={2}
+        keyExtractr={(item, index) => index}
+      />
+    );
+  };
+  return (
+    <ScreenWrapper style={styles.container}>
+      {renderHeader()}
+      {list ? renderAddEntryCard() : renderGridCard()}
+    </ScreenWrapper>
+  );
+};
+export default MyEntries;

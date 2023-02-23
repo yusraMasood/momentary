@@ -35,6 +35,7 @@ const StoreScreen = (props) => {
        <StoreCard
        onPress={()=> props.navigation.navigate(item?.navigate)}
        name={item?.name}
+       style={styles.itemContainer}
        />
         )
     }
@@ -46,6 +47,8 @@ const StoreScreen = (props) => {
         <FlatList
         data={storeArray}
         renderItem={renderStoreCard}
+        key={"storeArray"}
+        keyExtractor={(item,index)=> index}
         />
 
 

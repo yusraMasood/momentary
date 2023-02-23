@@ -6,9 +6,9 @@ import styles from './syles'
 
 const StoreCard=(props)=>{
     return(
-        <RippleHOC  onPress={props.onPress} style={styles.storeCard}>
+        <RippleHOC  onPress={props.onPress} style={[styles.storeCard, props.style]}>
         <RobotoMedium style={styles.storeText}>{props?.name}</RobotoMedium>
-        <RobotoRegular style={styles.descText}>{props?.desc}</RobotoRegular>
+        {props.desc&&<RobotoRegular style={styles.descText}>{props?.desc}</RobotoRegular>}
     </RippleHOC>
     )
 }

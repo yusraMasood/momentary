@@ -8,7 +8,7 @@ export const generalImages = {
     bookcover9: require('./generalImages/bookcover9.png'), 
     print: require('./generalImages/print.png'),
     books: require('./generalImages/books.png'),
-    // growthFinance:require('./generalImages/growthFinance.png'),
+    girl:require('./generalImages/girl.png'),
     // medicalInsurance:require('./generalImages/medicalInsurance.png'),
     // startegyConsulting:require('./generalImages/startegyConsulting.png'),
     // saving:require('./generalImages/saving.png'),
@@ -47,8 +47,21 @@ export const generalImages = {
     commentBtn:require('./icons/commentBtn.png'),
     share:require('./icons/share.png'),
     eyeOpen:require('./icons/eyeOpen.png'),
-    // close:require('./icons/close.png'),
-    // cross:require('./icons/cross.png'),
+    repeat:require('./icons/repeat.png'),
+    cloud:require('./icons/cloud.png'),
+    pin:require('./icons/pin.png'),
+    save:require('./icons/save.png'),
+
+    list:require('./icons/list.png'),
+    grid:require('./icons/grid.png'),
+    
+    pinned:require('./icons/pinned.png'),
+    delete:require('./icons/delete.png'),
+    upload:require('./icons/upload.png'),
+
+
+
+
   };
   
   export const tabIcons = {

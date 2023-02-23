@@ -17,9 +17,11 @@ const styles=StyleSheet.create({
     // },
     container:{
         paddingHorizontal: vw*4,
-        paddingTop: vh*0.5,
+        paddingTop: vh*2,
     },
-   
+    itemContainer:{
+        paddingVertical: vh*3.7,
+    }
   
 })
 export default styles

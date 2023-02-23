@@ -4,10 +4,11 @@ import {generalImages} from '../../../../assets/images';
 import CustomButton from '../../../../components/Buttons/CustomButton';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import RobotoRegular from '../../../../components/Texts/RobotoRegular';
+import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
 
-const MyProfile = () => {
+const MyProfile = (props) => {
   const profileArray = [
     {
       title: 'Name',
@@ -37,7 +38,9 @@ const MyProfile = () => {
   return (
     <ScreenWrapper style={styles.container}>
       <Image source={generalImages.userImage} style={styles.userImg} />
+      <RippleHOC onPress={()=>props.navigation.navigate("ChangePassword")}>
       <RobotoMedium style={styles.passwordText}>Change Password</RobotoMedium>
+      </RippleHOC>
       <View>
       <FlatList data={profileArray} renderItem={renderProfile} 
       key={"profileArray"}
@@ -46,7 +49,9 @@ const MyProfile = () => {
       numColumns={2}
       />
       </View>
-      <CustomButton alignStyle={styles.btnContainer} text={"Edit Profile"}/>
+      <CustomButton alignStyle={styles.btnContainer}
+      onPress={()=> props.navigation.navigate("EditProfile")}
+      text={"Edit Profile"}/>
   
     </ScreenWrapper>
   );

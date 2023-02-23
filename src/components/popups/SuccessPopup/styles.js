@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
   descText:{
     color: colors.text.grey,
-    width: vw*50,
+    // width: vw*50,
     fontSize: vh*1.8,
     // textAlign: "center"
   },

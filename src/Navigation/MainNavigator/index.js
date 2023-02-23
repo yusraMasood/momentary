@@ -6,6 +6,8 @@ import TabNavigator from '../TabNavigator';
 import NotificationScreen from '../../screens/Drawer/NotificationScreen';
 import SettingNavigator from '../SettingNavigator';
 import MyProfile from '../../screens/Drawer/Profile/MyProfile';
+import EditProfile from '../../screens/Drawer/Profile/EditProfile';
+import ChangePassword from '../../screens/Drawer/Profile/ChangePassword';
 
 const Stack = createStackNavigator();
 
@@ -14,18 +16,13 @@ const MainNavigator = () => {
   }, []);
   return (
     <Stack.Navigator screenOptions={NavigationOptions}>
-      <Stack.Screen name={"TabNavigator"} component={TabNavigator}
-      options={{headerShown: false}}
-      />
-       <Stack.Screen name={"NotificationScreen"} component={NotificationScreen}
-      />
-        <Stack.Screen name={"SettingNavigator"} component={SettingNavigator}
-        options={{headerShown: false}}
-      />
-       <Stack.Screen name={"MyProfile"} component={MyProfile}
-        
+      <Stack.Screen name={"TabNavigator"} component={TabNavigator} options={{headerShown: false}}/>
+       <Stack.Screen name={"NotificationScreen"} component={NotificationScreen}/>
+        <Stack.Screen name={"SettingNavigator"} component={SettingNavigator} options={{headerShown: false}}/>
+       <Stack.Screen name={"MyProfile"} component={MyProfile}/>
+       <Stack.Screen name={"EditProfile"} component={EditProfile}/>
+       <Stack.Screen name={"ChangePassword"} component={ChangePassword}/>
 
-      />
   
     </Stack.Navigator>
   );

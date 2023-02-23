@@ -10,27 +10,39 @@ const SettingScreen=(props)=>{
     const settingArray=[
         {
             name:"Account",
-            desc:"Sed ut perspiciatis unde omnis iste"
+            desc:"Sed ut perspiciatis unde omnis iste",
+            navigate:"Account"
+
         },
         {
             name:"App/UI",
-            desc:"Sed ut perspiciatis unde omnis iste"
+            desc:"Sed ut perspiciatis unde omnis iste",
+            navigate:"AppUI"
+
         },
         {
             name:"Legacy",
-            desc:"Sed ut perspiciatis unde omnis iste"
+            desc:"Sed ut perspiciatis unde omnis iste",
+            navigate:"Legacy"
+
         },   
          {
             name:"Notifications",
-            desc:"Sed ut perspiciatis unde omnis iste"
+            desc:"Sed ut perspiciatis unde omnis iste",
+            navigate:"Notification"
+
         },   
          {
             name:"Privacy",
-            desc:"Sed ut perspiciatis unde omnis iste"
+            desc:"Sed ut perspiciatis unde omnis iste",
+            navigate:"Privacy"
+
         },
         {
             name:"Support ",
-            desc:"Sed ut perspiciatis unde omnis iste"
+            desc:"Sed ut perspiciatis unde omnis iste",
+            navigate:"Support"
+
         },
     ]
 
@@ -39,6 +51,7 @@ const SettingScreen=(props)=>{
             <StoreCard
             name={item?.name}
             desc={item?.desc}
+            onPress={()=> props.navigation.navigate(item?.navigate)}
             
             />
         )
@@ -59,6 +72,8 @@ const SettingScreen=(props)=>{
             data={settingArray}
             renderItem={renderSettingCard}
             ListFooterComponent={renderFooter}
+            key={"settingArray"}
+            keyExtractor={(item,index)=> index}
             />
 
 

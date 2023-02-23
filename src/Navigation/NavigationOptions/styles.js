@@ -14,6 +14,23 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     fontSize: vh*1.6
   },
+  rightContainer:{
+    flexDirection: "row",
+    alignItems: "center",
+    // justifyContent: "space-between"
+  },
+  entryIcon:{
+    height: vh*2.2,
+    width: vh*2.2,
+    marginLeft: vw*2,
+    resizeMode: "contain"
+  },
+  saveIcon:{
+    height: vh*1.9,
+    width: vh*1.9,
+    marginLeft: vw*2,
+    resizeMode: "contain"
+  },
 
   titleText:{
     fontSize: vh*1.85,
