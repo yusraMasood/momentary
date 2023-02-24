@@ -6,7 +6,6 @@ import styles from './styles';
 import {vh} from '../../../../utils/dimensions';
 import CustomDropdown from '../../../../components/Dropdowns/CustomDropdown';
 import {icons} from '../../../../assets/images';
-import ContentContainer from '../../../../components/wrappers/ContentContainer';
 import {colors} from '../../../../utils/appTheme';
 import RippleHOC from '../../../../components/wrappers/Ripple';
 import ImagePicker from '../../../../components/Image/ImagePicker';

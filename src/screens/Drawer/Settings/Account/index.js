@@ -1,6 +1,8 @@
-import React from 'react';
+import React,{useRef} from 'react';
 import {View} from 'react-native';
 import CustomButton from '../../../../components/Buttons/CustomButton';
+import PublishQuestionPopup from '../../../../components/popups/PublishQuestionPopup';
+import SuccessPopup from '../../../../components/popups/SuccessPopup';
 import TextWithArrowIcon from '../../../../components/ReusableComponent/TextWithArrowIcon';
 import TextWithSwitch from '../../../../components/ReusableComponent/TextWithSwitch';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
@@ -10,6 +12,13 @@ import {linearColors} from '../../../../utils/appTheme';
 import styles from './styles';
 
 const Account = props => {
+
+  const biometricPopupRef=useRef(null)
+  const biometricDisableRef =useRef(null)
+  const successDisableRef=useRef(null)
+  const successRef=useRef(null)
+
+
   const accountInfoArray = [
     {
       title: 'Name',
@@ -36,7 +45,7 @@ const Account = props => {
       <View style={styles.accountInfoContainer}>
         {accountInfoArray.map((item, index) => {
           return (
-            <View key={"index"} style={styles.itemContainer}>
+            <View key={index} style={styles.itemContainer}>
               <RobotoRegular style={styles.titleText}>
                 {item?.title}
               </RobotoRegular>
@@ -57,8 +66,8 @@ const Account = props => {
       </RobotoMedium>
 
       <TextWithSwitch text={'Two Factor Enabled'} />
-      <TextWithSwitch text={'Biometric Verification '} />
-      <TextWithArrowIcon text={'Change Password'} />
+      <TextWithSwitch text={'Biometric Verification '} onPressSwitchDisable={()=>biometricDisableRef.current.show()} onPressSwitch={()=> biometricPopupRef.current.show()}/>
+      <TextWithArrowIcon text={'Change Password'} onPressPageDesign={()=>props.navigation.navigate("ChangePassword")}/>
 
       <RobotoMedium style={styles.accountHeadingText}>
       Access Controls
@@ -68,8 +77,8 @@ const Account = props => {
       <RobotoMedium style={styles.accountHeadingText}>
       Account Status
       </RobotoMedium>
-      <TextWithArrowIcon text={'Subscription'} textOpt={"Pro"} />
-      <TextWithArrowIcon text={'Payment Logs'} />
+      <TextWithArrowIcon text={'Subscription'} textOpt={"Pro"} onPressPageDesign={()=>props.navigation.navigate("SubscriptionLogs")}/>
+      <TextWithArrowIcon text={'Payment Logs'}  onPressPageDesign={()=>props.navigation.navigate("PaymentLogs")}/>
 
 
       <CustomButton
@@ -78,6 +87,28 @@ const Account = props => {
         textStyle={styles.btnText}
         onPress={() => props.navigation.navigate('AuthNavigator')}
         colors={linearColors.red}
+      />
+      <PublishQuestionPopup
+      reference={biometricPopupRef}
+      title={"Biometric Verification"}
+      desc={"Are you sure you want to enable biometric\nverification?"}
+      onAccept={()=> successRef.current.show()}
+      />
+         <PublishQuestionPopup
+      reference={biometricDisableRef}
+      title={"Biometric Verification"}
+      desc={"Are you sure you want to disable biometric\nverification?"}
+      onAccept={()=> successDisableRef.current.show()}
+      />
+      <SuccessPopup
+      reference={successRef}
+      title={"Success"}
+      desc={"Biometric verification has been successfully\enabled."}
+      />
+            <SuccessPopup
+      reference={successDisableRef}
+      title={"Success"}
+      desc={"Biometric verification has been successfully\ndisabled."}
       />
     </ScreenWrapper>
   );

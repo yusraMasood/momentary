@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         // width: vw*50,
         // textAlign: "center",
         fontSize: vh*1.94,
-        marginBottom: vh*2.5
+        // marginBottom: vh*2.5
         // textAlign: "center"
       },
       btnContainer:{
@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
       childrenContainer:{
         paddingHorizontal: vw*6,
         paddingTop: vh*3,
+      },
+      container:{
+        height: vh*24
       }
 });
 

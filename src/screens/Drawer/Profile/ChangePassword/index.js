@@ -18,26 +18,26 @@ const ChangePassword = props => {
   return (
     <ScreenWrapper style={styles.container}>
       <InputField
-        placeholder={'Enter Name'}
-        label={'Name'}
+        placeholder={'Enter Password'}
+        label={'Password'}
         onSubmitEditing={() => newPasswordRef.current.focus()}
       />
       <InputField
         reference={newPasswordRef}
-        placeholder={'Enter Name'}
-        label={'Name'}
+        placeholder={'Enter New Password'}
+        label={'New Password'}
         onSubmitEditing={() => confirmPasswordRef.current.focus()}
       />
       <InputField
         reference={confirmPasswordRef}
-        placeholder={'Enter Name'}
-        label={'Name'}
+        placeholder={'Enter Confirm Password'}
+        label={'Confirm Password'}
         onSubmitEditing={onSubmit}
       />
       <CustomButton
         alignStyle={styles.btnContainer}
         onPress={onSubmit}
-        text={'Update Profile'}
+        text={'Update Password'}
       />
       <SuccessPopup
         title={'Success'}

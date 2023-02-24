@@ -38,8 +38,8 @@ const PublishQuestionPopup = props => {
     hide();
   };
 
-  return (
-    <PopupWrapper reference={popup}  contentContainerStyle={styles.container} childrenStyle={styles.childrenContainer}>
+  return ( 
+    <PopupWrapper reference={popup}  contentContainerStyle={[styles.container,props.contentStye]} childrenStyle={styles.childrenContainer}>
       <RobotoMedium style={styles.successText}>{props.title}</RobotoMedium>
       <RobotoRegular style={styles.descText}>{props.desc}</RobotoRegular>
       <View style={styles.btnContainer}>

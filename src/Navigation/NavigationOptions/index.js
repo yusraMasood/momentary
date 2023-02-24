@@ -36,12 +36,26 @@ const titles = {
   ChangePassword:"Change Password",
   MyEntries:"My Entries",
   Account:"Account",
-  AppUI:"App/UI"
+  AppUI:"App/UI",
+  Legacy:"Legacy",
+  Notification:"Notifications",
+  Privacy:"Privacy",
+  Support:"Support",
+  SupportDetails:"Support",
+  ContactUs:"Contact Us",
+  FrequentlyAskedQuestions:"Frequently Asked Questions",
+  // PaymentLogs:"Payment Logs"
   // PostByLocation:"Global Network"
 
 };
 const titleWithDescription={
-  PostByLocation:"Global Network"
+  PostByLocation:"Global Network",
+  PaymentLogs:"Payment Logs"
+  
+}
+const routesWithDescription={
+  PostByLocation:"Anonymous Entry From Region",
+  PaymentLogs:"Total Subscription Payments: $2,000"
 }
 const routesWithBackIcon={
   LibraryScreen:"LibraryScreen",
@@ -58,7 +72,15 @@ const routesWithBackIcon={
   EditProfile:"EditProfile",
   ChangePassword:"ChangePassword",
   Account:"Account",
-  AppUI:"AppUI"
+  AppUI:"AppUI",
+  Legacy:"Legacy",
+  Notification:"Notification",
+  Privacy:"Privacy",
+  Support:"Support",
+  SupportDetails:"Support",
+  ContactUs:"ContactUs",
+  FrequentlyAskedQuestions:"FrequentlyAskedQuestions",
+  PaymentLogs:"PaymentLogs"
 }
 const routesWithImage = {
 
@@ -110,11 +132,11 @@ const renderTitle = props => {
   }
   if (titleWithDescription[props?.route?.name]) {
     return (
-      <View  >
+      <View  style={styles.titleWithDescriptionContainer}>
         <DamionRegular style={styles.titleCenterText}>
           {titleWithDescription[props?.route?.name]}
         </DamionRegular>
-        <RobotoRegular style={styles.anonymousText}>Anonymous Entry From Region</RobotoRegular>
+        <RobotoRegular style={styles.anonymousText}>{routesWithDescription[props?.route?.name]}</RobotoRegular>
       </View>
     );
   }

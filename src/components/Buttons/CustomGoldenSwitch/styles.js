@@ -29,9 +29,6 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         paddingLeft: 0.5 * vw,
       },
-      setBtn:{
-          
-      },
       switch: {
         width: 8.6 * vw,
         height: 2.9 * vh,

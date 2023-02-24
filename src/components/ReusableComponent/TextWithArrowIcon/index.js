@@ -8,7 +8,7 @@ import styles from './styles'
 const TextWithArrowIcon=(props)=>{
     return(
         <View>
-            <RippleHOC onPress={props.onPressPageDesign} style={styles.settingContainer}>
+            <RippleHOC onPress={props.onPressPageDesign} style={[styles.settingContainer,props.style]}>
         <RobotoRegular style={styles.pageTxt}>{props.text}</RobotoRegular>
         <View style={styles.rightContainer}>
         {props.textOpt &&
@@ -17,7 +17,7 @@ const TextWithArrowIcon=(props)=>{
         </RobotoRegular>
         }
         {props.textonly?null:
-         <Image source={icons.rightArrow} style={styles.arrowStyle} />
+         <Image source={props.icon?props.icon:icons.rightArrow} style={[styles.arrowStyle,props.iconStyle]} />
         } 
         </View>
       </RippleHOC>

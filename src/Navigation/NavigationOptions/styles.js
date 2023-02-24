@@ -6,8 +6,14 @@ const styles = StyleSheet.create({
 
   titleCenterText:{
     fontSize: vh*3.5,
+    // backgroundColor: "red",
+    // width: vw*35,
+    // paddingHorizontal: vw*2,
     color: colors.themeColor.yellow,
 
+  },
+  titleWithDescriptionContainer:{
+    alignItems: "center"
   },
   anonymousText:{
     color: colors.text.grey,

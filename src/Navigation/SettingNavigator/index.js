@@ -8,6 +8,11 @@ import Legacy from '../../screens/Drawer/Settings/Legacy';
 import Notification from '../../screens/Drawer/Settings/Notification';
 import Privacy from '../../screens/Drawer/Settings/Privacy';
 import Support from '../../screens/Drawer/Settings/Support';
+import SupportDetails from '../../screens/Drawer/Settings/SupportDetails';
+import ContactUs from '../../screens/Drawer/Settings/ContactUs';
+import FrequentlyAskedQuestions from '../../screens/Drawer/Settings/FrequentlyAskedQuestions';
+import SubscriptionLogs from '../../screens/Drawer/Settings/SubscriptionLogs';
+import PaymentLogs from '../../screens/Drawer/Settings/PaymentLogs';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +26,14 @@ const SettingNavigator = () => {
         <Stack.Screen name="Notification" component={Notification} />
         <Stack.Screen name="Privacy" component={Privacy} />
         <Stack.Screen name="Support" component={Support} />
+        <Stack.Screen name="SupportDetails" component={SupportDetails} />
+        <Stack.Screen name="ContactUs" component={ContactUs} />
+        <Stack.Screen name="FrequentlyAskedQuestions" component={FrequentlyAskedQuestions} />
+        <Stack.Screen name="SubscriptionLogs" component={SubscriptionLogs} />
+
+        <Stack.Screen name="PaymentLogs" component={PaymentLogs} />
+
+
 
 
     </Stack.Navigator>

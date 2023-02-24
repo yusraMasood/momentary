@@ -58,6 +58,9 @@ export const generalImages = {
     pinned:require('./icons/pinned.png'),
     delete:require('./icons/delete.png'),
     upload:require('./icons/upload.png'),
+    deleteIcon:require('./icons/deleteIcon.png'),
+    download:require('./icons/download.png'),
+    arrowDownwards:require('./icons/arrowDownwards.png'),
 
 
 

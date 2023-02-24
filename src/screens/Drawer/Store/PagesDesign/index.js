@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
-import {FlatList, Image, View} from 'react-native';
-import {generalImages} from '../../../../assets/images';
 import CustomButton from '../../../../components/Buttons/CustomButton';
 import DesignCard from '../../../../components/Cards/DesignCard';
-import CustomDropdown from '../../../../components/Dropdowns/CustomDropdown';
 import MainDropdown from '../../../../components/Dropdowns/MainDropdown';
 import RobotoRegular from '../../../../components/Texts/RobotoRegular';
 import ContentContainer from '../../../../components/wrappers/ContentContainer';

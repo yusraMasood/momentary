@@ -20,6 +20,17 @@ const styles =StyleSheet.create({
         fontSize: vh*1.6,
         paddingTop: vh*0.5
 
+    },
+    arrowIcon:{
+        height: vh*2,
+        width: vh*2,
+        resizeMode: "contain"
+
+    },
+    titleContainer:{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
     }
 
 })
