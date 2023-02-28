@@ -1,11 +1,14 @@
 import React from 'react'
-import { View } from 'react-native'
-
+import { View,Image } from 'react-native'
+import { icons } from '../../../assets/images'
+import RobotoRegular from '../../Texts/RobotoRegular'
+import styles from './styles'
 
 const DatePicker=()=>{
     return(
-        <View>
-            
+        <View style={styles.container}>
+            <RobotoRegular style={styles.fromText}>From</RobotoRegular>
+            <Image source={icons.calendar} style={styles.calendarIcon}/>
         </View>
 
     )

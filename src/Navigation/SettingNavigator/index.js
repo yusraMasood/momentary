@@ -13,6 +13,7 @@ import ContactUs from '../../screens/Drawer/Settings/ContactUs';
 import FrequentlyAskedQuestions from '../../screens/Drawer/Settings/FrequentlyAskedQuestions';
 import SubscriptionLogs from '../../screens/Drawer/Settings/SubscriptionLogs';
 import PaymentLogs from '../../screens/Drawer/Settings/PaymentLogs';
+import PaymentLogDetail from '../../screens/Drawer/Settings/PaymentLogDetail';
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,9 @@ const SettingNavigator = () => {
         <Stack.Screen name="SubscriptionLogs" component={SubscriptionLogs} />
 
         <Stack.Screen name="PaymentLogs" component={PaymentLogs} />
+
+        <Stack.Screen name="PaymentLogDetail" component={PaymentLogDetail} />
+
 
 
 

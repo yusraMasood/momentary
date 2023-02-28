@@ -10,100 +10,100 @@ import DamionRegular from '../../components/Texts/DamionRegular';
 import RobotoRegular from '../../components/Texts/RobotoRegular';
 import PragmaticaRegular from '../../components/Texts/RobotoSemiBold';
 import RippleHOC from '../../components/wrappers/Ripple';
-import { colors } from '../../utils/appTheme';
+import {colors} from '../../utils/appTheme';
 import {vh, vw} from '../../utils/dimensions';
 import styles from './styles';
 
-
-const routesWithTitle = {
-};
+const routesWithTitle = {};
 const titles = {
-  HomeScreen:"Momentary",
-  FriendNetworkScreen:"My Network",
-  LibraryScreen:"Library",
-  GlobalNetworkScreen:"Global Network",
-  NewEntry:"Add Entry",
-  NotificationScreen:"Notification",
-  AddNewJournal:"Create Journal",
-  StoreScreen:"Store",
-  PagesDesign:"Page Designs",
-  JournalCovers:"Journal Covers",
-  Typography:"Font Packs",
-  BookPrinting:"Book Printing",
-  SettingScreen:"Settings",
-  MyProfile:"Account Settings",
-  EditProfile:"Account Settings",
-  ChangePassword:"Change Password",
-  MyEntries:"My Entries",
-  Account:"Account",
-  AppUI:"App/UI",
-  Legacy:"Legacy",
-  Notification:"Notifications",
-  Privacy:"Privacy",
-  Support:"Support",
-  SupportDetails:"Support",
-  ContactUs:"Contact Us",
-  FrequentlyAskedQuestions:"Frequently Asked Questions",
+  HomeScreen: 'Momentary',
+  FriendNetworkScreen: 'My Network',
+  LibraryScreen: 'Library',
+  GlobalNetworkScreen: 'Global Network',
+  NewEntry: 'Add Entry',
+  NotificationScreen: 'Notification',
+  AddNewJournal: 'Create Journal',
+  StoreScreen: 'Store',
+  PagesDesign: 'Page Designs',
+  JournalCovers: 'Journal Covers',
+  Typography: 'Font Packs',
+  BookPrinting: 'Book Printing',
+  SettingScreen: 'Settings',
+  MyProfile: 'Account Settings',
+  EditProfile: 'Account Settings',
+  ChangePassword: 'Change Password',
+  MyEntries: 'My Entries',
+  Account: 'Account',
+  AppUI: 'App/UI',
+  Legacy: 'Legacy',
+  Notification: 'Notifications',
+  Privacy: 'Privacy',
+  Support: 'Support',
+  SupportDetails: 'Support',
+  ContactUs: 'Contact Us',
+  FrequentlyAskedQuestions: 'Frequently Asked Questions',
+  PaymentLogDetail: 'Purchase History',
+  SubscriptionLogs: 'SubscriptionLogs',
   // PaymentLogs:"Payment Logs"
   // PostByLocation:"Global Network"
-
 };
-const titleWithDescription={
-  PostByLocation:"Global Network",
-  PaymentLogs:"Payment Logs"
-  
-}
-const routesWithDescription={
-  PostByLocation:"Anonymous Entry From Region",
-  PaymentLogs:"Total Subscription Payments: $2,000"
-}
-const routesWithBackIcon={
-  LibraryScreen:"LibraryScreen",
-  NewEntry:"NewEntry",
-  NotificationScreen:"NotificationScreen",
-  AddNewJournal:"AddNewJournal",
-  PagesDesign:"PagesDesign",
-  JournalCovers:"JournalCovers",
-  Typography:"Typography",
-  BookPrinting:"BookPrinting",
-  PostByLocation:"PostByLocation",
-  SettingScreen:"SettingScreen",
-  MyProfile:"MyProfile",
-  EditProfile:"EditProfile",
-  ChangePassword:"ChangePassword",
-  Account:"Account",
-  AppUI:"AppUI",
-  Legacy:"Legacy",
-  Notification:"Notification",
-  Privacy:"Privacy",
-  Support:"Support",
-  SupportDetails:"Support",
-  ContactUs:"ContactUs",
-  FrequentlyAskedQuestions:"FrequentlyAskedQuestions",
-  PaymentLogs:"PaymentLogs"
-}
-const routesWithImage = {
-
+const titleWithDescription = {
+  PostByLocation: 'Global Network',
+  PaymentLogs: 'Payment Logs',
 };
+const routesWithDescription = {
+  PostByLocation: 'Anonymous Entry From Region',
+  PaymentLogs: 'Total Subscription Payments: $2,000',
+};
+const routesWithBackIcon = {
+  LibraryScreen: 'LibraryScreen',
+  NewEntry: 'NewEntry',
+  NotificationScreen: 'NotificationScreen',
+  AddNewJournal: 'AddNewJournal',
+  PagesDesign: 'PagesDesign',
+  JournalCovers: 'JournalCovers',
+  Typography: 'Typography',
+  BookPrinting: 'BookPrinting',
+  PostByLocation: 'PostByLocation',
+  SettingScreen: 'SettingScreen',
+  MyProfile: 'MyProfile',
+  EditProfile: 'EditProfile',
+  ChangePassword: 'ChangePassword',
+  Account: 'Account',
+  AppUI: 'AppUI',
+  Legacy: 'Legacy',
+  Notification: 'Notification',
+  Privacy: 'Privacy',
+  Support: 'Support',
+  SupportDetails: 'Support',
+  ContactUs: 'ContactUs',
+  FrequentlyAskedQuestions: 'FrequentlyAskedQuestions',
+  PaymentLogs: 'PaymentLogs',
+  PaymentLogDetail: 'PaymentLogDetail',
+  SubscriptionLogs: 'SubscriptionLogs',
+};
+const routesWithImage = {};
 const routesWithSetting = {
-  HomeScreen:"HomeScreen",
-  FriendNetworkScreen:"FriendNetworkScreen",
-  GlobalNetworkScreen:"GlobalNetworkScreen",
-  StoreScreen:"StoreScreen",
-  MyEntries:"MyEntries"
-}
+  HomeScreen: 'HomeScreen',
+  FriendNetworkScreen: 'FriendNetworkScreen',
+  GlobalNetworkScreen: 'GlobalNetworkScreen',
+  StoreScreen: 'StoreScreen',
+  MyEntries: 'MyEntries',
+};
 const routesWithNotification = {
-  HomeScreen:"HomeScreen",
-  FriendNetworkScreen:"FriendNetworkScreen",
-  GlobalNetworkScreen:"GlobalNetworkScreen",
-  StoreScreen:"StoreScreen",
-  SettingScreen:"SettingScreen",
-  MyEntries:"MyEntries"
-}
-const routesWithSaveIcon={
-  NewEntry:"NewEntry"
-
-}
+  HomeScreen: 'HomeScreen',
+  FriendNetworkScreen: 'FriendNetworkScreen',
+  GlobalNetworkScreen: 'GlobalNetworkScreen',
+  StoreScreen: 'StoreScreen',
+  SettingScreen: 'SettingScreen',
+  MyEntries: 'MyEntries',
+};
+const routesWithFilter = {
+  SubscriptionLogs: 'My Subscriptions',
+};
+const routesWithSaveIcon = {
+  NewEntry: 'NewEntry',
+};
 const NavigationOptions = navProps => {
   return {
     headerTitle: () => renderTitle(navProps),
@@ -132,11 +132,13 @@ const renderTitle = props => {
   }
   if (titleWithDescription[props?.route?.name]) {
     return (
-      <View  style={styles.titleWithDescriptionContainer}>
+      <View style={styles.titleWithDescriptionContainer}>
         <DamionRegular style={styles.titleCenterText}>
           {titleWithDescription[props?.route?.name]}
         </DamionRegular>
-        <RobotoRegular style={styles.anonymousText}>{routesWithDescription[props?.route?.name]}</RobotoRegular>
+        <RobotoRegular style={styles.anonymousText}>
+          {routesWithDescription[props?.route?.name]}
+        </RobotoRegular>
       </View>
     );
   }
@@ -144,16 +146,16 @@ const renderTitle = props => {
 const renderHeaderLeft = props => {
   if (routesWithSetting[props?.route?.name]) {
     return (
-        <RippleHOC onPress={() => props.navigation.navigate("SettingNavigator")}>
-          <Image source={icons.setting} style={styles.backIcon} />
-        </RippleHOC>
+      <RippleHOC onPress={() => props.navigation.navigate('SettingNavigator')}>
+        <Image source={icons.setting} style={styles.backIcon} />
+      </RippleHOC>
     );
   }
   if (routesWithBackIcon[props?.route?.name]) {
     return (
-        <RippleHOC onPress={() => props.navigation.goBack()}>
-          <Image source={icons.back} style={styles.backIcon} />
-        </RippleHOC>
+      <RippleHOC onPress={() => props.navigation.goBack()}>
+        <Image source={icons.back} style={styles.backIcon} />
+      </RippleHOC>
     );
   }
   // if (routesWithTitle[props?.route?.name]) {
@@ -183,30 +185,34 @@ const renderheaderRight = props => {
         style={styles.imgContainer}
       >
         <Image source={icons.notification} style={styles.backIcon} />
-       <View style={styles.circleNotification}/>
+        <View style={styles.circleNotification} />
       </RippleHOC>
     );
   }
-  if(routesWithSaveIcon[props?.route?.name]){
-
+  if (routesWithFilter[props?.route?.name]) {
     return (
-<View style={styles.rightContainer}>
-  <RippleHOC onPress={()=> props.navigation.navigate("MyEntries")}
-  >
-<Image source={icons.pin} style={styles.entryIcon}/>
-  </RippleHOC>
-  <RippleHOC onPress={()=> props.navigation.navigate("MyEntries")}
-  >
-<Image source={icons.save} style={styles.saveIcon}/>
-  </RippleHOC>
-  <RippleHOC onPress={()=> props.navigation.navigate("MyEntries")}
-  >
-<Image source={icons.cloud} style={styles.entryIcon}/>
-  </RippleHOC>
-</View>
+      <RippleHOC
+        onPress={() => props.navigation.navigate('NotificationScreen')}
+      >
+        <Image source={icons.filter} style={styles.backIcon} />
+      </RippleHOC>
     );
   }
-  
+  if (routesWithSaveIcon[props?.route?.name]) {
+    return (
+      <View style={styles.rightContainer}>
+        <RippleHOC onPress={() => props.navigation.navigate('MyEntries')}>
+          <Image source={icons.pin} style={styles.entryIcon} />
+        </RippleHOC>
+        <RippleHOC onPress={() => props.navigation.navigate('MyEntries')}>
+          <Image source={icons.save} style={styles.saveIcon} />
+        </RippleHOC>
+        <RippleHOC onPress={() => props.navigation.navigate('MyEntries')}>
+          <Image source={icons.cloud} style={styles.entryIcon} />
+        </RippleHOC>
+      </View>
+    );
+  }
 };
 
 export const drawerRoutes = {

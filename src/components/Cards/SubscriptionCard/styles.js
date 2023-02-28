@@ -29,6 +29,9 @@ const styles =StyleSheet.create({
     },
     amountText:{
         color: colors.themeColor.yellow,
+        // paddingTop: 0,
+        // padding: 0,
+        // paddingVertical: 0,
         fontSize: vh*2.8,
     }
     

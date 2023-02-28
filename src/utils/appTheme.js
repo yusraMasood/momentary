@@ -28,6 +28,12 @@ export const colors = {
     greyPlaceholder:"#7B7B7B"
   },
   border:{
+  },
+  status:{
+    yellow:"#D8AA3F",
+    blue:"#3FD8CE",
+    green:"#68D83F"
+
   }
 };
 export const linearColors = {

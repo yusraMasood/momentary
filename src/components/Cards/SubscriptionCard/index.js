@@ -19,7 +19,7 @@ const SubscriptionCard = props => {
     <RobotoRegular style={styles.dateText}>200</RobotoRegular>
   </View>
   <View>
-    {/* <RobotoMedium style={styles.silverText}>Amount</RobotoMedium> */}
+    <RobotoMedium style={styles.silverText}>Silver</RobotoMedium>
     <DamionRegular style={styles.amountText}>$6.00</DamionRegular>
   </View>
 

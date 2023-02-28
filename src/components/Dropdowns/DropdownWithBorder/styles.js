@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     },
     noOfTimes:{
       // paddingBottom: vh*1,
-      paddingHorizontal: vw*2.2,
+      // paddingHorizontal: vw*2.2,
     
 
       paddingVertical: vh*1,
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         borderBottomColor: colors.input.greyBorder
       },
       fromContainer:{
-          width: vw*60,
+          // width: vw*60,
           marginVertical: vh*1
 
       },
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
       priecText:{
         color: colors.text.offwhite,
         fontSize: vh*2,
-        paddingRight: vw*4,
+        // paddingRight: vw*4,
       },
       statusFocusText:{
         color: colors.text.grey,

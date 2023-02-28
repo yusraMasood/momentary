@@ -7,8 +7,17 @@ const styles =StyleSheet.create({
         // paddingTop: vh*2
     },
     dropdownContainer:{
+        // alignItems: "flex-end",
         flexDirection: "row",
         justifyContent: "space-between"
+        // flexDirection: "row",
+        // justifyContent: "space-between"
+    },
+    dateContainer:{
+        flexDirection: "row"
+    },
+    dropdownMainContainer:{
+        alignItems: "flex-end"
     }
 })
 export default styles

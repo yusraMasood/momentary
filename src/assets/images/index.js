@@ -51,7 +51,7 @@ export const generalImages = {
     cloud:require('./icons/cloud.png'),
     pin:require('./icons/pin.png'),
     save:require('./icons/save.png'),
-
+    arrowLeft:require('./icons/arrowLeft.png'),
     list:require('./icons/list.png'),
     grid:require('./icons/grid.png'),
     
