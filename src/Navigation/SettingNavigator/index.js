@@ -14,6 +14,12 @@ import FrequentlyAskedQuestions from '../../screens/Drawer/Settings/FrequentlyAs
 import SubscriptionLogs from '../../screens/Drawer/Settings/SubscriptionLogs';
 import PaymentLogs from '../../screens/Drawer/Settings/PaymentLogs';
 import PaymentLogDetail from '../../screens/Drawer/Settings/PaymentLogDetail';
+import AuditLogs from '../../screens/Drawer/Settings/AuditLogs';
+import HomeFeature from '../../screens/Drawer/Settings/HomeFeature';
+import SyncModes from '../../screens/Drawer/Settings/SyncModes';
+import AppLock from '../../screens/Drawer/Settings/AppLock';
+import LegacyDetermination from '../../screens/Drawer/Settings/LegacyDetermination';
+import LegacyContact from '../../screens/Drawer/Settings/LegacyContact';
 
 const Stack = createStackNavigator();
 
@@ -31,15 +37,14 @@ const SettingNavigator = () => {
         <Stack.Screen name="ContactUs" component={ContactUs} />
         <Stack.Screen name="FrequentlyAskedQuestions" component={FrequentlyAskedQuestions} />
         <Stack.Screen name="SubscriptionLogs" component={SubscriptionLogs} />
-
         <Stack.Screen name="PaymentLogs" component={PaymentLogs} />
-
         <Stack.Screen name="PaymentLogDetail" component={PaymentLogDetail} />
-
-
-
-
-
+        <Stack.Screen name="AuditLogs" component={AuditLogs} />
+        <Stack.Screen name="HomeFeature" component={HomeFeature} />
+        <Stack.Screen name="SyncModes" component={SyncModes} />
+        <Stack.Screen name="AppLock" component={AppLock} />
+        <Stack.Screen name="LegacyDetermination" component={LegacyDetermination} />
+        <Stack.Screen name="LegacyContact" component={LegacyContact} />
     </Stack.Navigator>
   );
 };

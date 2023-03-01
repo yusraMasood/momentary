@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     },
     container: {
         paddingVertical:vh*2,
-        paddingHorizontal: vw*9,
+        // paddingHorizontal: vw*9,
         backgroundColor: colors.themeRed,
         alignItems: "center",
         justifyContent: "center",

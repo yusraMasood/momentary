@@ -8,7 +8,7 @@ const DatePicker=()=>{
     return(
         <View style={styles.container}>
             <RobotoRegular style={styles.fromText}>From</RobotoRegular>
-            <Image source={icons.calendar} style={styles.calendarIcon}/>
+            <Image source={icons.greyCalendar} style={styles.calendarIcon}/>
         </View>
 
     )

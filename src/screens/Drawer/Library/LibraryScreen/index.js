@@ -56,6 +56,8 @@ const LibraryScreen = (props) => {
       <FlatList
         data={headingArray}
         renderItem={renderCards}
+        keyExtractor={(item,index)=> index}
+             key={"libraryscreenarray"}
         ListFooterComponent={renderFooter}
       />
     </ScreenWrapper>

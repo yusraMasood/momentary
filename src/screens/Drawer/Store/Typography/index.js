@@ -22,60 +22,61 @@ const Typography = () => {
   const [hipsterFont, setHipsterFont] = useState('Hipster Font Pack');
   const [retroFont, setRetroFont] = useState('Retro Font Pack');
 
-  const renderFonts=()=>{
-    return(
-        <PoppinsRegular style={styles.poppinsText}> Poppins - $1</PoppinsRegular>
-    )
-  }
+  const renderFonts = () => {
+    return (
+      <PoppinsRegular style={styles.poppinsText}> Poppins - $1</PoppinsRegular>
+    );
+  };
   return (
     <ScreenWrapper style={styles.container}>
-        <ContentContainer aware>
-        
-      <MainDropdown
-        array={fontPackArray}
-        dropdownValue={fontPack}
-        dropdownTitle={'Select board'}
-        setDropdownValue={setFontPack}
-      />
-      <MainDropdown
-        array={BrutalistFontArray}
-        dropdownValue={brutalistFont}
-        dropdownTitle={'Select board'}
-        setDropdownValue={setBrutalistFont}
-      />
-      <MainDropdown
-        array={classicFontArray}
-        dropdownValue={classicFont}
-        dropdownTitle={'Select board'}
-        setDropdownValue={setClassicFont}
-      />
-    <FlatList
-      data={[1,2,3,4]}
-      renderItem={renderFonts}
-      contentContainerStyle={styles.contentContainer}
-      showsHorizontalScrollIndicator={false}
-      horizontal={true}
-      />
-      <MainDropdown
-        array={cursiveFontArray}
-        dropdownValue={cursiveFont}
-        dropdownTitle={'Select board'}
-        setDropdownValue={setCursiveFont}
-      />
-      <MainDropdown
-        array={hipsterFontArray}
-        dropdownValue={hipsterFont}
-        dropdownTitle={'Select board'}
-        setDropdownValue={setHipsterFont}
-      />
-      <MainDropdown
-        array={retroFontArray}
-        dropdownValue={retroFont}
-        dropdownTitle={'Select board'}
-        setDropdownValue={setRetroFont}
-      />
+      <ContentContainer aware>
+        <MainDropdown
+          array={fontPackArray}
+          dropdownValue={fontPack}
+          dropdownTitle={'Select board'}
+          setDropdownValue={setFontPack}
+        />
+        <MainDropdown
+          array={BrutalistFontArray}
+          dropdownValue={brutalistFont}
+          dropdownTitle={'Select board'}
+          setDropdownValue={setBrutalistFont}
+        />
+        <MainDropdown
+          array={classicFontArray}
+          dropdownValue={classicFont}
+          dropdownTitle={'Select board'}
+          setDropdownValue={setClassicFont}
+        />
+        <FlatList
+          data={[1, 2, 3, 4]}
+          keyExtractor={(item, index) => index}
+          key={'typographyArray'}
+          renderItem={renderFonts}
+          contentContainerStyle={styles.contentContainer}
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
+        />
+        <MainDropdown
+          array={cursiveFontArray}
+          dropdownValue={cursiveFont}
+          dropdownTitle={'Select board'}
+          setDropdownValue={setCursiveFont}
+        />
+        <MainDropdown
+          array={hipsterFontArray}
+          dropdownValue={hipsterFont}
+          dropdownTitle={'Select board'}
+          setDropdownValue={setHipsterFont}
+        />
+        <MainDropdown
+          array={retroFontArray}
+          dropdownValue={retroFont}
+          dropdownTitle={'Select board'}
+          setDropdownValue={setRetroFont}
+        />
 
-      <CustomButton text={'Buy Now'} alignStyle={styles.btnContainer} />
+        <CustomButton text={'Buy Now'} alignStyle={styles.btnContainer} />
       </ContentContainer>
     </ScreenWrapper>
   );

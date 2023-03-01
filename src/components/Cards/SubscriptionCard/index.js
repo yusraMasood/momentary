@@ -10,10 +10,20 @@ import styles from './styles';
 const SubscriptionCard = props => {
   return (
 <View style={styles.container}>
-  <View>
-    <RobotoMedium style={styles.silverText}>Silver</RobotoMedium>
-    <RobotoRegular style={styles.dateText}>Sept 24, 2021</RobotoRegular>
-  </View>
+  {props.subscriptionArray.map((item,index)=>{
+    return(
+      <View>
+      <RobotoMedium style={styles.silverText}>{item?.title}</RobotoMedium>
+      {item.price ?  <DamionRegular style={styles.amountText}>{item.value}</DamionRegular>
+    :
+    <RobotoRegular style={styles.dateText}>{item?.value}</RobotoRegular>  
+    }
+    
+    </View>
+
+    )
+  })}
+{/*  
   <View>
     <RobotoMedium style={styles.silverText}>Plans Purchased</RobotoMedium>
     <RobotoRegular style={styles.dateText}>200</RobotoRegular>
@@ -21,7 +31,7 @@ const SubscriptionCard = props => {
   <View>
     <RobotoMedium style={styles.silverText}>Silver</RobotoMedium>
     <DamionRegular style={styles.amountText}>$6.00</DamionRegular>
-  </View>
+  </View> */}
 
 </View>
   );

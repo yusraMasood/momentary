@@ -10,8 +10,12 @@ export const colors = {
   },
   themeColor:{
     yellow:"#EED68A",
-    grey:"#1C1C1C"
+    grey:"#1C1C1C",
+    
 
+  },
+  button:{
+    grey:'rgba(196,196,196,0.41)'
   },
   text:{
     offwhite:"#DADADA",
@@ -27,13 +31,13 @@ export const colors = {
     greyBackground:"rgba(252,252,252,0.09)",
     greyPlaceholder:"#7B7B7B"
   },
-  border:{
-  },
+ card:{
+  grey:"#202020"
+ },
   status:{
     yellow:"#D8AA3F",
     blue:"#3FD8CE",
     green:"#68D83F"
-
   }
 };
 export const linearColors = {
@@ -42,7 +46,8 @@ export const linearColors = {
   yellow: ['#E1CA80', '#B09D5E','#95844C'],
   defaultRed: ['#CA0420', '#83031C'],
   defaultRed2: ['#F86C6D', '#B92F30'],
-  red:['#F86C6D', '#B92F30']
+  red:['#F86C6D', '#B92F30'],
+  grey:["'rgba(196,196,196,0.41)'","'rgba(196,196,196,0.41)'"]
   // lightPink:["|"],
 };
 export const themeShadow = {

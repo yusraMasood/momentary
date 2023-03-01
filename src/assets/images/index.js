@@ -61,6 +61,16 @@ export const generalImages = {
     deleteIcon:require('./icons/deleteIcon.png'),
     download:require('./icons/download.png'),
     arrowDownwards:require('./icons/arrowDownwards.png'),
+    greyCalendar:require('./icons/greyCalendar.png'),
+    diamond:require('./icons/diamond.png'),
+    check:require('./icons/check.png'),
+    book:require('./icons/book.png'),
+    openBook:require('./icons/openBook.png'),
+    free:require('./icons/free.png'),
+    editEntry:require('./icons/editEntry.png'),
+    metroInfo:require('./icons/metroInfo.png'),
+
+
 
 
 

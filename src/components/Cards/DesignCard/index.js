@@ -19,6 +19,8 @@ const DesignCard =()=>{
         <FlatList
         data={[1, 2, 3, 4, 5]}
         horizontal={true}
+        keyExtractor={(item,index)=> index}
+             key={"designCardArray"}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.contentContainer}
         renderItem={renderPrints}

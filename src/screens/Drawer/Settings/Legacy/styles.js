@@ -57,6 +57,14 @@ const styles = StyleSheet.create({
     borderRadius: vh*0.5,
     // paddingVertical: vh*0.5,
     paddingTop: vh*1,
+  },
+  notSetLagacyText:{
+    color: colors.themeColor.yellow,
+    paddingTop: vh*4,
+    fontSize: vh*1.9
+  },
+  btnAlign:{
+    marginTop: vh*22,
   }
 });
 export default styles;

@@ -50,7 +50,9 @@ const ContactUs = () => {
         // onChangeText={setEmail}
         // onSubmitEditing={() => passwordRef.current.focus()}
       />
-      <CustomButton text={"Submit"}/>
+      <CustomButton text={"Submit"} 
+      onPress={()=> successRef.current.show()}
+      />
       <RobotoMedium style={styles.headingText}>Note </RobotoMedium>
       <RobotoRegular style={styles.descText}>
         Your contact request will go directly to Momentary’s admin team and will
@@ -60,7 +62,11 @@ const ContactUs = () => {
       </RobotoRegular>
       <SuccessPopup
       reference={successRef}
-      />
+      title={"Success"}
+      styleContent={styles.popupstyle}
+      desc={"Thanks for reaching out! We have received your request and will get back with you as soon as possible through the email address linked to your account."}
+
+      /> 
     </ScreenWrapper>
   );
 };

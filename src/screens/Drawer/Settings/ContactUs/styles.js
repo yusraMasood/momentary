@@ -36,6 +36,8 @@ const styles =StyleSheet.create({
     input:{
         textAlignVertical: "top",
         
+    },popupstyle:{
+        height: vh*25,
     }
 })
 

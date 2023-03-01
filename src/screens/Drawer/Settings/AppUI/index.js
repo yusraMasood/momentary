@@ -43,9 +43,9 @@ const AppUI = props => {
       </RobotoMedium>
 
      
-      <TextWithArrowIcon text={'App Lock'} textOpt={"Immediate"}/>
-      <TextWithArrowIcon text={'Sync Mode'} />
-      <TextWithArrowIcon text={'Home Feature'} textOpt={"Journal"}/>
+      <TextWithArrowIcon text={'App Lock'} textOpt={"Immediate"} onPressPageDesign={()=> props.navigation.navigate("AppLock")}/>
+      <TextWithArrowIcon text={'Sync Mode'} onPressPageDesign={()=> props.navigation.navigate("SyncModes")}/>
+      <TextWithArrowIcon text={'Home Feature'} textOpt={"Journal"} onPressPageDesign={()=> props.navigation.navigate("HomeFeature")}/>
 
 
 

@@ -18,7 +18,10 @@ const FrequentlyAskedQuestions = () => {
   };
   return (
     <ScreenWrapper style={styles.container}>
-      <FlatList data={[1, 2, 3, 4, 5]} renderItem={renderQuestion} />
+      <FlatList data={[1, 2, 3, 4, 5]}
+      keyExtractor={(item,index)=> index}
+      key={"frequentlyaskedQsArray"}
+      renderItem={renderQuestion} />
     </ScreenWrapper>
   );
 };

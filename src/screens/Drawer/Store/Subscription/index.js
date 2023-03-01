@@ -64,7 +64,7 @@ const Subscription = (props) => {
       reference={successRef}
       title={"Subscribed User"}
       desc={`You are not a subscribed user. Please buy\nsubscription plan.`}
-      onAccept={()=> props.navigation.goBack()}
+      onAccept={()=> props.navigation.navigate("SubscriptionPlans")}
 
 
       />

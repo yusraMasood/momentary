@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useRef} from 'react'
 import { View } from 'react-native'
 import TextWithSwitch from '../../../../components/ReusableComponent/TextWithSwitch'
 import RobotoMedium from '../../../../components/Texts/RobotoMedium'
@@ -7,6 +7,8 @@ import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper'
 import styles from './styles'
 
 const Notification=()=>{
+    
+
     return(
         <ScreenWrapper style={styles.container}>
             <RobotoMedium style={styles.mainHeading}>In App Notifications</RobotoMedium>
@@ -23,7 +25,7 @@ const Notification=()=>{
             <TextWithSwitch text={"Patch Notes"} textStyle={styles.switchText} style={styles.switchContainer}/>
 
 
-
+       
 
 
         </ScreenWrapper>

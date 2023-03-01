@@ -47,6 +47,8 @@ const NotificationScreen = () => {
     <ScreenWrapper style={styles.container}>
       <FlatList data={[1, 2, 3, 4]}
       ListHeaderComponent={renderHeader}
+      keyExtractor={(item,index)=> index}
+             key={"notificationScreenArray"}
       renderItem={renderFriendCard} />
     </ScreenWrapper>
   );

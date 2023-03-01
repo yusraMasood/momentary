@@ -6,7 +6,7 @@ const styles =StyleSheet.create({
     container:{
         // paddingHorizontal: vw*4,
         borderWidth:1,
-        paddingVertical: vh*2.7,
+        paddingVertical: vh*2.4,
         paddingHorizontal: vw*4,
         borderRadius: vh*1,
         marginTop: vh*2.4,
@@ -20,19 +20,22 @@ const styles =StyleSheet.create({
     silverText:{
         color: colors.text.offwhite,
         fontSize: vh*1.9,
-        paddingBottom: vh*0.5,
+        // padding:0
+        // paddingBottom: vh*0.5,
     },
     dateText:{
         color: colors.text.grey,
-        fontSize: vh*1.6
+        fontSize: vh*1.6,
+        paddingTop: vh*0.5,
 
     },
     amountText:{
         color: colors.themeColor.yellow,
         // paddingTop: 0,
         // padding: 0,
+        // backgroundColor: "red",
         // paddingVertical: 0,
-        fontSize: vh*2.8,
+        fontSize: vh*2.5,
     }
     
 })

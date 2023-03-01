@@ -44,8 +44,14 @@ const titles = {
   FrequentlyAskedQuestions: 'Frequently Asked Questions',
   PaymentLogDetail: 'Purchase History',
   SubscriptionLogs: 'SubscriptionLogs',
-  // PaymentLogs:"Payment Logs"
-  // PostByLocation:"Global Network"
+  SubscriptionPlans:"Subscription Plans",
+  PaymentScreen:"Payment Method",
+  AuditLogs:"Audit Logs",
+  HomeFeature:"Home",
+  AppLock:"App Lock",
+  SyncModes:"Sync Modes",
+  LibraryCollection:"Library",
+  FriendRequest:"Friend Requests"
 };
 const titleWithDescription = {
   PostByLocation: 'Global Network',
@@ -81,6 +87,16 @@ const routesWithBackIcon = {
   PaymentLogs: 'PaymentLogs',
   PaymentLogDetail: 'PaymentLogDetail',
   SubscriptionLogs: 'SubscriptionLogs',
+  SubscriptionPlans:"SubscriptionPlans",
+  PaymentScreen:"PaymentScreen",
+  AuditLogs:"AuditLogs",
+  HomeFeature:"HomeFeature",
+  AppLock:"AppLock",
+  SyncModes:"SyncModes",
+  LegacyDetermination:"LegacyDetermination",
+  LegacyContact:"LegacyContact",
+  LibraryCollection:"LibraryCollection",
+  FriendRequest:"FriendRequest"
 };
 const routesWithImage = {};
 const routesWithSetting = {
@@ -123,11 +139,9 @@ const NavigationOptions = navProps => {
 const renderTitle = props => {
   if (titles[props?.route?.name]) {
     return (
-      <View>
         <DamionRegular style={styles.titleCenterText}>
           {titles[props?.route?.name]}
         </DamionRegular>
-      </View>
     );
   }
   if (titleWithDescription[props?.route?.name]) {

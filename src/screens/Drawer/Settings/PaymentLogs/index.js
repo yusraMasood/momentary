@@ -15,7 +15,24 @@ const PaymentLogs = props => {
   const statusArray = ['Pending', 'In Process', 'Delivered'];
 
   const renderPaymentCard = () => {
-    return <SubscriptionCard />;
+
+    const subscriptionArray=[
+      {
+          title:"Subscribed On",
+          value:"Sept 24, 2021",
+      },
+      {
+          title:"Expiry Date ",
+          value:"Sept 24, 2021",
+      },
+      {
+          title:"Silver",
+          value:"$6.00",
+      },
+  ]
+    return <SubscriptionCard
+    subscriptionArray={subscriptionArray}
+     />;
   };
   const renderDigitalGoods = () => {
     return <DigitalGoodCard />;
@@ -52,11 +69,20 @@ const PaymentLogs = props => {
         </View>
       </View>
       {dropdownValue == 'Subscription Payments' ? (
-        <FlatList data={[1, 2, 3, 4, 5]} renderItem={renderPaymentCard} />
+        <FlatList data={[1, 2, 3, 4, 5]} renderItem={renderPaymentCard}
+        keyExtractor={(item,index)=> index}
+             key={"subsriptionPaymentArray"}
+        />
       ) : dropdownValue == 'Digital Goods' ? (
-        <FlatList data={[1, 2, 3, 4, 5]} renderItem={renderDigitalGoods} />
+        <FlatList data={[1, 2, 3, 4, 5]} renderItem={renderDigitalGoods} 
+        keyExtractor={(item,index)=> index}
+             key={"digitalGoodArray"}
+        />
       ) : (
-        <FlatList data={statusArray} renderItem={renderBookPrintingCard} />
+        <FlatList data={statusArray} renderItem={renderBookPrintingCard}
+        keyExtractor={(item,index)=> index}
+             key={"bOokPrintingArray"}
+        />
       )}
     </ScreenWrapper>
   );

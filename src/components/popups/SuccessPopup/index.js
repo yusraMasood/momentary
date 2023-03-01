@@ -35,7 +35,7 @@ const SuccessPopup = props => {
     <PopupWrapper
       reference={popup}
       childrenStyle={styles.childrenStyle}
-      contentContainerStyle={styles.container}
+      contentContainerStyle={[styles.container,props.styleContent]}
     >
       <RobotoMedium style={styles.successText}>{props.title}</RobotoMedium>
       <RobotoRegular style={styles.descText}>

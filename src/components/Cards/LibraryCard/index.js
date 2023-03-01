@@ -1,16 +1,19 @@
+import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { FlatList, View,Image } from 'react-native'
 import { generalImages } from '../../../assets/images'
 import RobotoMedium from '../../Texts/RobotoMedium'
 import RobotoRegular from '../../Texts/RobotoRegular'
+import RippleHOC from '../../wrappers/Ripple'
 import styles from './styles'
 
 const LibraryCard=(props)=>{
+    const navigation =useNavigation()
     const renderImages=({item})=>{
         return(
-            <View style={styles.imageContainer}>
+            <RippleHOC onPress={()=> navigation.navigate("LibraryCollection")} style={styles.imageContainer}>
                 <Image source={item?item: generalImages?.bookcover} style={styles.bookImage}/>
-            </View>
+            </RippleHOC>
         )
     }
     return(

@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
       
       },
       redCircle:{
-        backgroundColor:colors.general.black,
+        backgroundColor:colors.general.white,
         // height: 2 * vh,
         // width: 2 * vh,
         // borderRadius: 1 * vh,

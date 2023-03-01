@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     fontSize: vh*3.5,
     // backgroundColor: "red",
     // width: vw*35,
+    // paddingRight: vw*2,
     // paddingHorizontal: vw*2,
     color: colors.themeColor.yellow,
 

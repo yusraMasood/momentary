@@ -7,6 +7,7 @@ import TextWithArrowIcon from '../../../../components/ReusableComponent/TextWith
 import TextWithSwitch from '../../../../components/ReusableComponent/TextWithSwitch';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import RobotoRegular from '../../../../components/Texts/RobotoRegular';
+import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import {linearColors} from '../../../../utils/appTheme';
 import styles from './styles';
@@ -56,10 +57,11 @@ const Account = props => {
           );
         })}
       </View>
-
+      <RippleHOC onPress={()=> props.navigation.navigate("EditProfile")}>
       <RobotoRegular style={styles.editText}>
         Edit Owner Information
       </RobotoRegular>
+      </RippleHOC>
 
       <RobotoMedium style={styles.accountHeadingText}>
         Account Security
@@ -72,7 +74,7 @@ const Account = props => {
       <RobotoMedium style={styles.accountHeadingText}>
       Access Controls
       </RobotoMedium>
-      <TextWithArrowIcon text={'Audit Logs'} />
+      <TextWithArrowIcon text={'Audit Logs'} onPressPageDesign={()=>props.navigation.navigate("AuditLogs")}/>
 
       <RobotoMedium style={styles.accountHeadingText}>
       Account Status

@@ -14,6 +14,10 @@ const StoreCard = props => {
         {props.icon && (
           <Image source={icons.rightArrow} style={styles.arrowIcon} />
         )}
+        {props.date &&
+        <RobotoRegular style={styles.descText}>{props?.date}</RobotoRegular>
+        
+        }
       </View>
       {props.desc && (
         <RobotoRegular style={styles.descText}>{props?.desc}</RobotoRegular>

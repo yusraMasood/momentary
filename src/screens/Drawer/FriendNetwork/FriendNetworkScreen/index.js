@@ -4,6 +4,7 @@ import { generalImages, icons } from '../../../../assets/images';
 import FriendNetworkCard from '../../../../components/Cards/FriendNetworkCard';
 import SearchInput from '../../../../components/Inputs/SearchInput';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
+import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import { colors } from '../../../../utils/appTheme';
 import styles from './styles';
@@ -25,7 +26,9 @@ const renderHeader=()=>{
           <View style={styles.headerContainer}>
           <RobotoMedium style={styles.headerText}>Me</RobotoMedium>
           <RobotoMedium style={styles.dashText}>-</RobotoMedium>
+          <RippleHOC onPress={()=> props.navigation.navigate("FriendRequest")}>
             <RobotoMedium style={styles.headerText}>My Friends</RobotoMedium>
+            </RippleHOC>
             </View>
         </View>
         </View>
