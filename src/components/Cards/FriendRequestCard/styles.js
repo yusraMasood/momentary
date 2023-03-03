@@ -9,6 +9,7 @@ const styles =StyleSheet.create({
         // marginTop: vh*2,
         marginBottom: vh*4,
         alignItems: "center",
+        // backgroundColor: "red",
         justifyContent: "space-between"
     },
     userImage:{
@@ -53,6 +54,11 @@ const styles =StyleSheet.create({
         color: colors.text.grey,
         fontSize: vh*1.6,
 
+    },
+    requestBtnText:{
+        color: colors.themeColor.yellow,
+        textDecorationLine: "underline",
+        fontSize: vh*1.7
     }
 
 })

@@ -2,25 +2,34 @@ import React from 'react'
 import { View,Image } from 'react-native'
 import { generalImages } from '../../../assets/images'
 import RobotoRegular from '../../Texts/RobotoRegular'
+import RippleHOC from '../../wrappers/Ripple'
 import styles from './styles'
 
-const FriendRequestCard=()=>{
+const FriendRequestCard=(props)=>{
     return(
-        <View style={styles.friendContainer}>
-            <View style={styles.imageWithNameContainer}>
+        <View  style={styles.friendContainer}>
+            <RippleHOC onPress={props.onPress}  style={styles.imageWithNameContainer}>
         <View style={styles.imageContainer}>
             <Image source={generalImages.userImage} style={styles.userImage}/>
         </View>
         <View style={styles.nameContainer}> 
-            <RobotoRegular style={styles.nameText}>Kamila Thompson </RobotoRegular>
-            <RobotoRegular style={styles.jobText}>Content Writer</RobotoRegular>
+            <RobotoRegular style={styles.nameText}>{props.name}</RobotoRegular>
+            <RobotoRegular style={styles.jobText}>{props.job}</RobotoRegular>
 
         </View>
-        </View>
+        </RippleHOC>
+        {props.request ?
+          <RippleHOC>
+          <RobotoRegular style={styles.requestBtnText}>{props.request}</RobotoRegular>
+      </RippleHOC>:
+
         <View style={styles.requestContainer}>
             <RobotoRegular style={styles.acceptText}>Accept</RobotoRegular>
             <RobotoRegular style={styles.rejectText}>Decline</RobotoRegular>
         </View>
+      
+        
+    }
     </View>
     )
 }

@@ -51,7 +51,10 @@ const titles = {
   AppLock:"App Lock",
   SyncModes:"Sync Modes",
   LibraryCollection:"Library",
-  FriendRequest:"Friend Requests"
+  FriendRequest:"Friend Requests",
+  SaveLocation:"Save Location",
+  Visiblity:"Visiblity",
+  ViewEntry:"View Entry"
 };
 const titleWithDescription = {
   PostByLocation: 'Global Network',
@@ -96,7 +99,11 @@ const routesWithBackIcon = {
   LegacyDetermination:"LegacyDetermination",
   LegacyContact:"LegacyContact",
   LibraryCollection:"LibraryCollection",
-  FriendRequest:"FriendRequest"
+  FriendRequest:"FriendRequest",
+  changeJournal:"changeJournal",
+  SaveLocation:"SaveLocation",
+  Visiblity:"Visiblity",
+  ViewEntry:"ViewEntry"
 };
 const routesWithImage = {};
 const routesWithSetting = {
@@ -218,7 +225,7 @@ const renderheaderRight = props => {
         <RippleHOC onPress={() => props.navigation.navigate('MyEntries')}>
           <Image source={icons.pin} style={styles.entryIcon} />
         </RippleHOC>
-        <RippleHOC onPress={() => props.navigation.navigate('MyEntries')}>
+        <RippleHOC onPress={() => props.navigation.navigate('SaveLocation')}>
           <Image source={icons.save} style={styles.saveIcon} />
         </RippleHOC>
         <RippleHOC onPress={() => props.navigation.navigate('MyEntries')}>

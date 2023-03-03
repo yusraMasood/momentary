@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import {View, Image,TextInput} from 'react-native';
 import {generalImages, icons} from '../../../../assets/images';
+import LikeCommentCard from '../../../../components/Cards/LikeCommentCard';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import RobotoRegular from '../../../../components/Texts/RobotoRegular';
 import ContentContainer from '../../../../components/wrappers/ContentContainer';
@@ -11,9 +12,9 @@ import styles from './styles';
 
 const PostByLocation = () => {
   const bookImageArray = [1, 2, 3];
-  const [like,setLike] =useState(false)
-  const [comment,setComment] =useState(false)
-  const [share,setShare] =useState(false)
+  // const [like,setLike] =useState(false)
+  // const [comment,setComment] =useState(false)
+  // const [share,setShare] =useState(false)
 
   return (
     <ScreenWrapper style={styles.container}>
@@ -53,7 +54,8 @@ const PostByLocation = () => {
           );
         })}
         </View>
-        <View style={styles.likeCountContainer}>
+        <LikeCommentCard/>
+        {/* <View style={styles.likeCountContainer}>
           <View style={styles.likeContainer}>
             <Image source={icons.like} style={styles.likeIcon}/>
             <RobotoMedium style={styles.likeText}>105K</RobotoMedium>
@@ -75,8 +77,8 @@ const PostByLocation = () => {
             <RobotoMedium style={styles.commentText}>Share</RobotoMedium>
           </RippleHOC>
 
-        </View>
-        <View style={styles.textInputContainer}>
+        </View> */}
+        {/* <View style={styles.textInputContainer}>
         <Image source={generalImages.userImage} style={styles.userImage}/>
         <View style={styles.inputContainer}>
         <TextInput
@@ -86,7 +88,7 @@ const PostByLocation = () => {
         />
         <Image source={icons.send} style={styles.sendIcon}/>
         </View>
-      </View>
+      </View> */}
         </ContentContainer>
     </ScreenWrapper>
   );

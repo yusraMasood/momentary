@@ -7,6 +7,7 @@ import RobotoMedium from '../../Texts/RobotoMedium';
 import RobotoRegular from '../../Texts/RobotoRegular';
 import RippleHOC from '../../wrappers/Ripple';
 import HashtagPopup from '../HashtagPopup';
+import PageDesignPopup from '../PageDesignPopup';
 import PopupWrapper from '../PopupWrapper';
 import styles from './styles';
 
@@ -40,6 +41,25 @@ const EntrySettingPopup = props => {
     hide();
   }
 
+  const onPressTag=()=>{
+    if (props?.onPressTag) {
+      props?.onPressTag();
+    }
+    hide();
+  }
+  const onPressVisiblity=()=>{
+    if (props?.onPressVisiblity) {
+      props?.onPressVisiblity();
+    }
+    hide();
+  }
+  const onPressDelete=()=>{
+    if (props?.onPressDelete) {
+      props?.onPressDelete();
+    }
+    hide();
+  }
+
   return (
     <PopupWrapper
       reference={popup}
@@ -47,11 +67,11 @@ const EntrySettingPopup = props => {
       contentContainerStyle={styles.contentContainer}
     >
       <RobotoMedium style={styles.settingText}>Entry Setting</RobotoMedium>
-      <RippleHOC onPress={props.onPressPageDesign} style={styles.settingContainer}>
+      <RippleHOC onPress={onPressPageDesign} style={styles.settingContainer}>
         <RobotoRegular style={styles.pageTxt}>Change Page Design</RobotoRegular>
         <Image source={icons.rightArrow} style={styles.arrowStyle} />
       </RippleHOC>
-      <RippleHOC style={styles.settingContainer}>
+      <RippleHOC onPress={onPressVisiblity} style={styles.settingContainer}>
         <RobotoRegular style={styles.pageTxt}>Visiblity</RobotoRegular>
         <View style={styles.rightContainer}>
           <RobotoRegular style={styles.privateText}>Private</RobotoRegular>
@@ -59,10 +79,7 @@ const EntrySettingPopup = props => {
         </View>
       </RippleHOC>
       <RippleHOC
-        onPress={() => {
-          tagRef.current.show();
-          hide();
-        }}
+        onPress={onPressTag}
         style={styles.settingContainer}
       >
         <RobotoRegular style={styles.pageTxt}>Tags</RobotoRegular>
@@ -77,17 +94,13 @@ const EntrySettingPopup = props => {
         <RobotoRegular style={styles.pageTxt}>Comments</RobotoRegular>
         <CustomGoldenSwitch />
       </View>
-      <RippleHOC style={styles.settingContainer}>
+      <RippleHOC onPress={onPressDelete} style={styles.settingContainer}>
         <RobotoRegular style={styles.pageTxt}>Delete</RobotoRegular>
         <View style={styles.crossContainer}>
           <Image source={icons.cross} style={styles.crossIcon} />
         </View>
       </RippleHOC>
-      <HashtagPopup
-        reference={tagRef}
-        // reference={networkPopup}
-        // onAccept={() => successPopup.current.show()}
-      />
+   
     </PopupWrapper>
   );
 };

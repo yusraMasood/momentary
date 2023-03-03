@@ -6,14 +6,17 @@ import RippleHOC from '../../../../components/wrappers/Ripple'
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper'
 import styles from './styles'
 
-const SaveLocation =()=>{
+const Visiblity =()=>{
     const [itemIndex,setItemIndex] =useState(0)
     const locationArray=[
         {
-            title:"Local",
+            title:"Global Network",
         },
         {
-            title:"Cloud",
+            title:"Private",
+        },
+        {
+            title:"My Network",
         },
     ]
     return(
@@ -30,4 +33,4 @@ const SaveLocation =()=>{
         </ScreenWrapper>
     )
 }
-export default SaveLocation
+export default Visiblity

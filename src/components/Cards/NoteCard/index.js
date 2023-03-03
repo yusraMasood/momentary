@@ -3,13 +3,14 @@ import { View,Image } from 'react-native'
 import { icons } from '../../../assets/images'
 import RobotoMedium from '../../Texts/RobotoMedium'
 import RobotoRegular from '../../Texts/RobotoRegular'
+import RippleHOC from '../../wrappers/Ripple'
 import styles from './styles'
 
 
 const NoteCard=(props)=>{
     const even=props.index%2==0;
     return(
-        <View style={[styles.noteContainer, props.listStyle]}>
+        <RippleHOC onPress={props.onPress} style={[styles.noteContainer, props.listStyle]}>
         <View style={styles.alignPin}>
           <Image source={icons.pinned} style={styles.pinIcon} />
         </View>
@@ -24,7 +25,7 @@ const NoteCard=(props)=>{
           </RobotoMedium>
           <Image source={icons.delete} style={[styles.deleteIcon,props.deleteIconStyle]} />
         </View>
-      </View>
+      </RippleHOC>
     )
 }
 export default NoteCard

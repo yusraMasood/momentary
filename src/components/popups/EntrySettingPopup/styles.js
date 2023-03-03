@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
     crossIcon:{
         height: vh*1.3,
         width: vh*1.3,
-        resizeMode: "contain"
+        resizeMode: "contain",
+        tintColor: colors.general.white
     },
     crossContainer:{
         padding:vh*1,

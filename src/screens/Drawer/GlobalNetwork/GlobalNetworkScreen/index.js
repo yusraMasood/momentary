@@ -29,7 +29,7 @@ const GlobalNetworkScreen = (props) => {
         <View style={styles.imgArrayContainer}>
           {imagesArray.map((item, index) => {
             return (
-              <View style={styles.printContainer}>
+              <View key={index} style={styles.printContainer}>
                 <Image source={generalImages.print} style={styles.printimg} />
               </View>
             );

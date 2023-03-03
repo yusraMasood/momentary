@@ -12,7 +12,7 @@ import styles from './styles';
 import {vh} from '../../../../utils/dimensions';
 import NoteCard from '../../../../components/Cards/NoteCard';
 
-const MyEntries = () => {
+const MyEntries = (props) => {
   const [list, setList] = useState(false);
   const gridArray = [1, 2, 3, 4, 5];
   const renderHeader = () => {
@@ -99,6 +99,7 @@ const MyEntries = () => {
             </View>
         ) : (
           <NoteCard
+          onPress={()=> props.navigation.navigate("ViewEntry")}
             list={true}
             index={index}
             listStyle={[styles.listNoteContainer]}

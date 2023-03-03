@@ -9,7 +9,7 @@ export const generalImages = {
     print: require('./generalImages/print.png'),
     books: require('./generalImages/books.png'),
     girl:require('./generalImages/girl.png'),
-    // medicalInsurance:require('./generalImages/medicalInsurance.png'),
+    pageDesign:require('./generalImages/pageDesign.png'),
     // startegyConsulting:require('./generalImages/startegyConsulting.png'),
     // saving:require('./generalImages/saving.png'),
     // profile:require('./generalImages/profile.png'),
@@ -69,6 +69,13 @@ export const generalImages = {
     free:require('./icons/free.png'),
     editEntry:require('./icons/editEntry.png'),
     metroInfo:require('./icons/metroInfo.png'),
+
+    email:require('./icons/email.png'),
+
+    phone:require('./icons/phone.png'),
+    reload:require('./icons/reload.png'),
+
+
 
 
 
