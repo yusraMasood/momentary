@@ -40,11 +40,12 @@ const PublishQuestionPopup = props => {
 
   return ( 
     <PopupWrapper reference={popup}  contentContainerStyle={[styles.container,props.contentStye]} childrenStyle={styles.childrenContainer}>
+    {props.image&&<Image source={generalImages.userImage} style={styles.userImage}/>}
       <RobotoMedium style={styles.successText}>{props.title}</RobotoMedium>
       <RobotoRegular style={styles.descText}>{props.desc}</RobotoRegular>
       <View style={styles.btnContainer}>
-      <BasicButton text={'Yes'} style={styles.buttonStyle} onPress={onYes}/>
-      <CustomButton text={'No'} style={styles.buttonStyle} onPress={onNo} />
+      <BasicButton text={props.btnYes?props.btnYes:'Yes'} style={[styles.buttonStyle,props.btnStyle]} onPress={onYes}/>
+      <CustomButton text={props.btnNo?props.btnNo:'No'} style={[styles.buttonStyle,props.btnStyle]} onPress={onNo} />
       </View>
     </PopupWrapper>
   );

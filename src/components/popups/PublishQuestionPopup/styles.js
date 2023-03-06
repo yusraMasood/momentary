@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
       },
       buttonStyle:{
         paddingHorizontal: vw*15,
-        paddingVertical: vh*1.5
+        paddingVertical: vh*1.3
       },
       childrenContainer:{
         paddingHorizontal: vw*6,
@@ -31,6 +31,12 @@ const styles = StyleSheet.create({
       },
       container:{
         height: vh*24
+      },
+      userImage:{
+        height: vh*9,
+        width: vw*18,
+        borderRadius: vh*5,
+        resizeMode: "contain"
       }
 });
 

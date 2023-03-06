@@ -46,6 +46,12 @@ const styles = StyleSheet.create({
         marginBottom: vh*2,
         resizeMode: "contain"
     },
+    faceStyle:{
+        height: vh*8,
+        width: vw*15,
+        marginBottom: vh*2,
+        resizeMode: "contain"     
+    },
     newAuthorText:{
         color: colors.text.offwhite,
         fontSize: vh*1.7

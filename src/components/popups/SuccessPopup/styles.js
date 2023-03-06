@@ -11,6 +11,12 @@ const styles = StyleSheet.create({
     fontSize: vh*2.3,
     paddingBottom: vh*0.7,
   },
+  userImage:{
+    height: vh*9,
+    width: vw*18,
+    borderRadius: vh*5,
+    resizeMode: "contain"
+  },
   descText:{
     color: colors.text.grey,
     // width: vw*50,

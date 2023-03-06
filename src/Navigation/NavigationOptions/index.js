@@ -54,7 +54,8 @@ const titles = {
   FriendRequest:"Friend Requests",
   SaveLocation:"Save Location",
   Visiblity:"Visiblity",
-  ViewEntry:"View Entry"
+  ViewEntry:"View Entry",
+  MyJournals: "My Journals"
 };
 const titleWithDescription = {
   PostByLocation: 'Global Network',
@@ -103,7 +104,11 @@ const routesWithBackIcon = {
   changeJournal:"changeJournal",
   SaveLocation:"SaveLocation",
   Visiblity:"Visiblity",
-  ViewEntry:"ViewEntry"
+  ViewEntry:"ViewEntry",
+  MyJournals:"MyJournals",
+  ViewAllEntries:"ViewAllEntries",
+  FriendDetails:"FriendDetails",
+  AddEntryInJournal:"AddEntryInJournal"
 };
 const routesWithImage = {};
 const routesWithSetting = {

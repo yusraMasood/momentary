@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     },
     nextBtn:{
         paddingVertical: vh*1.1,
+        paddingHorizontal: vw*10,
         borderRadius: vh*1.2,
     }
 });

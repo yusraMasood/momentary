@@ -11,6 +11,7 @@ import MasonryList from '@react-native-seoul/masonry-list';
 import styles from './styles';
 import {vh} from '../../../../utils/dimensions';
 import NoteCard from '../../../../components/Cards/NoteCard';
+import ListGridComponent from '../../../../components/ReusableComponent/ListGridComponent';
 
 const MyEntries = (props) => {
   const [list, setList] = useState(false);
@@ -19,38 +20,7 @@ const MyEntries = (props) => {
     return (
       <View>
         <SearchInput placeholder={'Search '} style={styles.searchInput} />
-        <View style={styles.alignGridContainer}>
-          <View style={styles.gridMainContainer}>
-            <RippleHOC
-              onPress={() => setList(true)}
-              style={styles.gridContainer}
-            >
-              <Image
-                source={icons.list}
-                style={[styles.gridIcon, list && styles.gridFocusIcon]}
-              />
-              <EuclidCircularARegular
-                style={[styles.listText, list && styles.listFocusText]}
-              >
-                List
-              </EuclidCircularARegular>
-            </RippleHOC>
-            <RippleHOC
-              onPress={() => setList(false)}
-              style={styles.gridContainer}
-            >
-              <Image
-                source={icons.grid}
-                style={[styles.gridIcon, !list && styles.gridFocusIcon]}
-              />
-              <EuclidCircularARegular
-                style={[styles.listText, !list && styles.listFocusText]}
-              >
-                Grid
-              </EuclidCircularARegular>
-            </RippleHOC>
-          </View>
-        </View>
+    <ListGridComponent list={list} setList={setList}/>
       </View>
     );
   };
@@ -102,6 +72,8 @@ const MyEntries = (props) => {
           onPress={()=> props.navigation.navigate("ViewEntry")}
             list={true}
             index={index}
+            delete
+            hashtag={"#lifeGoals #Lifestyle"}
             listStyle={[styles.listNoteContainer]}
             deleteIconStyle={styles.deleteIcon}
           />

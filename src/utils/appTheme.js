@@ -23,7 +23,8 @@ export const colors = {
     darkGrey:"#999999",
     greyDesc:"#CECECE",
     grayDesc:"#EFEFEF",
-    greyBorder:"rgba(97,97,97,0.45)"
+    greyBorder:"rgba(97,97,97,0.45)",
+    lightWhite:"#AAAAAA"
 
   },
   input:{

@@ -10,6 +10,18 @@ pagerView: {
     width: '100%',
     marginTop: vh * 2,
   },
+  popupContainer:{
+    height: vh*32
+  },
+  btnStyle:{
+    paddingHorizontal: vw*12,
+  },
+  contentSuccess:{
+    height: vh*29
+  },
+  btnStyle:{
+    paddingHorizontal: vw*9
+  }
 })
 
 export default styles 

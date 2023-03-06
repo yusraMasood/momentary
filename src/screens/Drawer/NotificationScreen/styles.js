@@ -19,6 +19,11 @@ const styles=StyleSheet.create({
         color: colors.text.offwhite,
         fontSize: vh*1.7
     },
+    readText:{
+        color: colors.text.grey,
+
+
+    },
     cardContainer:{
         marginBottom: vh*3,
     },
@@ -37,7 +42,9 @@ const styles=StyleSheet.create({
     },
     friendHeadingContainer:{
         flexDirection: "row",
-        alignItems: "center",justifyContent: "space-between"
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginBottom: vh*1.5,
     },
   
 })

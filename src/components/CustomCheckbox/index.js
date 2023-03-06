@@ -15,12 +15,11 @@ const CustomCheckBox=(props)=>{
 
     }
     return(
-        <RippleHOC style={styles.container} onPress={onPressCheck}>
-            <View style={styles.checkboxContainer} >
+        <RippleHOC style={[styles.container,props.style]} onPress={onPressCheck}>
+            <View style={[styles.checkboxContainer,props.checkboxStyle]} >
                 {checkbox&& 
-                <View style={styles.checkboxInnerContainer}>
                     <Image source={icons.tick} style={styles.tickImg}/>
-                </View>}
+                }
             </View>
             <RecoletaDemoRegular style={styles.title}>{props.para}</RecoletaDemoRegular>
         </RippleHOC>

@@ -10,7 +10,7 @@ const styles =StyleSheet.create({
     entryContainer:{
         alignItems: "flex-end",
         marginTop: vh*4.5,
-        marginBottom: vh*2,
+        // marginBottom: vh*2,
     },
     entryText:{
         color: colors.themeColor.yellow,
@@ -23,10 +23,10 @@ const styles =StyleSheet.create({
         alignItems: "center"
     },
     journalImg:{
-        height: vh*25,
+        height: vh*21.3,
         width: vw*90,
         resizeMode: "cover",
-        borderRadius: vh*2.5,
+        borderRadius: vh*1.3,
     },
     imgText:{
         color: colors.text.offwhite,
@@ -47,7 +47,7 @@ const styles =StyleSheet.create({
     },
     
       calendar: {
-        height: vh * 20,
+        height: vh * 13,
         width: vw * 95,
         alignSelf: 'center',
         // alignSelf: 'center',

@@ -133,6 +133,7 @@ const NewEntry = props => {
         <PublishQuestionPopup
           reference={globalRef}
           title={'Publish'}
+          contentStye={styles.publishPopup}
           desc={`Entries published on the Momentary Global Network are anonymized and will not include your user information or metadata from your photos.\n\nIdentifying information you have written in the entry itself will still be visible, as we do not censor or otherwise modify your writing.\n\nAre you sure you want to publish to Global Network?`}
         />
         <PageDesignPopup

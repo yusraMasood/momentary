@@ -15,6 +15,16 @@ const styles =StyleSheet.create({
         paddingHorizontal: vw * 2,
         borderRadius: vh * 1,
       },
+      checkboxContainer:{
+        marginVertical: vh*0,
+        position: "absolute",
+        right: vw*-2
+      },
+      checkbox:{
+        height: vh*2,
+        width: vw*4,
+
+      },
       alignPin:{
         alignItems: "flex-end"
       },
@@ -24,9 +34,12 @@ const styles =StyleSheet.create({
         width: vh*2.6,
         resizeMode: "contain",
       },
+      titleDescContainer:{
+        marginTop: vh*1.5
+      },
       healthyText: {
         color: colors.text.offwhite,
-        paddingTop: vh*1.5,
+        // paddingTop: vh*1.5,
         fontSize: vh * 2.3,
         paddingBottom: vh*1,
       },

@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Image} from 'react-native';
-import {icons} from '../../../../assets/images';
+import {generalImages, icons} from '../../../../assets/images';
 import LikeCommentCard from '../../../../components/Cards/LikeCommentCard';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import RobotoRegular from '../../../../components/Texts/RobotoRegular';
@@ -35,6 +35,7 @@ const ViewEntry = () => {
         );
       })}
       </View>
+      <Image source={generalImages.bookcover5} style={styles.postImage}/>
       <RobotoRegular style={styles.descText}>
         Lorem ipsum dolor sit amet, consectetur are it adipiscing elit. Aenean
         euismod bibendum laoreet. Proin gravida dolor sitom

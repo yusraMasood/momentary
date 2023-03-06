@@ -15,7 +15,8 @@ const LibraryScreen = (props) => {
     },
     {
       heading: 'Journals',
-      images:[generalImages?.bookcover4,generalImages?.bookcover9,generalImages?.bookcover,generalImages?.bookCover3]
+      images:[generalImages?.bookcover4,generalImages?.bookcover9,generalImages?.bookcover,generalImages?.bookCover3],
+      onPress:()=> props.navigation.navigate("MyJournals")
 
     },
     {
@@ -38,6 +39,7 @@ const LibraryScreen = (props) => {
   const renderCards = ({item}) => {
     return <LibraryCard heading={item?.heading}
     images={item?.images}
+    onPress={item?.onPress}
      />;
   };
   const renderFooter = () => {

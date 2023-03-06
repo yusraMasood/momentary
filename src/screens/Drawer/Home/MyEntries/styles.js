@@ -13,35 +13,35 @@ const styles = StyleSheet.create({
     marginTop: vh * 2,
     marginBottom: vh * 0.5,
   },
-  alignGridContainer: {
-    alignItems: 'flex-end',
-  },
-  gridMainContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  gridIcon: {
-    height: vh * 1.5,
-    width: vh * 1.5,
-    tintColor: colors.text.grey,
-    resizeMode: 'contain',
-    marginRight: vw * 1.3,
-  },
-  gridFocusIcon:{
-    tintColor: colors.general.white
-  },
-  listText: {
-    color: colors.text.grey,
-    fontSize: vh * 1.55,
-  },
-  listFocusText:{
-    color: colors.general.white
-  },
-  gridContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginLeft: vw * 3,
-  },
+  // alignGridContainer: {
+  //   alignItems: 'flex-end',
+  // },
+  // gridMainContainer: {
+  //   alignItems: 'center',
+  //   flexDirection: 'row',
+  // },
+  // gridIcon: {
+  //   height: vh * 1.5,
+  //   width: vh * 1.5,
+  //   tintColor: colors.text.grey,
+  //   resizeMode: 'contain',
+  //   marginRight: vw * 1.3,
+  // },
+  // gridFocusIcon:{
+  //   tintColor: colors.general.white
+  // },
+  // listText: {
+  //   color: colors.text.grey,
+  //   fontSize: vh * 1.55,
+  // },
+  // listFocusText:{
+  //   color: colors.general.white
+  // },
+  // gridContainer: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   marginLeft: vw * 3,
+  // },
   addEntryContainer: {
     backgroundColor: colors.themeColor.grey,
     paddingVertical: vh * 7.4,

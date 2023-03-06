@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {Text, View, Image} from 'react-native';
+import {Text, View, Image,LayoutAnimation} from 'react-native';
 import {icons} from '../../../assets/images';
 import CustomButton from '../../../components/Buttons/CustomButton';
 import CustomSwitch from '../../../components/CustomSwitch';
@@ -15,6 +15,8 @@ const LoginScreen = props => {
   const passwordRef = useRef(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [thumb,setThumb] =useState(false)
 
   const onSubmit = () => {
     props.navigation.navigate('MainNavigator');
@@ -56,7 +58,7 @@ const LoginScreen = props => {
       </View>
       <CustomButton text={'Login'} onPress={onSubmit} />
       <View style={styles.signupContainer}>
-        <Image source={icons.fingerprint} style={styles.fingerPrintStyle} />
+        <Image source={thumb?icons.fingerprint: icons.faceRecognition} style={[thumb?styles.fingerPrintStyle: styles.faceStyle]} />
         <View style={styles.registerContainer}>
           <RobotoRegular style={styles.newAuthorText}>
             New Author?{' '}
@@ -68,9 +70,11 @@ const LoginScreen = props => {
             </RobotoRegular>
           </RippleHOC>
         </View>
-        <RippleHOC>
+        <RippleHOC onPress={()=> {
+          LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+          setThumb(!thumb)}}>
           <RobotoRegular style={styles.faceRecognotionText}>
-            Face Recognition
+            {thumb?"Face Recognition":"Biometric"}
           </RobotoRegular>
         </RippleHOC>
       </View>

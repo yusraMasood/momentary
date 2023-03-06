@@ -9,13 +9,14 @@ import styles from './styles';
 
 const FriendNetworkCard = (props) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,props.style]}>
       <RippleHOC onPress={props.onPress} style={styles.userDetailsContainer}>
-        <View style={styles.userImageContainer}>
-          <Image source={generalImages.userImage} style={styles.userImage} />
-        </View>
+        
+        {props.image &&<View style={styles.userImageContainer}>
+          <Image source={props.image?props.image:generalImages.userImage} style={styles.userImage} />
+        </View>}
         <View>
-          <RobotoRegular style={styles.nameText}>Amelia Isabell</RobotoRegular>
+          {props.name &&<RobotoRegular style={styles.nameText}>Amelia Isabell</RobotoRegular>}
           <View style={styles.editContainer}>
             <Image source={icons.edit} style={styles.editIcon} />
             <RobotoRegular style={styles.dateText}>
@@ -26,7 +27,8 @@ const FriendNetworkCard = (props) => {
         <View style={styles.editContainer}>
           <Image source={icons.mapPin} style={styles.locationIcon} />
           <RobotoRegular style={styles.dateText}>
-           Approximate Locations
+           {/* Approximate Locations */}
+           {props.location}
           </RobotoRegular>
         </View>
       </RippleHOC>
@@ -34,8 +36,11 @@ const FriendNetworkCard = (props) => {
         Lorem ipsum dolor sit amet, consectetur are it adipiscing elit. Aenean
         euismod bibendum laoreet. Proin gravida dolor sitom
       </RobotoRegular>
+      <RobotoRegular style={styles.hashtagsText}> 
+        {props.hashtags}
+      </RobotoRegular>
       <View style={styles.alignComment}>
-      <RobotoMedium style={styles.headerText}>Add To library</RobotoMedium>
+      <RobotoMedium style={styles.headerText}>{props.clickText}</RobotoMedium>
       </View>
 
       {/* <View style={styles.alignComment}>

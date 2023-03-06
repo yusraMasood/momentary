@@ -7,8 +7,8 @@ const styles =StyleSheet.create({
     container:{
         paddingBottom: vh*2,
         paddingTop: vh*2,
-        borderBottomWidth:1,
-        borderBottomColor: colors.input.greyBorder
+        // borderBottomWidth:1,
+        // borderBottomColor: colors.input.greyBorder
     },
 
     userDetailsContainer:{
@@ -79,5 +79,10 @@ const styles =StyleSheet.create({
         textDecorationLine: "underline",
         fontSize: vh*1.6
     },
+    hashtagsText:{
+        fontSize: vh*1.7,
+        color: colors.themeColor.yellow,
+        paddingTop: vh*0.5,
+    }
 })
 export default styles

@@ -9,6 +9,7 @@ import JournalCovers from '../../screens/Drawer/Store/JournalCovers';
 import Subscription from '../../screens/Drawer/Store/Subscription';
 import SubscriptionPlans from '../../screens/Drawer/Store/SubscriptionPlans';
 import PaymentScreen from '../../screens/Drawer/Store/PaymentScreen';
+import BookPrintingSelectType from '../../screens/Drawer/Store/BookPrintingSelectType';
 const Stack = createStackNavigator();
 
 const StoreNavigator = () => {
@@ -24,6 +25,8 @@ const StoreNavigator = () => {
       <Stack.Screen name={"Subscription"} component={Subscription}/>
       <Stack.Screen name={"SubscriptionPlans"} component={SubscriptionPlans}/>
       <Stack.Screen name={"PaymentScreen"} component={PaymentScreen}/>
+      <Stack.Screen name={"BookPrintingSelectType"} component={BookPrintingSelectType}/>
+
     </Stack.Navigator>
   );
 };

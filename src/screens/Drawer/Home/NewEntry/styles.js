@@ -39,6 +39,9 @@ const styles = StyleSheet.create({
     borderTopColor: colors.input.greyBorder,
     paddingVertical: vh*1.4,
     paddingHorizontal: vw*5.5
+  },
+  publishPopup:{
+    height: vh*46
   }
 });
 export default styles;

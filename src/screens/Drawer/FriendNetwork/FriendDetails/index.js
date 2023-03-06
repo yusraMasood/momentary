@@ -1,9 +1,10 @@
-import React, {useState,useLayoutEffect} from 'react';
+import React, {useState,useLayoutEffect,useRef} from 'react';
 import {View, Image, FlatList,LayoutAnimation} from 'react-native';
 import {generalImages, icons} from '../../../../assets/images';
 import BasicButton from '../../../../components/Buttons/BasicButton';
 import JournalCard from '../../../../components/Cards/JournalCard';
 import SearchInput from '../../../../components/Inputs/SearchInput';
+import PublishQuestionPopup from '../../../../components/popups/PublishQuestionPopup';
 import DamionRegular from '../../../../components/Texts/DamionRegular';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import RobotoRegular from '../../../../components/Texts/RobotoRegular';
@@ -13,6 +14,7 @@ import styles from './styles';
 
 const FriendDetails = props => {
   const [journals, setJournals] = useState(false);
+  const removeRef=useRef(null)
   const contactArray = [
     {
       id: 1,
@@ -89,6 +91,7 @@ const FriendDetails = props => {
           <Image source={generalImages.userImage} style={styles.userImage} />
           <BasicButton
             text={'Remove'}
+            onPress={()=> removeRef.current.show()}
             style={styles.removeBtn}
             textStyle={styles.removeText}
           />
@@ -176,6 +179,13 @@ const FriendDetails = props => {
   return (
     <ScreenWrapper style={styles.container}>
       {journals ? renderJournalist() : renderEntryList()}
+
+      <PublishQuestionPopup
+        reference={removeRef}
+        title={'Remove Friend'}
+        desc={`Are you sure you wish to remove the\nfriend?`}
+        contentStye={styles.popupStyle}
+      />
     </ScreenWrapper>
   );
 };

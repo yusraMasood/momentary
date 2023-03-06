@@ -37,15 +37,16 @@ const SuccessPopup = props => {
       childrenStyle={styles.childrenStyle}
       contentContainerStyle={[styles.container,props.styleContent]}
     >
+        {props.image&&<Image source={generalImages.userImage} style={styles.userImage}/>}
       <RobotoMedium style={styles.successText}>{props.title}</RobotoMedium>
       <RobotoRegular style={styles.descText}>
         {props.desc}
       </RobotoRegular>
       <CustomButton
-        text={'Ok'}
+        text={props.btnText?props.btnText:'Ok'}
         onPress={onYes}
         alignStyle={styles.alignBtn}
-        style={styles.nextBtn}
+        style={[styles.nextBtn,props.btnStyle]}
       />
     </PopupWrapper>
   );

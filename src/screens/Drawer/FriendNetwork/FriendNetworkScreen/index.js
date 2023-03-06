@@ -13,6 +13,12 @@ const FriendNetworkScreen = (props) => {
   const renderFriendCard = () => {
     return <FriendNetworkCard 
     onPress={()=> props.navigation.navigate("MyProfile")}
+    location={"Approximate Locations"}
+    // hashtags={"#trends #fashion"}
+    clickText={"Add To library"}
+    name={"Amelia Isabell"}
+    image={generalImages.userImage}
+    style={styles.friendNetworkStyle}
     
     />;
   };

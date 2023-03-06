@@ -2,25 +2,20 @@ import React from 'react';
 import {View, Image, FlatList} from 'react-native';
 import {generalImages} from '../../../../assets/images';
 import CustomButton from '../../../../components/Buttons/CustomButton';
+import BookPrintJournalCard from '../../../../components/Cards/BookPrintJournalCard';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import RobotoRegular from '../../../../components/Texts/RobotoRegular';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
 
-const BookPrinting = () => {
+const BookPrinting = (props) => {
+  // console.warn("djopjdod");
   const renderBookPrint = () => {
     return (
-      <View style={styles.cardContainer}>
-        <View style={styles.journalContainer}>
-          <RobotoMedium style={styles.headingText}>
-            My First Journal
-          </RobotoMedium>
-          <RobotoRegular style={styles.dateText}>January 12, '22</RobotoRegular>
-        </View>
-        <View style={styles.bookImageContainer}>
-          <Image source={generalImages.books} style={styles.bookImage} />
-        </View>
-      </View>
+      <BookPrintJournalCard
+      onPress={()=> props.navigation.navigate("BookPrintingSelectType")}
+      />
+    
     );
   };
   const renderEmpty = () => {

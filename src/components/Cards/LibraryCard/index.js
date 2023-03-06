@@ -20,7 +20,9 @@ const LibraryCard=(props)=>{
         <View>
             <View style={styles.headingContainer}>
                 <RobotoMedium style={styles.headingText}>{props?.heading}</RobotoMedium>
+                <RippleHOC onPress={props.onPress}>
                 <RobotoRegular style={styles.viewText}>View All</RobotoRegular>
+                </RippleHOC>
             </View>
             <FlatList
             data={props?.images}

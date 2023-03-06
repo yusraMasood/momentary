@@ -19,13 +19,17 @@ const FriendRequestCard=(props)=>{
         </View>
         </RippleHOC>
         {props.request ?
-          <RippleHOC>
+          <RippleHOC onPress={props.onPressRequest}>
           <RobotoRegular style={styles.requestBtnText}>{props.request}</RobotoRegular>
       </RippleHOC>:
 
         <View style={styles.requestContainer}>
+            <RippleHOC onPress={props.onAccept}>
             <RobotoRegular style={styles.acceptText}>Accept</RobotoRegular>
+            </RippleHOC>
+            <RippleHOC>
             <RobotoRegular style={styles.rejectText}>Decline</RobotoRegular>
+            </RippleHOC>
         </View>
       
         

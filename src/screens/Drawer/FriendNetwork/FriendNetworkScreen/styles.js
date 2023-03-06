@@ -63,6 +63,10 @@ const styles=StyleSheet.create({
         height: vh*1.7,
         width: vw*3,
         resizeMode: "contain"
+    },
+    friendNetworkStyle:{
+        borderBottomWidth:1,
+        borderBottomColor: colors.input.greyBorder
     }
 })
 export default styles
