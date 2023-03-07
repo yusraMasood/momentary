@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
     title:{
         marginLeft: vw*1.5,
         fontSize: vh*1.45,
-        color:colors.greyText
+        color:colors.text.grey
     },
     tickImg:{
         height: vh*1.3,

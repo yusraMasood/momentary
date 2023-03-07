@@ -41,7 +41,7 @@ const items = [
   },
 ];
 
-const NotificationScreen = () => {
+const NotificationScreen = (props) => {
   const [showItems,setShowItems] =useState([])
   const [isMore, setIsMore] = useState(false);
   
@@ -97,7 +97,10 @@ const NotificationScreen = () => {
             <DamionRegular style={styles.headingText}>
               Friend Requests
             </DamionRegular>
+            <RippleHOC onPress={()=> props.navigation.navigate("FriendRequest")}>
             <PoppinsRegular style={styles.viewText}>View All</PoppinsRegular>
+
+            </RippleHOC>
           </View>
           {friendRequestArray.map((item, index) => {
             return (

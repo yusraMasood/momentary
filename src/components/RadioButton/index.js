@@ -9,6 +9,7 @@ const RadioButton = props => {
     <View>
 
     <View style={[styles.container, props.style]}>
+      {props.title &&
       <View style={styles.titleContainer}>
         {props.image&&
         <Image
@@ -19,6 +20,7 @@ const RadioButton = props => {
         }
         <RobotoRegular style={styles.title}>{props.title}</RobotoRegular>
       </View>
+      }
       <View style={styles.radioOuter}>
         <View style={props.focus && styles.radioInner} />
       </View>

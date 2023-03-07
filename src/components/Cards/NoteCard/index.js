@@ -21,7 +21,7 @@ const NoteCard=(props)=>{
           
         }
         </View>
-        <RippleHOC style={styles.titleDescContainer}>
+        <RippleHOC onPress={props.onPress} style={styles.titleDescContainer}>
         <RobotoMedium style={styles.healthyText}>Healthy</RobotoMedium>
         <RobotoRegular style={styles.descText}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean

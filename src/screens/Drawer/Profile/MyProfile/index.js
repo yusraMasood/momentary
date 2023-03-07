@@ -2,6 +2,7 @@ import React from 'react';
 import {View, FlatList, Image} from 'react-native';
 import {generalImages} from '../../../../assets/images';
 import CustomButton from '../../../../components/Buttons/CustomButton';
+import ContentDataComponent from '../../../../components/ReusableComponent/ContentDataComponent';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import RobotoRegular from '../../../../components/Texts/RobotoRegular';
 import RippleHOC from '../../../../components/wrappers/Ripple';
@@ -27,14 +28,14 @@ const MyProfile = (props) => {
     //     value:""
     // },
   ];
-  const renderProfile = ({item}) => {
-    return (
-      <View style={styles.itemContainer}>
-        <RobotoRegular style={styles.titleText}>{item?.title}</RobotoRegular>
-        <RobotoRegular style={styles.valueText}>{item?.value}</RobotoRegular>
-      </View>
-    );
-  };
+  // const renderProfile = ({item}) => {
+  //   return (
+  //     <View style={styles.itemContainer}>
+  //       <RobotoRegular style={styles.titleText}>{item?.title}</RobotoRegular>
+  //       <RobotoRegular style={styles.valueText}>{item?.value}</RobotoRegular>
+  //     </View>
+  //   );
+  // };
   return (
     <ScreenWrapper style={styles.container}>
       <Image source={generalImages.userImage} style={styles.userImg} />
@@ -42,12 +43,17 @@ const MyProfile = (props) => {
       <RobotoMedium style={styles.passwordText}>Change Password</RobotoMedium>
       </RippleHOC>
       <View>
-      <FlatList data={profileArray} renderItem={renderProfile} 
+        <ContentDataComponent
+        array={profileArray}
+        />
+      {/* <FlatList 
+      data={profileArray} 
+      renderItem={renderProfile} 
       key={"profileArray"}
       keyExtractor={(item,index)=>index}
       columnWrapperStyle={styles.columnWrapperStyle}
       numColumns={2}
-      />
+      /> */}
       </View>
       <CustomButton alignStyle={styles.btnContainer}
       onPress={()=> props.navigation.navigate("EditProfile")}

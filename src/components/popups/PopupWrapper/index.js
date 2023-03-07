@@ -4,6 +4,7 @@ import {BlurView} from '@react-native-community/blur';
 import {vh, vw} from '../../../utils/dimensions';
 import {colors, themeShadow} from '../../../utils/appTheme';
 import {icons} from '../../../assets/images';
+import RippleHOC from '../../wrappers/Ripple';
 
 const PopupWrapper = props => {
   const [visible, setVisible] = useState(false);
@@ -52,9 +53,9 @@ const PopupWrapper = props => {
           />
         </TouchableOpacity>
         <View style={[styles.contentContainer, props.contentContainerStyle]}>
-        <View style={styles.alignContent}>
+        <RippleHOC onPress={hide} style={styles.alignContent}>
         <Image source={icons.cross} style={styles.crossIcon}/>
-        </View>
+        </RippleHOC>
         <View style={props.childrenStyle}>
           {props.children}
           </View>
@@ -87,14 +88,18 @@ const styles = StyleSheet.create({
   },
   alignContent:{
     alignItems: "flex-end",
+    // backgroundColor: "red",
+    // position: "absolute",
+    // right: vw*4,
+    // top: vh*1.8,
 
   },
   crossIcon:{
     height: vh*2.1,
     width: vw*3.2,
-    position: "absolute",
-    right: vw*4,
-    top: vh*1.8,
+    marginRight: vw*4,
+    marginTop: vh*1,
+    
     
     resizeMode: "contain"
   },

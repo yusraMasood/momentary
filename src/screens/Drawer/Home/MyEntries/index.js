@@ -27,7 +27,14 @@ const MyEntries = (props) => {
 
   const renderNotes = ({item, index}) => {
     // const even=index%2==0;
-    return <NoteCard />;
+    return <NoteCard pin
+    hashtag={"#lifeGoals #Lifestyle"}
+    delete
+    onPress={()=> props.navigation.navigate("ViewEntry")}
+
+
+    
+    />;
   };
   const renderAddEntry = () => {
     return (
@@ -73,6 +80,7 @@ const MyEntries = (props) => {
             list={true}
             index={index}
             delete
+            pin
             hashtag={"#lifeGoals #Lifestyle"}
             listStyle={[styles.listNoteContainer]}
             deleteIconStyle={styles.deleteIcon}

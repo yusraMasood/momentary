@@ -16,19 +16,19 @@ const styles =StyleSheet.create({
         resizeMode: "contain",
         borderRadius: vh*6,
     },
-    titleText:{
-        fontSize: vh*1.7,
-        color: colors.general.white
-    },
-    valueText:{
-        fontSize: vh*1.7,
-        color: colors.text.grey
-    },
-    itemContainer:{
+    // titleText:{
+    //     fontSize: vh*1.7,
+    //     color: colors.general.white
+    // },
+    // valueText:{
+    //     fontSize: vh*1.7,
+    //     color: colors.text.grey
+    // },
+    // itemContainer:{
 
-        width: vw*45,
-        marginTop: vh*2.6,
-    },
+    //     width: vw*45,
+    //     marginTop: vh*2.6,
+    // },
     passwordText:{
         color: colors.themeColor.yellow,
         textDecorationLine: "underline",
@@ -41,10 +41,10 @@ const styles =StyleSheet.create({
     //     flexWrap: "wrap",
     //     justifyContent: "space-between"
     // },
-    columnWrapperStyle:{
-        justifyContent: "space-between",
-        // marginBottom: vh*4,
-    },
+    // columnWrapperStyle:{
+    //     justifyContent: "space-between",
+    //     // marginBottom: vh*4,
+    // },
     btnContainer:{
         marginTop: vh*13,
     }

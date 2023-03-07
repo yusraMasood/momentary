@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         paddingTop: vh*4.2,
     },
     contentContainer:{
-        height: vh*33.5
+        height: vh*37
     },
     // hashtagsMainContainer:{
     //     flexDirection: "row",

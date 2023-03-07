@@ -93,9 +93,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.momentary"
+    namespace "com.Momentary"
     defaultConfig {
-        applicationId "com.momentary"
+        applicationId "com.Momentary"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

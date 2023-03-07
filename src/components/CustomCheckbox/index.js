@@ -11,7 +11,11 @@ const CustomCheckBox=(props)=>{
 
     const onPressCheck=()=>{
         setCheckbox(!checkbox)
-        // props.updateData(!checkbox)
+        if(props.updateData)
+        {
+            props.updateData(!checkbox)
+
+        }
 
     }
     return(

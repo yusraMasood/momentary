@@ -52,7 +52,7 @@ const FriendRequest = props => {
   };
   return (
     <ScreenWrapper style={styles.container}>
-      <SearchInput />
+      <SearchInput placeholder={"Search.."} />
       <PageViewButton data={requestArray} reference={pagerRef} />
 
       <PagerView

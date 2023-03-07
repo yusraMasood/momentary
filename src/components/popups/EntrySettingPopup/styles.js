@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         paddingTop: vh*2.5,
     },
     contentContainer:{
-        height: vh*32.6,
+        height: vh*35,
         width: vw*84,
         // borderRadius: vh*1.5
     },

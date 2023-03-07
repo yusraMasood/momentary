@@ -4,7 +4,7 @@ import { vh, vw } from '../../../utils/dimensions';
 
 const styles = StyleSheet.create({
   container:{
-    height: vh*21
+    height: vh*23
   },
   successText:{
     color: colors.text.offwhite,

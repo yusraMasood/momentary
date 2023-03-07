@@ -5,7 +5,7 @@ import { vh, vw } from '../../../utils/dimensions';
 const styles = StyleSheet.create({
     container:{
         // paddingHorizontal: vw*1,
-        height: vh*47
+        height: vh*49
         // paddingTop: vh
     },
     childrenContainer:{

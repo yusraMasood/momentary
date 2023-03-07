@@ -55,7 +55,11 @@ const titles = {
   SaveLocation:"Save Location",
   Visiblity:"Visiblity",
   ViewEntry:"View Entry",
-  MyJournals: "My Journals"
+  MyJournals: "My Journals",
+  BookPrintingSelectType:"Book Printing",
+  BookPrintingPlaceOrder:"Place Order",
+  BookPrintingPayment:"Place Order",
+  BookPrintingOrderSummary:"Order Summary"
 };
 const titleWithDescription = {
   PostByLocation: 'Global Network',
@@ -108,7 +112,11 @@ const routesWithBackIcon = {
   MyJournals:"MyJournals",
   ViewAllEntries:"ViewAllEntries",
   FriendDetails:"FriendDetails",
-  AddEntryInJournal:"AddEntryInJournal"
+  AddEntryInJournal:"AddEntryInJournal",
+  BookPrintingSelectType:"BookPrintingSelectType",
+  BookPrintingPlaceOrder:"BookPrintingPlaceOrder",
+  BookPrintingPayment:"BookPrintingPayment",
+  BookPrintingOrderSummary:"BookPrintingOrderSummary"
 };
 const routesWithImage = {};
 const routesWithSetting = {

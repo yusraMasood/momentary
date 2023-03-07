@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         // borderRadius: vh*0.2,
     },
     popupContainer:{
-        height: vh*63,
+        height: vh*65,
     },
     selectedText:{
         color: colors.text.offwhite,

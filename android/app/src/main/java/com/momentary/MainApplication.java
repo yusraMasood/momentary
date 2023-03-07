@@ -1,4 +1,4 @@
-package com.momentary;
+package com.Momentary;
 
 import android.app.Application;
 

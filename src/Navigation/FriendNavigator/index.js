@@ -13,7 +13,7 @@ const FriendNavigator = () => {
   return (
     <Stack.Navigator screenOptions={NavigationOptions}>
       <Stack.Screen name={"FriendNetworkScreen"} component={FriendNetworkScreen}/>
-      <Stack.Screen name={"FriendRequest"} component={FriendRequest}/>
+     
       <Stack.Screen name={"FriendDetails"} component={FriendDetails}/>
 
 
