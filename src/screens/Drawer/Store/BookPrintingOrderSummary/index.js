@@ -9,7 +9,7 @@ import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import {addressArray, cardDetailArray} from '../../../../utils/data';
 import styles from './styles';
 
-const BookPrintingOrderSummary = () => {
+const BookPrintingOrderSummary = (props) => {
   return (
     <ScreenWrapper style={styles.container}>
       <RobotoRegular style={styles.orderIdText}>
@@ -20,7 +20,9 @@ const BookPrintingOrderSummary = () => {
       <ContentDataComponent array={cardDetailArray} />
       <RobotoMedium style={[styles.billingText,styles.addressText]}>Address Details</RobotoMedium>
       <ContentDataComponent array={addressArray} />
-      <CustomButton text={'Save Receipt'}  alignStyle={styles.btnStyle}/>
+      <CustomButton text={'Save Receipt'}
+      onPress={()=> props.navigation.navigate("StoreScreen")}
+      alignStyle={styles.btnStyle}/>
       
     </ScreenWrapper>
   );

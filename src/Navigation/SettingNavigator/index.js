@@ -20,6 +20,7 @@ import SyncModes from '../../screens/Drawer/Settings/SyncModes';
 import AppLock from '../../screens/Drawer/Settings/AppLock';
 import LegacyDetermination from '../../screens/Drawer/Settings/LegacyDetermination';
 import LegacyContact from '../../screens/Drawer/Settings/LegacyContact';
+import ViewLegacyContact from '../../screens/Drawer/Settings/ViewLegacyContact';
 
 const Stack = createStackNavigator();
 
@@ -45,6 +46,7 @@ const SettingNavigator = () => {
         <Stack.Screen name="AppLock" component={AppLock} />
         <Stack.Screen name="LegacyDetermination" component={LegacyDetermination} />
         <Stack.Screen name="LegacyContact" component={LegacyContact} />
+        <Stack.Screen name="ViewLegacyContact" component={ViewLegacyContact} />
     </Stack.Navigator>
   );
 };

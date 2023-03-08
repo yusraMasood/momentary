@@ -12,7 +12,7 @@ import styles from './styles';
 const FriendNetworkScreen = (props) => {
   const renderFriendCard = () => {
     return <FriendNetworkCard 
-    onPress={()=> props.navigation.navigate("MyProfile")}
+    onPress={()=> props.navigation.navigate("FriendDetails")}
     location={"Approximate Locations"}
     // hashtags={"#trends #fashion"}
     clickText={"Add To library"}
@@ -30,7 +30,9 @@ const renderHeader=()=>{
         <View style={styles.headerContainer}>
           <Image source={icons.user} style={styles.sendIcon}/>
           <View style={styles.headerContainer}>
+            <RippleHOC  onPress={()=> props.navigation.navigate("MyProfile")}>
           <RobotoMedium style={styles.headerText}>Me</RobotoMedium>
+            </RippleHOC>
           <RobotoMedium style={styles.dashText}>-</RobotoMedium>
           <RippleHOC onPress={()=> props.navigation.navigate("FriendRequest")}>
             <RobotoMedium style={styles.headerText}>My Friends</RobotoMedium>

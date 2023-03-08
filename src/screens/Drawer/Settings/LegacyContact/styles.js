@@ -64,7 +64,7 @@ const styles =StyleSheet.create({
         marginTop: vh*14,
       },
       popupStyle:{
-        height: vh*26,
+        height: vh*28,
       }
 })
 export default styles 

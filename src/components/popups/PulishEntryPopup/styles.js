@@ -12,14 +12,16 @@ const styles = StyleSheet.create({
         paddingHorizontal: vw*8,
     },
     descText:{
-        color: colors.text.grayDesc,
+        color: colors.text.grey,
         letterSpacing: vw*0.14,
+        paddingTop: vh*1,
+        // paddingBottom: vh*,
         fontSize: vh*1.75,
     },
     publishText:{
         color: colors.text.offwhite,
         fontSize: vh*2.4,
-        marginTop: vh*3.5,
+        marginTop: vh*1,
     },
     buttonStyle:{
         paddingVertical: vh*1.3

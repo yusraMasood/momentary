@@ -131,3 +131,40 @@ export const settingArray=[
 
   },
 ]
+export const contactArray=[
+  {
+      heading:"Contact Information",
+      profile:[
+          {
+              title:"Name",
+              value:"Andrew Wilson"
+          },
+          {
+              title:"Email Address",
+              value:"andrew_email@sample.com"
+          },
+          {
+              title:"Phone Number",
+              value:"123-456-7890"
+          },
+      ]
+  },
+  {
+      heading:"Delegated Access",
+      profile:[
+          {
+              title:"Make Account Private",
+              value:"3 Months"
+          },
+          {
+              title:"Archive Account",
+              value:"3 Months"
+          },
+          {
+              title:"Delete Account",
+              value:"Never"
+          },
+      ]
+  },
+
+]

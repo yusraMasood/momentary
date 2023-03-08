@@ -11,7 +11,7 @@ const styles =StyleSheet.create({
         fontSize: vh*2.4,
     },
     popupStyle:{
-        height: vh*21
+        height: vh*24
     }
 })
 

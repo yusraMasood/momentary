@@ -1,17 +1,30 @@
-import React from 'react';
+import React,{useLayoutEffect} from 'react';
 import {View, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import DamionRegular from '../../../../components/Texts/DamionRegular';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import RobotoRegular from '../../../../components/Texts/RobotoRegular';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import { linearColors } from '../../../../utils/appTheme';
 import styles from './styles';
 
-const SupportDetails = () => {
+const SupportDetails = (props) => {
+  console.log(props?.route?.params);
     const pointsArray=[1,2,3,4,5]
+    // useLayoutEffect(() => {
+    //   props.navigation.setOptions({
+    //     headerTitle: () => {
+    //       return (
+    //         <DamionRegular style={styles.titleCenterText}>
+    //      {props.route?.params?.type}
+    //         </DamionRegular>
+    //       );
+    //     },
+    //   });
+    // }, [props.navigation]);
   return (
     <ScreenWrapper style={styles.container}>
-      <RobotoMedium style={styles.headingText}>Acceptable Use</RobotoMedium>
+      <RobotoMedium style={styles.headingText}>{props.route?.params?.type}</RobotoMedium>
       <RobotoRegular style={styles.descText}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod
         bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra

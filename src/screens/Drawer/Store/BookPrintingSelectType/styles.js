@@ -98,7 +98,7 @@ const styles =StyleSheet.create({
         width: vw*35
     },
     popupStyle:{
-        height: vh*22
+        height: vh*24
     }
 })
 

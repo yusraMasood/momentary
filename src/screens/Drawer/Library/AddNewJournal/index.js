@@ -14,7 +14,7 @@ import styles from './styles';
 
 const AddNewJournal = props => {
   const successRef = useRef(null);
-  const [date,setDate] =useState(new Date())
+  const [date, setDate] = useState(new Date());
   return (
     <ScreenWrapper style={styles.container}>
       <View style={styles.entryContainer}>

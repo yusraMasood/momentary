@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: vw*5.5
   },
   publishPopup:{
-    height: vh*46
+    height: vh*48
   }
 });
 export default styles;

@@ -8,11 +8,15 @@ import RobotoRegular from '../../../../components/Texts/RobotoRegular';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
 
-const ContactUs = () => {
+const ContactUs = (props) => {
     const successRef=useRef(null)
     const emailRef=useRef(null)
     const subjectRef=useRef(null)
+    const messageRef=useRef(null)
+const onSubmit=()=>{
+  successRef.current.show()
 
+}
   return (
     <ScreenWrapper style={styles.container}>
              <InputField
@@ -37,21 +41,21 @@ const ContactUs = () => {
         label={'Subject'}
         // value={email}
         // onChangeText={setEmail}
-        // onSubmitEditing={() => passwordRef.current.focus()}
+        onSubmitEditing={() => messageRef.current.focus()}
       />
        <InputField
-           reference={subjectRef}
-        placeholder={'Enter Subject'}
+           reference={messageRef}
+        placeholder={'Enter Message'}
         inputContainerIcon={styles.messageInput}
         numberOfLines={8}
         // label={'Subject'}
         inputContainer={styles.input}
         // value={email}
         // onChangeText={setEmail}
-        // onSubmitEditing={() => passwordRef.current.focus()}
+        onSubmitEditing={onSubmit}
       />
       <CustomButton text={"Submit"} 
-      onPress={()=> successRef.current.show()}
+      onPress={onSubmit}
       />
       <RobotoMedium style={styles.headingText}>Note </RobotoMedium>
       <RobotoRegular style={styles.descText}>
@@ -64,6 +68,7 @@ const ContactUs = () => {
       reference={successRef}
       title={"Success"}
       styleContent={styles.popupstyle}
+      onAccept={()=> props.navigation.goBack()}
       desc={"Thanks for reaching out! We have received your request and will get back with you as soon as possible through the email address linked to your account."}
 
       /> 

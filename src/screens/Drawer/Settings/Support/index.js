@@ -66,7 +66,7 @@ const Support = props => {
             return(
                 <StoreCard
                 key={innerIndex}
-                  onPress={() => props.navigation.navigate(value?.navigate)}
+                  onPress={() => props.navigation.navigate(value?.navigate,{type: value?.heading})}
                   name={value?.heading}
                   icon={value.arrow}
                   textStyle={styles.textCard}

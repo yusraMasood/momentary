@@ -36,7 +36,7 @@ const styles =StyleSheet.create({
         marginTop: vh*25
     },
     paymentPopup:{
-        height: vh*18
+        height: vh*20
     }
 
 })

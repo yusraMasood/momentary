@@ -7,7 +7,7 @@ import RippleHOC from '../../wrappers/Ripple'
 import styles from './styles'
 
 
- const LikeCommentCard=()=>{
+ const LikeCommentCard=(props)=>{
     const [like,setLike] =useState(false)
   const [comment,setComment] =useState(false)
   const [share,setShare] =useState(false)
@@ -30,7 +30,7 @@ import styles from './styles'
             <Image source={icons.commentBtn} style={styles.iconLike}/>
             <RobotoMedium style={styles.commentText}>Comment</RobotoMedium>
           </RippleHOC> 
-           <RippleHOC style={styles.likeBtnContaienr}>
+           <RippleHOC onPress={props.onPressShare} style={styles.likeBtnContaienr}>
             <Image source={icons.share} style={styles.iconLike}/>
             <RobotoMedium style={styles.commentText}>Share</RobotoMedium>
           </RippleHOC>

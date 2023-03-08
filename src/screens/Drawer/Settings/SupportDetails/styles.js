@@ -8,6 +8,15 @@ const styles =StyleSheet.create({
         paddingHorizontal: vw*4,
         paddingTop: vh*1
     },
+    // titleCenterText:{
+    //     fontSize: vh*3.5,
+    //     // backgroundColor: "red",
+    //     // width: vw*35,
+    //     // paddingRight: vw*2,
+    //     // paddingHorizontal: vw*2,
+    //     color: colors.themeColor.yellow,
+    
+    //   },
     headingText:{
         fontSize: vh*2.7,
         color: colors.text.offwhite,

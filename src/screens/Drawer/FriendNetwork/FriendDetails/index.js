@@ -80,7 +80,7 @@ const FriendDetails = props => {
 
   const changeJournal=() => {
   
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
+    // LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
     setJournals(!journals)
   
   }

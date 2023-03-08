@@ -11,7 +11,7 @@ pagerView: {
     marginTop: vh * 2,
   },
   popupContainer:{
-    height: vh*32
+    height: vh*34
   },
   btnStyle:{
     paddingHorizontal: vw*12,

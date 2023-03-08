@@ -13,7 +13,7 @@ const GlobalNavigator = () => {
   return (
     <Stack.Navigator screenOptions={NavigationOptions}>
       <Stack.Screen name={"GlobalNetworkScreen"} component={GlobalNetworkScreen}/>
-      <Stack.Screen name={"PostByLocation"} component={PostByLocation}/>
+      {/* <Stack.Screen name={"PostByLocation"} component={PostByLocation}/> */}
       {/* <Stack.Screen name={"FriendRequest"} component={FriendRequest}/> */}
 
 

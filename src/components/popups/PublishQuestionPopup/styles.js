@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         paddingTop: vh*3,
       },
       container:{
-        height: vh*24
+        height: vh*26
       },
       userImage:{
         height: vh*9,

@@ -59,7 +59,8 @@ const titles = {
   BookPrintingSelectType:"Book Printing",
   BookPrintingPlaceOrder:"Place Order",
   BookPrintingPayment:"Place Order",
-  BookPrintingOrderSummary:"Order Summary"
+  BookPrintingOrderSummary:"Order Summary",
+  ViewLegacyContact:"Secondary Contact"
 };
 const titleWithDescription = {
   PostByLocation: 'Global Network',
@@ -116,7 +117,9 @@ const routesWithBackIcon = {
   BookPrintingSelectType:"BookPrintingSelectType",
   BookPrintingPlaceOrder:"BookPrintingPlaceOrder",
   BookPrintingPayment:"BookPrintingPayment",
-  BookPrintingOrderSummary:"BookPrintingOrderSummary"
+  BookPrintingOrderSummary:"BookPrintingOrderSummary",
+  ViewLegacyContact:"ViewLegacyContact",
+  LibraryFavouriteContent:"LibraryFavouriteContent"
 };
 const routesWithImage = {};
 const routesWithSetting = {

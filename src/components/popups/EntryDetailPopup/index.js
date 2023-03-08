@@ -1,15 +1,12 @@
 import React, {useRef, useImperativeHandle} from 'react';
 import {Image, ImageBackground, View} from 'react-native';
 import {generalImages, icons} from '../../../assets/images';
-import BasicButton from '../../Buttons/BasicButton';
-import CustomButton from '../../Buttons/CustomButton';
 import RobotoMedium from '../../Texts/RobotoMedium';
 import RobotoRegular from '../../Texts/RobotoRegular';
-import RippleHOC from '../../wrappers/Ripple';
 import PopupWrapper from '../PopupWrapper';
 import styles from './styles';
 
-const PulishEntryPopup = props => {
+const EntryDetailPopup = props => {
   const popup = useRef(null);
 
   useImperativeHandle(props?.reference, () => ({
@@ -40,18 +37,19 @@ const PulishEntryPopup = props => {
 
   return (
     <PopupWrapper reference={popup} contentContainerStyle={styles.container} childrenStyle={styles.childrenContainer}>
-      {props.title &&<RobotoMedium style={styles.publishText}>{props.title}</RobotoMedium>}
-      {props.desc1 &&<RobotoRegular style={styles.descText}>
-        {props.desc1}
-      </RobotoRegular>}
-      <BasicButton text={props.yesBtn} style={styles.buttonStyle} onPress={onYes}/>
-      <CustomButton text={props.noBtn} style={styles.buttonStyle} onPress={onNo} />
-    {props.desc &&
-    <RobotoRegular style={styles.descText}>
-    {props.desc}
-  </RobotoRegular>
-    }  
+  <RobotoMedium style={styles.entryText}>Entry</RobotoMedium>
+  <View style={styles.editContainer}>
+    <Image source={icons.mapPin} style={styles.edit}/>
+    <RobotoRegular style={styles.approximateText}>Approximate location of author</RobotoRegular>
+  </View>
+  <View style={styles.editContainer}>
+    <Image source={icons.edit} style={styles.edit}/>
+    <RobotoRegular style={styles.approximateText}>January 31, 2022 - 03:00 pm</RobotoRegular>
+  </View>
+     <RobotoRegular style={styles.descText}>Lorem ipsum dolor sit amet, consectetur are it adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sitomLorem ipsum dolor sit amet, consectetur are it adipiscing 
+elit. Aenean euismod bibendum laoreet. Proin gravida dolor 
+</RobotoRegular>
     </PopupWrapper>
   );
 };
-export default PulishEntryPopup;
+export default EntryDetailPopup;

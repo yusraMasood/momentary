@@ -42,6 +42,12 @@ const styles =StyleSheet.create({
     },
     alignBtn:{
         marginTop: vh*8,
+    },
+    popupStyle:{
+        height: vh*62.5
+    },
+    popupSuccess:{
+        height: vh*19,
     }
 })
 export default styles 

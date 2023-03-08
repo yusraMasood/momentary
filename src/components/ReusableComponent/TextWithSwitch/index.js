@@ -17,13 +17,15 @@ const TextWithSwitch = props => {
         {
         
             props.onPressSwitchDisable()
-            setSwitch(false);
+           
         }
+        setSwitch(false);
     } else {
       if (props.onPressSwitch) {
         props.onPressSwitch();
-        setSwitch(true);
+        
       }
+      setSwitch(true);
     }
   };
   return (

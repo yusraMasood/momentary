@@ -9,6 +9,7 @@ import MyProfile from '../../screens/Drawer/Profile/MyProfile';
 import EditProfile from '../../screens/Drawer/Profile/EditProfile';
 import ChangePassword from '../../screens/Drawer/Profile/ChangePassword';
 import FriendRequest from '../../screens/Drawer/FriendNetwork/FriendRequest';
+import PostByLocation from '../../screens/Drawer/GlobalNetwork/PostByLocation';
 
 const Stack = createStackNavigator();
 
@@ -34,6 +35,8 @@ const MainNavigator = () => {
       <Stack.Screen name={'EditProfile'} component={EditProfile} />
       <Stack.Screen name={'ChangePassword'} component={ChangePassword} />
       <Stack.Screen name={'FriendRequest'} component={FriendRequest} />
+      <Stack.Screen name={'PostByLocation'} component={PostByLocation} />
+
     </Stack.Navigator>
   );
 };

@@ -4,7 +4,7 @@ import { vh, vw } from '../../../utils/dimensions';
 
 const styles = StyleSheet.create({
   container:{
-    height: vh*23
+    height: vh*22
   },
   successText:{
     color: colors.text.offwhite,
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     // textAlign: "center"
   },
   childrenStyle:{
-    paddingTop: vh*2.5,
+    paddingTop: vh*1,
     paddingHorizontal: vw*4,
   },
   alignBtn:{

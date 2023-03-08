@@ -31,7 +31,7 @@ const Legacy = props => {
             <RobotoBold style={styles.editText}>Edit</RobotoBold>
           </RippleHOC>
         </View>
-        <View style={styles.gridContainer}>
+        <RippleHOC onPress={()=> props.navigation.navigate("ViewLegacyContact")} style={styles.gridContainer}>
           <View style={styles.itemContainer}>
             <RobotoRegular style={styles.titleText}>Name</RobotoRegular>
             <RobotoRegular style={styles.valueText}>
@@ -48,7 +48,7 @@ const Legacy = props => {
             <RobotoRegular style={styles.titleText}>Phone Number</RobotoRegular>
             <RobotoRegular style={styles.valueText}>123-456-7890</RobotoRegular>
           </View>
-        </View>
+        </RippleHOC>
       </View>
     );
   };

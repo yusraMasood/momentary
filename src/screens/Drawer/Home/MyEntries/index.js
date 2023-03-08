@@ -2,39 +2,34 @@ import React, {useState} from 'react';
 import {View, Image, FlatList} from 'react-native';
 import {generalImages, icons} from '../../../../assets/images';
 import SearchInput from '../../../../components/Inputs/SearchInput';
-import EuclidCircularARegular from '../../../../components/Texts/EuclidCircularARegular';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
-import RobotoRegular from '../../../../components/Texts/RobotoRegular';
-import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
-import MasonryList from '@react-native-seoul/masonry-list';
 import styles from './styles';
-import {vh} from '../../../../utils/dimensions';
 import NoteCard from '../../../../components/Cards/NoteCard';
 import ListGridComponent from '../../../../components/ReusableComponent/ListGridComponent';
 
-const MyEntries = (props) => {
+const MyEntries = props => {
   const [list, setList] = useState(false);
   const gridArray = [1, 2, 3, 4, 5];
   const renderHeader = () => {
     return (
       <View>
         <SearchInput placeholder={'Search '} style={styles.searchInput} />
-    <ListGridComponent list={list} setList={setList}/>
+        <ListGridComponent list={list} setList={setList} />
       </View>
     );
   };
 
   const renderNotes = ({item, index}) => {
     // const even=index%2==0;
-    return <NoteCard pin
-    hashtag={"#lifeGoals #Lifestyle"}
-    delete
-    onPress={()=> props.navigation.navigate("ViewEntry")}
-
-
-    
-    />;
+    return (
+      <NoteCard
+        pin
+        hashtag={'#lifeGoals #Lifestyle'}
+        delete
+        onPress={() => props.navigation.navigate('ViewEntry')}
+      />
+    );
   };
   const renderAddEntry = () => {
     return (
@@ -67,21 +62,22 @@ const MyEntries = (props) => {
     return (
       <View>
         {gridArray.length - 1 == index ? (
-            <View style={styles.lastEntryContainer}>
-              <View style={styles.alignEntryText}>
-
-              <RobotoMedium style={styles.lastEntryText}>Add Entry</RobotoMedium>
-              </View>
-            <Image source={generalImages.girl} style={styles.girlImgGrid} />
+          <View style={styles.lastEntryContainer}>
+            <View style={styles.alignEntryText}>
+              <RobotoMedium style={styles.lastEntryText}>
+                Add Entry
+              </RobotoMedium>
             </View>
+            <Image source={generalImages.girl} style={styles.girlImgGrid} />
+          </View>
         ) : (
           <NoteCard
-          onPress={()=> props.navigation.navigate("ViewEntry")}
+            onPress={() => props.navigation.navigate('ViewEntry')}
             list={true}
             index={index}
             delete
             pin
-            hashtag={"#lifeGoals #Lifestyle"}
+            hashtag={'#lifeGoals #Lifestyle'}
             listStyle={[styles.listNoteContainer]}
             deleteIconStyle={styles.deleteIcon}
           />

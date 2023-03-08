@@ -106,7 +106,11 @@ const NewEntry = props => {
         <PulishEntryPopup
           reference={publishEntry}
           onAccept={() => networkPopup.current.show()}
+          title={"Publish To"}
+          desc={"Entries published on the Momentary Global Network are anonymized and will not include your user information or metadata from your photos.\n\nIdentifying information you have written in the entry itself will still be visible, as we do not censor or otherwise modify your writing. "}
           onReject={() => globalRef.current.show()}
+          yesBtn={"My Network"}
+          noBtn={"Global Network"}
         />
         <MyNetworkPopup
           reference={networkPopup}
