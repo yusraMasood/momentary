@@ -8,6 +8,7 @@ import com.blitzapp.animatedsplash.animation.GroupAnimation;
 import static com.blitzapp.animatedsplash.animation.AnimatedText.FIT_CENTER;
 import static com.blitzapp.animatedsplash.animation.AnimatedText.FIT_XY;
 import static com.blitzapp.animatedsplash.animation.Constants.FADE;
+import static com.blitzapp.animatedsplash.animation.Constants.ROTATE;
 import static com.blitzapp.animatedsplash.animation.Constants.SCALE;
 import static com.blitzapp.animatedsplash.animation.Constants.SLIDE;
 import static com.blitzapp.animatedsplash.animation.Constants.SPLASH_SLIDE_RIGHT;
@@ -55,7 +56,7 @@ public class MainActivity extends ReactActivity {
     splash.addAnimatedImage(logoimage);
 
 
-    AnimatedObject loadingImage = new AnimatedObject(R.drawable.loading, screenHeight * 0.11, screenHeight * 0.11);
+    AnimatedObject loadingImage = new AnimatedObject(R.drawable.loading, screenHeight * 0.09, screenHeight * 0.09);
     loadingImage.setPositionY(screenHeight*0.8F);
 ////    loadingImage.setRotateDegree(180);
     loadingImage.setScaleType(FIT_XY);
@@ -65,23 +66,20 @@ public class MainActivity extends ReactActivity {
 
     ObjectAnimation logoimageAnimation1 = new ObjectAnimation(logoimage, FADE, 1000, 0f, 1f, false);
     ObjectAnimation logoimageAnimation2 = new ObjectAnimation(logoimage, SCALE, 1000, 0f, 1f, 0f, 1f, false);
-    ObjectAnimation loadingAnimation = new ObjectAnimation(loadingImage, FADE, 2000, 0,180, true);
-//    ObjectAnimation *squareAnimation1 = [[ObjectAnimation alloc] initimage:loadingImage imageSource:loadingImage animationtype:FADE animationDuration:2000 rotateDegree:180 loop:true];
-//initimage:loadingImage
-//    ObjectAnimation loadingAnimation = new ObjectAnimation(loadingImage, SCALE, 2000, 0f, 1f, 0f, 1f, true);
-
-//    ObjectAnimation loadingAnimation = new ObjectAnimation(loadingImage, FADE, 2000, 0f, 1f,  true);
+//    RotateAnimation loadingAnimation = new RotateAnimation(loadingImage);
+    ObjectAnimation loadingAnimation = new ObjectAnimation(loadingImage,ROTATE,2000, 0,720,true);
+//    ObjectAnimation loadingAnimation1 = new ObjectAnimation(loadingImage,ROTATE,2000, 0,360,tr);
+//    ObjectAnimation loadingAnimation3 = new ObjectAnimation(loadingImage,ROTATE,2000, 0,360,false);
+//    ObjectAnimation loadingAnimation4 = new ObjectAnimation(loadingImage,ROTATE,2000, 0,360,false);
 
 
     GroupAnimation logogroup = new GroupAnimation(1);
     GroupAnimation loadingGroup = new GroupAnimation(1);
-//    RotateAnimation rotate = new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-//    rotate.setDuration(5000);
-//    ImageView image= (ImageView) findViewById(R.drawable.loading);
-//
-//    rotate.setInterpolator(new LinearInterpolator());
-//    loadingImage.startAnimation(rotate);
+
     loadingGroup.addAnimation(loadingAnimation);
+//    loadingGroup.addAnimation(loadingAnimation1);
+//    loadingGroup.addAnimation(loadingAnimation3);
+//    loadingGroup.addAnimation(loadingAnimation4);
 
     logogroup.addAnimation(logoimageAnimation1);
     logogroup.addAnimation(logoimageAnimation2);
