@@ -12,6 +12,7 @@ const LibraryScreen = props => {
     {
       heading: 'All Entries',
       images: [generalImages?.bookcover],
+      onPress: () => props.navigation.navigate('ViewAllEntries'),
     },
     {
       heading: 'Journals',
@@ -31,7 +32,10 @@ const LibraryScreen = props => {
         generalImages?.bookcover9,
         generalImages?.bookCover3,
       ],
-      onPress:()=> props.navigation.navigate("LibraryFavouriteContent",{type:"Favorite Connect Content"})
+      onPress: () =>
+        props.navigation.navigate('LibraryFavouriteContent', {
+          type: 'Favorite Connect Content',
+        }),
     },
     {
       heading: 'Favorite Global Content',
@@ -41,7 +45,10 @@ const LibraryScreen = props => {
         generalImages?.bookcover,
         generalImages?.bookCover3,
       ],
-      onPress:()=> props.navigation.navigate("LibraryFavouriteContent",{type:"Favorite Global Content"})
+      onPress: () =>
+        props.navigation.navigate('LibraryFavouriteContent', {
+          type: 'Favorite Global Content',
+        }),
     },
     {
       heading: 'Now In Print',

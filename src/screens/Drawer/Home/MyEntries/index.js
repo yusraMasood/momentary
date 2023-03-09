@@ -7,6 +7,7 @@ import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
 import NoteCard from '../../../../components/Cards/NoteCard';
 import ListGridComponent from '../../../../components/ReusableComponent/ListGridComponent';
+import RippleHOC from '../../../../components/wrappers/Ripple';
 
 const MyEntries = props => {
   const [list, setList] = useState(false);
@@ -34,9 +35,13 @@ const MyEntries = props => {
   const renderAddEntry = () => {
     return (
       <View>
-        <View style={styles.addEntryContainer}>
+        <RippleHOC
+          onPress={() =>
+            props.navigation.navigate('NewEntry', {type: 'New Entry'})
+          }
+          style={styles.addEntryContainer}>
           <RobotoMedium style={styles.entryText}>Add Entry</RobotoMedium>
-        </View>
+        </RippleHOC>
         <Image source={generalImages.girl} style={styles.girlImg} />
       </View>
     );
@@ -63,11 +68,15 @@ const MyEntries = props => {
       <View>
         {gridArray.length - 1 == index ? (
           <View style={styles.lastEntryContainer}>
-            <View style={styles.alignEntryText}>
+            <RippleHOC
+              onPress={() =>
+                props.navigation.navigate('NewEntry', {type: 'New Entry'})
+              }
+              style={styles.alignEntryText}>
               <RobotoMedium style={styles.lastEntryText}>
                 Add Entry
               </RobotoMedium>
-            </View>
+            </RippleHOC>
             <Image source={generalImages.girl} style={styles.girlImgGrid} />
           </View>
         ) : (

@@ -24,10 +24,10 @@
 		779D7D13170D41F58DBCA5A2 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E93B3F87312D43188882C6BE /* Poppins-SemiBold.ttf */; };
 		90B651262FB04713A6031604 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8D675EE99BB4A75A0841E7E /* Roboto-Bold.ttf */; };
 		95A93AD05E874D39A017440A /* Damion-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B1B0ADDF04D4310B315975D /* Damion-Regular.ttf */; };
+		B01B11227C97491FAE20B154 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = A35CADF436024865B36E7962 /* index.js */; };
 		BF61E163B2864A03923F85C0 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B831C98A9514E03A42CF509 /* Poppins-Medium.ttf */; };
 		D688BE6FA4874A29A7123EFE /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E23B68A0E63B42128495842C /* Roboto-Light.ttf */; };
 		DE2BEC8FBCF84C4EB1E63B68 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B1F11F26A1E5439FA3F8793B /* Poppins-ExtraBold.ttf */; };
-		B01B11227C97491FAE20B154 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = A35CADF436024865B36E7962 /* index.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +63,7 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-Momentary-MomentaryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momentary-MomentaryTests.release.xcconfig"; path = "Target Support Files/Pods-Momentary-MomentaryTests/Pods-Momentary-MomentaryTests.release.xcconfig"; sourceTree = "<group>"; };
 		9B831C98A9514E03A42CF509 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		A22555F46000486AA77D77E0 /* Poppins-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Black.ttf"; path = "../src/assets/fonts/Poppins-Black.ttf"; sourceTree = "<group>"; };
+		A35CADF436024865B36E7962 /* index.js */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = index.js; path = ../src/assets/fonts/index.js; sourceTree = "<group>"; };
 		A7F7DDF41DB749788D04C510 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../src/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		B1F11F26A1E5439FA3F8793B /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.ttf"; path = "../src/assets/fonts/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
 		B3339C2535FC4DE69AF2B2FF /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../src/assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
@@ -71,7 +72,6 @@
 		E23B68A0E63B42128495842C /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../src/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
 		E93B3F87312D43188882C6BE /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../src/assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		A35CADF436024865B36E7962 /* index.js */ = {isa = PBXFileReference; name = "index.js"; path = "../src/assets/fonts/index.js"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

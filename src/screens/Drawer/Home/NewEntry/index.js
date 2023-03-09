@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useLayoutEffect, useRef, useState} from 'react';
 import {View, Image, ScrollView} from 'react-native';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import {RichEditor, actions, RichToolbar} from 'react-native-pell-rich-editor';
@@ -17,6 +17,7 @@ import EntrySettingPopup from '../../../../components/popups/EntrySettingPopup';
 import PublishQuestionPopup from '../../../../components/popups/PublishQuestionPopup';
 import PageDesignPopup from '../../../../components/popups/PageDesignPopup';
 import ImagePopup from '../../../../components/popups/ImagePopup';
+import DamionRegular from '../../../../components/Texts/DamionRegular';
 
 const NewEntry = props => {
   const richText = useRef(null);
@@ -35,6 +36,17 @@ const NewEntry = props => {
   const pageDesignRef = useRef(null);
   const imagePopupRef = useRef(null);
   const deleteRef = useRef(null);
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      headerTitle: () => {
+        return (
+          <DamionRegular style={styles.titleCenterText}>
+            {props.route?.params?.type}
+          </DamionRegular>
+        );
+      },
+    });
+  }, [props.navigation]);
 
   return (
     <ScreenWrapper>
@@ -106,11 +118,13 @@ const NewEntry = props => {
         <PulishEntryPopup
           reference={publishEntry}
           onAccept={() => networkPopup.current.show()}
-          title={"Publish To"}
-          desc={"Entries published on the Momentary Global Network are anonymized and will not include your user information or metadata from your photos.\n\nIdentifying information you have written in the entry itself will still be visible, as we do not censor or otherwise modify your writing. "}
+          title={'Publish To'}
+          desc={
+            'Entries published on the Momentary Global Network are anonymized and will not include your user information or metadata from your photos.\n\nIdentifying information you have written in the entry itself will still be visible, as we do not censor or otherwise modify your writing. '
+          }
           onReject={() => globalRef.current.show()}
-          yesBtn={"My Network"}
-          noBtn={"Global Network"}
+          yesBtn={'My Network'}
+          noBtn={'Global Network'}
         />
         <MyNetworkPopup
           reference={networkPopup}
@@ -132,7 +146,7 @@ const NewEntry = props => {
           onPressDesign={() => pageDesignRef.current.show()}
           onPressVisiblity={() => props.navigation.navigate('Visiblity')}
           onPressTag={() => hashTagRef.current.show()}
-          onPressDelete={()=> deleteRef.current.show()}
+          onPressDelete={() => deleteRef.current.show()}
         />
         <PublishQuestionPopup
           reference={globalRef}
@@ -148,7 +162,8 @@ const NewEntry = props => {
         <PublishQuestionPopup
           reference={deleteRef}
           title={'Delete Entry'}
-          desc={"Are you sure you want to Delete an Entry?"}      />
+          desc={'Are you sure you want to Delete an Entry?'}
+        />
       </ScrollView>
     </ScreenWrapper>
   );

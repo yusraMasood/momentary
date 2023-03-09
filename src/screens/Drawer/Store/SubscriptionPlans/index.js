@@ -6,10 +6,9 @@ import Carousel from 'react-native-snap-carousel';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 
 import styles from './styles';
-import { vw } from '../../../../utils/dimensions';
+import {vw} from '../../../../utils/dimensions';
 
 const SubscriptionPlans = () => {
-
   return (
     <ScreenWrapper>
       <View style={styles.descContainer}>
@@ -20,20 +19,17 @@ const SubscriptionPlans = () => {
         </RobotoRegular>
       </View>
       <Carousel
-          layout={'default'}
-          data={[1,2,3,4]}
-          sliderWidth={vw * 100}
-          itemWidth={vw * 75}
-          keyExtractor={(item,index) => index}
-          containerCustomStyle={styles.carouselView}
-          renderItem={({item}) => {
-            return (
-                <SubscriptionPlanCard
-                />
-            );
-          }}
-          activeSlideAlignment="start"
-        />
+        layout={'default'}
+        data={[1, 2, 3, 4]}
+        sliderWidth={vw * 100}
+        itemWidth={vw * 75}
+        keyExtractor={(item, index) => index}
+        containerCustomStyle={styles.carouselView}
+        renderItem={({item}) => {
+          return <SubscriptionPlanCard />;
+        }}
+        activeSlideAlignment="start"
+      />
       {/* <FlatList data={[1, 2, 3, 4, 5]} 
       renderItem={renderSubscriptionPlan}
       horizontal={true}
