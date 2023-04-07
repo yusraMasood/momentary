@@ -60,7 +60,8 @@ const titles = {
   BookPrintingPlaceOrder:"Place Order",
   BookPrintingPayment:"Place Order",
   BookPrintingOrderSummary:"Order Summary",
-  ViewLegacyContact:"Secondary Contact"
+  ViewLegacyContact:"Secondary Contact",
+  EditEntry:"Edit Entry"
 };
 const titleWithDescription = {
   PostByLocation: 'Global Network',
@@ -73,6 +74,7 @@ const routesWithDescription = {
 const routesWithBackIcon = {
   LibraryScreen: 'LibraryScreen',
   NewEntry: 'NewEntry',
+  EditEntry:"EditEntry",
   NotificationScreen: 'NotificationScreen',
   AddNewJournal: 'AddNewJournal',
   PagesDesign: 'PagesDesign',
@@ -108,7 +110,7 @@ const routesWithBackIcon = {
   FriendRequest:"FriendRequest",
   changeJournal:"changeJournal",
   SaveLocation:"SaveLocation",
-  Visiblity:"Visiblity",
+  Visiblity:"Visiblity", 
   ViewEntry:"ViewEntry",
   MyJournals:"MyJournals",
   ViewAllEntries:"ViewAllEntries",
@@ -136,6 +138,7 @@ const routesWithNotification = {
   StoreScreen: 'StoreScreen',
   SettingScreen: 'SettingScreen',
   MyEntries: 'MyEntries',
+  // EditEntry:"EditEntry"
 };
 const routesWithFilter = {
   SubscriptionLogs: 'My Subscriptions',

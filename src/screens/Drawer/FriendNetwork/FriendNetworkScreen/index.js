@@ -3,6 +3,7 @@ import {View, Image, FlatList,TextInput} from 'react-native';
 import { generalImages, icons } from '../../../../assets/images';
 import FriendNetworkCard from '../../../../components/Cards/FriendNetworkCard';
 import SearchInput from '../../../../components/Inputs/SearchInput';
+import UserPosts from '../../../../components/ReusableComponent/UserPosts';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
@@ -10,18 +11,18 @@ import { colors } from '../../../../utils/appTheme';
 import styles from './styles';
 
 const FriendNetworkScreen = (props) => {
-  const renderFriendCard = () => {
-    return <FriendNetworkCard 
-    onPress={()=> props.navigation.navigate("FriendDetails")}
-    location={"Approximate Locations"}
-    // hashtags={"#trends #fashion"}
-    clickText={"Add To library"}
-    name={"Amelia Isabell"}
-    image={generalImages.userImage}
-    style={styles.friendNetworkStyle}
+  // const renderFriendCard = () => {
+  //   return <FriendNetworkCard 
+  //   onPress={()=> props.navigation.navigate("FriendDetails")}
+  //   location={"Approximate Locations"}
+  //   // hashtags={"#trends #fashion"}
+  //   clickText={"Add To library"}
+  //   name={"Amelia Isabell"}
+  //   image={generalImages.userImage}
+  //   style={styles.friendNetworkStyle}
     
-    />;
-  };
+  //   />;
+  // };
 const renderHeader=()=>{
     return(
       <View>
@@ -45,13 +46,14 @@ const renderHeader=()=>{
 }
   return (
     <ScreenWrapper style={styles.container}>
-
-      <FlatList data={[1, 2, 3, 4, 5]} 
+      {renderHeader()}
+<UserPosts/>
+      {/* <FlatList data={[1, 2, 3, 4, 5]} 
       ListHeaderComponent={renderHeader}
       key={"friendArar"}
       keyExtractor={(item,index)=> index}
       contentContainerStyle={styles.flatListContainer}
-      renderItem={renderFriendCard} />
+      renderItem={renderFriendCard} /> */}
       {/* <View style={styles.textInputContainer}>
         <Image source={generalImages.userImage} style={styles.userImage}/>
         <View style={styles.inputContainer}>

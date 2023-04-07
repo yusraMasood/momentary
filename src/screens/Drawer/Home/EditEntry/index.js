@@ -5,7 +5,7 @@ import styles from './styles';
 import DamionRegular from '../../../../components/Texts/DamionRegular';
 import TextEditor from '../../../../components/ReusableComponent/TextEditor';
 
-const NewEntry = props => {
+const EditEntry = props => {
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -26,4 +26,4 @@ const NewEntry = props => {
     </ScreenWrapper>
   );
 };
-export default NewEntry;
+export default EditEntry;

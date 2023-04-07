@@ -1,7 +1,5 @@
 import React, {useLayoutEffect} from 'react';
-import {View, Image, FlatList, TextInput} from 'react-native';
-import {generalImages, icons} from '../../../../assets/images';
-import FriendNetworkCard from '../../../../components/Cards/FriendNetworkCard';
+import UserPosts from '../../../../components/ReusableComponent/UserPosts';
 import DamionRegular from '../../../../components/Texts/DamionRegular';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
@@ -18,28 +16,9 @@ const LibraryFavouriteContent = props => {
       },
     });
   }, [props.navigation]);
-  const renderFriendCard = () => {
-    return (
-      <FriendNetworkCard
-        onPress={() => props.navigation.navigate('PostByLocation')}
-        location={'Approximate Locations'}
-        hashtags={"#trends #fashion"}
-        clickText={'Add To library'}
-        name={'Amelia Isabell'}
-        image={generalImages.userImage}
-        style={styles.friendNetworkStyle}
-      />
-    );
-  };
   return (
     <ScreenWrapper style={styles.container}>
-      <FlatList
-        data={[1, 2, 3, 4, 5]}
-        key={'friendArar'}
-        keyExtractor={(item, index) => index}
-        contentContainerStyle={styles.flatListContainer}
-        renderItem={renderFriendCard}
-      />
+      <UserPosts/>
     </ScreenWrapper>
   );
 };

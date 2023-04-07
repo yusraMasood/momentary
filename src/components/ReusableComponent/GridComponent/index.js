@@ -1,16 +1,14 @@
 import React, {useState} from 'react';
 import {View, Image, FlatList} from 'react-native';
-import {generalImages, icons} from '../../../../assets/images';
-import SearchInput from '../../../../components/Inputs/SearchInput';
-import RobotoMedium from '../../../../components/Texts/RobotoMedium';
-import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
+import { generalImages } from '../../../assets/images';
+import NoteCard from '../../Cards/NoteCard';
+import SearchInput from '../../Inputs/SearchInput';
+import RobotoMedium from '../../Texts/RobotoMedium';
+import RippleHOC from '../../wrappers/Ripple';
+import ListGridComponent from '../ListGridComponent';
 import styles from './styles';
-import NoteCard from '../../../../components/Cards/NoteCard';
-import ListGridComponent from '../../../../components/ReusableComponent/ListGridComponent';
-import RippleHOC from '../../../../components/wrappers/Ripple';
-import GridComponent from '../../../../components/ReusableComponent/GridComponent';
 
-const MyEntries = props => {
+const GridComponent = props => {
   const [list, setList] = useState(false);
   const gridArray = [1, 2, 3, 4, 5];
   const renderHeader = () => {
@@ -109,10 +107,9 @@ const MyEntries = props => {
   };
   return (
     <ScreenWrapper style={styles.container}>
-      <GridComponent/>
-      {/* {renderHeader()}
-      {list ? renderAddEntryCard() : renderGridCard()} */}
+      {renderHeader()}
+      {list ? renderAddEntryCard() : renderGridCard()}
     </ScreenWrapper>
   );
 };
-export default MyEntries;
+export default GridComponent;

@@ -5,102 +5,66 @@ import {vh, vw} from '../../../../utils/dimensions';
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: vw * 2,
-    // paddingBottom: vh*10,
-    // paddingTop: vh*4,
   },
-  searchInput: {
-    marginVertical: 0,
-    marginTop: vh * 2,
-    marginBottom: vh * 0.5,
-  },
-  // alignGridContainer: {
+  // searchInput: {
+  //   marginVertical: 0,
+  //   marginTop: vh * 2,
+  //   marginBottom: vh * 0.5,
+  // },
+  // addEntryContainer: {
+  //   backgroundColor: colors.themeColor.grey,
+  //   paddingVertical: vh * 7.4,
   //   alignItems: 'flex-end',
+  //   borderRadius: vh * 1,
+  //   paddingHorizontal: vw * 23,
+  //   marginTop: vh * 2,
   // },
-  // gridMainContainer: {
-  //   alignItems: 'center',
-  //   flexDirection: 'row',
+  // girlImg: {
+  //   position: 'absolute',
+  //   left: vw * 14,
+  //   height: vh * 20,
+  //   width: vw * 31,
+  //   resizeMode: 'cover',
   // },
-  // gridIcon: {
-  //   height: vh * 1.5,
-  //   width: vh * 1.5,
-  //   tintColor: colors.text.grey,
-  //   resizeMode: 'contain',
-  //   marginRight: vw * 1.3,
-  // },
-  // gridFocusIcon:{
-  //   tintColor: colors.general.white
-  // },
-  // listText: {
-  //   color: colors.text.grey,
-  //   fontSize: vh * 1.55,
-  // },
-  // listFocusText:{
-  //   color: colors.general.white
-  // },
-  // gridContainer: {
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  //   marginLeft: vw * 3,
-  // },
-  addEntryContainer: {
-    backgroundColor: colors.themeColor.grey,
-    paddingVertical: vh * 7.4,
-    alignItems: 'flex-end',
-    borderRadius: vh * 1,
-    paddingHorizontal: vw * 23,
-    marginTop: vh * 2,
-    // marginTop: vh*2,
-  },
-  girlImg: {
-    position: 'absolute',
-    left: vw * 14,
-    // top: vh*-2,
 
-    height: vh * 20,
-    width: vw * 31,
-    resizeMode: 'cover',
-  },
+  // entryText: {
+  //   color: colors.themeColor.yellow,
+  //   fontSize: vh * 2.4,
+  //   textDecorationLine: 'underline',
+  // },
+  // listNoteContainer:{
+  //   width: vw*45,
+  //   marginLeft: vw*2,
 
-  entryText: {
-    color: colors.themeColor.yellow,
-    fontSize: vh * 2.4,
-    textDecorationLine: 'underline',
-  },
-  listNoteContainer:{
-    width: vw*45,
-    marginLeft: vw*2,
-
-  },
-  evenContainer:{
-    // marginTop: vh*3,
-  },
-  deleteIcon:{
-    marginTop: vh*2,
-  },
-  contentContainer:{
-    // marginTop: vh*4,
-    paddingBottom: vh*15
-  },
-  lastEntryContainer:{
-    backgroundColor: colors.themeColor.grey,
-    paddingVertical: vh*1,
-    paddingHorizontal: vw*3.2,
-    borderRadius: vh*1,
-    marginTop: vh*2,
-    marginLeft: vw*3,
-  },
-  girlImgGrid:{
-    height: vh * 25,
-    width: vw * 38,
-    resizeMode: 'cover',
-  },
-  lastEntryText:{
-    color: colors.themeColor.yellow,
-    textDecorationLine: "underline",
-    fontSize: vh*1.75
-  },
-  alignEntryText:{
-    alignItems: "flex-end"
-  }
+  // },
+  // evenContainer:{
+  // },
+  // deleteIcon:{
+  //   marginTop: vh*2,
+  // },
+  // contentContainer:{
+  //   paddingBottom: vh*15
+  // },
+  // lastEntryContainer:{
+  //   backgroundColor: colors.themeColor.grey,
+  //   paddingVertical: vh*1,
+  //   paddingHorizontal: vw*3.2,
+  //   borderRadius: vh*1,
+  //   marginTop: vh*2,
+  //   marginLeft: vw*3,
+  // },
+  // girlImgGrid:{
+  //   height: vh * 25,
+  //   width: vw * 38,
+  //   resizeMode: 'cover',
+  // },
+  // lastEntryText:{
+  //   color: colors.themeColor.yellow,
+  //   textDecorationLine: "underline",
+  //   fontSize: vh*1.75
+  // },
+  // alignEntryText:{
+  //   alignItems: "flex-end"
+  // }
 });
 export default styles;

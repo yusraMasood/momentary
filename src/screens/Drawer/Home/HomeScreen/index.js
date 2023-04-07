@@ -22,7 +22,7 @@ const HomeScreen = props => {
       </RippleHOC>
       <RippleHOC
         onPress={() =>
-          props.navigation.navigate('NewEntry', {type: 'Resume Entry'})
+          props.navigation.navigate('EditEntry', {type: 'Resume Entry'})
         }
         style={styles.newCardContainer}>
         <RobotoBold style={styles.headingText}>Resume Entry</RobotoBold>
