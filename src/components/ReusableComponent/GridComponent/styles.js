@@ -4,7 +4,7 @@ import { vh, vw } from '../../../utils/dimensions';
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: vw * 2,
+    // paddingHorizontal: vw * 2,
   },
   searchInput: {
     marginVertical: 0,
@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
     marginTop: vh*2,
   },
   contentContainer:{
-    paddingBottom: vh*15
+    paddingBottom: vh*15,
+    // backgroundColor: "red"
   },
   lastEntryContainer:{
     backgroundColor: colors.themeColor.grey,

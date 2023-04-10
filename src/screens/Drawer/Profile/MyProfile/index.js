@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {View, FlatList, Image} from 'react-native';
 import {generalImages} from '../../../../assets/images';
 import CustomButton from '../../../../components/Buttons/CustomButton';
@@ -8,8 +8,14 @@ import RobotoRegular from '../../../../components/Texts/RobotoRegular';
 import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
+import { useGetProfileQuery } from '../../../../state/account';
 
 const MyProfile = (props) => {
+
+  const [getProfile] =useGetProfileQuery()
+  useEffect(()=>{
+    getProfile()
+  },[])
   const profileArray = [
     {
       title: 'Name',

@@ -12,6 +12,10 @@ const styles = StyleSheet.create({
         fontSize: vh*6.5,
         
     },
+    errorText:{
+        color: colors.general.red,
+        fontSize : vh*2
+    },
     alignContent:{
         alignItems: "center"
     },

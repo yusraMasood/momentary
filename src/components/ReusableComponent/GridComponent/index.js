@@ -7,8 +7,10 @@ import RobotoMedium from '../../Texts/RobotoMedium';
 import RippleHOC from '../../wrappers/Ripple';
 import ListGridComponent from '../ListGridComponent';
 import styles from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 const GridComponent = props => {
+  const navigation =useNavigation()
   const [list, setList] = useState(false);
   const gridArray = [1, 2, 3, 4, 5];
   const renderHeader = () => {
@@ -16,7 +18,7 @@ const GridComponent = props => {
       <View>
         <SearchInput placeholder={'Search '} style={styles.searchInput} />
         <ListGridComponent list={list} setList={setList} />
-      </View>
+      </View> 
     );
   };
 
@@ -27,7 +29,7 @@ const GridComponent = props => {
         pin
         hashtag={'#lifeGoals #Lifestyle'}
         delete
-        onPress={() => props.navigation.navigate('ViewEntry')}
+        onPress={() => navigation.navigate('ViewEntry')}
       />
     );
   };
@@ -36,7 +38,7 @@ const GridComponent = props => {
       <View>
         <RippleHOC
           onPress={() =>
-            props.navigation.navigate('NewEntry', {type: 'New Entry'})
+            navigation.navigate('NewEntry', {type: 'New Entry'})
           }
           style={styles.addEntryContainer}>
           <RobotoMedium style={styles.entryText}>Add Entry</RobotoMedium>
@@ -50,7 +52,7 @@ const GridComponent = props => {
       <View>
         <FlatList
           data={[1, 2, 3, 4]}
-          key={'gridArray'}
+          key={'listArray'}
           //   numColumns={2}
           ListHeaderComponent={renderAddEntry}
           contentContainerStyle={styles.contentContainer}
@@ -99,6 +101,7 @@ const GridComponent = props => {
       <FlatList
         data={gridArray}
         renderItem={renderGridNotes}
+        contentContainerStyle={styles.contentContainer}
         key={'gridArray'}
         numColumns={2}
         keyExtractr={(item, index) => index}
@@ -106,10 +109,10 @@ const GridComponent = props => {
     );
   };
   return (
-    <ScreenWrapper style={styles.container}>
+    <View style={styles.container}>
       {renderHeader()}
       {list ? renderAddEntryCard() : renderGridCard()}
-    </ScreenWrapper>
+    </View>
   );
 };
 export default GridComponent;

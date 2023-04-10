@@ -12,8 +12,10 @@ import RippleHOC from '../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../components/wrappers/ScreenWrapper';
 import { linearColors } from '../../../utils/appTheme';
 import styles from './styles';
+import { usePostSignupMutation } from '../../../state/auth';
 
 const SignupScreen = (props) => {
+  const [postSignup]=usePostSignupMutation()
  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

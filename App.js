@@ -1,7 +1,10 @@
 import React, {useEffect} from 'react';
 import {StatusBar, View} from 'react-native';
 import Navigation from './src/Navigation';
+import {PersistGate} from 'redux-persist/integration/react';
+import {Provider} from 'react-redux';
 import AnimatedSplash from 'react-native-animated-splash';
+import { persistor, store } from './src/state';
 
 const App = () => {
   useEffect(() => {
@@ -9,6 +12,8 @@ const App = () => {
   }, []);
 
   return (
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
     <View style={{flex: 1}}>
       <StatusBar
         barStyle="dark-content"
@@ -17,6 +22,8 @@ const App = () => {
       />
       <Navigation />
     </View> 
+    </PersistGate>
+    </Provider>
   );
 };
 export default App;
