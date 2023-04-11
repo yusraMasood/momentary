@@ -5,7 +5,6 @@ import { colors } from '../../../utils/appTheme'
 import { vh } from '../../../utils/dimensions'
 
 const ErrorMessage=(props)=>{
-    console.log("props",props);
     return(
       <RobotoRegular style={styles.errorText}>{props.error}</RobotoRegular>
 

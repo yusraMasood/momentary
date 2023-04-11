@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef,useState} from 'react';
 import {View, FlatList, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {generalImages, icons} from '../../../../assets/images';
@@ -10,21 +10,36 @@ import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import {linearColors} from '../../../../utils/appTheme';
 import styles from './styles';
+import { useGetProfileQuery, usePostProfileMutation } from '../../../../state/account';
+import ImagePicker from '../../../../components/Image/ImagePicker';
 
 const EditProfile = props => {
+  const {data} =useGetProfileQuery()
+  // const [postProfile,{isLoading,error}] =usePostProfileMutation()
+
+
+  const [name,setName]=useState(data?.user?.firstName)
+  const [phone,setPhone] =useState(data?.user?.phone)
+  const [image,setImage] =useState("")
+  const [imageSelection,setImageSelection] =useState(false)
   const phoneRef = useRef(null);
 
   const onSubmit = () => {
-    props.navigation.goBack();
+    postProfile().then((res)=>{
+      console.log("res in Profile",res);
+      // props.navigation.goBack();
+    })
   };
 
   return (
     <ScreenWrapper style={styles.container}>
       <View>
-        <Image source={generalImages.userImage} style={styles.userImg} />
+        <Image source={image?.uri?{uri:image?.uri}: generalImages.userImage} style={styles.userImg} />
+        <RippleHOC style={styles.cameraMainContainer} onPress={()=> setImageSelection(true)}>
         <LinearGradient colors={linearColors.yellow} style={styles.cameraContainer}>
           <Image source={icons.camera} style={styles.cameraStyle} />
         </LinearGradient>
+        </RippleHOC>
       </View>
       <RippleHOC onPress={()=> props.navigation.navigate("ChangePassword")}>
       <RobotoMedium style={styles.passwordText}>Change Password</RobotoMedium>
@@ -33,21 +48,31 @@ const EditProfile = props => {
         placeholder={'Enter Name'}
         label={'Name'}
         onSubmitEditing={() => phoneRef.current.focus()}
+        value={name}
+        onChangeText={setName}
       />
       <InputField
         reference={phoneRef}
         placeholder={'Enter Phone No'}
+        value={phone}
+        onChangeText={setPhone}
         label={'Phone No'}
         onSubmitEditing={onSubmit}
       />
       <View style={styles.itemContainer}>
         <RobotoRegular style={styles.titleText}>Email</RobotoRegular>
-        <RobotoRegular style={styles.valueText}>elsa@email.com</RobotoRegular>
+        <RobotoRegular style={styles.valueText}>{data?.user?.email}</RobotoRegular>
       </View>
       <CustomButton
         alignStyle={styles.btnContainer}
         onPress={onSubmit}
         text={'Update Profile'}
+      />
+      <ImagePicker
+      image={image}
+      setImage={setImage}
+      imageSelection={imageSelection}
+      setImageSelection={setImageSelection}
       />
     </ScreenWrapper>
   );

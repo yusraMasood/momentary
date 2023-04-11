@@ -35,8 +35,8 @@ export const showToast = msg => {
 // export const showGlobalToast = msg => {};
 export const presentToast = message => {
   setTimeout(() => {
-    // Toast.show(message);
     Toast.show(message);
+    // Toast.show(message);
   }, 500);
 
   // EventRegister.emit(events.showToast, getMessage(message))

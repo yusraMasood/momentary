@@ -11,33 +11,41 @@ import RobotoRegular from '../../../components/Texts/RobotoRegular';
 import RippleHOC from '../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
-import { usePostLoginMutation } from '../../../state/auth';
-import { showToast } from '../../../Api/APIHelpers';
-import { colors } from '../../../utils/appTheme';
-import { vh } from '../../../utils/dimensions';
+import {  setToken, usePostLoginMutation } from '../../../state/auth';
+// import { showToast } from '../../../Api/APIHelpers';
+import Toast from "react-native-toast"
 import ButtonLoading from '../../../components/Loaders/ButtonLoading';
+import { validateEmail } from '../../../utils/Validations';
+import { useDispatch } from 'react-redux';
+import ErrorMessage from '../../../components/Error/ErrorMessage';
 
 const LoginScreen = props => {
   const passwordRef = useRef(null);
-  // const 
-  const [postLogin,{isLoading} ]=usePostLoginMutation()
+  const dispatch=useDispatch()
+  const [postLogin,{isLoading,error,isSuccess} ]=usePostLoginMutation()
   const [email, setEmail] = useState('alex-admin@mailinator.com');
   const [password, setPassword] = useState('Admin@123');
-
   const [thumb,setThumb] =useState(false)
-  // console.log(isLoading);
+  // {isLoading,error}
+  console.log(isSuccess,"isSuccess");
   const onSubmit = () => {
     if (email == '') {
-      return showToast('Please enter your email address');
+      return Toast.show('Please enter your email address');
     }
     if (!validateEmail(email)) {
-      return showToast('Please enter valid email address');
+      return Toast.show('Please enter valid email address');
     }
     if (password == '') {
-      return showToast('Please enter your password');
+      return Toast.show('Please enter your password');
     }
     postLogin({email,password,role:"admin"}).then((res)=>{
-      console.log("res",res);
+      console.log("tokneee",res);
+      dispatch(setToken("dkpdopd"))
+      if(res?.data?.token)
+      {
+        dispatch(setToken(res?.data?.token))
+
+      }
     })
   
   };
@@ -48,6 +56,8 @@ const LoginScreen = props => {
       </View>
       
       <RobotoMedium style={styles.signinText}>Sign In</RobotoMedium>
+      <ErrorMessage
+      error={error?.data?.message}/>
       <InputField
         placeholder={'Enter Email Address'}
         label={'Email'}

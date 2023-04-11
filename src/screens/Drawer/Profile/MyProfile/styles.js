@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 
   userImg: {
     height: vh * 10,
-    width: vw * 22,
+    width: vh * 10,
     resizeMode: 'cover',
     borderRadius: vh * 6,
   },

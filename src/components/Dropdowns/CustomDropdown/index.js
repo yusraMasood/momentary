@@ -13,7 +13,6 @@ import styles from './styles';
 
 const CustomDropdown = props => {
   const [dropdown, setDropdown] = useState(false);
-  // console.log("props", props);
   const savedropdownValue = item => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
     props.setDropdownValue(item);

@@ -27,7 +27,6 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
         image: image
       }
 
-      // console.log("RESP", data?.image);
 
       setImage(data?.image)
       // console.log("image",image);
@@ -41,7 +40,6 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
     }
   }
   const uploadMultipleImages = (data) => {
-    // console.log("upload multiple images called", data);
     const imageArr = image
     data.map((v, i) => {
       imageArr.push({

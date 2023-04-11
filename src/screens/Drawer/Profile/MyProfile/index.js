@@ -12,39 +12,29 @@ import { useGetProfileQuery } from '../../../../state/account';
 
 const MyProfile = (props) => {
 
-  const [getProfile] =useGetProfileQuery()
+  const {data,isLoading, isFetching, isError} =useGetProfileQuery()
+  console.log(data);
+  // console.log("message",message);
   useEffect(()=>{
-    getProfile()
+    // getProfile()
   },[])
   const profileArray = [
     {
       title: 'Name',
-      value: 'Elsa Robert',
+      value: data?.user?.firstName,
     },
     {
       title: 'Phone No',
-      value: '0000-000-0000000',
+      value: data?.user?.phone,
     },
     {
       title: 'Email',
-      value: 'elsa@email.com',
+      value: data?.user?.email,
     },
-    // {
-    //     title:"",
-    //     value:""
-    // },
   ];
-  // const renderProfile = ({item}) => {
-  //   return (
-  //     <View style={styles.itemContainer}>
-  //       <RobotoRegular style={styles.titleText}>{item?.title}</RobotoRegular>
-  //       <RobotoRegular style={styles.valueText}>{item?.value}</RobotoRegular>
-  //     </View>
-  //   );
-  // };
   return (
     <ScreenWrapper style={styles.container}>
-      <Image source={generalImages.userImage} style={styles.userImg} />
+      <Image source={data?.user?.image?{uri:data?.user?.image}: generalImages.userImage} style={styles.userImg} />
       <RippleHOC onPress={()=>props.navigation.navigate("ChangePassword")}>
       <RobotoMedium style={styles.passwordText}>Change Password</RobotoMedium>
       </RippleHOC>
@@ -52,14 +42,6 @@ const MyProfile = (props) => {
         <ContentDataComponent
         array={profileArray}
         />
-      {/* <FlatList 
-      data={profileArray} 
-      renderItem={renderProfile} 
-      key={"profileArray"}
-      keyExtractor={(item,index)=>index}
-      columnWrapperStyle={styles.columnWrapperStyle}
-      numColumns={2}
-      /> */}
       </View>
       <CustomButton alignStyle={styles.btnContainer}
       onPress={()=> props.navigation.navigate("EditProfile")}

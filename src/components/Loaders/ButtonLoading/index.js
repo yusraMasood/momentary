@@ -7,7 +7,7 @@ import { colors } from '../../../utils/appTheme'
 const ButtonLoading=()=>{
     return(
         <View style={styles.indicatorContainer}>
-            <ActivityIndicator size={vh*4} color={colors.themeColor.yellow} />
+            <ActivityIndicator size={20} color={colors.themeColor.yellow} />
 
         </View>
     )

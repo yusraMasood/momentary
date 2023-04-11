@@ -43,7 +43,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: vh*0.8,
         paddingVertical: vh*0.9,
         borderRadius: vh*4,
-        position: "absolute",
+     
+    },
+    cameraMainContainer:{
+   position: "absolute",
         bottom: vh*0.6,
         left: vw*16,
     },

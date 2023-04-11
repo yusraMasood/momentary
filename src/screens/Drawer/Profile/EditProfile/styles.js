@@ -13,17 +13,21 @@ const styles = StyleSheet.create({
     tintColor: colors.general.black,
     resizeMode: 'contain',
   },
-  cameraContainer: {
-    padding: vh * 1,
-    borderRadius: vh * 3,
+  cameraMainContainer:{
     position: 'absolute',
     left: vw * 15,
     bottom: vh * 0.4,
+
+  },
+  cameraContainer: {
+    padding: vh * 1,
+    borderRadius: vh * 3,
+  
   },
 
   userImg: {
     height: vh * 10,
-    width: vw * 22,
+    width: vh * 10,
     resizeMode: 'cover',
     borderRadius: vh * 6,
   },

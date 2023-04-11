@@ -16,26 +16,25 @@ import {
 } from '../../../state/auth';
 import {showToast} from '../../../Api/APIHelpers';
 import ButtonLoading from '../../../components/Loaders/ButtonLoading';
+import ErrorMessage from '../../../components/Error/ErrorMessage';
 
 const VerificationCode = props => {
   const passwordRef = useRef(null);
   const {email} = props?.route?.params;
   const [otp, setOtp] = useState(props?.route?.params?.otp);
   const [password, setPassword] = useState('');
-  const [postVerifyCode, message] = usePostVerifyCodeMutation();
+  const [postVerifyCode, {error,isLoading}] = usePostVerifyCodeMutation();
   const [postVerifyEmail, data] = usePostVerifyEmailMutation();
 
   const onSubmit = () => {
     postVerifyCode({email, otp}).then(res => {
       if (res) {
-        console.log(res);
         // props.navigation.navigate('ResetPassword', {email, otp});
       }
     });
   };
   const verifyEmail = () => {
     postVerifyEmail({email}).then(res => {
-      console.log('res', res);
       setOtp(res?.data?.otp);
     });
   };
@@ -48,6 +47,10 @@ const VerificationCode = props => {
       <RobotoRegular style={styles.descResetText}>
         Check your email address for verification code.
       </RobotoRegular>
+      <ErrorMessage
+     error={error?.data?.message}
+     
+     />
       <InputField
         placeholder={'Enter Verification Code'}
         label={'Verification Code'}
@@ -56,21 +59,24 @@ const VerificationCode = props => {
         onChangeText={setOtp}
         onSubmitEditing={onSubmit}
       />
-      {data?.isLoading ? (
+      
+        <View  style={styles.alignReset}>
+        {data?.isLoading ? (
         <ButtonLoading />
       ) : (
-        <RippleHOC onPress={verifyEmail} style={styles.alignReset}>
+          <RippleHOC onPress={verifyEmail}>
           <RobotoRegular style={styles.backLoginText}>
             Resend Code
           </RobotoRegular>
-        </RippleHOC>
-      )}
 
-      <CustomButton
-        text={'Continue'}
-        onPress={onSubmit}
-        alignStyle={styles.continueBtn}
-      />
+          </RippleHOC>
+      )}</View>
+       {isLoading?
+      <ButtonLoading/> :
+
+       <CustomButton text={"Continue"}  onPress={onSubmit} alignStyle={styles.continueBtn}/>
+    }
+
       <RippleHOC
         onPress={() => props.navigation.navigate('LoginScreen')}
         style={styles.alignContent}

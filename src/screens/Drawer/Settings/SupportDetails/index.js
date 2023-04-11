@@ -9,7 +9,6 @@ import { linearColors } from '../../../../utils/appTheme';
 import styles from './styles';
 
 const SupportDetails = (props) => {
-  console.log(props?.route?.params);
     const pointsArray=[1,2,3,4,5]
     // useLayoutEffect(() => {
     //   props.navigation.setOptions({

@@ -15,8 +15,8 @@ const CustomButton = props => {
   };
   return (
     <View style={[styles.alignContent, props.alignStyle]}>
-       <Pressable onPress={handleOnPress} disabled={props.disabled}
-       style={({pressed})=>[pressed &&{backgroundColor: colors.text.grey}]}
+       <RippleHOC onPress={handleOnPress} disabled={props.disabled}
+       style={{overflow:"hidden"}}
       >
         <LinearGradient colors={props.colors?props.colors:linearColors.yellow} style={[styles.container, props.style]}>
        
@@ -25,7 +25,7 @@ const CustomButton = props => {
           </RobotoBold>
         
         </LinearGradient>
-        </Pressable>
+        </RippleHOC>
      
     </View>
   );

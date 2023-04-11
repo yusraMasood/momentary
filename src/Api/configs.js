@@ -10,13 +10,13 @@ export const endpoints = {
   auth: {
     login: 'user/login',
     logout: 'auth/logout',
-    register: 'auth/register',
+    register: 'user/signup',
     expertise:"expertise/all"
   },
   account: {
     profile: 'user',
     update: 'user/update',
-    changePassword: 'user/change-password',
+    changePassword: 'user/updatePassword',
     uploadPicture:"user/upload"
   },
   passwordRecovery: {

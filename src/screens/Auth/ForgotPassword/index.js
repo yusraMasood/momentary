@@ -18,8 +18,6 @@ const ForgotPassword = (props) => {
   
   const [email, setEmail] = useState('alex-admin@mailinator.com');
   const [postVerifyEmail,{error,isLoading}]=usePostVerifyEmailMutation()
-
-  console.log("error",error);
   const onSubmit=()=>{
     postVerifyEmail({email}).then((res)=>{
       if(res?.data?.otp){

@@ -6,7 +6,6 @@ import { icons } from '../../../assets/images';
 import styles from './styles'
 
 const DropdownWithBorder = (props) => {
-    // console.log("props", props);
     const [dropdown,setDropdown] =useState(false)
     const savedropdownValue = (item) => {
         props.setDropdownValue(item)

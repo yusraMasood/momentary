@@ -8,48 +8,18 @@ const general = {
 const auth = {
   state: {
     token: null,
-    expertise:null
   },
   name: 'auth',
 };
-const account = {
-  state: {
-    profile: {},
-    credentials: {
-      email: null,
-      password: null,
-      rememberMe: false
-    },
-    location: {
-      coordinate: {
-        latitiude: 0,
-        longitude: 0,
-      },
-      address: '',
-      city: '',
-      country: '',
-    },
-  },
-  name: 'account',
-};
 
-const home = {
+const apiSlice = {
   state: {
   },
-  name: 'home',
+  name: 'apiSlice',
 };
-
-const miscellaneous = {
-  state: {
-  },
-  name: 'miscellaneous',
-};
-
 const initial = {
   general: general,
   auth,
-  account,
-  home,
-  miscellaneous
+  apiSlice
 };
 export default initial;

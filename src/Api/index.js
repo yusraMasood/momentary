@@ -8,9 +8,9 @@ import {
 } from "./APIHelpers";
 export const post = async (endpoint, body, formData=false, queryParams) => {
   const url = base_url + endpoint + dataToQueryParameter(queryParams);
-  console.log("URLLLLLL POSTTT=======>>>>>>>", url);
+  // console.log("URLLLLLL POSTTT=======>>>>>>>", url);
   const configs = getConfigs("POST", body, formData);
-  console.log("APIII CONFIGGG=====>>>", configs);
+  // console.log("APIII CONFIGGG=====>>>", configs);
   try {
     const networkResult = await performNetworkRequest(url, configs);
     const result = await handleResponse(networkResult);
@@ -24,13 +24,13 @@ export const post = async (endpoint, body, formData=false, queryParams) => {
 };
 export const get = async (endpoint, queryParams) => {
   const url = base_url + endpoint + dataToQueryParameter(queryParams);
-  console.log("URLLLLLL GEETTT=======>>>>>>>", url);
+  // console.log("URLLLLLL GEETTT=======>>>>>>>", url);
   const configs = getConfigs("GET");
 
   try {
     const networkResult = await performNetworkRequest(url, configs);
     const result = await handleResponse(networkResult);
-    console.log("RESULT OF API IS : ", result);
+    // console.log("RESULT OF API IS : ", result);
     return Promise.resolve(result);
   } catch (e) {
     const message = getMessage(e);
