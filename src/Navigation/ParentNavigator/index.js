@@ -13,12 +13,12 @@ const ParentNavigator = () => {
   // console.log(token);
   return (
     <ParentStack.Navigator screenOptions={{headerShown: false}}>
-      {token?
-      <ParentStack.Screen name="MainNavigator" component={MainNavigator} />
+         <ParentStack.Screen name="MainNavigator" component={MainNavigator} />
+      {/* {token?
     :
     <ParentStack.Screen name="AuthNavigator" component={AuthNavigator} />
 
-    }
+    } */}
     </ParentStack.Navigator>
   );
 };

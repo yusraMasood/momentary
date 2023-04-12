@@ -34,9 +34,24 @@ export const extendedProfileSlice = apiSlice.injectEndpoints({
         body: {...queryArg},
       }),
     }),
+    postImage: builder.mutation({
+      query: (data) => ({
+        url: endpoints.account.updateImage,
+        method: 'POST',
+        headers: {
+          // 'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'Content-Type' : 'multipart/form-data'
+        },
+        body:data,
+      }),
+    }),
   }),
 });
 
-export const {useGetProfileQuery,usePostProfileMutation,
-usePostChangePasswordMutation
+export const {
+  useGetProfileQuery,
+  usePostProfileMutation,
+  usePostChangePasswordMutation,
+  usePostImageMutation
 } = extendedProfileSlice;

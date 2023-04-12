@@ -1,5 +1,5 @@
 import React,{useRef,useState} from 'react'
-import { View,ScrollView,Image } from 'react-native'
+import { View,ScrollView,Image,FlatList } from 'react-native'
 import {RichEditor, actions, RichToolbar} from 'react-native-pell-rich-editor';
 import { icons } from '../../../assets/images';
 import { colors } from '../../../utils/appTheme';
@@ -16,16 +16,23 @@ import PulishEntryPopup from '../../popups/PulishEntryPopup';
 import SuccessPopup from '../../popups/SuccessPopup';
 import RippleHOC from '../../wrappers/Ripple';
 import styles from "./styles"
+import ImageComponent from '../../Image/ImageComponent';
+import CustomButton from '../../Buttons/CustomButton';
+import DamionRegular from '../../Texts/DamionRegular';
+import EuclidCircularARegular from '../../Texts/EuclidCircularARegular';
 
 
 const TextEditor=()=>{
 
     const [imageSelection, setImageSelection] = useState(false);
     const [dropdownValue, setDropdownValue] = useState('');
+    const [entryText,setEntryText] =useState('Hello <b>World</b> <p>this is a new paragraph</p> <p>this is another new paragraph</p>')
+  const [input,setInput] =useState("")
     const richText = useRef(null);
     const documentsArray = ['text1', 'text2', 'text3'];
     const [image, setImage] = useState(null);
     const publishEntry = useRef(null);
+    const [imageArray,setImageArray] =useState([])
     const networkPopup = useRef(null);
     const globalPopup = useRef(null);
     const hashTagRef = useRef(null);
@@ -36,8 +43,36 @@ const TextEditor=()=>{
     const pageDesignRef = useRef(null);
     const imagePopupRef = useRef(null);
     const deleteRef = useRef(null);
+    // console.log(entryText);
 
-
+    const renderImage=(item)=>{
+      return(
+        <ImageComponent uri={item?.uri}/>
+      )
+    }
+    // console.log("imageArray",imageArray);
+    // const updateItemImages=(img)=>{
+    //   // console.log(img);
+    //   setImageArray([...imageArray,...img])
+    // }
+    const updateItemImages=(img)=>{
+      // console.log("hello",img);
+      setImageArray((p)=>[...p,...img?.image])
+    }
+    console.log(input);
+    const submitContentHandle = () => {
+      const replaceHTML = entryText.replace(/<(.|\n)*?>/g, "").trim();
+      const replaceWhiteSpace = replaceHTML.replace(/&nbsp;/g, "").trim();
+  
+      if (replaceWhiteSpace.length <= 0) {
+        // setShowDescError(true);
+      } else {
+        // send data to your server!
+      }
+    };
+    const handleInput = useCallback(() => {
+      console.log(inputType, data)
+    }, []);
     return(
         <ScrollView usecontainer={true} style={styles.container}>
         <CustomDropdown
@@ -51,10 +86,9 @@ const TextEditor=()=>{
             editor={richText}
             style={styles.toolContainer}
             iconTint={colors.themeColor.yellow}
-            onPressAddImage={() => {}}
             actions={[
               actions.setBold,
-              actions.insertImage,
+              // actions.insertImage,
               actions.setItalic,
               actions.insertBulletsList,
               actions.insertOrderedList,
@@ -75,17 +109,32 @@ const TextEditor=()=>{
             }}
             ref={richText}
             editorStyle={styles.editorText}
+            initialContentHTML={entryText}
             placeholder={'Type here...'}
             placeholderColor={colors.text.grey}
-            initialHeight={vh * 55}
+            initialHeight={vh * 45}
+            onChange={setEntryText}
             // initialFocus={true}
             // editorStyle={{height: 500}}
             focusable
+            onInput={handleInput}
             // initialContentHTML={'<p>djojdojdo</p>'}
             // editorInitializedCallback={() => onEditorInitialized()}
           />
         </View>
-        <View style={styles.editContainer}>
+        <FlatList
+        data={imageArray}
+        key={"imageArray"}
+        contentContainerStyle={styles.contentContainerStyle}
+        horizontal={true}
+        keyExtractor={(item,index)=> index}
+        renderItem={renderImage}
+        />
+        <CustomButton text={"Submit"}
+        onPress={submitContentHandle}
+        />
+        <EuclidCircularARegular style={{color:"white"}}>{entryText}</EuclidCircularARegular>
+        {/* <View style={styles.editContainer}>
           <Image source={icons.text} style={styles.textIcon} />
           <RippleHOC onPress={() => setImageSelection(true)}>
             <Image source={icons.addImage} style={styles.textIcon} />
@@ -96,13 +145,8 @@ const TextEditor=()=>{
           <RippleHOC onPress={() => publishEntry.current.show()}>
             <Image source={icons.send} style={styles.textIcon} />
           </RippleHOC>
-        </View>
-        <ImagePicker
-          image={image}
-          setImage={setImage}
-          imageSelection={imageSelection}
-          setImageSelection={setImageSelection}
-        />
+        </View> */}
+       
         <PulishEntryPopup
           reference={publishEntry}
           onAccept={() => networkPopup.current.show()}
@@ -151,6 +195,13 @@ const TextEditor=()=>{
           reference={deleteRef}
           title={'Delete Entry'}
           desc={'Are you sure you want to Delete an Entry?'}
+        />
+         <ImagePicker
+          image={image}
+          setImage={setImage}
+          updateImages={updateItemImages}
+          imageSelection={imageSelection}
+          setImageSelection={setImageSelection}
         />
       </ScrollView>
 

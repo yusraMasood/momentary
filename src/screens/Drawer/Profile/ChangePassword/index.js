@@ -29,6 +29,8 @@ const ChangePassword = props => {
       <InputField
         placeholder={'Enter Password'}
         label={'Password'}
+        isPassword
+        rightIcon
         value={password}
         onChangeText={setPassword}
         onSubmitEditing={() => newPasswordRef.current.focus()}
@@ -37,6 +39,8 @@ const ChangePassword = props => {
         reference={newPasswordRef}
         placeholder={'Enter New Password'}
         label={'New Password'}
+        isPassword
+        rightIcon
         value={newPassword}
         onChangeText={setNewPassword}
         onSubmitEditing={() => confirmPasswordRef.current.focus()}
@@ -46,6 +50,8 @@ const ChangePassword = props => {
         placeholder={'Enter Confirm Password'}
         label={'Confirm Password'}
         value={confirmPassword}
+        isPassword
+        rightIcon
         onChangeText={setConfirmPassword}
         onSubmitEditing={onSubmit}
       />

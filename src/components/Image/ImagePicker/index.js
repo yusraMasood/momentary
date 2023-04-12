@@ -1,10 +1,9 @@
 import React, { useCallback } from 'react'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import { generalImages, icons } from '../../../assets/images';
+import { icons } from '../../../assets/images';
 import BottomSheetHOC from '../../popups/BottomSheetHOC';
-// import BottomSheetHOC from '../Popups/BottomSheetHOC';
 
-const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUploading, options }) => {
+const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUploading, options,updateImages }) => {
   const choices = [
     {
       name: 'Camera',
@@ -27,11 +26,8 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
         image: image
       }
 
-
       setImage(data?.image)
-      // console.log("image",image);
-      // setPicture([...response?.user?.images])
-      // setUploading(false)
+      updateImages(data)
 
     } catch (e) {
       console.log(e);
@@ -49,15 +45,10 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
         // fieldName: "image"
       })
     })
-    // console.log("imageArr", imageArr);
     setImage(imageArr)
   }
   const img = (data) => {
     if (data?.assets != null) {
-      // data.assets.length > 1 ?
-    //   typeof(image)==='object'?
-    //     uploadMultipleImages(data.assets)
-    //     : 
         uploadImage({
           uri: data.assets[0].uri,
           type: data.assets[0].type,
@@ -65,12 +56,6 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
           // fieldName: "image"
         })
     }
-
-  //   _image = {
-  //     uri: image,
-  //     type: `image/${splittedUri[splittedUri.length - 1]}`,
-  //     name: imageName ?? 'avatar',
-  // };
   }
 
 

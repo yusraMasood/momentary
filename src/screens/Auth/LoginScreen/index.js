@@ -12,7 +12,6 @@ import RippleHOC from '../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
 import {  setToken, usePostLoginMutation } from '../../../state/auth';
-// import { showToast } from '../../../Api/APIHelpers';
 import Toast from "react-native-toast"
 import ButtonLoading from '../../../components/Loaders/ButtonLoading';
 import { validateEmail } from '../../../utils/Validations';
@@ -22,13 +21,16 @@ import ErrorMessage from '../../../components/Error/ErrorMessage';
 const LoginScreen = props => {
   const passwordRef = useRef(null);
   const dispatch=useDispatch()
-  const [postLogin,{isLoading,error,isSuccess} ]=usePostLoginMutation()
+  const [postLogin,message]=usePostLoginMutation()
   const [email, setEmail] = useState('alex-admin@mailinator.com');
-  const [password, setPassword] = useState('Admin@123');
+  const [password, setPassword] = useState('password');
   const [thumb,setThumb] =useState(false)
-  // {isLoading,error}
-  console.log(isSuccess,"isSuccess");
+
+  console.log(message);
+
+  // {isLoading,error,isSuccess} 
   const onSubmit = () => {
+    // getBiometricData()
     if (email == '') {
       return Toast.show('Please enter your email address');
     }
@@ -40,7 +42,7 @@ const LoginScreen = props => {
     }
     postLogin({email,password,role:"admin"}).then((res)=>{
       console.log("tokneee",res);
-      dispatch(setToken("dkpdopd"))
+      // dispatch(setToken("dkpdopd"))
       if(res?.data?.token)
       {
         dispatch(setToken(res?.data?.token))
@@ -56,8 +58,8 @@ const LoginScreen = props => {
       </View>
       
       <RobotoMedium style={styles.signinText}>Sign In</RobotoMedium>
-      <ErrorMessage
-      error={error?.data?.message}/>
+      {/* <ErrorMessage
+      error={error?.data?.message}/> */}
       <InputField
         placeholder={'Enter Email Address'}
         label={'Email'}
@@ -89,11 +91,11 @@ const LoginScreen = props => {
           </RobotoRegular>
         </RippleHOC>
       </View>
-      {isLoading?
-      <ButtonLoading/> :
+      {/* {isLoading?
+      <ButtonLoading/> : */}
        <CustomButton text={'Login'} onPress={onSubmit}
        />
-    }
+    {/* } */}
       <View style={styles.signupContainer}>
         <Image source={thumb?icons.fingerprint: icons.faceRecognition} style={[thumb?styles.fingerPrintStyle: styles.faceStyle]} />
         <View style={styles.registerContainer}>
@@ -119,3 +121,47 @@ const LoginScreen = props => {
   );
 };
 export default LoginScreen;
+
+const getBiometricData=async()=>{
+  const rnBiometrics = new ReactNativeBiometrics()
+//   rnBiometrics.simplePrompt({promptMessage: 'Confirm fingerprint'})
+// .then((resultObject) => {
+//   const { success } = resultObject
+
+//   if (success) {
+//     console.log('successful biometrics provided')
+//   } else {
+//     console.log('user cancelled biometric prompt')
+//   }
+// })
+// .catch(() => {
+//   console.log('biometrics failed')
+// })
+//   rnBiometrics.createKeys()
+// .then((resultObject) => {
+//   const { publicKey } = resultObject
+//   console.log(publicKey)
+//   sendPublicKeyToServer(publicKey)
+// })
+//   const { biometryType } = await rnBiometrics.isSensorAvailable()
+//   console.log(biometryType);
+//   rnBiometrics.isSensorAvailable()
+// .then((resultObject) => {
+//   const { available, biometryType } = resultObject
+
+//   if (available && biometryType === BiometryTypes.TouchID) {
+//     console.log('TouchID is supported')
+//   } else if (available && biometryType === BiometryTypes.FaceID) {
+//     console.log('FaceID is supported')
+//   } else if (available && biometryType === BiometryTypes.Biometrics) {
+//     console.log('Biometrics is supported')
+//   } else {
+//     console.log('Biometrics not supported')
+//   }
+// })
+//   if (biometryType === BiometryTypes.Biometrics) {
+
+//     //do something face id specific
+//   }
+
+}

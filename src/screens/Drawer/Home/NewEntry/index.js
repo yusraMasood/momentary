@@ -22,7 +22,6 @@ const NewEntry = props => {
   return (
     <ScreenWrapper style={styles.container}>
       <TextEditor/>
-   
     </ScreenWrapper>
   );
 };

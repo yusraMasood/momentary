@@ -10,25 +10,38 @@ import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import {linearColors} from '../../../../utils/appTheme';
 import styles from './styles';
-import { useGetProfileQuery, usePostProfileMutation } from '../../../../state/account';
+import { useGetProfileQuery, usePostImageMutation, usePostProfileMutation } from '../../../../state/account';
 import ImagePicker from '../../../../components/Image/ImagePicker';
+import { jsonToFormdata } from '../../../../Api/APIHelpers';
 
 const EditProfile = props => {
   const {data} =useGetProfileQuery()
-  // const [postProfile,{isLoading,error}] =usePostProfileMutation()
+  const [postProfile,{isLoading,error}] =usePostProfileMutation()
 
 
   const [name,setName]=useState(data?.user?.firstName)
   const [phone,setPhone] =useState(data?.user?.phone)
-  const [image,setImage] =useState("")
+  const [image,setImage] =useState(null)
   const [imageSelection,setImageSelection] =useState(false)
+  const [postImage,message] =usePostImageMutation()
   const phoneRef = useRef(null);
-
+console.log("update api",message);
   const onSubmit = () => {
-    postProfile().then((res)=>{
-      console.log("res in Profile",res);
-      // props.navigation.goBack();
+    // const formData = new FormData();
+    // formData.append('image', image);
+    // formData.append('entityType', "profile");
+    const body={
+      image,
+      entityType:"profile"
+    }
+    jsonToFormdata(body)
+
+    postImage(body).then((res)=>{
+      console.log("res",res);
     })
+    // postProfile({firstName:name,phone}).then((res)=>{
+    //   // props.navigation.goBack();
+    // })
   };
 
   return (

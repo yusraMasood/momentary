@@ -7,9 +7,12 @@ import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import {colors, linearColors} from '../../../../utils/appTheme';
 import {settingArray} from '../../../../utils/data';
 import styles from './styles';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../../../../state/auth';
 
 const SettingScreen = props => {
   const logoutRef = useRef(null);
+  const dispatch =useDispatch()
 
   const renderSettingCard = ({item}) => {
     return (
@@ -30,6 +33,10 @@ const SettingScreen = props => {
       />
     );
   };
+  const onRemoveToken=()=>{
+    dispatch(setToken(null))
+
+  }
   return (
     <ScreenWrapper style={styles.container}>
       <FlatList
@@ -44,7 +51,7 @@ const SettingScreen = props => {
         reference={logoutRef}
         title={'Logout'}
         desc={'Are you sure you want to logout?'}
-        onAccept={()=>props.navigation.navigate('AuthNavigator')}
+        onAccept={onRemoveToken}
         contentStye={styles.popupStyle}
       />
     </ScreenWrapper>

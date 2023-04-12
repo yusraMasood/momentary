@@ -13,6 +13,9 @@ const styles =StyleSheet.create({
         fontSize: vh * 3.5,
         color: colors.themeColor.yellow,
       },
+      contentContainerStyle:{
+        marginVertical: vh*2,
+      },
       editorText: {
         backgroundColor: colors.general.black,
         color: colors.text.offwhite,

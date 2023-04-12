@@ -1,11 +1,10 @@
 export const urls = {
   v1: `https://mobileapps.onlinetestingserver.com:1338/apis/`, //dev
-  // v2: `https://dev74.onlinetestingserver.com:7081/`,
-  // v3: `https://dev28.onlinetestingserver.com/soachatapi/api/`,
+  v2: `https://mobileapps.onlinetestingserver.com:16001/`,
 };
 export const base_url = urls.v1;
-// export const base_urlImage = urls.v2;
-// export const soa_url = urls.v3;
+export const base_urlImage = urls.v2;
+
 export const endpoints = {
   auth: {
     login: 'user/login',
@@ -15,9 +14,8 @@ export const endpoints = {
   },
   account: {
     profile: 'user',
-    update: 'user/update',
-    changePassword: 'user/updatePassword',
-    uploadPicture:"user/upload"
+    update: 'user/edit',
+    updateImage: 'upload/user',
   },
   passwordRecovery: {
     verifyEmail: 'user/forgotPassword/request',
