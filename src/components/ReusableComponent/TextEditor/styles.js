@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native'
 import { colors } from '../../../utils/appTheme'
 import { vh, vw } from '../../../utils/dimensions'
-
+import FontFamilyStylesheet from './customFonts';
+const fontFamily = 'Damion'
 const styles =StyleSheet.create({
     textEditorContainer: {
         borderWidth: 1,
@@ -18,9 +19,33 @@ const styles =StyleSheet.create({
       },
       editorText: {
         backgroundColor: colors.general.black,
+        // backgroundColor:`rgba(255,255,255,0.3)`,
         color: colors.text.offwhite,
+        initialCSSText: `${FontFamilyStylesheet}`, contentCSSText: `font-family: ${fontFamily}`,
+        // cssText:,
+        caretColor:colors.themeColor.yellow,
+        placeholderColor: colors.text.grey
         // fontSize: vh*1.7
         // height:vh*70
+      },
+      arrowStyle:{
+        height: vh*0.6,
+        width: vh*0.6,
+        tintColor: colors.themeColor.yellow,
+        resizeMode: "contain"
+      },
+      fontActionStyle:{
+        color: colors.themeColor.yellow,
+        fontSize: vh*1.55,
+        marginRight: vw*2
+      },
+      fontContainer:{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        borderWidth:0.4,
+        borderColor: colors.themeColor.yellow,
+        padding: vh*0.19
       },
       toolContainer: {
         backgroundColor: colors.general.black,

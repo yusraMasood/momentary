@@ -79,15 +79,15 @@ export const authSliceToken = createSlice({
   name: initial.auth.name,
   initialState: initial.auth.state,
   reducers: {
-    // setToken: (state, action) => {
-    //   console.log("setToken",action);
-    //   state.token = action.payload;
-    // },
+    setToken: (state, action) => {
+      console.log("setToken",action);
+      state.token = action.payload;
+    },
   },
 });
-// export const {setToken} = authSliceToken.actions;
-// export default authSliceToken.reducer;
-// export const useToken = () => {
-//   const token = useSelector(state => state.auth.token);
-//   return token;
-// };
+export const {setToken} = authSliceToken.actions;
+export default authSliceToken.reducer;
+export const useToken = () => {
+  const token = useSelector(state => state.auth.token);
+  return token;
+};

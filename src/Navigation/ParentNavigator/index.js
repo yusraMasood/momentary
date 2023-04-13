@@ -8,15 +8,19 @@ import { useSelector } from 'react-redux';
 const ParentStack = createStackNavigator();
 
 const ParentNavigator = () => {
-  const token=useSelector(state=> state?.auth?.token)
-  // const token =useToken()
-  // console.log(token);
+  // const token=useSelector(state=> state?.auth?.token)
+  const token =useToken()
   return (
     <ParentStack.Navigator screenOptions={{headerShown: false}}>
-         <ParentStack.Screen name="MainNavigator" component={MainNavigator} />
-      {/* {token?
+      {token?
+    <ParentStack.Screen name="MainNavigator" component={MainNavigator} />
     :
     <ParentStack.Screen name="AuthNavigator" component={AuthNavigator} />
+
+    }
+      {/* {token?
+    :
+    
 
     } */}
     </ParentStack.Navigator>

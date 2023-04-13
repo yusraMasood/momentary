@@ -69,18 +69,12 @@ export const generalImages = {
     free:require('./icons/free.png'),
     editEntry:require('./icons/editEntry.png'),
     metroInfo:require('./icons/metroInfo.png'),
-
+    emoji: require('./icons/emoji.png'),
     email:require('./icons/email.png'),
 
     phone:require('./icons/phone.png'),
     reload:require('./icons/reload.png'),
-
-
-
-
-
-
-
+    customFont:require('./icons/customFont.png'),
 
   };
   

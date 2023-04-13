@@ -14,7 +14,7 @@ import styles from './styles';
 import { usePostSignupMutation } from '../../../state/auth';
 import ImagePicker from '../../../components/Image/ImagePicker';
 import ContentContainer from '../../../components/wrappers/ContentContainer';
-import { getCountryCode, validateEmail, validateName } from '../../../utils/Validations';
+import {  getCountryCode, validateEmail, validateName } from '../../../utils/Validations';
 import Toast from "react-native-toast"
 
 const SignupScreen = (props) => {
@@ -37,8 +37,8 @@ const SignupScreen = (props) => {
   const usernameRef=useRef(null)
 
   const onSubmit=()=>{
-    const getCountryCode=getCountryCode(phone)
-    console.log(getCountryCode);
+    // const countryCode=getCountryCode(phone)
+    // console.log(countryCode);
     if (email == '') {
       return Toast.show('Please enter your email address');
     }

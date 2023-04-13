@@ -14,7 +14,7 @@ import styles from './styles';
 import {  setToken, usePostLoginMutation } from '../../../state/auth';
 import Toast from "react-native-toast"
 import ButtonLoading from '../../../components/Loaders/ButtonLoading';
-import { validateEmail } from '../../../utils/Validations';
+import { getBiometricData, validateEmail } from '../../../utils/Validations';
 import { useDispatch } from 'react-redux';
 import ErrorMessage from '../../../components/Error/ErrorMessage';
 
@@ -41,8 +41,7 @@ const LoginScreen = props => {
       return Toast.show('Please enter your password');
     }
     postLogin({email,password,role:"admin"}).then((res)=>{
-      console.log("tokneee",res);
-      // dispatch(setToken("dkpdopd"))
+
       if(res?.data?.token)
       {
         dispatch(setToken(res?.data?.token))
@@ -51,6 +50,10 @@ const LoginScreen = props => {
     })
   
   };
+  const biometric=()=>{
+    
+    getBiometricData()
+  }
   return (
     <ScreenWrapper style={styles.container}>
       <View style={styles.alignContent}>
@@ -97,7 +100,10 @@ const LoginScreen = props => {
        />
     {/* } */}
       <View style={styles.signupContainer}>
+        <RippleHOC onPress={biometric}>
         <Image source={thumb?icons.fingerprint: icons.faceRecognition} style={[thumb?styles.fingerPrintStyle: styles.faceStyle]} />
+
+        </RippleHOC>
         <View style={styles.registerContainer}>
           <RobotoRegular style={styles.newAuthorText}>
             New Author?{' '}
@@ -121,47 +127,3 @@ const LoginScreen = props => {
   );
 };
 export default LoginScreen;
-
-const getBiometricData=async()=>{
-  const rnBiometrics = new ReactNativeBiometrics()
-//   rnBiometrics.simplePrompt({promptMessage: 'Confirm fingerprint'})
-// .then((resultObject) => {
-//   const { success } = resultObject
-
-//   if (success) {
-//     console.log('successful biometrics provided')
-//   } else {
-//     console.log('user cancelled biometric prompt')
-//   }
-// })
-// .catch(() => {
-//   console.log('biometrics failed')
-// })
-//   rnBiometrics.createKeys()
-// .then((resultObject) => {
-//   const { publicKey } = resultObject
-//   console.log(publicKey)
-//   sendPublicKeyToServer(publicKey)
-// })
-//   const { biometryType } = await rnBiometrics.isSensorAvailable()
-//   console.log(biometryType);
-//   rnBiometrics.isSensorAvailable()
-// .then((resultObject) => {
-//   const { available, biometryType } = resultObject
-
-//   if (available && biometryType === BiometryTypes.TouchID) {
-//     console.log('TouchID is supported')
-//   } else if (available && biometryType === BiometryTypes.FaceID) {
-//     console.log('FaceID is supported')
-//   } else if (available && biometryType === BiometryTypes.Biometrics) {
-//     console.log('Biometrics is supported')
-//   } else {
-//     console.log('Biometrics not supported')
-//   }
-// })
-//   if (biometryType === BiometryTypes.Biometrics) {
-
-//     //do something face id specific
-//   }
-
-}
