@@ -4,55 +4,40 @@ import {icons} from '../../../assets/images';
 import CustomButton from '../../../components/Buttons/CustomButton';
 import CustomSwitch from '../../../components/CustomSwitch';
 import InputField from '../../../components/Inputs/InputField';
-import ReactNativeBiometrics, { BiometryTypes } from 'react-native-biometrics'
 import DamionRegular from '../../../components/Texts/DamionRegular';
 import RobotoMedium from '../../../components/Texts/RobotoMedium';
 import RobotoRegular from '../../../components/Texts/RobotoRegular';
 import RippleHOC from '../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
-import {  setToken, usePostLoginMutation } from '../../../state/auth';
-import Toast from "react-native-toast"
 import ButtonLoading from '../../../components/Loaders/ButtonLoading';
-import { getBiometricData, validateEmail } from '../../../utils/Validations';
-import { useDispatch } from 'react-redux';
 import ErrorMessage from '../../../components/Error/ErrorMessage';
+import useAuth from '../../../hooks/useAuth';
+import { useGlobalLoader } from '../../../state/general';
 
 const LoginScreen = props => {
   const passwordRef = useRef(null);
-  const dispatch=useDispatch()
-  const [postLogin,message]=usePostLoginMutation()
+  const {loginUser} =useAuth()
+  const isLoading = useGlobalLoader();
   const [email, setEmail] = useState('alex-admin@mailinator.com');
   const [password, setPassword] = useState('password');
+  const [deviceId,setDeviceId] =useState("1234")
   const [thumb,setThumb] =useState(false)
+  // console.log(message);
 
-  console.log(message);
-
-  // {isLoading,error,isSuccess} 
   const onSubmit = () => {
-    // getBiometricData()
-    if (email == '') {
-      return Toast.show('Please enter your email address');
-    }
-    if (!validateEmail(email)) {
-      return Toast.show('Please enter valid email address');
-    }
-    if (password == '') {
-      return Toast.show('Please enter your password');
-    }
-    postLogin({email,password,role:"admin"}).then((res)=>{
-
-      if(res?.data?.token)
-      {
-        dispatch(setToken(res?.data?.token))
-
-      }
-    })
-  
+    loginUser({email,password})
   };
   const biometric=()=>{
+    if(thumb)
+    {
+
+     
+    }
+    else{
+
+    }
     
-    getBiometricData()
   }
   return (
     <ScreenWrapper style={styles.container}>
@@ -62,7 +47,7 @@ const LoginScreen = props => {
       
       <RobotoMedium style={styles.signinText}>Sign In</RobotoMedium>
       {/* <ErrorMessage
-      error={error?.data?.message}/> */}
+      error={message?.error?.data?.message}/> */}
       <InputField
         placeholder={'Enter Email Address'}
         label={'Email'}
@@ -94,11 +79,11 @@ const LoginScreen = props => {
           </RobotoRegular>
         </RippleHOC>
       </View>
-      {/* {isLoading?
-      <ButtonLoading/> : */}
+      {isLoading?
+      <ButtonLoading/> :
        <CustomButton text={'Login'} onPress={onSubmit}
        />
-    {/* } */}
+     } 
       <View style={styles.signupContainer}>
         <RippleHOC onPress={biometric}>
         <Image source={thumb?icons.fingerprint: icons.faceRecognition} style={[thumb?styles.fingerPrintStyle: styles.faceStyle]} />

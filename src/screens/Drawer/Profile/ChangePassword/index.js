@@ -22,7 +22,6 @@ const ChangePassword = props => {
     postChangePassword({password, newPassword}).then(res => {
       console.log('changePassword', res);
     });
-    // props.navigation.navigate("MyProfile")
   };
   return (
     <ScreenWrapper style={styles.container}>

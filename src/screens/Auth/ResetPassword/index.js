@@ -11,17 +11,23 @@ import RippleHOC from '../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
 import {usePostResetPasswordMutation} from '../../../state/auth';
+import {useGlobalLoader} from '../../../state/general';
+import ButtonLoading from '../../../components/Loaders/ButtonLoading';
+import useAuth from '../../../hooks/useAuth';
 
 const ResetPassword = props => {
   const passwordRef = useRef(null);
   const {email, otp} = props?.route?.params;
-  const [postResetPassword] = usePostResetPasswordMutation();
+  // const [postResetPassword] = usePostResetPasswordMutation();
+  const  {resetPassword} =useAuth()
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const isLoading = useGlobalLoader();
 
   const onSubmit = () => {
-    postResetPassword({email, otp}).then(res => {
-      if (res) {
+    resetPassword({email, otp, password, confirmPassword}).then(res => {
+      console.log("dsjodj",res);
+      if (res?.message) {
         props.navigation.navigate('LoginScreen');
       }
     });
@@ -33,11 +39,11 @@ const ResetPassword = props => {
       </View>
       <RobotoMedium style={styles.signinText}>Reset Password</RobotoMedium>
       <InputField
-        //  reference={passwordRef}
         placeholder={'Enter Password'}
         isPassword
         value={password}
         onChangeText={setPassword}
+        maxLength={16}
         rightIcon
         label={'Password'}
         onSubmitEditing={() => passwordRef.current.focus()}
@@ -47,17 +53,21 @@ const ResetPassword = props => {
         onSubmitEditing={onSubmit}
         placeholder={'Enter Confirm Password'}
         value={confirmPassword}
+        maxLength={16}
         onChangeText={setConfirmPassword}
         isPassword
         rightIcon
         label={'Confirm Password'}
       />
-
-      <CustomButton
-        text={'Updated Password'}
-        onPress={onSubmit}
-        alignStyle={styles.continueBtn}
-      />
+      {isLoading ? (
+        <ButtonLoading />
+      ) : (
+        <CustomButton
+          text={'Updated Password'}
+          onPress={onSubmit}
+          alignStyle={styles.continueBtn}
+        />
+      )}
       <RippleHOC
         onPress={() => props.navigation.navigate('LoginScreen')}
         style={styles.alignContent}

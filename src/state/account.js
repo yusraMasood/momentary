@@ -39,9 +39,10 @@ export const extendedProfileSlice = apiSlice.injectEndpoints({
         url: endpoints.account.updateImage,
         method: 'POST',
         headers: {
+          'Content-Type' : 'multipart/form-data',
           // 'Content-Type': 'application/json',
-          Accept: 'application/json',
-          'Content-Type' : 'multipart/form-data'
+          Accept: 'multipart/form-data',
+         
         },
         body:data,
       }),

@@ -19,6 +19,25 @@ export const validateLowerCase = value => {
 }
 export const  getBiometricData=async()=>{
     const rnBiometrics = new ReactNativeBiometrics({ allowDeviceCredentials: true })
+    const { biometryType } = await rnBiometrics.isSensorAvailable()
+    console.log(biometryType);
+    console.log(BiometryTypes.FaceID);
+        rnBiometrics.isSensorAvailable()
+    .then((resultObject) => {
+      const { available, biometryType } = resultObject
+  
+    //   if (available && biometryType === BiometryTypes.TouchID) {
+    //     console.log('TouchID is supported')
+    //   } 
+       if (available && biometryType === BiometryTypes.FaceID) {
+        console.log('FaceID is supported')
+      } else if (available && biometryType === BiometryTypes.Biometrics) {
+        console.log('Biometrics is supported')
+      } else {
+        console.log('Biometrics not supported')
+      }
+    })
+
 
     rnBiometrics.simplePrompt({promptMessage: 'Confirm fingerprint'})
     .then((resultObject) => {
@@ -50,21 +69,7 @@ export const  getBiometricData=async()=>{
     
 //     const { biometryType } = await rnBiometrics.isSensorAvailable()
 
-//     rnBiometrics.isSensorAvailable()
-//     .then((resultObject) => {
-//       const { available, biometryType } = resultObject
-  
-//     //   if (available && biometryType === BiometryTypes.TouchID) {
-//     //     console.log('TouchID is supported')
-//     //   } 
-//        if (available && biometryType === BiometryTypes.FaceID) {
-//         console.log('FaceID is supported')
-//       } else if (available && biometryType === BiometryTypes.Biometrics) {
-//         console.log('Biometrics is supported')
-//       } else {
-//         console.log('Biometrics not supported')
-//       }
-//     })
+
 //     rnBiometrics.createKeys()
 //   .then((resultObject) => {
 //     const { publicKey } = resultObject

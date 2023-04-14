@@ -13,7 +13,6 @@ import PageDesignPopup from '../../popups/PageDesignPopup';
 import PublishQuestionPopup from '../../popups/PublishQuestionPopup';
 import PulishEntryPopup from '../../popups/PulishEntryPopup';
 import SuccessPopup from '../../popups/SuccessPopup';
-import {EmojiView} from './emoji';
 import styles from './styles';
 import ImageComponent from '../../Image/ImageComponent';
 import {icons} from '../../../assets/images';
@@ -21,6 +20,7 @@ import RippleHOC from '../../wrappers/Ripple';
 import EmojiSelectorPopup from '../../popups/EmojiSelectorPopup';
 import CustomFontSelector from '../../popups/CustomFontSelector';
 import EuclidCircularARegular from '../../Texts/EuclidCircularARegular';
+import { useFont } from '../../../state/auth';
 
 const TextEditor = () => {
   const [imageSelection, setImageSelection] = useState(false);
@@ -29,7 +29,8 @@ const TextEditor = () => {
     'Hello <b>World</b> <p>this is a new paragraph</p> <p>this is another new paragraph</p>',
   );
   // const [customfonts,setCustomFonts] =useState(false)
-  const [input, setInput] = useState('');
+  const fontStyle=useFont()
+  const [background,setBackground] =useState(false)
   const richText = useRef(null);
   const documentsArray = ['text1', 'text2', 'text3'];
   const [image, setImage] = useState(null);
@@ -59,7 +60,7 @@ const TextEditor = () => {
 
 
   };
-  console.log(entryText);
+
   const handleEmoji = useCallback(() => {
     Keyboard.dismiss();
     richText.current?.blurContentEditor();
@@ -71,13 +72,13 @@ const TextEditor = () => {
     richText.current?.blurContentEditor();
     // setCustomFonts(!customfonts);
     customFontRef.current.show();
-  }, [customFontRef]);
+  }, [customFontRef, fontStyle]);
 
   const handleInsertEmoji = useCallback(emoji => {
-    console.log(emoji);
     richText.current?.insertText(emoji);
     richText.current?.blurContentEditor();
   }, []);
+  // {cssText: `${FontFamilyStylesheet.damion}`, contentCSSText: `font-family: ${fontFamily}`}
   return (
     <ScrollView usecontainer={true} style={styles.container}>
       <CustomDropdown
@@ -111,7 +112,7 @@ const TextEditor = () => {
           customFonts:()=>{
             return(
               <View style={styles.fontContainer}>
-                <EuclidCircularARegular style={styles.fontActionStyle}>Font</EuclidCircularARegular>
+                <EuclidCircularARegular  style={styles.fontActionStyle}>{fontStyle.fontName?fontStyle.fontName:"Font"}</EuclidCircularARegular>
                 <Image source={icons.arrowDown} style={styles.arrowStyle}/>
                 </View>
             )
@@ -124,17 +125,19 @@ const TextEditor = () => {
           }}
           ref={richText}
           // editorStyle={[initialCSSText, styles.editorText]}
-          editorStyle={styles.editorText}
+          editorStyle= {{
+            backgroundColor:background?`rgba(255,255,255,0.25)`: colors.general.black,
+            color: colors.text.offwhite,
+            // initialCSSText: `${FontFamilyStylesheet.poppins}`, contentCSSText: `font-family: ${fontFamilyPoppins}`,
+            caretColor:colors.themeColor.yellow,
+            placeholderColor: colors.text.grey,
+            cssText: `${fontStyle.style}`, contentCSSText: `font-family: ${fontStyle.fontName}`
+          }}
           initialContentHTML={entryText}
           placeholder={'Type here...'}
           initialHeight={vh * 50}
           onChange={setEntryText}
-          // initialFocus={true}
-          // editorStyle={{height: 500}}
           focusable
-          onInput={handleInput}
-          // initialContentHTML={'<p>djojdojdo</p>'}
-          // editorInitializedCallback={() => onEditorInitialized()}
         />
       </View>
       <FlatList
@@ -146,7 +149,7 @@ const TextEditor = () => {
         renderItem={renderImage}
       />
       <View style={styles.editContainer}>
-        <RippleHOC onPress={()=> set}>
+        <RippleHOC onPress={()=> setBackground(!background)}>
         <Image source={icons.text} style={styles.textIcon} />
         </RippleHOC>
         <RippleHOC onPress={() => setImageSelection(true)}>
@@ -183,7 +186,10 @@ const TextEditor = () => {
         reference={emojiVisibleRef}
         onSelect={handleInsertEmoji}
       />
-      <CustomFontSelector reference={customFontRef} />
+      <CustomFontSelector 
+      reference={customFontRef}
+      
+      />
       <SuccessPopup
         reference={successPopup}
         onAccept={() => props.navigation.navigate('MyEntries')}
@@ -192,7 +198,7 @@ const TextEditor = () => {
       />
       <EntrySettingPopup
         reference={settingRef}
-        onPressDesign={() => pageDesignRef.current.show()}
+        // onPressDesign={() => pageDesignRef.current.show()}
         onPressVisiblity={() => props.navigation.navigate('Visiblity')}
         onPressTag={() => hashTagRef.current.show()}
         onPressDelete={() => deleteRef.current.show()}
@@ -203,10 +209,10 @@ const TextEditor = () => {
         contentStye={styles.publishPopup}
         desc={`Entries published on the Momentary Global Network are anonymized and will not include your user information or metadata from your photos.\n\nIdentifying information you have written in the entry itself will still be visible, as we do not censor or otherwise modify your writing.\n\nAre you sure you want to publish to Global Network?`}
       />
-      <PageDesignPopup
+      {/* <PageDesignPopup
         reference={pageDesignRef}
         onAccept={() => imagePopupRef.current.show()}
-      />
+      /> */}
       <ImagePopup reference={imagePopupRef} />
       <PublishQuestionPopup
         reference={deleteRef}

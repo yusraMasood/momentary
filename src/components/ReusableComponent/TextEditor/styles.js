@@ -1,8 +1,7 @@
 import { StyleSheet } from 'react-native'
 import { colors } from '../../../utils/appTheme'
 import { vh, vw } from '../../../utils/dimensions'
-import FontFamilyStylesheet from './customFonts';
-const fontFamily = 'Damion'
+
 const styles =StyleSheet.create({
     textEditorContainer: {
         borderWidth: 1,
@@ -17,17 +16,15 @@ const styles =StyleSheet.create({
       contentContainerStyle:{
         marginVertical: vh*2,
       },
-      editorText: {
-        backgroundColor: colors.general.black,
-        // backgroundColor:`rgba(255,255,255,0.3)`,
-        color: colors.text.offwhite,
-        initialCSSText: `${FontFamilyStylesheet}`, contentCSSText: `font-family: ${fontFamily}`,
-        // cssText:,
-        caretColor:colors.themeColor.yellow,
-        placeholderColor: colors.text.grey
-        // fontSize: vh*1.7
-        // height:vh*70
-      },
+      // editorText: {
+      //   backgroundColor: colors.general.black,
+      //   // backgroundColor:`rgba(255,255,255,0.3)`,
+      //   color: colors.text.offwhite,
+       
+      //   initialCSSText: `${FontFamilyStylesheet.poppins}`, contentCSSText: `font-family: ${fontFamilyPoppins}`,
+      //   caretColor:colors.themeColor.yellow,
+      //   placeholderColor: colors.text.grey
+      // },
       arrowStyle:{
         height: vh*0.6,
         width: vh*0.6,
@@ -36,7 +33,7 @@ const styles =StyleSheet.create({
       },
       fontActionStyle:{
         color: colors.themeColor.yellow,
-        fontSize: vh*1.55,
+        fontSize: vh*1.4,
         marginRight: vw*2
       },
       fontContainer:{

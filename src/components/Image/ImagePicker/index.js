@@ -35,18 +35,18 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
 
     }
   }
-  const uploadMultipleImages = (data) => {
-    const imageArr = image
-    data.map((v, i) => {
-      imageArr.push({
-        uri: v.uri,
-        type: v.type,
-        name: v.fileName,
-        // fieldName: "image"
-      })
-    })
-    setImage(imageArr)
-  }
+  // const uploadMultipleImages = (data) => {
+  //   const imageArr = image
+  //   data.map((v, i) => {
+  //     imageArr.push({
+  //       uri: v.uri,
+  //       type: v.type,
+  //       name: v.fileName,
+  //       // fieldName: "image"
+  //     })
+  //   })
+  //   setImage(imageArr)
+  // }
   const img = (data) => {
     if (data?.assets != null) {
         uploadImage({

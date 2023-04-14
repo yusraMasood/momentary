@@ -16,15 +16,20 @@ import ImagePicker from '../../../components/Image/ImagePicker';
 import ContentContainer from '../../../components/wrappers/ContentContainer';
 import {  getCountryCode, validateEmail, validateName } from '../../../utils/Validations';
 import Toast from "react-native-toast"
+import useAuth from '../../../hooks/useAuth';
+import { useGlobalLoader } from '../../../state/general';
+import ButtonLoading from '../../../components/Loaders/ButtonLoading';
 
 const SignupScreen = (props) => {
-  const [postSignup]=usePostSignupMutation()
+  // const [postSignup]=usePostSignupMutation()
+  const {signupUser} =useAuth()
  
-  const [email, setEmail] = useState('');
-  const [fullName,setFullName] =useState("")
-  const [phone,setPhone] =useState("")
-  const [password, setPassword] = useState('');
-  const [confirmPassword,setConfirmPassword] =useState("")
+  const [email, setEmail] = useState('atlas@gmail.com');
+  const isLoading = useGlobalLoader();
+  const [fullName,setFullName] =useState("Atlas Corrigan")
+  const [phone,setPhone] =useState("3886764444")
+  const [password, setPassword] = useState('admin123');
+  const [confirmPassword,setConfirmPassword] =useState("admin123")
   const [imageSelection,setImageSelection] =useState(false)
   const [image,setImage]=useState("")
   const [username,setUsername] =useState("RobMcDonnell")
@@ -37,29 +42,13 @@ const SignupScreen = (props) => {
   const usernameRef=useRef(null)
 
   const onSubmit=()=>{
-    // const countryCode=getCountryCode(phone)
-    // console.log(countryCode);
-    if (email == '') {
-      return Toast.show('Please enter your email address');
-    }
-    if (!validateEmail(email)) {
-      return Toast.show('Please enter valid email address');
-    }
-    if (password == '') {
-      return Toast.show('Please enter your password');
-    }
-    const body={
-      firstName: fullName,
-      lastName:"dd",
-      email,password,role:"admin",
-      // countryCode:,
-      deviceToken:"android",
-      deviceType:"android"
-    }
-    postSignup(body).then((res)=>{
-      props.navigation.navigate("LoginScreen")
+ 
+  const response=  signupUser({fullName,email,password,phone,password,confirmPassword,phone}).then((res)=>{
+      console.log("res",res);
+      // props.navigation.navigate("LoginScreen")
 
     })
+    console.log("Ressss",response);
   }
   const onChangeName = data => {
     if (validateName(data)) {
@@ -163,8 +152,11 @@ const SignupScreen = (props) => {
       rightIcon
       label={"Confirm Password"}
       />
-      
-      <CustomButton text={"Sign Up"}  onPress={onSubmit} alignStyle={styles.alignBtn}/>
+      {isLoading?
+    <ButtonLoading/>:
+    <CustomButton text={"Sign Up"}  onPress={onSubmit} alignStyle={styles.alignBtn}/>
+
+    }
       <View style={styles.alignContent}>
       <View style={styles.registerContainer}>
 <RobotoRegular style={styles.newAuthorText}>Have an account already?{" "}</RobotoRegular>

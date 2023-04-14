@@ -16,14 +16,6 @@ export const authSlice = apiSlice.injectEndpoints({
         body: data,
         credentials: 'include',
       }),
-      // transformResponse: result => result?.data?.token,
-      // async onQueryStarted(args, {dispatch, queryFulfilled}) {
-      //   try {
-      //     const {data} = await queryFulfilled;
-      //     console.log('data', data);
-      //     dispatch(setToken(data));
-      //   } catch (error) {}
-      // },
     }),
     postSignup: builder.mutation({
       query: data => ({
@@ -80,14 +72,23 @@ export const authSliceToken = createSlice({
   initialState: initial.auth.state,
   reducers: {
     setToken: (state, action) => {
-      console.log("setToken",action);
+      // console.log("setToken",action);
       state.token = action.payload;
     },
+    setFont:(state,action)=>{
+      state.fontStyle = action.payload;
+
+    }
   },
 });
-export const {setToken} = authSliceToken.actions;
+export const {setToken,setFont} = authSliceToken.actions;
 export default authSliceToken.reducer;
 export const useToken = () => {
   const token = useSelector(state => state.auth.token);
   return token;
 };
+export const useFont = () => {
+  const token = useSelector(state => state.auth.fontStyle);
+  return token;
+};
+

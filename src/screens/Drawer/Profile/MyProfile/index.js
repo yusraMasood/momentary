@@ -34,12 +34,13 @@ const MyProfile = (props) => {
   ];
   return (
     <ScreenWrapper style={styles.container}>
-      <Image source={data?.user?.image?{uri:data?.user?.image}: generalImages.userImage} style={styles.userImg} />
+      <Image source={data?.user?.image?.thumbnail?{uri:data?.user?.image?.thumbnail}: generalImages.userImage} style={styles.userImg} />
       <RippleHOC onPress={()=>props.navigation.navigate("ChangePassword")}>
       <RobotoMedium style={styles.passwordText}>Change Password</RobotoMedium>
       </RippleHOC>
       <View>
         <ContentDataComponent
+        loader={isLoading}
         array={profileArray}
         />
       </View>

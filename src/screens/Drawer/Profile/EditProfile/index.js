@@ -15,33 +15,28 @@ import ImagePicker from '../../../../components/Image/ImagePicker';
 import { jsonToFormdata } from '../../../../Api/APIHelpers';
 
 const EditProfile = props => {
+
   const {data} =useGetProfileQuery()
   const [postProfile,{isLoading,error}] =usePostProfileMutation()
-
-
   const [name,setName]=useState(data?.user?.firstName)
   const [phone,setPhone] =useState(data?.user?.phone)
-  const [image,setImage] =useState(null)
+  const [image,setImage] =useState({uri: data?.user?.image?.thumbnail})
   const [imageSelection,setImageSelection] =useState(false)
   const [postImage,message] =usePostImageMutation()
   const phoneRef = useRef(null);
-console.log("update api",message);
-  const onSubmit = () => {
-    // const formData = new FormData();
-    // formData.append('image', image);
-    // formData.append('entityType', "profile");
-    const body={
-      image,
-      entityType:"profile"
-    }
-    jsonToFormdata(body)
 
-    postImage(body).then((res)=>{
-      console.log("res",res);
+  const onSubmit = () => {
+    if(image){
+      const formData = new FormData();
+      formData.append('image', image);
+      formData.append('entityType', "profile");
+      postImage(formData).then((res)=>{
+        console.log("res",res);
+      })
+    }
+    postProfile({firstName:name,phone}).then((res)=>{
+      // props.navigation.goBack();
     })
-    // postProfile({firstName:name,phone}).then((res)=>{
-    //   // props.navigation.goBack();
-    // })
   };
 
   return (

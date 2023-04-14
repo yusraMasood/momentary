@@ -2,13 +2,23 @@ import React from 'react';
 import {View, FlatList} from 'react-native';
 import RobotoRegular from '../../Texts/RobotoRegular';
 import styles from './styles';
+import CustomSkeleton from '../../Loaders/CustomSkeleton';
+import { vw } from '../../../utils/dimensions';
 
 const ContentDataComponent = props => {
   const renderProfile = ({item}) => {
     return (
       <View style={styles.itemContainer}>
         <RobotoRegular style={styles.titleText}>{item?.title}</RobotoRegular>
-        <RobotoRegular style={styles.valueText}>{item?.value}</RobotoRegular>
+        {props.loader ?
+      <CustomSkeleton
+      height={2}
+      width={40}
+      marginLeft={vw*3}
+      />  :
+      <RobotoRegular style={styles.valueText}>{item?.value}</RobotoRegular>
+
+      }
       </View>
     );
   };

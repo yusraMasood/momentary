@@ -67,10 +67,10 @@ const EntrySettingPopup = props => {
       contentContainerStyle={styles.contentContainer}
     >
       <RobotoMedium style={styles.settingText}>Entry Setting</RobotoMedium>
-      <RippleHOC onPress={onPressPageDesign} style={styles.settingContainer}>
+      {/* <RippleHOC onPress={onPressPageDesign} style={styles.settingContainer}>
         <RobotoRegular style={styles.pageTxt}>Change Page Design</RobotoRegular>
         <Image source={icons.rightArrow} style={styles.arrowStyle} />
-      </RippleHOC>
+      </RippleHOC> */}
       <RippleHOC onPress={onPressVisiblity} style={styles.settingContainer}>
         <RobotoRegular style={styles.pageTxt}>Visiblity</RobotoRegular>
         <View style={styles.rightContainer}>

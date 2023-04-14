@@ -3,13 +3,16 @@ import {View, Image, FlatList, TextInput} from 'react-native';
 import { generalImages } from '../../../assets/images';
 import FriendNetworkCard from '../../Cards/FriendNetworkCard';
 import styles from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 const UserPosts = props => {
+  const navigation =useNavigation()
   
   const renderFriendCard = () => {
     return (
       <FriendNetworkCard
-        onPress={() => props.navigation.navigate('PostByLocation')}
+      onPressFriend={()=>navigation.navigate('FriendDetails')}
+        onPress={() => navigation.navigate('PostByLocation')}
         location={'Approximate Locations'}
         hashtags={"#trends #fashion"}
         clickText={'Add To library'}

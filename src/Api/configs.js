@@ -16,6 +16,7 @@ export const endpoints = {
     profile: 'user',
     update: 'user/edit',
     updateImage: 'upload/user',
+    changePassword:"user/changepassword/"
   },
   passwordRecovery: {
     verifyEmail: 'user/forgotPassword/request',

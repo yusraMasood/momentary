@@ -10,11 +10,13 @@ import styles from './styles';
 const FriendNetworkCard = (props) => {
   return (
     <View style={[styles.container,props.style]}>
-      <RippleHOC onPress={props.onPress} style={styles.userDetailsContainer}>
+    
+      <RippleHOC onPress={props.onPressFriend} style={styles.userDetailsContainer}>
         
         {props.image &&<View style={styles.userImageContainer}>
           <Image source={props.image?props.image:generalImages.userImage} style={styles.userImage} />
         </View>}
+        
         <View>
           {props.name &&<RobotoRegular style={styles.nameText}>Amelia Isabell</RobotoRegular>}
           <View style={styles.editContainer}>
@@ -27,11 +29,11 @@ const FriendNetworkCard = (props) => {
         <View style={styles.editContainer}>
           <Image source={icons.mapPin} style={styles.locationIcon} />
           <RobotoRegular style={styles.dateText}>
-           {/* Approximate Locations */}
            {props.location}
           </RobotoRegular>
         </View>
       </RippleHOC>
+      <RippleHOC onPress={props.onPress}>
       <RobotoRegular style={styles.descText}> 
         Lorem ipsum dolor sit amet, consectetur are it adipiscing elit. Aenean
         euismod bibendum laoreet. Proin gravida dolor sitom
@@ -39,6 +41,7 @@ const FriendNetworkCard = (props) => {
       <RobotoRegular style={styles.hashtagsText}> 
         {props.hashtags}
       </RobotoRegular>
+      </RippleHOC>
       <View style={styles.alignComment}>
       <RobotoMedium style={styles.headerText}>{props.clickText}</RobotoMedium>
       </View>

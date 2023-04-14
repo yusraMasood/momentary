@@ -41,8 +41,8 @@ export const styles = StyleSheet.create({
     borderWidth:1,
     borderColor: colors.input.greyBorder,
     paddingVertical: vh*1,
-    paddingHorizontal: vw*3.4,
-    borderRadius: vh*3,
+    paddingHorizontal: vw*3,
+    borderRadius: vh*5,
     marginLeft: vw*5,
   },
   crossIcon:{

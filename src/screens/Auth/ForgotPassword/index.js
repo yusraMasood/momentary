@@ -13,17 +13,22 @@ import styles from './styles';
 import { usePostVerifyEmailMutation } from '../../../state/auth';
 import ButtonLoading from '../../../components/Loaders/ButtonLoading';
 import ErrorMessage from '../../../components/Error/ErrorMessage';
+import { useGlobalLoader } from '../../../state/general';
+import useAuth from '../../../hooks/useAuth';
 
 const ForgotPassword = (props) => {
   
   const [email, setEmail] = useState('alex-admin@mailinator.com');
-  const [postVerifyEmail,{error,isLoading}]=usePostVerifyEmailMutation()
+  const {VerifyEmail} =useAuth()
+  // const [postVerifyEmail,{error,isLoading}]=usePostVerifyEmailMutation()
+  const isLoading = useGlobalLoader();
   const onSubmit=()=>{
-    postVerifyEmail({email}).then((res)=>{
-      if(res?.data?.otp){
-        props.navigation.navigate("VerificationCode",{otp:res?.data?.otp,email})
-      }
+    VerifyEmail({email  }).then((res)=>{
+      if(res?.otp){
+            props.navigation.navigate("VerificationCode",{otp:res?.otp,email})
+          }
     })
+    
   }
   return (
     <ScreenWrapper style={styles.container}>
@@ -32,10 +37,10 @@ const ForgotPassword = (props) => {
       </View>
    
       <RobotoMedium style={styles.signinText}>Forgot Password</RobotoMedium>
-      <ErrorMessage
+      {/* <ErrorMessage
      error={error?.data?.message}
      
-     />
+     /> */}
       <InputField
       placeholder={"Enter Email"}
       label={"Email"}

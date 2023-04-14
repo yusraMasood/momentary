@@ -1,15 +1,15 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-import themeColors from '../../Utils/themeColors';
-import { vh, vw } from '../../Utils/units';
+import { colors } from '../../../utils/appTheme';
+import { vh, vw } from '../../../utils/dimensions';
 
 const CustomSkeleton = props => {
   return (
     <SkeletonPlaceholder
-      backgroundColor={themeColors.background}
+      backgroundColor={colors.skeleton.background}
       // backgroundColor={"#5A5A5A"}
-      highlightColor={themeColors.highlightColor}
+      highlightColor={colors.skeleton.highlightColor}
       // highlightColor={"#808080"}
       speed={1200}>
       <SkeletonPlaceholder.Item

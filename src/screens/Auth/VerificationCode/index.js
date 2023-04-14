@@ -17,26 +17,37 @@ import {
 import {showToast} from '../../../Api/APIHelpers';
 import ButtonLoading from '../../../components/Loaders/ButtonLoading';
 import ErrorMessage from '../../../components/Error/ErrorMessage';
+import useAuth from '../../../hooks/useAuth';
+import { useGlobalLoader } from '../../../state/general';
 
 const VerificationCode = props => {
   const passwordRef = useRef(null);
   const {email} = props?.route?.params;
+  const isLoadingGlobal=useGlobalLoader()
   const [otp, setOtp] = useState(props?.route?.params?.otp);
-  const [password, setPassword] = useState('');
-  const [postVerifyCode, {error,isLoading}] = usePostVerifyCodeMutation();
-  const [postVerifyEmail, data] = usePostVerifyEmailMutation();
+  const [postVerifyCode,{isLoading} ] = usePostVerifyCodeMutation();
+  // const [postVerifyEmail, data] = usePostVerifyEmailMutation();
+  const {VerifyEmail} =useAuth()
+  // console.log(message);
+  // {error,isLoading}
 
   const onSubmit = () => {
-    postVerifyCode({email, otp}).then(res => {
-      if (res) {
-        // props.navigation.navigate('ResetPassword', {email, otp});
+    // console.log(typeof Number(otp));
+
+    postVerifyCode({email, otp: Number(otp)}).then(res => {
+      if (res?.data?.message) {
+        props.navigation.navigate('ResetPassword', {email, otp});
       }
     });
   };
   const verifyEmail = () => {
-    postVerifyEmail({email}).then(res => {
-      setOtp(res?.data?.otp);
-    });
+    VerifyEmail({email}).then((res)=>{
+      if(res?.otp){
+        console.log("otppp",res?.otp);
+        setOtp(res?.otp);
+          }
+    })
+ 
   };
   return (
     <ScreenWrapper style={styles.container}>
@@ -47,10 +58,10 @@ const VerificationCode = props => {
       <RobotoRegular style={styles.descResetText}>
         Check your email address for verification code.
       </RobotoRegular>
-      <ErrorMessage
+      {/* <ErrorMessage
      error={error?.data?.message}
      
-     />
+     /> */}
       <InputField
         placeholder={'Enter Verification Code'}
         label={'Verification Code'}
@@ -61,7 +72,7 @@ const VerificationCode = props => {
       />
       
         <View  style={styles.alignReset}>
-        {data?.isLoading ? (
+        {isLoadingGlobal ? (
         <ButtonLoading />
       ) : (
           <RippleHOC onPress={verifyEmail}>
@@ -75,7 +86,7 @@ const VerificationCode = props => {
       <ButtonLoading/> :
 
        <CustomButton text={"Continue"}  onPress={onSubmit} alignStyle={styles.continueBtn}/>
-    }
+    } 
 
       <RippleHOC
         onPress={() => props.navigation.navigate('LoginScreen')}

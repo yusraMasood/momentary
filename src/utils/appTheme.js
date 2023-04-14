@@ -39,6 +39,10 @@ export const colors = {
     yellow:"#D8AA3F",
     blue:"#3FD8CE",
     green:"#68D83F"
+  },
+  skeleton:{
+    background: '#dbdbdb',
+    highlightColor: '#ffffff',
   }
 };
 export const linearColors = {
