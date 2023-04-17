@@ -57,6 +57,16 @@ export const authSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    getUsernameSuggestion: builder.query({
+      query: (queryArg) => ({
+        url: endpoints.auth.usernameSuggestion,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        params: {...queryArg},
+      }),
+    }),
   }),
 });
 export const {
@@ -65,6 +75,7 @@ export const {
   usePostVerifyEmailMutation,
   usePostVerifyCodeMutation,
   usePostResetPasswordMutation,
+  useGetUsernameSuggestionQuery
 } = authSlice;
 
 export const authSliceToken = createSlice({

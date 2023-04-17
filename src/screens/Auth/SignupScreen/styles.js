@@ -15,6 +15,10 @@ const styles = StyleSheet.create({
     alignContent:{
         alignItems: "center"
     },
+    contentContainer:{
+        // marginTop: vh*3
+        alignItems: "center"
+    },
     signinText:{
         marginTop: vh*2,
         color:colors.text.offwhite,
@@ -50,19 +54,19 @@ const styles = StyleSheet.create({
         bottom: vh*0.6,
         left: vw*16,
     },
-    usernameArrayContainer:{
-        flexDirection: "row",
-        marginTop: vh*1,
-        flexWrap: "wrap",
-        justifyContent: "space-between"
-    },
+    // usernameArrayContainer:{
+    //     flexDirection: "row",
+    //     marginTop: vh*1,
+    //     flexWrap: "wrap",
+    //     justifyContent: "space-between"
+    // },
     usernameContainer:{
         borderWidth:1,
         paddingHorizontal: vw*0.9,
         paddingVertical: vh*0.2,
         borderRadius: vh*0.5,
-        marginRight: vw*0.4,
-        borderColor: colors.general.white
+        marginRight: vw*3,
+        borderColor: colors.general.white,
     },
     usernameFocusContainer:{
         borderColor: colors.themeColor.yellow

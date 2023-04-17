@@ -52,8 +52,11 @@ export default () => {
     fullName,
     email,
     phone,
+    username,
     password,
     confirmPassword,
+    deviceToken,
+    deviceType
   }) => {
     let response;
     dispatch(toggleGlobalLoader(true));
@@ -61,6 +64,10 @@ export default () => {
       if (fullName.trim() === '') {
         Toast.error('Please Enter Your Full Name');
         throw new Error('Please Enter Your Full Name');
+      }
+      if (username.trim() === '') {
+        Toast.error('Please Enter Your Username');
+        throw new Error('Please Enter Your Username');
       }
       if (email.trim() === '') {
         Toast.error('Please Enter Your Email');
@@ -79,20 +86,24 @@ export default () => {
         throw new Error('Please Enter Your Phone');
       }
       const body = {
-        firstName: fullName,
-        lastName: 'dd',
+        fullName,
+        username,
         email,
+        phone,
+        image,
         password,
-        role: 'admin',
-        deviceToken: 'android',
+        confirmPassword,
+        role: 'user',
+        deviceToken: '123',
         deviceType: 'android',
       };
-     const response= await postSignup(body).then(res => {
-        dispatch(toggleGlobalLoader(false));
-        if (res?.error?.data) {
-          Toast.error(res?.error?.data?.message);
-        } 
-      }).then((res)=> console.log("signup",res));
+    //  const response= await postSignup(body).then(res => {
+    //     dispatch(toggleGlobalLoader(false));
+    //     if (res?.error?.data) {
+    //       Toast.error(res?.error?.data?.message);
+    //     } 
+    //   }).then((res)=> console.log("signup",res));
+    const response= await postVerifyEmail(body).unwrap()
       return response
     } catch (e) {
       dispatch(toggleGlobalLoader(false));

@@ -1,5 +1,5 @@
 import React,{useRef,useState} from 'react';
-import {Text, View, Image} from 'react-native';
+import {Text, View, Image,FlatList} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { generalImages, icons } from '../../../assets/images';
 import CustomButton from '../../../components/Buttons/CustomButton';
@@ -11,7 +11,6 @@ import RippleHOC from '../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../components/wrappers/ScreenWrapper';
 import { linearColors } from '../../../utils/appTheme';
 import styles from './styles';
-import { usePostSignupMutation } from '../../../state/auth';
 import ImagePicker from '../../../components/Image/ImagePicker';
 import ContentContainer from '../../../components/wrappers/ContentContainer';
 import {  getCountryCode, validateEmail, validateName } from '../../../utils/Validations';
@@ -19,21 +18,26 @@ import Toast from "react-native-toast"
 import useAuth from '../../../hooks/useAuth';
 import { useGlobalLoader } from '../../../state/general';
 import ButtonLoading from '../../../components/Loaders/ButtonLoading';
+import { useGetUsernameSuggestionQuery } from '../../../state/auth';
 
 const SignupScreen = (props) => {
   // const [postSignup]=usePostSignupMutation()
   const {signupUser} =useAuth()
+
+
+  const {data,isLoading,refetch}=useGetUsernameSuggestionQuery({fullName})
  
   const [email, setEmail] = useState('atlas@gmail.com');
-  const isLoading = useGlobalLoader();
-  const [fullName,setFullName] =useState("Atlas Corrigan")
+  const isLoader = useGlobalLoader();
+  const [fullName,setFullName] =useState(data?.usernames[0])
   const [phone,setPhone] =useState("3886764444")
   const [password, setPassword] = useState('admin123');
   const [confirmPassword,setConfirmPassword] =useState("admin123")
   const [imageSelection,setImageSelection] =useState(false)
   const [image,setImage]=useState("")
   const [username,setUsername] =useState("RobMcDonnell")
-  const usernameArray=["RobMcDonnell","RobMcl213", "RobMcl256","RobMcl856"]
+  const [deviceType,setDeviceType] =useState("android")
+  const [deviceToken,setDeviceToken] =useState("12343")
 
   const emailRef=useRef(null)
   const confirmPasswordRef =useRef(null)
@@ -41,14 +45,13 @@ const SignupScreen = (props) => {
   const phoneRef = useRef(null);
   const usernameRef=useRef(null)
 
+
   const onSubmit=()=>{
  
-  const response=  signupUser({fullName,email,password,phone,password,confirmPassword,phone}).then((res)=>{
+   signupUser({fullName,username,email,password,phone,password,confirmPassword,deviceToken,deviceType}).then((res)=>{
       console.log("res",res);
-      // props.navigation.navigate("LoginScreen")
 
     })
-    console.log("Ressss",response);
   }
   const onChangeName = data => {
     if (validateName(data)) {
@@ -60,7 +63,15 @@ const SignupScreen = (props) => {
   const onPressIcon=()=>{
      setImageSelection(true)
   }
- 
+ const renderUsernames=({item,index})=>{
+  const focus=username==item
+  return(
+    <RippleHOC onPress={()=> setUsername(item)} style={[styles.usernameContainer, focus && styles.usernameFocusContainer]} key={index}>
+    <RobotoRegular style={[styles.usernameText, focus && styles.usernameFocusText]}>{item}</RobotoRegular>
+  </RippleHOC>
+  )
+
+ }
   
   return (
     <ScreenWrapper style={styles.container}>
@@ -83,6 +94,8 @@ const SignupScreen = (props) => {
       placeholder={"Enter Full Name"}
       questionIcon
       label={"Full Name"}
+      onEndEditing={refetch}
+      onBlur={refetch}
       value={fullName}
       keyboardType={"email-address"}
       onChangeText={setFullName}
@@ -97,16 +110,14 @@ const SignupScreen = (props) => {
       onSubmitEditing={()=> phoneRef.current.focus()}
       onChangeText={onChangeName}
       />
-      <View style={styles.usernameArrayContainer}>
-      {usernameArray.map((item,index)=>{
-        const focus=username==item
-        return(
-          <RippleHOC onPress={()=> setUsername(item)} style={[styles.usernameContainer, focus && styles.usernameFocusContainer]} key={index}>
-            <RobotoRegular style={[styles.usernameText, focus && styles.usernameFocusText]}>{item}</RobotoRegular>
-          </RippleHOC>
-        )
-      })}
-      </View>
+      <FlatList
+      data={data?.usernames}
+      renderItem={renderUsernames}
+      contentContainerStyle={styles.contentContainer}
+      horizontal={true}
+      keyExtractor={(item)=> item}
+      key={"usernameArray"}
+      />
       <InputField
       reference={phoneRef}
       placeholder={"Enter Phone"}
@@ -152,7 +163,7 @@ const SignupScreen = (props) => {
       rightIcon
       label={"Confirm Password"}
       />
-      {isLoading?
+      {isLoader?
     <ButtonLoading/>:
     <CustomButton text={"Sign Up"}  onPress={onSubmit} alignStyle={styles.alignBtn}/>
 

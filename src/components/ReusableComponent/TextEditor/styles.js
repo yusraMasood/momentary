@@ -33,7 +33,7 @@ const styles =StyleSheet.create({
       },
       fontActionStyle:{
         color: colors.themeColor.yellow,
-        fontSize: vh*1.4,
+        fontSize: vh*1.3,
         marginRight: vw*2
       },
       fontContainer:{

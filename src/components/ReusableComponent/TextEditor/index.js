@@ -112,7 +112,7 @@ const TextEditor = () => {
           customFonts:()=>{
             return(
               <View style={styles.fontContainer}>
-                <EuclidCircularARegular  style={styles.fontActionStyle}>{fontStyle.fontName?fontStyle.fontName:"Font"}</EuclidCircularARegular>
+                <EuclidCircularARegular numberOfLines={1}  style={styles.fontActionStyle}>{fontStyle.fontName?fontStyle.fontName:"Font"}</EuclidCircularARegular>
                 <Image source={icons.arrowDown} style={styles.arrowStyle}/>
                 </View>
             )
@@ -131,7 +131,7 @@ const TextEditor = () => {
             // initialCSSText: `${FontFamilyStylesheet.poppins}`, contentCSSText: `font-family: ${fontFamilyPoppins}`,
             caretColor:colors.themeColor.yellow,
             placeholderColor: colors.text.grey,
-            cssText: `${fontStyle.style}`, contentCSSText: `font-family: ${fontStyle.fontName}`
+            cssText: `${fontStyle?.style}`, contentCSSText: `font-family: ${fontStyle?.fontName}`
           }}
           initialContentHTML={entryText}
           placeholder={'Type here...'}

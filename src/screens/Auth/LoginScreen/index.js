@@ -14,6 +14,7 @@ import ButtonLoading from '../../../components/Loaders/ButtonLoading';
 import ErrorMessage from '../../../components/Error/ErrorMessage';
 import useAuth from '../../../hooks/useAuth';
 import { useGlobalLoader } from '../../../state/general';
+import { getBiometricData } from '../../../utils/Validations';
 
 const LoginScreen = props => {
   const passwordRef = useRef(null);
@@ -29,6 +30,7 @@ const LoginScreen = props => {
     loginUser({email,password})
   };
   const biometric=()=>{
+    // getBiometricData()
     if(thumb)
     {
 

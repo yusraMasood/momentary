@@ -1,6 +1,6 @@
 export const urls = {
-  v1: `https://mobileapps.onlinetestingserver.com:1338/apis/`, //dev
-  v2: `https://mobileapps.onlinetestingserver.com:16001/`,
+  v1: `https://mobileapps.onlinetestingserver.com:1601/apis/`, //dev
+  v2: `https://mobileapps.onlinetestingserver.com:1601/`,
 };
 export const base_url = urls.v1;
 export const base_urlImage = urls.v2;
@@ -10,7 +10,8 @@ export const endpoints = {
     login: 'user/login',
     logout: 'auth/logout',
     register: 'user/signup',
-    expertise:"expertise/all"
+    expertise:"expertise/all",
+    usernameSuggestion:"user/username-suggestions"
   },
   account: {
     profile: 'user',

@@ -18,10 +18,10 @@ export const validateLowerCase = value => {
     return lowerReg.test(value)
 }
 export const  getBiometricData=async()=>{
-    const rnBiometrics = new ReactNativeBiometrics({ allowDeviceCredentials: true })
+    const rnBiometrics = new ReactNativeBiometrics()
     const { biometryType } = await rnBiometrics.isSensorAvailable()
     console.log(biometryType);
-    console.log(BiometryTypes.FaceID);
+    // console.log(BiometryTypes.FaceID);
         rnBiometrics.isSensorAvailable()
     .then((resultObject) => {
       const { available, biometryType } = resultObject

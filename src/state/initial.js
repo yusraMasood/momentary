@@ -9,6 +9,7 @@ const auth = {
   state: {
     token: null,
     fontStyle:null,
+    
   },
   name: 'auth',
 };
