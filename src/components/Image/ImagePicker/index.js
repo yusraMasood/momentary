@@ -2,8 +2,10 @@ import React, { useCallback } from 'react'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { icons } from '../../../assets/images';
 import BottomSheetHOC from '../../popups/BottomSheetHOC';
+import useProfile from '../../../hooks/useProfile';
 
 const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUploading, options,updateImages }) => {
+  const {uploadImage} =useProfile()
   const choices = [
     {
       name: 'Camera',
@@ -20,14 +22,17 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
       },
     },
   ];
-  const uploadImage = async (image) => {
+  const getImage = async (image) => {
     try {
       let data = {
         image: image
       }
-
-      setImage(data?.image)
-      updateImages(data)
+      const formData = new FormData();
+      formData.append('image', data?.image);
+      formData.append('entityType', "profile");
+      uploadImage(formData).then((res)=>{
+        setImage(res?.image)
+      })
 
     } catch (e) {
       console.log(e);
@@ -35,21 +40,9 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
 
     }
   }
-  // const uploadMultipleImages = (data) => {
-  //   const imageArr = image
-  //   data.map((v, i) => {
-  //     imageArr.push({
-  //       uri: v.uri,
-  //       type: v.type,
-  //       name: v.fileName,
-  //       // fieldName: "image"
-  //     })
-  //   })
-  //   setImage(imageArr)
-  // }
   const img = (data) => {
     if (data?.assets != null) {
-        uploadImage({
+      getImage({
           uri: data.assets[0].uri,
           type: data.assets[0].type,
           name: data.assets[0].fileName,

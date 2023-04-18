@@ -7,6 +7,27 @@ const styles = StyleSheet.create({
     paddingHorizontal: vw * 4,
     paddingTop: vh * 2,
   },
+  contentContainerStyle:{
+    marginVertical: vh*2,
+  },
+  publishPopup: {
+    height: vh * 49.3,
+  },
+  editContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    // marginTop: vh*2,
+    borderTopWidth: 1,
+    borderTopColor: colors.input.greyBorder,
+    paddingVertical: vh * 1.4,
+    paddingHorizontal: vw * 5.5,
+  },
+  textIcon: {
+    height: vh * 3.5,
+    width: vw * 7,
+    // backgroundColor: "blue",
+    resizeMode: 'contain',
+  },
 
 });
 export default styles;

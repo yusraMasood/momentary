@@ -29,11 +29,19 @@ const PulishEntryPopup = props => {
     if (props?.onAccept) {
       props?.onAccept();
     }
+    if(props.setPrivacy)
+    {
+      props.setPrivacy("private")
+    }
     hide();
   };
   const onNo = () => {
     if (props?.onReject) {
       props?.onReject();
+    }
+    if(props.setPrivacy)
+    {
+      props.setPrivacy("public")
     }
     hide();
   };

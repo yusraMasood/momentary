@@ -24,21 +24,11 @@ export const endpoints = {
     verifyCode: 'user/forgotPassword/verifyCode',
     updatePassword: 'user/forgotPassword/changePassword',
   },
-  home: {
-   venue:"venue/all",
-   notification:"notification/all",
-   applyJob:"job/apply",
-   venueDetail:"venue/",
-   job:"job/musician/logs",
-   markRead:"notification/mark-as-read"
-  },
+  entry:{
+    add:"user/journal/enteries/create",
+    hashtag:"hashTags/all"
+  }
   
-  miscellaneous: {
-    contactUs: 'feedback/create',
-    about:"about-us",
-    terms:"terms-and-conditions",
-    privacy:"privacy-policy"
-  },
   
 };
 export const headers={

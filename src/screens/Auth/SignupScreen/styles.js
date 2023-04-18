@@ -17,20 +17,15 @@ const styles = StyleSheet.create({
     },
     contentContainer:{
         // marginTop: vh*3
-        alignItems: "center"
+        alignItems: "center",
     },
     signinText:{
         marginTop: vh*2,
         color:colors.text.offwhite,
         fontSize: vh*3,
     },
-    usernameText:{
-        color: colors.general.white,
-        fontSize: vh*1.6
-    },
-    usernameFocusText:{
-        color: colors.themeColor.yellow
-    },
+   
+//   
     userimage:{
       marginTop: vh*2,
       height: vh*10.5,
@@ -60,17 +55,17 @@ const styles = StyleSheet.create({
     //     flexWrap: "wrap",
     //     justifyContent: "space-between"
     // },
-    usernameContainer:{
-        borderWidth:1,
-        paddingHorizontal: vw*0.9,
-        paddingVertical: vh*0.2,
-        borderRadius: vh*0.5,
-        marginRight: vw*3,
-        borderColor: colors.general.white,
-    },
-    usernameFocusContainer:{
-        borderColor: colors.themeColor.yellow
-    },
+    // usernameContainer:{
+    //     borderWidth:1,
+    //     paddingHorizontal: vw*0.9,
+    //     paddingVertical: vh*0.2,
+    //     borderRadius: vh*0.5,
+    //     marginRight: vw*3,
+    //     borderColor: colors.general.white,
+    // },
+    // usernameFocusContainer:{
+    //     borderColor: colors.themeColor.yellow
+    // },
     alignBtn:{
         marginTop: vh*5,
     },

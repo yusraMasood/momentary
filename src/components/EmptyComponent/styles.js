@@ -5,11 +5,11 @@ const styles = StyleSheet.create({
 
   emptyContainer:{
     alignItems:"center",
-    marginTop: vh*4,
+    marginTop: vh*2,
   },
   emptyText:{
     fontSize: vh*2,
-    color: colors.blackText
+    color: colors.general.white
   },
 
 });

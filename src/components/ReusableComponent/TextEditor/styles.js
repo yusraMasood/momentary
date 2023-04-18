@@ -13,9 +13,7 @@ const styles =StyleSheet.create({
         fontSize: vh * 3.5,
         color: colors.themeColor.yellow,
       },
-      contentContainerStyle:{
-        marginVertical: vh*2,
-      },
+     
       // editorText: {
       //   backgroundColor: colors.general.black,
       //   // backgroundColor:`rgba(255,255,255,0.3)`,
@@ -50,24 +48,9 @@ const styles =StyleSheet.create({
         borderBottomColor: colors.input.greyBorder,
         borderBottomWidth: 1,
       },
-      textIcon: {
-        height: vh * 3.5,
-        width: vw * 7,
-        // backgroundColor: "blue",
-        resizeMode: 'contain',
-      },
-      editContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        // marginTop: vh*2,
-        borderTopWidth: 1,
-        borderTopColor: colors.input.greyBorder,
-        paddingVertical: vh * 1.4,
-        paddingHorizontal: vw * 5.5,
-      },
-      publishPopup: {
-        height: vh * 48,
-      },
+    
+  
+    
 
 })
 export default styles 

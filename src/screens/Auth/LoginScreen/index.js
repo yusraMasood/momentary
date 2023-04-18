@@ -20,8 +20,8 @@ const LoginScreen = props => {
   const passwordRef = useRef(null);
   const {loginUser} =useAuth()
   const isLoading = useGlobalLoader();
-  const [email, setEmail] = useState('alex-admin@mailinator.com');
-  const [password, setPassword] = useState('password');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [deviceId,setDeviceId] =useState("1234")
   const [thumb,setThumb] =useState(false)
   // console.log(message);

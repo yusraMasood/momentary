@@ -1,4 +1,4 @@
-import React, {useRef, useImperativeHandle} from 'react';
+import React, {useRef, useImperativeHandle,useState} from 'react';
 import {Image, ImageBackground, View} from 'react-native';
 import {generalImages, icons} from '../../../assets/images';
 import CustomButton from '../../Buttons/CustomButton';
@@ -9,10 +9,12 @@ import RobotoMedium from '../../Texts/RobotoMedium';
 import RippleHOC from '../../wrappers/Ripple';
 import PopupWrapper from '../PopupWrapper';
 import styles from './styles';
+import { useGetHashtagsQuery } from '../../../state/entry';
 
 const HashtagPopup = props => {
   const popup = useRef(null);
-  const hashtagArray=[1,2,3,4,5,6,7,8]
+  const [search,setSearch] =useState("")
+  const hashtagData =useGetHashtagsQuery({tag: search})
 
   useImperativeHandle(props?.reference, () => ({
     hide: hide,
@@ -33,7 +35,6 @@ const HashtagPopup = props => {
     }
     hide();
   };
-
   return (
     <PopupWrapper reference={popup} childrenStyle={styles.container} contentContainerStyle={styles.contentContainer}>
         <RobotoMedium style={styles.hashtagHeading}>Add Hashtags</RobotoMedium>
@@ -42,19 +43,18 @@ const HashtagPopup = props => {
         inputContainerStyle={styles.inputContainer}
         label={"search"}
         placeholder={"Search here..."}
+        onSubmitEditing={hashtagData?.refetch}
+        onEndEditing={hashtagData?.refetch}
+        value={search}
+        onChangeText={setSearch}
         />
         <View style={styles.hashtagsMainContainer}>
-          <Hashtags />
-        {/* {hashtagArray.map((value,index)=>{
-            return(
-                <View style={styles.hashtagContainer}>
-                  <Image source={icons.cross} style={styles.crossimg}/>
-                    <RobotoBold style={styles.hashtagText}>#sports</RobotoBold>
-                </View>
-
-            )
-        })} */}
-       
+          <Hashtags isLoading={hashtagData?.isLoading}
+          setMyHashtags={props.setMyHashtags}
+          myhashtags={props.myhashtags}
+          array={hashtagData?.data?.hashTags}
+          
+          />
         </View>
         <CustomButton text={"Publish"}
         onPress={onYes}

@@ -11,7 +11,12 @@ export const apiSlice = createApi({
     tagTypes: ['Post'],
     prepareHeaders: (headers, {getState}) => {
       const token =getState()?.auth?.token
-      headers.set('authorization', `Bearer ${token}`);
+    
+
+      if(token){
+        headers.set('authorization', `Bearer ${token}`);
+
+      }
       return headers;
     },
   }),

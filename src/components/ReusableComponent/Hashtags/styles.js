@@ -8,6 +8,12 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
   },
+  myTagText:{
+    color: colors.general.white,
+    fontSize: vh*1.5,
+    paddingTop: vh*2,
+    paddingBottom: vh*1
+  },
   hashtagContainer: {
     borderWidth: 1,
     marginBottom: vh * 1,

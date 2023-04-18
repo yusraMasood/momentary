@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
+import { Platform } from 'react-native'
 import {
   setToken,
   usePostLoginMutation,
@@ -12,12 +13,11 @@ import {Toast, getMessage} from '../../Api/APIHelpers';
 import {toggleGlobalLoader} from '../../state/general';
 
 export default () => {
-  const [postLogin] = usePostLoginMutation();
+  const [postLogin,message] = usePostLoginMutation();
   const [postSignup] = usePostSignupMutation();
   const [postVerifyEmail]=usePostVerifyEmailMutation()
   const [postResetPassword] = usePostResetPasswordMutation();
   const dispatch = useDispatch();
-
   const loginUser = async ({email, password}) => {
     dispatch(toggleGlobalLoader(true));
 
@@ -34,7 +34,7 @@ export default () => {
         Toast.error('Please Enter Your Password');
         throw new Error('Please Enter Your Password');
       }
-      await postLogin({email, password, role: 'admin'}).then(res => {
+      await postLogin({email, password, role: 'user'}).then(res => {
         dispatch(toggleGlobalLoader(false));
         if (res?.error?.data) {
           Toast.error(res?.error?.data?.message);
@@ -56,7 +56,7 @@ export default () => {
     password,
     confirmPassword,
     deviceToken,
-    deviceType
+    image
   }) => {
     let response;
     dispatch(toggleGlobalLoader(true));
@@ -85,26 +85,27 @@ export default () => {
         Toast.error('Please Enter Your Phone');
         throw new Error('Please Enter Your Phone');
       }
+      if (image?._id.trim() === '') {
+        Toast.error('Please Upload Image');
+        throw new Error('Please Upload Image');
+      }
       const body = {
         fullName,
         username,
         email,
         phone,
-        image,
+        image: image?._id,
         password,
         confirmPassword,
         role: 'user',
         deviceToken: '123',
-        deviceType: 'android',
+        deviceType: Platform.OS,
       };
-    //  const response= await postSignup(body).then(res => {
-    //     dispatch(toggleGlobalLoader(false));
-    //     if (res?.error?.data) {
-    //       Toast.error(res?.error?.data?.message);
-    //     } 
-    //   }).then((res)=> console.log("signup",res));
-    const response= await postVerifyEmail(body).unwrap()
-      return response
+    const response= await postSignup(body).unwrap()
+
+    dispatch(toggleGlobalLoader(false));
+    Toast.success("Registration Successful")
+    return response
     } catch (e) {
       dispatch(toggleGlobalLoader(false));
       Toast.error(getMessage(e));
