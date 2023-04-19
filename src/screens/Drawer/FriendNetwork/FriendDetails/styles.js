@@ -47,9 +47,9 @@ const styles =StyleSheet.create({
     },
     userImage:{
         height: vh*10,
-        width: vw*20,
+        width: vh*10,
         resizeMode: "contain",
-        borderRadius: vh*5.5,
+        borderRadius: vh*6,
     },
     imgBtnContainer:{
         flexDirection: "row",

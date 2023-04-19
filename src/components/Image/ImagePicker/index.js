@@ -32,6 +32,10 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
       formData.append('entityType', "profile");
       uploadImage(formData).then((res)=>{
         setImage(res?.image)
+        if(updateImages){
+
+          updateImages(res?.image)
+        }
       })
 
     } catch (e) {

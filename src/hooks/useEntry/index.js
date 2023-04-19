@@ -1,8 +1,6 @@
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {Toast, getMessage} from '../../Api/APIHelpers';
-import {toggleGlobalLoader} from '../../state/general';
-import {usePostImageMutation} from '../../state/account';
 import { usePostAddEntryMutation } from '../../state/entry';
 
 export default () => {
@@ -12,13 +10,13 @@ export default () => {
   const dispatch = useDispatch();
   const addEntry = async data => {
     const body={
-        journal,
-        content,
-        hashtags,
-        privacy,
-        images,
-        selectedPeople,
-        location    
+        journal:"643d227cf891ff1c57663d1b",
+        content:data?.entryText,
+        hashtags:data?.myhashtags,
+        privacy:data?.privacy,
+        images: data?.imageIds,
+        selectedPeople:[],
+        location:data?.location
     }
     try {
       const response = await postAddEntry(body).unwrap()

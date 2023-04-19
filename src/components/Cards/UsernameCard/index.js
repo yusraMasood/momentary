@@ -13,7 +13,7 @@ const UsernameCard=(props)=>{
           <CustomSkeleton height={2} width={5} marginLeft={vw*1.5}/>
         ) : (
           <RippleHOC
-            onPress={() => setUsername(item)}
+            onPress={() => props.setUsername(props.name)}
             style={[
               styles.usernameContainer,
               props.focus && styles.usernameFocusContainer,

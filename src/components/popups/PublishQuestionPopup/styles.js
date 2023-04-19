@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
       },
       userImage:{
         height: vh*9,
-        width: vw*18,
-        borderRadius: vh*5,
+        width: vh*9,
+        borderRadius: vh*8,
         resizeMode: "contain"
       }
 });

@@ -18,11 +18,11 @@ const styles =StyleSheet.create({
     },
     userImage:{
         height: vh*5,
-        width: vw*10,
-        resizeMode: "contain"
+        width: vh*5,
+        resizeMode: "cover"
     },
     userImageContainer:{
-        borderRadius: vh*4,
+        borderRadius: vh*5,
         overflow: "hidden"
     },
     editIcon:{

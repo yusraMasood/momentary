@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     userimage:{
       marginTop: vh*2,
       height: vh*10.5,
-      width: vw*21,
-      resizeMode: "contain",
+      width: vh*10.5,
+      resizeMode: "cover",
       borderRadius: vh*6
     },
     cameraIcon:{

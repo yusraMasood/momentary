@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useRef, useState} from 'react';
+import React, {useLayoutEffect, useRef, useState,useEffect} from 'react';
 import {View, Image, ScrollView,FlatList} from 'react-native';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
@@ -17,6 +17,10 @@ import RippleHOC from '../../../../components/wrappers/Ripple';
 import {icons} from '../../../../assets/images';
 import ImageComponent from '../../../../components/Image/ImageComponent';
 import useEntry from '../../../../hooks/useEntry';
+import { LATITUDE_DELTA, LONGITUDE_DELTA, checkLocationPermissions, getCurrentLocation } from '../../../../utils/HelperFunction';
+import { getAddressByLatLong } from '../../../../state/location';
+import { Toast } from '../../../../Api/APIHelpers';
+import { useDispatch } from 'react-redux';
 
 const NewEntry = props => {
   const [entryText, setEntryText] = useState(
@@ -28,8 +32,11 @@ const NewEntry = props => {
   const documentsArray = ['text1', 'text2', 'text3'];
   const [imageSelection, setImageSelection] = useState(false);
   const [myhashtags,setMyHashtags] =useState([])
+  const [location,setLocation] =useState(null)
+  const dispatch =useDispatch()
 
   const {addEntry} =useEntry()
+
   const globalRef = useRef(null);
   const imagePopupRef = useRef(null);
   const deleteRef = useRef(null);
@@ -40,12 +47,40 @@ const NewEntry = props => {
   const globalPopup = useRef(null);
   const hashTagRef = useRef(null);
   const successPopup = useRef(null);
-  const settingRef = useRef(null);
+  const settingRef = useRef(null);  
 
-
-
-  
-
+  const getUserLocation = async () => {
+    const location = await getCurrentLocation();
+    const data = {
+      latitude: location.latitude,
+      longitude: location.longitude,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA,
+    };
+    try {
+      const response = await dispatch(getAddressByLatLong(data));
+      setLocation({
+        latitude: location.latitude,
+        longitude: location.longitude,
+        name: response?.results[0]?.formatted_address,
+      });
+    } catch (e) {
+      Toast.error(e);
+    }
+  };
+  const setupMethods = async () => {
+    checkLocationPermissions()
+      .then(() => {
+        getUserLocation();
+      })
+      .catch(e => {
+        console.log('catch', e);
+      });
+  };
+  useEffect(()=>{
+    setupMethods()
+  },[])
+  // console.log(userLocation);
   useLayoutEffect(() => {
     props.navigation.setOptions({
       headerTitle: () => {
@@ -58,19 +93,25 @@ const NewEntry = props => {
     });
   }, [props.navigation]);
 
-  const renderImage = item => {
-    return <ImageComponent uri={item?.item?.uri} />;
+  const renderImage = ({item}) => {
+    return <ImageComponent uri={item} />;
   };
 
   const updateItemImages = img => {
-    setImageArray(p => [...p, img?.image]);
+    // setImageIds(p=>[...p,img?._id])
+    setImageArray(p => [...p, img?.thumbnail]);
   };
   const addEntryFunc=()=>{
-    addEntry({privacy, entryText,imageArray,location,hashtags}).then((res)=>{
-      // successPopup.current.show()
+    addEntry({privacy, entryText,imageArray,location,myhashtags}).then((res)=>{
+      if(res)
+    {
+      successPopup.current.show()
+
+    }
 
     })
   }
+  // console.log(imageArray,"imageArray");
 
   return (
     <ScreenWrapper style={styles.container}>
@@ -109,7 +150,8 @@ const NewEntry = props => {
 
         <PulishEntryPopup
           reference={publishEntry}
-          onAccept={() => networkPopup.current.show()}
+          // onAccept={() => networkPopup.current.show()}
+          onAccept={() => hashTagRef.current.show()}
           title={'Publish To'}
           desc={'Entries published on the Momentary Global Network are anonymized and will not include your user information or metadata from your photos.\n\nIdentifying information you have written in the entry itself will still be visible, as we do not censor or otherwise modify your writing. '}
           onReject={() => globalRef.current.show()}
@@ -120,7 +162,7 @@ const NewEntry = props => {
         />
         <MyNetworkPopup
           reference={networkPopup}
-          onAccept={() => hashTagRef.current.show()}
+          // onAccept={() => hashTagRef.current.show()}
         />
         <HashtagPopup
           reference={hashTagRef}
@@ -148,7 +190,8 @@ const NewEntry = props => {
           title={'Publish'}
           contentStye={styles.publishPopup}
           desc={`Entries published on the Momentary Global Network are anonymized and will not include your user information or metadata from your photos.\n\nIdentifying information you have written in the entry itself will still be visible, as we do not censor or otherwise modify your writing.\n\nAre you sure you want to publish to Global Network?`}
-        />
+          onAccept={()=>hashTagRef.current.show()}
+       />
         <ImagePopup reference={imagePopupRef} />
         <PublishQuestionPopup
           reference={deleteRef}

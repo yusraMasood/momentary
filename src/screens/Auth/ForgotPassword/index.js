@@ -18,7 +18,7 @@ import useAuth from '../../../hooks/useAuth';
 
 const ForgotPassword = (props) => {
   
-  const [email, setEmail] = useState('alex-admin@mailinator.com');
+  const [email, setEmail] = useState('');
   const {VerifyEmail} =useAuth()
   // const [postVerifyEmail,{error,isLoading}]=usePostVerifyEmailMutation()
   const isLoading = useGlobalLoader();

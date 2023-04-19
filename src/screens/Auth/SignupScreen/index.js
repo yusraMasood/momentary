@@ -41,7 +41,7 @@ const SignupScreen = props => {
     data?.usernames ? data?.usernames[0] : '',
   );
   const {data, isLoading, refetch, error} = useGetUsernameSuggestionQuery({
-    fullName: username,
+    fullName,
   });
   const [deviceToken, setDeviceToken] = useState('12343');
 
@@ -53,6 +53,8 @@ const SignupScreen = props => {
   const passwordRef = useRef(null);
   const phoneRef = useRef(null);
   const usernameRef = useRef(null);
+
+  console.log(data, isLoading,  error);
 
   const onSubmit = () => {
     signupUser({
@@ -77,7 +79,9 @@ const SignupScreen = props => {
   };
   const renderUsernames = ({item, index}) => {
     const focus = username == item;
-    return <UsernameCard focus={focus} name={item} isLoading={isLoading} />;
+    return <UsernameCard focus={focus} name={item} isLoading={isLoading}
+    setUsername={setUsername}
+    />;
   };
   const onChangeName = data => {
     if (validateName(data)) {
@@ -136,8 +140,8 @@ const SignupScreen = props => {
           placeholder={'Enter Full Name'}
           questionIcon
           label={'Full Name'}
-          // onEndEditing={refetch}
-          // onBlur={refetch}
+          onEndEditing={refetch}
+          onBlur={refetch}
           value={fullName}
           keyboardType={'email-address'}
           onChangeText={onChangeName}
@@ -150,7 +154,7 @@ const SignupScreen = props => {
           label={'Username'}
           value={username}
           onSubmitEditing={() => phoneRef.current.focus()}
-          onChangeText={handleUsername}
+          onChangeText={setUsername}
         />
         {data?.usernames && getUsernameList()}
 

@@ -8,6 +8,8 @@ import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
 
 const HomeScreen = props => {
+ 
+
   return (
     <ScreenWrapper style={styles.container}>
       <RippleHOC

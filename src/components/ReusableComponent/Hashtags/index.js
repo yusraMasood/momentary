@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { View,Image,FlatList } from 'react-native'
 import { icons } from '../../../assets/images'
 import RobotoBold from '../../Texts/RobotoBold'
@@ -7,15 +7,47 @@ import EmptyComponent from '../../EmptyComponent'
 import RippleHOC from '../../wrappers/Ripple'
 
 
+
 const Hashtags=(props)=>{
+    // const [myhashtags,props.setMyHashtags]=useState([])
     console.log(props.myhashtags);
+
+
+    const deleteItem = value => {
+        const tempDelete = [...props.myhashtags];
+        const indexItem = tempDelete.filter(item=> item?._id == value?._id);
+        console.log(indexItem,"indexItem");
+        tempDelete.splice(indexItem?._id, 1);
+        console.log(tempDelete,"tempDelete");
+        props.setMyHashtags(tempDelete);
+      };
+    
     const renderHashtags=({item})=>{
         return(
             <View style={styles.hashtagContainer}>
-            <Image source={icons.cross} style={styles.crossimg}/>
-            <RippleHOC onPress={()=> props.setMyHashtags([...props.myhashtags,...item])}>
+            {/* <Image source={icons.cross} style={styles.crossimg}/> */}
+            <RippleHOC onPress={()=> {
+                if(!props.myhashtags.includes(item)){
+                    props.setMyHashtags([...props.myhashtags, item])
+                }}
+                }
+                >
               <RobotoBold style={styles.hashtagText}>#{item?.tag}</RobotoBold>
                 </RippleHOC>
+          </View>
+
+
+        )
+    }
+    const renderMyHashtags=({item})=>{
+        return(
+            <View style={styles.hashtagContainer}>
+                <RippleHOC onPress={()=>deleteItem(item)} style={styles.crossIconContainer}>
+            <Image source={icons.cross} style={styles.crossimg}/>
+
+             
+              <RobotoBold style={styles.hashtagText}>#{item?.tag}</RobotoBold>
+              </RippleHOC>
           </View>
 
 
@@ -32,7 +64,8 @@ const Hashtags=(props)=>{
             <FlatList
             data={props.isLoading?[1,2,3,4]:props.array}
             numColumns={4}
-            columnWrapperStyle={{justifyContent: 'space-between'}}
+            contentContainerStyle={styles.contentContainerStyle}
+            columnWrapperStyle={styles.columnStyle}
             key={"hashtagArray"}
             keyExtractor={(item,index)=> item?._id}
             ListEmptyComponent={renderEmpty}
@@ -42,11 +75,12 @@ const Hashtags=(props)=>{
             <FlatList
             data={props.myhashtags}
             numColumns={4}
+            contentContainerStyle={styles.contentContainerStyle}
             columnWrapperStyle={{justifyContent: 'space-between'}}
-            key={"hashtagArray"}
+            key={"myhashtagArray"}
             keyExtractor={(item,index)=> item?._id}
             ListEmptyComponent={renderEmpty}
-            renderItem={renderHashtags}
+            renderItem={renderMyHashtags}
             />
         </View>
         

@@ -20,22 +20,33 @@ const styles = StyleSheet.create({
     borderColor: colors.themeColor.yellow,
     paddingVertical: vh * 0.8,
     paddingHorizontal: vw * 2.3,
-    // marginRight: vw*2,
+    marginRight: vw*1,
     borderRadius: vh * 1,
     // flexDirection: "row"
   },
   hashtagText: {
+    paddingTop: vh*0.5,
     color: colors.themeColor.yellow,
     fontSize: vh * 1.8,
   },
-  crossimg: {
-    height: vh * 0.5,
-    position: 'absolute',
+  crossIconContainer:{
+    // position: 'absolute',
     top: vh * 0.6,
     right: vw * 1.2,
-    width: vh * 0.5,
+
+  },
+  crossimg: {
+    height: vh * 0.8,
+    width: vh * 0.8,
     tintColor: colors.themeColor.yellow,
     resizeMode: 'contain',
+  },
+  contentContainerStyle:{
+    // height
+    height: vh*11
+  },
+  columnStyle:{
+    // justifyContent: "space-between"
   },
 });
 export default styles;

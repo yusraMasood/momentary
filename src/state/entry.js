@@ -11,7 +11,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: {...data},
+        body:data,
       }),
     }),
     getHashtags: builder.query({
