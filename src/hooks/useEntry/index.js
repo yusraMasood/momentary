@@ -14,7 +14,7 @@ export default () => {
         content:data?.entryText,
         hashtags:data?.myhashtags,
         privacy:data?.privacy,
-        images: data?.imageIds,
+        images: data?.imageArray,
         selectedPeople:[],
         location:data?.location
     }
