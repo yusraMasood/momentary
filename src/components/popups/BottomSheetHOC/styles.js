@@ -31,64 +31,60 @@ export const styles = StyleSheet.create({
 
   modalInnerContainer: {
     width: vw * 90,
-    borderRadius: vh*2,
+    borderRadius: vh * 2,
     backgroundColor: colors.general.black,
     position: 'absolute',
     paddingTop: vh * 2,
-    paddingBottom:vh*4,
+    paddingBottom: vh * 4,
   },
-  imageContainer:{
-    borderWidth:1,
+  imageContainer: {
+    borderWidth: 1,
     borderColor: colors.input.greyBorder,
-    paddingVertical: vh*1,
-    paddingHorizontal: vw*3,
-    borderRadius: vh*5,
-    marginLeft: vw*5,
+    paddingVertical: vh * 1.3,
+    paddingHorizontal: vw * 3,
+    borderRadius: vh * 5,
+    marginLeft: vw * 5,
   },
-  crossIcon:{
-    height: vh*3,
-    position: "absolute",
-    right: vw*4.5,
-    width: vw*4,
-    resizeMode: "contain"
-
+  crossIcon: {
+    height: vh * 3,
+    position: 'absolute',
+    right: vw * 4.5,
+    width: vw * 4,
+    resizeMode: 'contain',
   },
   image: {
-    height: vh*3.5,
-    width: vw*4.5,
-    resizeMode: "contain"
-
-   
+    height: vh * 2,
+    width: vh * 2,
+    resizeMode: 'contain',
   },
-  alignContent:{
-    alignItems: "flex-end",
-    paddingRight: vw*7,
+  alignContent: {
+    alignItems: 'flex-end',
+    paddingRight: vw * 7,
     // position: "absolute"
-
   },
-  crossIcon:{
-    height: vh*3,
-    position: "absolute",
-    right: vw*4.5,
-    width: vw*4,
-    resizeMode: "contain"
+  crossIcon: {
+    height: vh * 3,
+    position: 'absolute',
+    right: vw * 4.5,
+    width: vw * 4,
+    resizeMode: 'contain',
   },
-  photoText:{
+  photoText: {
     color: colors.text.offwhite,
-    fontSize: vh*3,
-    paddingLeft: vw*5,
-    paddingTop: vh*0.9,
+    fontSize: vh * 3,
+    paddingLeft: vw * 5,
+    paddingTop: vh * 0.9,
   },
-  imgStyle:{
-    height: vh*2.6,
-    width: vh*2.6,
-    resizeMode: "contain"
+  imgStyle: {
+    height: vh * 2.6,
+    width: vh * 2.6,
+    resizeMode: 'contain',
   },
-  alignContainer:{
-    flexDirection: "row",
+  alignContainer: {
+    flexDirection: 'row',
     // justifyContent: "space-between",
-    paddingTop: vh*2,
+    paddingTop: vh * 2,
     // paddingHorizontal: vw*6,
     // backgroundColor: "red"
-  }
+  },
 });

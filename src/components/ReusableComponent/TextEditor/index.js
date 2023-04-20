@@ -8,16 +8,15 @@ import {icons} from '../../../assets/images';
 import EmojiSelectorPopup from '../../popups/EmojiSelectorPopup';
 import CustomFontSelector from '../../popups/CustomFontSelector';
 import EuclidCircularARegular from '../../Texts/EuclidCircularARegular';
-import { useFont } from '../../../state/auth';
+import {useFont} from '../../../state/auth';
 
-const TextEditor = (props) => {
-  
-  const fontStyle=useFont()
+const TextEditor = props => {
+  const fontStyle = useFont();
   // const [background,setBackground] =useState(false)
   const richText = useRef(null);
   const scrollRef = useRef(null);
   const emojiVisibleRef = useRef(null);
-  
+
   const customFontRef = useRef(null);
 
   const handleEmoji = useCallback(() => {
@@ -54,6 +53,7 @@ const TextEditor = (props) => {
             actions.insertBulletsList,
             actions.insertOrderedList,
             actions.undo,
+            actions.keyboard,
             actions.redo,
             'insertEmoji',
           ]}
@@ -62,14 +62,18 @@ const TextEditor = (props) => {
           iconMap={{
             insertEmoji: icons.emoji,
             // customFonts: icons.customFont,
-          customFonts:()=>{
-            return(
-              <View style={styles.fontContainer}>
-                <EuclidCircularARegular numberOfLines={1}  style={styles.fontActionStyle}>{fontStyle.fontName?fontStyle.fontName:"Font"}</EuclidCircularARegular>
-                <Image source={icons.arrowDown} style={styles.arrowStyle}/>
+            customFonts: () => {
+              return (
+                <View style={styles.fontContainer}>
+                  <EuclidCircularARegular
+                    numberOfLines={1}
+                    style={styles.fontActionStyle}>
+                    {fontStyle.fontName ? fontStyle.fontName : 'Font'}
+                  </EuclidCircularARegular>
+                  <Image source={icons.arrowDown} style={styles.arrowStyle} />
                 </View>
-            )
-          }
+              );
+            },
           }}
         />
         <RichEditor
@@ -78,14 +82,17 @@ const TextEditor = (props) => {
           }}
           ref={richText}
           // editorStyle={[initialCSSText, styles.editorText]}
-          editorStyle= {{
-            backgroundColor:props.background?`rgba(255,255,255,0.25)`: colors.general.black,
+          editorStyle={{
+            backgroundColor: props.background
+              ? `rgba(255,255,255,0.25)`
+              : colors.general.black,
             // backgroundColor: colors.general.black,
             color: colors.text.offwhite,
             // initialCSSText: `${FontFamilyStylesheet.poppins}`, contentCSSText: `font-family: ${fontFamilyPoppins}`,
-            caretColor:colors.themeColor.yellow,
+            caretColor: colors.themeColor.yellow,
             placeholderColor: colors.text.grey,
-            cssText: `${fontStyle?.style}`, contentCSSText: `font-family: ${fontStyle?.fontName}`
+            cssText: `${fontStyle?.style}`,
+            contentCSSText: `font-family: ${fontStyle?.fontName}`,
           }}
           initialContentHTML={props.entryText}
           placeholder={'Type here...'}
@@ -94,16 +101,13 @@ const TextEditor = (props) => {
           focusable
         />
       </View>
- 
+
       <EmojiSelectorPopup
         reference={emojiVisibleRef}
         onSelect={handleInsertEmoji}
       />
-      <CustomFontSelector 
-      reference={customFontRef}
-      
-      />
-      </View>
+      <CustomFontSelector reference={customFontRef} />
+    </View>
   );
 };
 export default TextEditor;

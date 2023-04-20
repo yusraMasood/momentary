@@ -40,7 +40,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Enable Camera permission for user to upload profile picture</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string>enable permission please</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Enable gallery permission for user to upload profile picture </string>
 	<key>UIAppFonts</key>

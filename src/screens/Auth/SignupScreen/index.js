@@ -54,7 +54,7 @@ const SignupScreen = props => {
   const phoneRef = useRef(null);
   const usernameRef = useRef(null);
 
-  console.log(data, isLoading,  error);
+  console.log(data, isLoading, error);
 
   const onSubmit = () => {
     signupUser({
@@ -79,9 +79,14 @@ const SignupScreen = props => {
   };
   const renderUsernames = ({item, index}) => {
     const focus = username == item;
-    return <UsernameCard focus={focus} name={item} isLoading={isLoading}
-    setUsername={setUsername}
-    />;
+    return (
+      <UsernameCard
+        focus={focus}
+        name={item}
+        isLoading={isLoading}
+        setUsername={setUsername}
+      />
+    );
   };
   const onChangeName = data => {
     if (validateName(data)) {
@@ -101,14 +106,16 @@ const SignupScreen = props => {
   };
   const getUsernameList = () => {
     return (
-      <FlatList
-        data={isLoading ? [1, 2, 3, 4] : data?.usernames}
-        renderItem={renderUsernames}
-        contentContainerStyle={styles.contentContainer}
-        horizontal={true}
-        keyExtractor={item => item}
-        key={'usernameArray'}
-      />
+      <View>
+        <FlatList
+          data={isLoading ? [1, 2, 3, 4] : data?.usernames}
+          renderItem={renderUsernames}
+          contentContainerStyle={styles.contentContainer}
+          horizontal={true}
+          keyExtractor={item => item}
+          key={'usernameArray'}
+        />
+      </View>
     );
   };
   return (
@@ -130,8 +137,7 @@ const SignupScreen = props => {
           <RippleHOC onPress={onPressIcon} style={styles.cameraMainContainer}>
             <LinearGradient
               colors={linearColors.yellow}
-              style={styles.cameraContainer}
-            >
+              style={styles.cameraContainer}>
               <Image source={icons.camera} style={styles.cameraIcon} />
             </LinearGradient>
           </RippleHOC>
@@ -140,8 +146,8 @@ const SignupScreen = props => {
           placeholder={'Enter Full Name'}
           questionIcon
           label={'Full Name'}
-          onEndEditing={refetch}
-          onBlur={refetch}
+          // onEndEditing={refetch}
+          // onBlur={refetch}
           value={fullName}
           keyboardType={'email-address'}
           onChangeText={onChangeName}

@@ -8,11 +8,11 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
   },
-  myTagText:{
+  myTagText: {
     color: colors.general.white,
-    fontSize: vh*1.5,
-    paddingTop: vh*2,
-    paddingBottom: vh*1
+    fontSize: vh * 1.5,
+    paddingTop: vh * 2,
+    paddingBottom: vh * 1,
   },
   hashtagContainer: {
     borderWidth: 1,
@@ -20,20 +20,19 @@ const styles = StyleSheet.create({
     borderColor: colors.themeColor.yellow,
     paddingVertical: vh * 0.8,
     paddingHorizontal: vw * 2.3,
-    marginRight: vw*1,
+    marginRight: vw * 3,
     borderRadius: vh * 1,
     // flexDirection: "row"
   },
   hashtagText: {
-    paddingTop: vh*0.5,
+    paddingTop: vh * 0.5,
     color: colors.themeColor.yellow,
     fontSize: vh * 1.8,
   },
-  crossIconContainer:{
-    // position: 'absolute',
+  crossIconContainer: {
+    position: 'absolute',
     top: vh * 0.6,
     right: vw * 1.2,
-
   },
   crossimg: {
     height: vh * 0.8,
@@ -41,11 +40,11 @@ const styles = StyleSheet.create({
     tintColor: colors.themeColor.yellow,
     resizeMode: 'contain',
   },
-  contentContainerStyle:{
+  contentContainerStyle: {
     // height
-    height: vh*11
+    height: vh * 11,
   },
-  columnStyle:{
+  columnStyle: {
     // justifyContent: "space-between"
   },
 });

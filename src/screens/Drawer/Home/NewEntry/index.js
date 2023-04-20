@@ -1,5 +1,5 @@
-import React, {useLayoutEffect, useRef, useState,useEffect} from 'react';
-import {View, Image, ScrollView,FlatList} from 'react-native';
+import React, {useLayoutEffect, useRef, useState, useEffect} from 'react';
+import {View, Image, ScrollView, FlatList} from 'react-native';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
 import DamionRegular from '../../../../components/Texts/DamionRegular';
@@ -17,25 +17,31 @@ import RippleHOC from '../../../../components/wrappers/Ripple';
 import {icons} from '../../../../assets/images';
 import ImageComponent from '../../../../components/Image/ImageComponent';
 import useEntry from '../../../../hooks/useEntry';
-import { LATITUDE_DELTA, LONGITUDE_DELTA, checkLocationPermissions, getCurrentLocation } from '../../../../utils/HelperFunction';
-import { getAddressByLatLong } from '../../../../state/location';
-import { Toast } from '../../../../Api/APIHelpers';
-import { useDispatch } from 'react-redux';
+import {
+  LATITUDE_DELTA,
+  LONGITUDE_DELTA,
+  checkLocationPermissions,
+  getCurrentLocation,
+} from '../../../../utils/HelperFunction';
+import {getAddressByLatLong} from '../../../../state/location';
+import {Toast} from '../../../../Api/APIHelpers';
+import {useDispatch} from 'react-redux';
+import ContentContainer from '../../../../components/wrappers/ContentContainer';
 
 const NewEntry = props => {
   const [entryText, setEntryText] = useState(
     'Hello <b>World</b> <p>this is a new paragraph</p> <p>this is another new paragraph</p>',
   );
-  const [background,setBackground] =useState(false)
-  const [privacy,setPrivacy] =useState("")
+  const [background, setBackground] = useState(false);
+  const [privacy, setPrivacy] = useState('');
   const [dropdownValue, setDropdownValue] = useState('');
   const documentsArray = ['text1', 'text2', 'text3'];
   const [imageSelection, setImageSelection] = useState(false);
-  const [myhashtags,setMyHashtags] =useState([])
-  const [location,setLocation] =useState(null)
-  const dispatch =useDispatch()
+  const [myhashtags, setMyHashtags] = useState([]);
+  const [location, setLocation] = useState(null);
+  const dispatch = useDispatch();
 
-  const {addEntry} =useEntry()
+  const {addEntry} = useEntry();
 
   const globalRef = useRef(null);
   const imagePopupRef = useRef(null);
@@ -47,7 +53,7 @@ const NewEntry = props => {
   const globalPopup = useRef(null);
   const hashTagRef = useRef(null);
   const successPopup = useRef(null);
-  const settingRef = useRef(null);  
+  const settingRef = useRef(null);
 
   const getUserLocation = async () => {
     const location = await getCurrentLocation();
@@ -77,9 +83,9 @@ const NewEntry = props => {
         console.log('catch', e);
       });
   };
-  useEffect(()=>{
-    setupMethods()
-  },[])
+  useEffect(() => {
+    setupMethods();
+  }, []);
   // console.log(userLocation);
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -94,28 +100,28 @@ const NewEntry = props => {
   }, [props.navigation]);
 
   const renderImage = ({item}) => {
-    return <ImageComponent uri={item} />;
+    return <ImageComponent uri={item?.thumbnail} />;
   };
 
   const updateItemImages = img => {
     // setImageIds(p=>[...p,img?._id])
-    setImageArray(p => [...p, img?.thumbnail]);
+    setImageArray(p => [...p, img]);
   };
-  const addEntryFunc=()=>{
-    addEntry({privacy, entryText,imageArray,location,myhashtags}).then((res)=>{
-      if(res)
-    {
-      successPopup.current.show()
-
-    }
-
-    })
-  }
+  const addEntryFunc = () => {
+    // console.log(location);
+    addEntry({privacy, entryText, imageArray, location, myhashtags}).then(
+      res => {
+        if (res) {
+          successPopup.current.show();
+        }
+      },
+    );
+  };
   // console.log(imageArray,"imageArray");
 
   return (
     <ScreenWrapper style={styles.container}>
-      <ScrollView usecontainer={true}>
+      <ContentContainer usecontainer={true} aware>
         <CustomDropdown
           array={documentsArray}
           dropdownValue={dropdownValue}
@@ -123,8 +129,10 @@ const NewEntry = props => {
           setDropdownValue={setDropdownValue}
         />
         <TextEditor
-        background={background}
-        entryText={entryText} setEntryText={setEntryText}/>
+          background={background}
+          entryText={entryText}
+          setEntryText={setEntryText}
+        />
         <FlatList
           data={imageArray}
           key={'imageArray'}
@@ -153,12 +161,13 @@ const NewEntry = props => {
           // onAccept={() => networkPopup.current.show()}
           onAccept={() => hashTagRef.current.show()}
           title={'Publish To'}
-          desc={'Entries published on the Momentary Global Network are anonymized and will not include your user information or metadata from your photos.\n\nIdentifying information you have written in the entry itself will still be visible, as we do not censor or otherwise modify your writing. '}
+          desc={
+            'Entries published on the Momentary Global Network are anonymized and will not include your user information or metadata from your photos.\n\nIdentifying information you have written in the entry itself will still be visible, as we do not censor or otherwise modify your writing. '
+          }
           onReject={() => globalRef.current.show()}
           yesBtn={'My Network'}
           noBtn={'Global Network'}
           setPrivacy={setPrivacy}
-
         />
         <MyNetworkPopup
           reference={networkPopup}
@@ -190,8 +199,8 @@ const NewEntry = props => {
           title={'Publish'}
           contentStye={styles.publishPopup}
           desc={`Entries published on the Momentary Global Network are anonymized and will not include your user information or metadata from your photos.\n\nIdentifying information you have written in the entry itself will still be visible, as we do not censor or otherwise modify your writing.\n\nAre you sure you want to publish to Global Network?`}
-          onAccept={()=>hashTagRef.current.show()}
-       />
+          onAccept={() => hashTagRef.current.show()}
+        />
         <ImagePopup reference={imagePopupRef} />
         <PublishQuestionPopup
           reference={deleteRef}
@@ -205,7 +214,7 @@ const NewEntry = props => {
           imageSelection={imageSelection}
           setImageSelection={setImageSelection}
         />
-      </ScrollView>
+      </ContentContainer>
     </ScreenWrapper>
   );
 };

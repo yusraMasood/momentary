@@ -11,7 +11,7 @@ const ContentContainer = props => {
   }
   return (
     <Scroll
-    showsVerticalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}
       bounces={false}
       {...props}
       contentContainerStyle={[{flexGrow: 1}, props.contentContainerStyle]}
@@ -24,7 +24,7 @@ const ContentContainer = props => {
 const styles = StyleSheet.create({
   container: {
     // flexGrow: 1,
-    flex:1,
+    flex: 1,
     // height: vh*100,
     backgroundColor: colors.white,
     // backgroundColor: "red"
