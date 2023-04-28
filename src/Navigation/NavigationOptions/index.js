@@ -61,7 +61,8 @@ const titles = {
   BookPrintingPayment:"Place Order",
   BookPrintingOrderSummary:"Order Summary",
   ViewLegacyContact:"Secondary Contact",
-  EditEntry:"Edit Entry"
+  EditEntry:"Edit Entry",
+  HashtagScreen:"Hashtag"
 };
 const titleWithDescription = {
   PostByLocation: 'Global Network',

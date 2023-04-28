@@ -12,8 +12,10 @@ const CustomGoldenSwitch = props => {
     setSwitch(!switchh);
     // console.warn(!switchh);
 
+if(props.updateData){
+  props.updateData(!switchh);
 
-    // props.updateData(props.id, !switchh);
+}
   };
   return (
     <RippleHOC

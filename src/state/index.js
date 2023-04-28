@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import { authSliceToken } from './auth';
 import { apiSlice } from './apiSlice';
 import { generalReducer } from './general';
+import { entrySliceToken } from './entry';
 const persistedConfig = {
   key: 'momentary-user',
   storage: AsyncStorage,
@@ -13,6 +14,7 @@ const persistedConfig = {
 const reducers = combineReducers({
   // [authSliceToken.reducerPath]: authSliceToken.reducer,
   auth: authSliceToken.reducer,
+  entry: entrySliceToken.reducer,
   general: generalReducer.reducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
 });

@@ -33,15 +33,17 @@ const NewEntry = props => {
     'Hello <b>World</b> <p>this is a new paragraph</p> <p>this is another new paragraph</p>',
   );
   const [background, setBackground] = useState(false);
-  const [privacy, setPrivacy] = useState('');
+  const [privacy, setPrivacy] = useState('Private');
   const [dropdownValue, setDropdownValue] = useState('');
   const documentsArray = ['text1', 'text2', 'text3'];
   const [imageSelection, setImageSelection] = useState(false);
   const [myhashtags, setMyHashtags] = useState([]);
   const [location, setLocation] = useState(null);
+  const [pageDesign,setPageDesign] =useState(null)
+  
   const dispatch = useDispatch();
 
-  const {addEntry} = useEntry();
+
 
   const globalRef = useRef(null);
   const imagePopupRef = useRef(null);
@@ -107,17 +109,7 @@ const NewEntry = props => {
     // setImageIds(p=>[...p,img?._id])
     setImageArray(p => [...p, img]);
   };
-  const addEntryFunc = () => {
-    // console.log(location);
-    addEntry({privacy, entryText, imageArray, location, myhashtags}).then(
-      res => {
-        if (res) {
-          successPopup.current.show();
-        }
-      },
-    );
-  };
-  // console.log(imageArray,"imageArray");
+  
 
   return (
     <ScreenWrapper style={styles.container}>
@@ -168,6 +160,7 @@ const NewEntry = props => {
           yesBtn={'My Network'}
           noBtn={'Global Network'}
           setPrivacy={setPrivacy}
+          // privacy={privacy}
         />
         <MyNetworkPopup
           reference={networkPopup}
@@ -178,7 +171,6 @@ const NewEntry = props => {
           onAccept={addEntryFunc}
           setMyHashtags={setMyHashtags}
           myhashtags={myhashtags}
-          // onAccept={}
         />
 
         <SuccessPopup
@@ -190,9 +182,12 @@ const NewEntry = props => {
         <EntrySettingPopup
           reference={settingRef}
           // onPressDesign={() => pageDesignRef.current.show()}
-          onPressVisiblity={() => props.navigation.navigate('Visiblity')}
-          onPressTag={() => hashTagRef.current.show()}
+          onPressVisiblity={() => props.navigation.navigate('Visiblity', {privacy})}
+          // onPressTag={() => hashTagRef.current.show()}
+          onPressTag={()=> props.navigation.navigate("HashtagScreen")}
           onPressDelete={() => deleteRef.current.show()}
+          // comment={comment}
+          // setComment={setComment}
         />
         <PublishQuestionPopup
           reference={globalRef}

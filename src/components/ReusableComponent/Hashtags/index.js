@@ -5,33 +5,33 @@ import RobotoBold from '../../Texts/RobotoBold';
 import styles from './styles';
 import EmptyComponent from '../../EmptyComponent';
 import RippleHOC from '../../wrappers/Ripple';
+import { saveSetting, useSetting } from '../../../state/entry';
+import { useDispatch } from 'react-redux';
 
 const Hashtags = props => {
-  // const [myhashtags,props.setMyHashtags]=useState([])
-  console.log(props.myhashtags);
+  const dispatch =useDispatch()
+  const setting =useSetting()
+  console.log(setting);
 
   const deleteItem = value => {
-    // console.log('my hashtags', props.myhashtags);
-    const tempDelete = [...props.myhashtags];
-    // console.log('temp delete', tempDelete);
-    const indexItem = tempDelete.findIndex(item => item?._id == value?._id);
-    console.log('indexItem', indexItem);
+    const tempDelete = [...setting?.hashtags];
+    const indexItem = tempDelete.findIndex(item => item == value);
     tempDelete.splice(indexItem, 1);
-    console.log('tempDelete', tempDelete);
-    props.setMyHashtags(tempDelete);
+    // props.setMyHashtags(tempDelete);
+    dispatch(saveSetting({...setting,hashtags: tempDelete}))
   };
 
   const renderHashtags = ({item}) => {
     return (
       <View style={styles.hashtagContainer}>
-        {/* <Image source={icons.cross} style={styles.crossimg}/> */}
         <RippleHOC
           onPress={() => {
-            if (!props.myhashtags.includes(item)) {
-              props.setMyHashtags([...props.myhashtags, item]);
+            if (!setting?.hashtags.includes(item)) {
+              // props.setMyHashtags([...props.myhashtags, item]);
+              dispatch(saveSetting({...setting,hashtags:[...setting?.hashtags,item] }))
             }
           }}>
-          <RobotoBold style={styles.hashtagText}>#{item?.tag}</RobotoBold>
+          <RobotoBold style={styles.hashtagText}>#{item}</RobotoBold>
         </RippleHOC>
       </View>
     );
@@ -45,7 +45,7 @@ const Hashtags = props => {
           <Image source={icons.cross} style={styles.crossimg} />
         </RippleHOC>
 
-        <RobotoBold style={styles.hashtagText}>#{item?.tag}</RobotoBold>
+        <RobotoBold style={styles.hashtagText}>#{item}</RobotoBold>
       </View>
     );
   };
@@ -54,7 +54,7 @@ const Hashtags = props => {
   };
   return (
     <View>
-      <FlatList
+      {/* <FlatList
         data={props.isLoading ? [1, 2, 3, 4] : props.array}
         numColumns={4}
         contentContainerStyle={styles.contentContainerStyle}
@@ -63,18 +63,47 @@ const Hashtags = props => {
         keyExtractor={(item, index) => item?._id}
         ListEmptyComponent={renderEmpty}
         renderItem={renderHashtags}
-      />
+      /> */}
+      <View style={styles.hashtagsMainContainer}>
+
+     
+      {
+        props.array.map((item,index)=>{
+          return(
+            <View style={styles.hashtagContainer}>
+            <RippleHOC
+              onPress={() => {
+                if (!setting?.hashtags.includes(item)) {
+                  dispatch(saveSetting({...setting,hashtags:[...setting?.hashtags,item] }))
+                }
+              }}>
+              <RobotoBold style={styles.hashtagText}>#{item}</RobotoBold>
+            </RippleHOC>
+          </View>
+
+          )
+        })
+      }
+       </View>
       <RobotoBold style={styles.myTagText}>My Tags</RobotoBold>
-      <FlatList
-        data={props.myhashtags}
-        numColumns={4}
-        contentContainerStyle={styles.contentContainerStyle}
-        // columnWrapperStyle={{justifyContent: 'space-between'}}
-        key={'myhashtagArray'}
-        keyExtractor={(item, index) => item?._id}
-        ListEmptyComponent={renderEmpty}
-        renderItem={renderMyHashtags}
-      />
+          <View style={styles.hashtagsMainContainer}>
+          {
+        setting?.hashtags.map((item,index)=>{
+          return(
+            <View style={styles.hashtagContainer}>
+            <RippleHOC
+              onPress={() => deleteItem(item)}
+              style={styles.crossIconContainer}>
+              <Image source={icons.cross} style={styles.crossimg} />
+            </RippleHOC>
+    
+            <RobotoBold style={styles.hashtagText}>#{item}</RobotoBold>
+          </View>
+
+          )
+        })
+      }
+      </View>
     </View>
   );
 };

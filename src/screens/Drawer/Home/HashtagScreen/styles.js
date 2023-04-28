@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import { colors } from '../../../utils/appTheme';
-import { vh, vw } from '../../../utils/dimensions';
+import { vh, vw } from '../../../../utils/dimensions';
+import { colors } from '../../../../utils/appTheme';
 
 const styles = StyleSheet.create({
     container:{
@@ -13,8 +13,6 @@ const styles = StyleSheet.create({
     searchText:{
         color: colors.text.grey,
         fontSize: vh*1.9,
-
-
     },
     hashtagContainer:{
         flexDirection: "row",

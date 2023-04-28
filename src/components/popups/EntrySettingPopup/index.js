@@ -10,11 +10,14 @@ import HashtagPopup from '../HashtagPopup';
 import PageDesignPopup from '../PageDesignPopup';
 import PopupWrapper from '../PopupWrapper';
 import styles from './styles';
+import { useDispatch } from 'react-redux';
+import { saveSetting, useSetting } from '../../../state/entry';
 
 const EntrySettingPopup = props => {
   const popup = useRef(null);
   const tagRef = useRef(null);
-
+const dispatch =useDispatch()
+const setting =useSetting()
   useImperativeHandle(props?.reference, () => ({
     hide: hide,
     show: show,
@@ -59,7 +62,12 @@ const EntrySettingPopup = props => {
     }
     hide();
   }
+  // console.log(setting);
+  const getCommentValue=(value)=>{
+    // props.setComment(value)
+    dispatch(saveSetting({...setting,comment: value}))
 
+  }
   return (
     <PopupWrapper
       reference={popup}
@@ -92,7 +100,7 @@ const EntrySettingPopup = props => {
       </RippleHOC>
       <View style={styles.settingContainer}>
         <RobotoRegular style={styles.pageTxt}>Comments</RobotoRegular>
-        <CustomGoldenSwitch />
+        <CustomGoldenSwitch updateData={getCommentValue}/>
       </View>
       <RippleHOC onPress={onPressDelete} style={styles.settingContainer}>
         <RobotoRegular style={styles.pageTxt}>Delete</RobotoRegular>

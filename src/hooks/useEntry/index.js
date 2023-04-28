@@ -16,7 +16,11 @@ export default () => {
         privacy:data?.privacy,
         images: data?.imageArray,
         selectedPeople:[],
-        location:data?.location
+        location:data?.location,
+        pageDesign:null,
+        comment:data?.comment,
+        share:false,
+        multiComment: false
     }
     try {
       const response = await postAddEntry(body).unwrap()

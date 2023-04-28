@@ -47,11 +47,10 @@ const styles = StyleSheet.create({
     tintColor: colors.text.grey,
   },
   input: {
-    // paddingVertical: vh * 1.4,
     flex: 1,
     padding: 0,
     color: colors.text.offwhite,
-    // fontFamily: fonts.recolita.regular,
+    fontFamily: fonts.roboto.regular,
     fontSize: vh * 1.85,
   },
   // labelContainer: {

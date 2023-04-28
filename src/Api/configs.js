@@ -1,6 +1,6 @@
 export const urls = {
-  v1: `https://mobileapps.onlinetestingserver.com:1601/apis/`, //dev
-  v2: `https://mobileapps.onlinetestingserver.com:1601/`,
+  v1: `https://mobileapps.onlinetestingserver.com:1701/apis/`, //dev
+  v2: `https://mobileapps.onlinetestingserver.com:1701/`,
 };
 export const base_url = urls.v1;
 export const base_urlImage = urls.v2;
@@ -25,8 +25,8 @@ export const endpoints = {
     updatePassword: 'user/forgotPassword/changePassword',
   },
   entry:{
-    add:"user/journal/enteries/create",
-    hashtag:"hashTags/all"
+    add:"user/journal/entries/create",
+    hashtag:"hashTags/all"  
   }
   
   

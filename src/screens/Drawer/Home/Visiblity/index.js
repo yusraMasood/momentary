@@ -5,27 +5,29 @@ import RadioButton from '../../../../components/RadioButton'
 import RippleHOC from '../../../../components/wrappers/Ripple'
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper'
 import styles from './styles'
+import { useDispatch } from 'react-redux'
+import { saveSetting, useSetting } from '../../../../state/entry'
 
 const Visiblity =()=>{
-    const [itemIndex,setItemIndex] =useState(0)
+    const [itemValue,setItemValue] =useState("Private")
+    const dispatch =useDispatch()
+    const setting= useSetting()
     const locationArray=[
-        {
-            title:"Global Network",
-        },
-        {
-            title:"Private",
-        },
-        {
-            title:"My Network",
-        },
+        "Global Network","Private","My Network",
     ]
+    console.log(setting);
     return(
         <ScreenWrapper style={styles.container}>
              {locationArray.map((item,index)=>{
-                const focus = index==itemIndex
+                const focus = item==itemValue
+
+
                 return(
-                    <RippleHOC key={index} onPress={()=> setItemIndex(index)} style={styles.buttonContainer}>
-                    <RadioButton title={item?.title} focus={focus} image={item?.img} iconStyle={styles.iconStyle}/>
+                    <RippleHOC key={index} onPress={()=> {
+                        setItemValue(item)
+                        dispatch(saveSetting({...setting,visiblity: item}))
+                        }} style={styles.buttonContainer}>
+                    <RadioButton title={item} focus={focus} image={item?.img} iconStyle={styles.iconStyle}/>
                     </RippleHOC>
                 )
             })}

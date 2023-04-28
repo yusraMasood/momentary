@@ -13,6 +13,17 @@ const auth = {
   },
   name: 'auth',
 };
+const entry = {
+  state: {
+  setting:{
+    visiblity: "Private",
+    hashtags:[],
+    comment: false,
+  }
+    
+  },
+  name: 'entry',
+};
 
 const apiSlice = {
   state: {
@@ -22,6 +33,7 @@ const apiSlice = {
 const initial = {
   general: general,
   auth,
-  apiSlice
+  apiSlice,
+  entry
 };
 export default initial;
