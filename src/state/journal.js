@@ -7,9 +7,9 @@ import { useSelector } from "react-redux";
 
 export const entendedEntrySlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
-    postAddEntry: builder.mutation({
+    postAddJournal: builder.mutation({
       query: (data) => ({
-        url: endpoints.entry.add,
+        url: endpoints.journal.add,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -17,30 +17,20 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
         body:data,
       }),
     }),
-    getHashtags: builder.query({
-      query: (queryArg) => ({
-        url: endpoints.entry.hashtag,
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        params: {...queryArg},
-      }),
-    }),
-
-  
-  getEntries: builder.query({
+  getJournals: builder.query({
     query: (queryArg) => ({
-      url: endpoints.entry.allEntries,
+      url: endpoints.journal.allJournals,
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
       params: {...queryArg},
-    }),}),
-    postDeleteEntry: builder.mutation({
+    }),
+    // transformResponse: (response, meta, arg) => response.data,
+  }),
+    postDeleteJournal: builder.mutation({
       query: (queryArg) => ({
-        url: `${endpoints.entry.deleteEntry}/${queryArg}`,
+        url: `${endpoints.journal.delete}/${queryArg}`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,25 +38,39 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
         // params: queryArg,
       }),
     }),
-    getEntryById: builder.query({
+    getJournalById: builder.query({
       query: (queryArg) => ({
-        url: endpoints.entry.entryById,
+        url: endpoints.journal.journalDetails,
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
         params: {...queryArg},
       }),}),
+      postUpdateJournal: builder.mutation({
+        query: (queryArg) => ({
+          url: `${endpoints.journal.update}/${queryArg}`,
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          // params: queryArg,
+        }),
+
+        // transformResponse:(response)=>{
+        //   console.log(response,"response");
+        // }
+      
+      }),
   
 })})
 
 export const {
-  usePostAddEntryMutation,
-  useGetHashtagsQuery,
-  useGetEntriesQuery,
-  usePostDeleteEntryMutation,
-  useGetEntryByIdQuery
-  
+    useGetJournalByIdQuery,
+    useGetJournalsQuery,
+    usePostAddJournalMutation,
+    usePostDeleteJournalMutation,
+    usePostUpdateJournalMutation
 } = entendedEntrySlice;
 
 export const entrySliceToken = createSlice({

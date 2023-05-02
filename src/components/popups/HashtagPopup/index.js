@@ -19,6 +19,7 @@ const HashtagPopup = props => {
   const dispatch =useDispatch()
   const setting =useSetting()
   const hashtagData =useGetHashtagsQuery({keyword: search})
+  const [hashtagsArray,setHashtagsArray] =useState([])
 
   useImperativeHandle(props?.reference, () => ({
     hide: hide,
@@ -34,51 +35,37 @@ const HashtagPopup = props => {
   };
 
   const onYes = () => {
+    dispatch(saveSetting({...setting, hashtags:hashtagsArray }))
     if (props?.onAccept) {
       props?.onAccept();
     }
     hide();
   };
   const handleSubmitSearch=()=>{
-    // console.log(hashtagData);
 
-    if(hashtagData?.data?.hashTags.length==0)
-    {
+   
       if (!setting?.hashtags.includes(search)) {
         // props.setMyHashtags([...props.myhashtags, search]);
         dispatch(saveSetting({...setting,hashtags:[...setting?.hashtags,search] }))
       }
-
-    }
     
   }
-  // console.log("props.myhashtags",props.myhashtags);
+  const deleteItem = value => {
+    const tempDelete = [...setting?.hashtags];
+    const indexItem = tempDelete.findIndex(item => item == value);
+    tempDelete.splice(indexItem, 1);
+    dispatch(saveSetting({...setting,hashtags: tempDelete}))
+  };
   return (
     <PopupWrapper reference={popup} childrenStyle={styles.container} contentContainerStyle={styles.contentContainer}>
         <RobotoMedium style={styles.hashtagHeading}>Add Hashtags</RobotoMedium>
-        <View style={styles.hashtagContainer}>
 
-        <InputField
-        inputContainerIcon={styles.contentInput}
-        inputContainerStyle={styles.inputContainer}
-        // label={"search"}
-        placeholder={"Search here..."}
-        onSubmitEditing={handleSubmitSearch}
-        onEndEditing={handleSubmitSearch}
-        value={search}
-        onChangeText={setSearch}
-        />
-        <RippleHOC onPress={handleSubmitSearch}>
-          <RobotoRegular style={styles.searchText}>Search</RobotoRegular>
-        </RippleHOC>
-
-        </View>
         <View style={styles.hashtagsMainContainer}>
-          <Hashtags isLoading={hashtagData?.isLoading}
-          setMyHashtags={props.setMyHashtags}
-          myhashtags={props.myhashtags}
-          array={hashtagData?.data?.hashTags}
-          searchText={search}          
+          <Hashtags 
+          isLoading={hashtagData?.isLoading}
+          
+          hashtags={hashtagsArray} 
+          setHashtags={setHashtagsArray}      
           />
         </View>
         <CustomButton text={"Publish"}

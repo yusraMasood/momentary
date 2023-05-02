@@ -13,6 +13,19 @@ const styles = StyleSheet.create({
   publishPopup: {
     height: vh * 49.3,
   },
+  backIcon:{
+    height: vh*3,
+    width: vh*3 ,
+    resizeMode: "contain",
+
+  },
+  backIcon:{
+    height: vh*3,
+    width: vh*3 ,
+    resizeMode: "contain",
+
+  }
+  ,
   editContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',

@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import {View, Image} from 'react-native';
-import {generalImages} from '../../../../assets/images';
+import {generalImages, icons} from '../../../../assets/images';
 import CustomButton from '../../../../components/Buttons/CustomButton';
 import CustomGoldenSwitch from '../../../../components/Buttons/CustomGoldenSwitch';
 import InputField from '../../../../components/Inputs/InputField';
@@ -11,24 +11,58 @@ import CalendarStrip from 'react-native-calendar-strip';
 import RobotoRegular from '../../../../components/Texts/RobotoRegular';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
+import ImagePicker from '../../../../components/Image/ImagePicker';
+import RippleHOC from '../../../../components/wrappers/Ripple';
+import ContentContainer from '../../../../components/wrappers/ContentContainer';
+import useJournal from '../../../../hooks/useJournal';
+import { useGlobalLoader, useInlineLoader } from '../../../../state/general';
+import ButtonLoading from '../../../../components/Loaders/ButtonLoading';
 
 const AddNewJournal = props => {
   const successRef = useRef(null);
   const [date, setDate] = useState(new Date());
+  const [title, setTitle] = useState('');
+  const [hashtags, setHashtags] = useState([]);
+  const [image, setImage] = useState(null);
+  const [imageSelection, setImageSelection] = useState(false);
+  const [search, setSearch] = useState('');
+  const [lifeTime, setLifeTime] = useState(false);
+  const loader = useGlobalLoader()
+  const {addJournal} =useJournal()
+  const imageLoader =useInlineLoader()
+
+  const handleAddJournal = () => {
+    addJournal({image, title, hashtags,lifeTime,date}).then((res)=>{
+      if(res?.journal)
+      {
+        successRef.current.show()
+
+      }
+    });
+  };
+  const getSwitchValue = value => {
+    setLifeTime(value);
+  };
   return (
     <ScreenWrapper style={styles.container}>
+      <ContentContainer>
       <View style={styles.entryContainer}>
         <RobotoRegular style={styles.entryText}>Add Entries</RobotoRegular>
       </View>
+
       <InputField
+        label={'Add Journal Title'}
         inputContainerIcon={styles.inputInnerContainer}
-        placeholder={'Search Field For Tags'}
+        placeholder={'Enter Title'}
+        value={title}
+        onChangeText={setTitle}
         inputContainerStyle={styles.inputContainer}
       />
-      <Hashtags />
+      <Hashtags hashtags={hashtags} setHashtags={setHashtags} />
+
       <View style={styles.journalContainer}>
         <RobotoMedium style={styles.imgText}>Life time journal</RobotoMedium>
-        <CustomGoldenSwitch />
+        <CustomGoldenSwitch updateData={getSwitchValue} />
       </View>
       <CalendarStrip
         showMonth={true}
@@ -54,13 +88,25 @@ const AddNewJournal = props => {
       />
       <View style={styles.journalContainer}>
         <RobotoMedium style={styles.imgText}>Image</RobotoMedium>
-        <RobotoRegular style={styles.entryText}>Add Image</RobotoRegular>
+        <RippleHOC onPress={() => setImageSelection(true)}>
+          <RobotoRegular style={styles.entryText}>Add Image</RobotoRegular>
+        </RippleHOC>
       </View>
-      <Image source={generalImages.books} style={styles.journalImg} />
-      <CustomButton
-        text={'Save To Library'}
-        onPress={() => successRef.current.show()}
-      />
+      {imageLoader? <ButtonLoading/>
+    :
+
+        <Image source={{uri: image?.thumbnail}} style={styles.journalImg} />
+    }
+      {/* {image?.thumbnail && (
+      )} */}
+      {loader?
+    <ButtonLoading/>:
+    <CustomButton
+      text={'Save To Library'}
+      onPress={handleAddJournal}
+    />
+
+    }
 
       <SuccessPopup
         reference={successRef}
@@ -68,6 +114,14 @@ const AddNewJournal = props => {
         desc={'Journal has been added to the library.'}
         onAccept={() => props.navigation.goBack()}
       />
+      <ImagePicker
+        image={image}
+        setImage={setImage}
+        imageSelection={imageSelection}
+        setImageSelection={setImageSelection}
+        type={'journal'}
+      />
+      </ContentContainer>
     </ScreenWrapper>
   );
 };

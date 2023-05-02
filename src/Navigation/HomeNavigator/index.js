@@ -8,7 +8,6 @@ import SaveLocation from '../../screens/Drawer/Home/SaveLocation';
 import Visiblity from '../../screens/Drawer/Home/Visiblity';
 import ViewEntry from '../../screens/Drawer/Home/ViewEntry';
 import EditEntry from '../../screens/Drawer/Home/EditEntry';
-import HashtagScreen from '../../screens/Drawer/Home/HashtagScreen';
 const Stack = createStackNavigator();
 
 const HomeNavigator = () => {
@@ -23,7 +22,6 @@ const HomeNavigator = () => {
       <Stack.Screen name={"Visiblity"} component={Visiblity}/>
       <Stack.Screen name={"ViewEntry"} component={ViewEntry}/>
       <Stack.Screen name={"EditEntry"} component={EditEntry}/>
-      <Stack.Screen name={"HashtagScreen"} component={HashtagScreen}/>
 
     </Stack.Navigator>
   );

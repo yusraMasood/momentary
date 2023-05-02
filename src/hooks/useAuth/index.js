@@ -18,8 +18,7 @@ export default () => {
   const [postVerifyEmail]=usePostVerifyEmailMutation()
   const [postResetPassword] = usePostResetPasswordMutation();
   const dispatch = useDispatch();
-  // console.log(message);
-  const loginUser = async ({email, password}) => {
+    const loginUser = async ({email, password}) => {
     dispatch(toggleGlobalLoader(true));
 
     try {

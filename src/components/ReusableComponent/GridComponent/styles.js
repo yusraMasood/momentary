@@ -6,11 +6,7 @@ const styles = StyleSheet.create({
   container: {
     // paddingHorizontal: vw * 2,
   },
-  searchInput: {
-    marginVertical: 0,
-    marginTop: vh * 2,
-    marginBottom: vh * 0.5,
-  },
+
   addEntryContainer: {
     backgroundColor: colors.themeColor.grey,
     paddingVertical: vh * 7.4,

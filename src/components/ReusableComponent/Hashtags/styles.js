@@ -8,6 +8,36 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
   },
+  searchText:{
+    color: colors.text.grey,
+    fontSize: vh*1.9,
+
+
+},
+searchContainer:{
+  flexDirection: "row",
+      alignItems: "center",
+      borderBottomColor: colors.input.greyBorder ,
+      borderBottomWidth:1,
+      marginBottom: vh*2
+},
+inputContainer:{
+  paddingTop: 0,
+  flex:1,
+  // paddingBottom: vh*2,
+
+},
+contentInput:{
+  marginVertical: 0,
+  borderBottomWidth:0,
+},
+hashtagContainer:{
+  flexDirection: "row",
+  alignItems: "center",
+  borderBottomColor: colors.input.greyBorder ,
+  borderBottomWidth:1,
+  marginBottom: vh*2
+},
   myTagText: {
     color: colors.general.white,
     fontSize: vh * 1.5,

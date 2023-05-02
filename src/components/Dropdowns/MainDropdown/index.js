@@ -6,7 +6,6 @@ import RippleHOC from '../../wrappers/Ripple';
 import styles from './styles'
 
 const MainDropdown = (props) => {
-    // console.log("props", props);
     const [dropdown,setDropdown] =useState(false)
     const savedropdownValue = (item) => {
         props.setDropdownValue(item)

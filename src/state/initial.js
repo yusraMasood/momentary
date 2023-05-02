@@ -16,9 +16,10 @@ const auth = {
 const entry = {
   state: {
   setting:{
-    visiblity: "Private",
+    visiblity: "",
     hashtags:[],
     comment: false,
+    location: null
   }
     
   },

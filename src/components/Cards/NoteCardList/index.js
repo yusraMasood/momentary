@@ -1,18 +1,19 @@
 import React from 'react';
-import {View, Image, useWindowDimensions, ActivityIndicator} from 'react-native';
+import {View, Image, useWindowDimensions} from 'react-native';
 import {icons} from '../../../assets/images';
 import CustomCheckBox from '../../CustomCheckbox';
 import RobotoMedium from '../../Texts/RobotoMedium';
+import RobotoRegular from '../../Texts/RobotoRegular';
 import RippleHOC from '../../wrappers/Ripple';
 import styles from './styles';
 import RenderHtml from 'react-native-render-html';
+import HtmlText from "react-native-html-to-text"
 import {usePostDeleteEntryMutation} from '../../../state/entry';
 import CustomSkeleton from '../../Loaders/CustomSkeleton';
 import { vh } from '../../../utils/dimensions';
-import ButtonLoading from '../../Loaders/ButtonLoading';
 
-const NoteCard = props => {
-  const [postDeleteEntry, message] = usePostDeleteEntryMutation(props.id);
+const NoteCardList = props => {
+  const [postDeleteEntry, message] = usePostDeleteEntryMutation();
   const even = props.index % 2 == 0;
   const source = {
     html: `${props.content}`,
@@ -21,15 +22,17 @@ const NoteCard = props => {
 
   const deleteEntry = () => {
     postDeleteEntry(props.id);
-    if(props.refetch)
-    {
-      props.refetch()
-    }
-
   };
 
   return (
-   
+    <View>
+      {props.isLoading?
+    <CustomSkeleton
+    height={15}
+    width={40}
+    marginTop={vh*2}
+
+    />  :
     <View
     onPress={props.onPress}
     style={[styles.noteContainer, props.listStyle]}
@@ -65,33 +68,31 @@ const NoteCard = props => {
       <View style={styles.hashtagContainer}>
         {props.hashtag.slice(0,2).map((value, index) => {
           return(
-            <RobotoMedium style={styles.hashtagText} numberOfLines={1}>#{value}</RobotoMedium>
+            <RobotoMedium numberOfLines={1} style={styles.hashtagText}>#{value}</RobotoMedium>
+
           )
         })}
       </View>
       {props.delete && (
-        <View>
-{message?.isLoading?
-<ButtonLoading/>
-
-:
-<RippleHOC onPress={deleteEntry}>
+        <RippleHOC onPress={deleteEntry}>
           <Image
             source={icons.delete}
             style={[styles.deleteIcon, props.deleteIconStyle]}
           />
         </RippleHOC>
-
-}
-          </View>
-        
       )}
     </View>
     </View>
   </View>
+
+    }
+
+  
+   
+    </View>
   );
 };
-export default NoteCard;
+export default NoteCardList;
 
 // {props.pin ? (
 //   <Image source={icons.pinned} style={styles.pinIcon} />

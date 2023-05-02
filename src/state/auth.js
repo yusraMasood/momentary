@@ -83,7 +83,6 @@ export const authSliceToken = createSlice({
   initialState: initial.auth.state,
   reducers: {
     setToken: (state, action) => {
-      // console.log("setToken",action);
       state.token = action.payload;
     },
     setFont:(state,action)=>{

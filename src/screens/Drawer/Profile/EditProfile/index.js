@@ -31,7 +31,6 @@ const EditProfile = props => {
       formData.append('image', image);
       formData.append('entityType', "profile");
       postImage(formData).then((res)=>{
-        console.log("res",res);
       })
     }
     postProfile({firstName:name,phone}).then((res)=>{
@@ -81,6 +80,7 @@ const EditProfile = props => {
       setImage={setImage}
       imageSelection={imageSelection}
       setImageSelection={setImageSelection}
+      type="profile"
       />
     </ScreenWrapper>
   );

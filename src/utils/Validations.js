@@ -20,21 +20,15 @@ export const validateLowerCase = value => {
 export const  getBiometricData=async()=>{
     const rnBiometrics = new ReactNativeBiometrics()
     const { biometryType } = await rnBiometrics.isSensorAvailable()
-    console.log(biometryType);
-    // console.log(BiometryTypes.FaceID);
         rnBiometrics.isSensorAvailable()
     .then((resultObject) => {
       const { available, biometryType } = resultObject
   
     //   if (available && biometryType === BiometryTypes.TouchID) {
-    //     console.log('TouchID is supported')
     //   } 
        if (available && biometryType === BiometryTypes.FaceID) {
-        console.log('FaceID is supported')
       } else if (available && biometryType === BiometryTypes.Biometrics) {
-        console.log('Biometrics is supported')
       } else {
-        console.log('Biometrics not supported')
       }
     })
 
@@ -44,13 +38,10 @@ export const  getBiometricData=async()=>{
       const { success } = resultObject
   
       if (success) {
-        console.log('successful biometrics provided')
       } else {
-        console.log('user cancelled biometric prompt')
       }
     })
     .catch(() => {
-      console.log('biometrics failed')
     })
     // rnBiometrics.createSignature({
     //     promptMessage: 'Sign in',
@@ -60,7 +51,6 @@ export const  getBiometricData=async()=>{
     //     const { success, signature } = resultObject
     
     //     if (success) {
-    //       console.log(signature)
     //       verifySignatureWithServer(signature, payload)
     //     }
     //   })
@@ -73,7 +63,6 @@ export const  getBiometricData=async()=>{
 //     rnBiometrics.createKeys()
 //   .then((resultObject) => {
 //     const { publicKey } = resultObject
-//     console.log(publicKey)
 //     // sendPublicKeyToServer(publicKey)
 //   })
     // rnBiometrics.createSignature({
@@ -84,7 +73,6 @@ export const  getBiometricData=async()=>{
     //     const { success, signature } = resultObject
     
     //     if (success) {
-    //       console.log(signature)
     //       verifySignatureWithServer(signature, payload)
     //     }
     //   })
@@ -94,7 +82,6 @@ export const  getBiometricData=async()=>{
 export const getCountryCode=( input )=> {
     // Set default country code to US if no real country code is specified
     const defaultCountryCode = input.substr( 0, 1 ) !== '+' ? 'US' : null;
-    console.log(defaultCountryCode);
     let formatted = new libphonenumber.asYouType( defaultCountryCode ).input( input );
     let countryCode = '';
     let withoutCountryCode = formatted;
@@ -130,7 +117,6 @@ export const validateSpecialCharacter = value => {
 export const validateDOB = value => {
 
     var parsedValue = moment(value)
-    console.log("pparsed value",parsedValue);
     var days = moment().diff(parsedValue, 'days')
     if(days < minAgeInDays){
         return false

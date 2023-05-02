@@ -16,63 +16,36 @@ const GridComponent = props => {
   const renderHeader = () => {
     return (
       <View>
-        <SearchInput placeholder={'Search '} style={styles.searchInput} />
         <ListGridComponent list={list} setList={setList} />
       </View> 
     );
   };
+  // const onPressNewEntry=()=>{
+  //   if(updateDataAndNavigate)
+  //   {
+  //     props.updateDataAndNavigate(pr)
+  //   }
+  // }
 
   const renderNotes = ({item, index}) => {
-    // const even=index%2==0;
     return (
       <NoteCard
         pin
-        hashtag={'#lifeGoals #Lifestyle'}
+        id={item?._id}
+         hashtag={item?.hashtags}
         delete
-        onPress={() => navigation.navigate('ViewEntry')}
+        content={item?.content}
+        // onPress={onPressNewEntry}
       />
     );
   };
-  const renderAddEntry = () => {
-    return (
-      <View>
-        <RippleHOC
-          onPress={() =>
-            navigation.navigate('NewEntry', {type: 'New Entry'})
-          }
-          style={styles.addEntryContainer}>
-          <RobotoMedium style={styles.entryText}>Add Entry</RobotoMedium>
-        </RippleHOC>
-        <Image source={generalImages.girl} style={styles.girlImg} />
-      </View>
-    );
-  };
-  const renderAddEntryCard = () => {
-    return (
-      <View>
-        <FlatList
-          data={[1, 2, 3, 4]}
-          key={'listArray'}
-          //   numColumns={2}
-          ListHeaderComponent={renderAddEntry}
-          contentContainerStyle={styles.contentContainer}
-          keyExtractr={(item, index) => index}
-          renderItem={renderNotes}
-        />
-      </View>
-    );
-  };
   const renderGridNotes = ({item, index}) => {
-    // console.log(gridArray.length - 1 == index, gridArray.length - 1, index);
-    // const even=index%2==0;
     return (
       <View>
         {gridArray.length - 1 == index ? (
           <View style={styles.lastEntryContainer}>
             <RippleHOC
-              onPress={() =>
-                props.navigation.navigate('NewEntry', {type: 'New Entry'})
-              }
+              onPress={props.onPressNewEntry}
               style={styles.alignEntryText}>
               <RobotoMedium style={styles.lastEntryText}>
                 Add Entry
@@ -82,24 +55,61 @@ const GridComponent = props => {
           </View>
         ) : (
           <NoteCard
-            onPress={() => props.navigation.navigate('ViewEntry')}
+            onPress={props.onPressNewEntry}
             list={true}
             index={index}
             delete
             pin
-            hashtag={'#lifeGoals #Lifestyle'}
+            id={item?._id}
+            content={item?.content}
+            hashtag={item?.hashtags}
             listStyle={[styles.listNoteContainer]}
-            deleteIconStyle={styles.deleteIcon}
+            // deleteIconStyle={styles.deleteIcon}
           />
         )}
       </View>
     );
   };
+  const renderAddEntry = () => {
+    return (
+      <View>
+        <RippleHOC
+          onPress={props.onPressNewEntry}
+          style={styles.addEntryContainer}>
+          <RobotoMedium style={styles.entryText}>Add Entry</RobotoMedium>
+        </RippleHOC>
+        <Image source={generalImages.girl} style={styles.girlImg} />
+      </View>
+    );
+  };
+  const handleOnEndReached=()=>{
+    if(props.data.length>8)
+    {
+      props.setPage(props.page+1)
+    }
+  }
+  const renderAddEntryCard = () => {
+    return (
+      <View>
+        <FlatList
+          data={props.data}
+          key={'listArray'}
+          //   numColumns={2}
+          ListHeaderComponent={renderAddEntry}
+          contentContainerStyle={styles.contentContainer}
+          keyExtractr={(item, index) => index}
+          renderItem={renderNotes}
+          onEndReached={handleOnEndReached}
+        />
+      </View>
+    );
+  };
+
 
   const renderGridCard = () => {
     return (
       <FlatList
-        data={gridArray}
+        data={props.data}
         renderItem={renderGridNotes}
         contentContainerStyle={styles.contentContainer}
         key={'gridArray'}

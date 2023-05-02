@@ -11,18 +11,23 @@ import DamionRegular from '../../../../components/Texts/DamionRegular';
 import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
+import { useGetFriendRequestQuery, useGetMyFriendsQuery } from '../../../../state/friends';
 
 const FriendRequest = props => {
   const pagerRef = useRef();
-  const [page, setPage] = useState(0);
+  const [friendPage, setFriendPage] = useState(0);
+  const [page,setPage] =useState(0)
   const requestArray = ['My Connections', 'Incoming', 'Outgoing'];
   const requestRef = useRef(null);
   const addFriendRef = useRef(null);
+  const friendsData=useGetMyFriendsQuery()
+  const friendRequest= useGetFriendRequestQuery({requestType: page==1?"received": "sent"})
+  // console.log("friendRequest",pagerRef?.current);
 
-  const renderConnectionCard = () => {
+  const renderConnectionCard = ({item}) => {
     return (
       <FriendRequestCard
-        name={'Kamila Thompson '}
+        name={item?.friend?.fullName}
         job={'Last Entry on mm/dd/yyyy'}
         request={'Remove'}
         onPress={() => props.navigation.navigate('FriendDetails')}
@@ -50,10 +55,19 @@ const FriendRequest = props => {
       />
     );
   };
+  const handleFriendReached=()=>{
+    if(friendsData?.friends?.length>8){
+      setFriendPage(friendPage+1)
+    }
+  }
+  const updateData=(data)=>{
+setPage(data)
+
+  }
   return (
     <ScreenWrapper style={styles.container}>
       <SearchInput placeholder={"Search.."} />
-      <PageViewButton data={requestArray} reference={pagerRef} />
+      <PageViewButton data={requestArray} reference={pagerRef} updateData={updateData}/>
 
       <PagerView
         ref={pagerRef}
@@ -63,17 +77,18 @@ const FriendRequest = props => {
       >
         <View key="1">
           <FlatList
-            data={[1, 2, 3, 4]}
+            data={friendsData?.data?.friends}
             key={'myconnectionArray'}
             keyExtractor={(item, index) => index}
             renderItem={renderConnectionCard}
             showsVerticalScrollIndicator={false}
+            onEndReached={handleFriendReached}
             contentContainerStyle={styles.contentContainer}
           />
         </View>
         <View key="2">
           <FlatList
-            data={[1, 2, 3, 4]}
+            data={friendRequest?.data?.friendRequests}
             key={'incomingArray'}
             keyExtractor={(item, index) => index}
             renderItem={renderIncomingCard}
@@ -83,7 +98,7 @@ const FriendRequest = props => {
         </View>
         <View key="3">
           <FlatList
-            data={[1, 2, 3, 4]}
+            data={friendRequest?.data?.friendRequests}
             key={'outgoingArray'}
             keyExtractor={(item, index) => index}
             renderItem={renderOutgoingCard}

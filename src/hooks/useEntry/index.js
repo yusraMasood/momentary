@@ -1,28 +1,37 @@
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {Toast, getMessage} from '../../Api/APIHelpers';
-import { usePostAddEntryMutation } from '../../state/entry';
+import { usePostAddEntryMutation, useSetting } from '../../state/entry';
 
 export default () => {
   const [postAddEntry, message] = usePostAddEntryMutation();
-
-  console.log(message);
+  const setting =useSetting()
   const dispatch = useDispatch();
   const addEntry = async data => {
     const body={
         journal:"643d227cf891ff1c57663d1b",
         content:data?.entryText,
-        hashtags:data?.myhashtags,
-        privacy:data?.privacy,
+        hashtags:setting?.hashtags,
+        privacy:setting?.visiblity=="Private"?"private":setting?.visiblity=="Public"?"public": "myNetwork",
         images: data?.imageArray,
         selectedPeople:[],
-        location:data?.location,
+        location:setting?.location,
         pageDesign:null,
-        comment:data?.comment,
+        comment:setting?.comment,
         share:false,
         multiComment: false
-    }
+    } 
     try {
+      if (data?.entryText.trim() === '') {
+        Toast.error('Please Enter Your Entry');
+        throw new Error('Please Enter Your Entry');
+      }
+      if (setting?.hashtags.length==0) {
+        Toast.error('Please add atleast one hashtag');
+        throw new Error('Please add atleast one hashtag');
+      }
+    
+
       const response = await postAddEntry(body).unwrap()
       return response;
     } catch (e) {

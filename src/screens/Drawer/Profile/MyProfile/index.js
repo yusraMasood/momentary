@@ -13,8 +13,6 @@ import { useGetProfileQuery } from '../../../../state/account';
 const MyProfile = (props) => {
 
   const {data,isLoading, isFetching, isError} =useGetProfileQuery()
-  console.log(data);
-  // console.log("message",message);
   useEffect(()=>{
     // getProfile()
   },[])

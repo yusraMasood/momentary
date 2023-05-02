@@ -28,11 +28,9 @@ const VerificationCode = props => {
   const [postVerifyCode,{isLoading} ] = usePostVerifyCodeMutation();
   // const [postVerifyEmail, data] = usePostVerifyEmailMutation();
   const {VerifyEmail} =useAuth()
-  // console.log(message);
   // {error,isLoading}
 
   const onSubmit = () => {
-    // console.log(typeof Number(otp));
 
     postVerifyCode({email, otp: Number(otp)}).then(res => {
       if (res?.data?.message) {
@@ -43,7 +41,6 @@ const VerificationCode = props => {
   const verifyEmail = () => {
     VerifyEmail({email}).then((res)=>{
       if(res?.otp){
-        console.log("otppp",res?.otp);
         setOtp(res?.otp);
           }
     })

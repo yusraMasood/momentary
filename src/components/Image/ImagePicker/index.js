@@ -3,9 +3,12 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { icons } from '../../../assets/images';
 import BottomSheetHOC from '../../popups/BottomSheetHOC';
 import useProfile from '../../../hooks/useProfile';
+import { useDispatch } from 'react-redux';
+import { toggleInlineLoader } from '../../../state/general';
 
-const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUploading, options,updateImages }) => {
+const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUploading, options,updateImages,type="general" }) => {
   const {uploadImage} =useProfile()
+  const dispatch =useDispatch()
   const choices = [
     {
       name: 'Camera',
@@ -24,22 +27,29 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
   ];
   const getImage = async (image) => {
     try {
+      console.log("type,type",type);
+      dispatch(toggleInlineLoader(true))
       let data = {
         image: image
       }
       const formData = new FormData();
       formData.append('image', data?.image);
-      formData.append('entityType', "profile");
+      formData.append('entityType', type);
       uploadImage(formData).then((res)=>{
         setImage(res?.image)
+      dispatch(toggleInlineLoader(false))
+
         if(updateImages){
 
           updateImages(res?.image)
         }
       })
 
+
     } catch (e) {
       console.log(e);
+      dispatch(toggleInlineLoader(false))
+
       setUploading(false)
 
     }

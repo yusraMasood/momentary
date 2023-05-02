@@ -10,7 +10,7 @@ const FriendRequestCard=(props)=>{
         <View  style={styles.friendContainer}>
             <RippleHOC onPress={props.onPress}  style={styles.imageWithNameContainer}>
         <View style={styles.imageContainer}>
-            <Image source={generalImages.userImage} style={styles.userImage}/>
+            <Image source={props.image?{uri: props.image}: generalImages.userImage} style={styles.userImage}/>
         </View>
         <View style={styles.nameContainer}> 
             <RobotoRegular style={styles.nameText}>{props.name}</RobotoRegular>

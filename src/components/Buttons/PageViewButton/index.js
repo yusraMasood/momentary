@@ -19,6 +19,11 @@ const PageViewButton = props => {
           onPress={() => {
             reference.current.setPage(index);
             setPageIndex(index);
+            if(props.updateData)
+            {
+              props.updateData(index)
+
+            }
           }}
           style={[styles.btnContainer,  pageIndex === index && styles.btnFocusContainer]}
         >

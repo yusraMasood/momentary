@@ -13,11 +13,6 @@ export const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const googleApiKey = 'AIzaSyCL2XFs2hqb_aQFKtcUVf9xyhdxLBSFdp0';
 
 export const checkLocationPermissions = async () => {
-  // console.log('check location permission');
-  // console.log(
-  //   PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
-  //   'PERMISSIONS.IOS.LOCATION_WHEN_IN_USE',
-  // );
 
   try {
     if (Platform.OS == 'android') {
@@ -30,7 +25,6 @@ export const checkLocationPermissions = async () => {
         : PERMISSIONS.IOS.LOCATION_WHEN_IN_USE;
     await checkPermission(permission);
   } catch (error) {
-    // console.log('check location permission', error);
     throw new Error(error);
 
     // show toast
@@ -38,14 +32,12 @@ export const checkLocationPermissions = async () => {
 };
 
 export const getCurrentLocation = popupShow => {
-  console.log('get current location');
   Geocoder.init(googleApiKey, {language: 'en'}); // use a valid API key
   // var addressComponent;
 
   return new Promise((resolve, reject) => {
     Geolocation.getCurrentPosition(
       success => {
-        console.log(success, 'success');
 
         // Geocoder.from({
         //   latitude: success.coords.latitude,
@@ -59,7 +51,6 @@ export const getCurrentLocation = popupShow => {
           longitude: success.coords.longitude,
           // address:addressComponent
         };
-        // console.log("Address of User", Coords);
 
         return resolve(Coords);
       },
@@ -106,7 +97,6 @@ const promptForLocation = async () => {
 
 const checkPermission = async permission => {
   const result = await check(permission);
-  console.log('result', result);
 
   return new Promise(async (resolve, reject) => {
     switch (result) {

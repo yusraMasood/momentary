@@ -26,10 +26,24 @@ export const endpoints = {
   },
   entry:{
     add:"user/journal/entries/create",
-    hashtag:"hashTags/all"  
+    hashtag:"hashTags/all",
+    allEntries:"user/journal/entries",
+    deleteEntry:"user/journal/entries/delete" ,
+    entryById:"user/journal/entries/" 
+  },
+  friend:{
+    myFriends:"user/my-friends/all",
+    friendRequest:"user/friend-requests/all"
+
+
+  },
+  journal:{
+    add:"user/journals/create",
+    allJournals:"user/journals/all",
+    journalDetails:"user/journals",
+    update:"user/journals/update",
+    delete:"user/journals/delete"
   }
-  
-  
 };
 export const headers={
           

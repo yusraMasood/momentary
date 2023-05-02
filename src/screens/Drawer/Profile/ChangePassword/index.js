@@ -16,11 +16,9 @@ const ChangePassword = props => {
   const confirmPasswordRef = useRef(null);
   const successRef = useRef(null);
   const [postChangePassword, message] = usePostChangePasswordMutation();
-  console.log(message);
   const onSubmit = () => {
     // successRef.current.show();
     postChangePassword({password, newPassword}).then(res => {
-      console.log('changePassword', res);
     });
   };
   return (

@@ -60,11 +60,11 @@ const styles = StyleSheet.create({
     color: colors.themeColor.yellow,
     fontSize: vh * 1.85,
     // marginRight: vw*1,
-    width: vw * 15,
+    width: vw * 25,
   },
   deleteIcon: {
-    height: vh * 1.9,
-    width: vh * 1.9,
+    height: vh * 1.5,
+    width: vh * 1.5,
     resizeMode: 'contain',
   },
   evenContainer: {

@@ -15,6 +15,7 @@ import { saveSetting, useSetting } from '../../../state/entry';
 
 const EntrySettingPopup = props => {
   const popup = useRef(null);
+  
   const tagRef = useRef(null);
 const dispatch =useDispatch()
 const setting =useSetting()
@@ -62,7 +63,6 @@ const setting =useSetting()
     }
     hide();
   }
-  // console.log(setting);
   const getCommentValue=(value)=>{
     // props.setComment(value)
     dispatch(saveSetting({...setting,comment: value}))
@@ -82,7 +82,7 @@ const setting =useSetting()
       <RippleHOC onPress={onPressVisiblity} style={styles.settingContainer}>
         <RobotoRegular style={styles.pageTxt}>Visiblity</RobotoRegular>
         <View style={styles.rightContainer}>
-          <RobotoRegular style={styles.privateText}>Private</RobotoRegular>
+          <RobotoRegular style={styles.privateText}>{setting?.visiblity}</RobotoRegular>
           <Image source={icons.rightArrow} style={styles.arrowStyle} />
         </View>
       </RippleHOC>
@@ -92,15 +92,21 @@ const setting =useSetting()
       >
         <RobotoRegular style={styles.pageTxt}>Tags</RobotoRegular>
         <View style={styles.rightContainer}>
+         {setting?.hashtags.slice(0,2).map((value,index)=>{
+          return(
+
           <RobotoRegular style={styles.privateText}>
-            Funny , Random 
+          {value}
           </RobotoRegular>
+          )
+
+         })}
           <Image source={icons.rightArrow} style={styles.arrowStyle} />
         </View>
       </RippleHOC>
       <View style={styles.settingContainer}>
         <RobotoRegular style={styles.pageTxt}>Comments</RobotoRegular>
-        <CustomGoldenSwitch updateData={getCommentValue}/>
+        <CustomGoldenSwitch updateData={getCommentValue} status={setting?.comment}/>
       </View>
       <RippleHOC onPress={onPressDelete} style={styles.settingContainer}>
         <RobotoRegular style={styles.pageTxt}>Delete</RobotoRegular>

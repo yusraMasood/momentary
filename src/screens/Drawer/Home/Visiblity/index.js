@@ -15,7 +15,6 @@ const Visiblity =()=>{
     const locationArray=[
         "Global Network","Private","My Network",
     ]
-    console.log(setting);
     return(
         <ScreenWrapper style={styles.container}>
              {locationArray.map((item,index)=>{

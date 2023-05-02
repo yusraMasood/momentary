@@ -10,14 +10,32 @@ import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import RobotoRegular from '../../../../components/Texts/RobotoRegular';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
+import { useGetJournalsQuery } from '../../../../state/journal';
 
 const MyJournals = (props) => {
+  const [search,setSearch] =useState("")
   const [list, setList] = useState(false);
-
+  const [page,setPage]=useState(1)
+  const journalApi =useGetJournalsQuery({
+    keyword: search,
+    page,
+    limit:5 
+  },
+  // {
+  //   selectFromResult
+  // }
+  
+  )
+  
+  // const [journalData,setJournalData] =useState(journalApi?.data?.journal)
+console.log("journalApi  ",journalApi);
   const renderHeader = () => {
     return (
       <View>
-        <SearchInput placeholder={'Search '} style={styles.searchInput} />
+        <SearchInput placeholder={'Search '}
+        value={search}
+        onChangeText={setSearch}
+        style={styles.searchInput} />
     <ListGridComponent list={list} setList={setList} 
     onPress={()=> props.navigation.navigate("AddNewJournal")}
     />
@@ -40,6 +58,10 @@ const MyJournals = (props) => {
     
     );
   };
+  const handleOnEndReached=()=>{
+    // if()
+    setPage(page+1)
+  }
   const renderList=()=>{
     return(
       <FlatList
@@ -50,6 +72,8 @@ const MyJournals = (props) => {
         key={'bookPrintingScreenArray'}
         // contentContainerStyle={styles.contentContainer}
         renderItem={renderBookPrint}
+      onEndReached={handleOnEndReached}
+
       />
     )
   }
@@ -73,6 +97,7 @@ const MyJournals = (props) => {
       key={'bookPrintingGridScreenArray'}
       // contentContainerStyle={styles.contentContainer}
       renderItem={renderJournalGrid}
+      onEndReached={handleOnEndReached}
     />
     )
   }

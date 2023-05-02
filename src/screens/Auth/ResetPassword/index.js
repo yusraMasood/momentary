@@ -26,7 +26,6 @@ const ResetPassword = props => {
 
   const onSubmit = () => {
     resetPassword({email, otp, password, confirmPassword}).then(res => {
-      console.log("dsjodj",res);
       if (res?.message) {
         props.navigation.navigate('LoginScreen');
       }

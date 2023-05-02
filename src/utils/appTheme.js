@@ -41,8 +41,8 @@ export const colors = {
     green:"#68D83F"
   },
   skeleton:{
-    background: '#dbdbdb',
-    highlightColor: '#ffffff',
+    background: '#5A5A5A',
+    highlightColor: '#808080',
   }
 };
 export const linearColors = {

@@ -16,34 +16,32 @@ import PulishEntryPopup from '../../../../components/popups/PulishEntryPopup';
 import RippleHOC from '../../../../components/wrappers/Ripple';
 import {icons} from '../../../../assets/images';
 import ImageComponent from '../../../../components/Image/ImageComponent';
-import useEntry from '../../../../hooks/useEntry';
-import {
-  LATITUDE_DELTA,
-  LONGITUDE_DELTA,
-  checkLocationPermissions,
-  getCurrentLocation,
-} from '../../../../utils/HelperFunction';
-import {getAddressByLatLong} from '../../../../state/location';
-import {Toast} from '../../../../Api/APIHelpers';
 import {useDispatch} from 'react-redux';
 import ContentContainer from '../../../../components/wrappers/ContentContainer';
+import {useGetEntriesQuery, useGetEntryByIdQuery, useSetting} from '../../../../state/entry';
+import useEntry from '../../../../hooks/useEntry';
+import { useInlineLoader } from '../../../../state/general';
+import ButtonLoading from '../../../../components/Loaders/ButtonLoading';
 
 const NewEntry = props => {
+  // const message = useGetEntryByIdQuery({id: props.route?.params?.id});
   const [entryText, setEntryText] = useState(
-    'Hello <b>World</b> <p>this is a new paragraph</p> <p>this is another new paragraph</p>',
+     '',
   );
+  const {addEntry} = useEntry();
+  const imageLoader =useInlineLoader()
+
   const [background, setBackground] = useState(false);
   const [privacy, setPrivacy] = useState('Private');
   const [dropdownValue, setDropdownValue] = useState('');
   const documentsArray = ['text1', 'text2', 'text3'];
   const [imageSelection, setImageSelection] = useState(false);
   const [myhashtags, setMyHashtags] = useState([]);
-  const [location, setLocation] = useState(null);
-  const [pageDesign,setPageDesign] =useState(null)
-  
+
+  const [pageDesign, setPageDesign] = useState(null);
+
   const dispatch = useDispatch();
-
-
+  const setting = useSetting();
 
   const globalRef = useRef(null);
   const imagePopupRef = useRef(null);
@@ -57,40 +55,15 @@ const NewEntry = props => {
   const successPopup = useRef(null);
   const settingRef = useRef(null);
 
-  const getUserLocation = async () => {
-    const location = await getCurrentLocation();
-    const data = {
-      latitude: location.latitude,
-      longitude: location.longitude,
-      latitudeDelta: LATITUDE_DELTA,
-      longitudeDelta: LONGITUDE_DELTA,
-    };
-    try {
-      const response = await dispatch(getAddressByLatLong(data));
-      setLocation({
-        latitude: location.latitude,
-        longitude: location.longitude,
-        name: response?.results[0]?.formatted_address,
-      });
-    } catch (e) {
-      Toast.error(e);
-    }
-  };
-  const setupMethods = async () => {
-    checkLocationPermissions()
-      .then(() => {
-        getUserLocation();
-      })
-      .catch(e => {
-        console.log('catch', e);
-      });
-  };
-  useEffect(() => {
-    setupMethods();
-  }, []);
-  // console.log(userLocation);
   useLayoutEffect(() => {
     props.navigation.setOptions({
+      headerLeft: () => {
+        return (
+          <RippleHOC onPress={onPressBack}>
+            <Image source={icons.back} style={styles.backIcon} />
+          </RippleHOC>
+        );
+      },
       headerTitle: () => {
         return (
           <DamionRegular style={styles.titleCenterText}>
@@ -109,8 +82,39 @@ const NewEntry = props => {
     // setImageIds(p=>[...p,img?._id])
     setImageArray(p => [...p, img]);
   };
-  
-
+  const onPressSend = () => {
+    if (setting?.visiblity == '') {
+      publishEntry.current.show();
+    } else {
+      hashTagRef.current.show();
+    }
+  };
+  const onPressBack = () => {
+    if (entryText == '') {
+      // log
+      props.navigation.goBack();
+    } else {
+      addEntry({entryText, imageArray}).then(res => {
+        if (res) {
+          props.navigation.goBack();
+        }
+      });
+    }
+  };
+  const addEntryFunc = () => {
+    addEntry({entryText, imageArray}).then(res => {
+      if (res) {
+        successPopup.current.show();
+      }
+    });
+  };
+  const renderImageFooter=()=>{
+    return(
+      <View>
+        {imageLoader &&<ButtonLoading/>}
+      </View>
+    )
+  }
   return (
     <ScreenWrapper style={styles.container}>
       <ContentContainer usecontainer={true} aware>
@@ -132,6 +136,7 @@ const NewEntry = props => {
           horizontal={true}
           keyExtractor={(item, index) => index}
           renderItem={renderImage}
+          ListFooterComponent={renderImageFooter}
         />
         <View style={styles.editContainer}>
           <RippleHOC onPress={() => setBackground(!background)}>
@@ -143,7 +148,7 @@ const NewEntry = props => {
           <RippleHOC onPress={() => settingRef.current.show()}>
             <Image source={icons.settingEntry} style={styles.textIcon} />
           </RippleHOC>
-          <RippleHOC onPress={() => publishEntry.current.show()}>
+          <RippleHOC onPress={onPressSend}>
             <Image source={icons.send} style={styles.textIcon} />
           </RippleHOC>
         </View>
@@ -182,9 +187,11 @@ const NewEntry = props => {
         <EntrySettingPopup
           reference={settingRef}
           // onPressDesign={() => pageDesignRef.current.show()}
-          onPressVisiblity={() => props.navigation.navigate('Visiblity', {privacy})}
+          onPressVisiblity={() =>
+            props.navigation.navigate('Visiblity', {privacy})
+          }
           // onPressTag={() => hashTagRef.current.show()}
-          onPressTag={()=> props.navigation.navigate("HashtagScreen")}
+          onPressTag={() => hashTagRef.current.show()}
           onPressDelete={() => deleteRef.current.show()}
           // comment={comment}
           // setComment={setComment}
@@ -208,6 +215,7 @@ const NewEntry = props => {
           updateImages={updateItemImages}
           imageSelection={imageSelection}
           setImageSelection={setImageSelection}
+          type={"journalEntry"}
         />
       </ContentContainer>
     </ScreenWrapper>

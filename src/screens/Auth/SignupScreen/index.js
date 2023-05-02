@@ -54,8 +54,6 @@ const SignupScreen = props => {
   const phoneRef = useRef(null);
   const usernameRef = useRef(null);
 
-  console.log(data, isLoading, error);
-
   const onSubmit = () => {
     signupUser({
       fullName,
