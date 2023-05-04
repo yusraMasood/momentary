@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
     marginBottom: vh * 0.5,
   },
   noteGridContainer:{
-    // height: vh*15
+    height: vh*20,
+    overflow: "hidden"
   },
 
   addEntryContainer: {

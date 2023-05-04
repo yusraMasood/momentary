@@ -5,6 +5,7 @@ import RobotoMedium from '../../Texts/RobotoMedium'
 import RobotoRegular from '../../Texts/RobotoRegular'
 import RippleHOC from '../../wrappers/Ripple'
 import styles from './styles'
+import moment from 'moment'
 
 const JournalInGridCard=(props)=>{
     return(
@@ -13,12 +14,14 @@ const JournalInGridCard=(props)=>{
           
         {/* </View> */}
         <View style={styles.bookImageContainer}>
-          <Image source={generalImages.books} style={styles.bookImage} />
+          <Image source={props.image?{uri: props.image}:generalImages.books} style={styles.bookImage} />
         </View>
         <RobotoMedium style={styles.headingText}>
-            My First Journal
+            {props.title}
           </RobotoMedium>
-          <RobotoRegular style={styles.dateText}>January 12, '22</RobotoRegular>
+          <RobotoRegular style={styles.dateText}> {moment(props.createdAt).format("MMMM DD, 'YY")}
+          {/* January 12, '22 */}
+          </RobotoRegular>
       </RippleHOC>
     )
 }

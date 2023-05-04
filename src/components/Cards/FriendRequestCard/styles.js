@@ -14,7 +14,7 @@ const styles =StyleSheet.create({
     },
     userImage:{
         height: vh*8,
-        width: vw*16,
+        width: vh*8,
         resizeMode: "cover"
     },
     imageWithNameContainer:{

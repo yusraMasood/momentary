@@ -11,24 +11,41 @@ import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import NoteCard from '../../../../components/Cards/NoteCard';
 import NoteCardList from '../../../../components/Cards/NoteCardList';
 import CustomSkeleton from '../../../../components/Loaders/CustomSkeleton';
-import { vh } from '../../../../utils/dimensions';
+import {vh, vw} from '../../../../utils/dimensions';
+import EmptyComponent from '../../../../components/EmptyComponent';
+import { usePaginatedQuery } from '@reduxjs/toolkit/query';
 
 const MyEntries = props => {
-  const entriesApi = useGetEntriesQuery({
-    keyword:search
-  });
-  // , {
-  //   selectFromResult: ({data}) => ({
-  //     totalPages: data?.totalPages,
-  //     page: data?.page,
-  //   }),
-  // }
   const [search, setSearch] = useState('');
   const [list, setList] = useState(true);
-  const [query, setQuery] = useState({keyword: search, page: 1, limit: 5});
-  // const [entriesData,setEntriesData]=useState(entriesApi?.data?.journalEntries)
+  const [page, setPage] = useState(1);
 
-  console.log('entriesApi', entriesApi);
+  const entriesApi = useGetEntriesQuery({
+    keyword: search,
+    page,
+    limit: 5,
+  });
+  console.log("entriesApi",entriesApi);
+  // const {
+  //   data,
+  //   isLoading,
+  //   isFetchingNextPage,
+  //   fetchNextPage,
+  //   hasNextPage,
+  // } = usePaginatedQuery('entriesData', {
+  //   query: (page = 1) => `user/journal/entries/?page=${page}&pageSize=${PAGE_SIZE}`,
+  //   getNextPageParam: lastPage => lastPage.nextPage,
+  // });
+  const handleOnEndReached = () => {
+    if (entriesApi?.data?.journalEntries.length > 5) {
+      if(entriesApi?.data?.totalPages!=page)
+      {
+        setPage(page + 1);
+
+      }
+    }
+  };
+
   const renderHeader = () => {
     return (
       <View>
@@ -37,26 +54,25 @@ const MyEntries = props => {
     );
   };
   const renderNotes = ({item, index}) => {
-    return ( 
+    return (
       <View>
-      {entriesApi?.isLoading?
-        <CustomSkeleton
-        height={15}
-        width={90}
-        marginTop={vh*2}
-    
-        />  :
-      <NoteCard
-        isLoading={entriesApi?.isLoading}
-        pin
-        id={item?._id}
-        hashtag={item?.hashtags}
-        refetch={entriesApi?.refetch}
-        delete
-        content={item?.content}
-        listStyle={[styles.noteGridContainer]}
-        onPress={() => props.navigation.navigate('EditEntry', {id: item?._id})}
-      />}
+        {entriesApi?.isLoading ? (
+          <CustomSkeleton height={15} width={95} marginLeft={vw*3} marginTop={vh * 2} />
+        ) : (
+          <NoteCard
+            isLoading={entriesApi?.isLoading}
+            pin
+            id={item?._id}
+            hashtag={item?.hashtags}
+            refetch={entriesApi?.refetch}
+            delete
+            content={item?.content}
+            listStyle={[styles.noteGridContainer]}
+            onPress={() =>
+              props.navigation.navigate('EditEntry', {id: item?._id})
+            }
+          />
+        )}
       </View>
     );
   };
@@ -77,31 +93,27 @@ const MyEntries = props => {
           </View>
         ) : (
           <View>
-          {entriesApi?.isLoading?
-        <CustomSkeleton
-        height={15}
-        width={40}
-        marginTop={vh*2}
-    
-        />  :
-          <NoteCard
-            list={true}
-            index={index}
-            delete
-            pin
-            refetch={entriesApi?.refetch}
-            id={item?._id}
-            content={item?.content}
-            descStyle={styles.descText}
-            hashtag={item?.hashtags}
-            listStyle={[styles.listNoteContainer]}
-            // deleteIconStyle={styles.deleteIcon}
-            onPress={() =>
-              props.navigation.navigate('EditEntry', {id: item?._id})
-            }
-          />
-  }
-  </View>
+            {entriesApi?.isLoading ? (
+              <CustomSkeleton height={15} width={40} marginTop={vh * 2} />
+            ) : (
+              <NoteCard
+                list={true}
+                index={index}
+                delete
+                pin
+                refetch={entriesApi?.refetch}
+                id={item?._id}
+                content={item?.content}
+                descStyle={styles.descText}
+                hashtag={item?.hashtags}
+                listStyle={[styles.listNoteContainer]}
+                // deleteIconStyle={styles.deleteIcon}
+                onPress={() =>
+                  props.navigation.navigate('EditEntry', {id: item?._id})
+                }
+              />
+            )}
+          </View>
         )}
       </View>
     );
@@ -119,16 +131,11 @@ const MyEntries = props => {
       </View>
     );
   };
-  const handleOnEndReached = () => {
-    // {data, isLoading, refetch, error}
-    if (entriesApi?.data?.journalEntries.length > 4) {
-      // setPage(page + 1);
-      setQuery({
-        keyword: search, page: query?.page+1, limit: 5
-
-      })
-    }
-  };
+ const renderEmpty=()=>{
+  return(
+    <EmptyComponent text="No Entries to show"/>
+  )
+ }
   const renderAddEntryCard = () => {
     return (
       <View>
@@ -143,6 +150,7 @@ const MyEntries = props => {
           ListHeaderComponent={renderAddEntry}
           contentContainerStyle={styles.contentContainer}
           keyExtractr={(item, index) => index}
+          ListEmptyComponent={renderEmpty}
           renderItem={renderNotes}
           onEndReached={handleOnEndReached}
         />
@@ -162,6 +170,7 @@ const MyEntries = props => {
         contentContainerStyle={styles.contentContainer}
         key={'gridArray'}
         numColumns={2}
+        ListEmptyComponent={renderEmpty}
         keyExtractr={(item, index) => index}
         onEndReached={handleOnEndReached}
       />

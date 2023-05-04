@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useLayoutEffect} from 'react'
 import { View,Image } from 'react-native'
 import { icons, tabIcons } from '../../../../assets/images'
 import RadioButton from '../../../../components/RadioButton'
@@ -8,13 +8,42 @@ import styles from './styles'
 import { useDispatch } from 'react-redux'
 import { saveSetting, useSetting } from '../../../../state/entry'
 
-const Visiblity =()=>{
-    const [itemValue,setItemValue] =useState("Private")
-    const dispatch =useDispatch()
-    const setting= useSetting()
+const Visiblity =(props)=>{
+
+    const {type,visiblity} =props?.route?.params
+    const [itemValue,setItemValue] =useState(visiblity?visiblity:"Global Network")
     const locationArray=[
         "Global Network","Private","My Network",
     ]
+    const onPressBack=()=>{
+        if(type=="add")
+{
+    props.route?.params?.handleRoute(itemValue)
+    // props.navigation.navigate("NewEntry",{privacy: itemValue})
+    props.navigation.goBack()
+}
+else{
+    props.route?.params?.handleRoute(itemValue)
+    props.navigation.goBack()
+
+
+    // props.navigation.navigate("EditEntry",{privacy: itemValue})
+
+}
+    }
+    useLayoutEffect(() => {
+        props.navigation.setOptions({
+          headerLeft: () => {
+            return (
+              <RippleHOC onPress={onPressBack}>
+                <Image source={icons.back} style={styles.backIcon} />
+              </RippleHOC>
+            );
+          },
+      
+        });
+      }, [props.navigation]);
+
     return(
         <ScreenWrapper style={styles.container}>
              {locationArray.map((item,index)=>{
@@ -24,7 +53,8 @@ const Visiblity =()=>{
                 return(
                     <RippleHOC key={index} onPress={()=> {
                         setItemValue(item)
-                        dispatch(saveSetting({...setting,visiblity: item}))
+                        // dispatch(saveSetting({...setting,visiblity: item}))
+
                         }} style={styles.buttonContainer}>
                     <RadioButton title={item} focus={focus} image={item?.img} iconStyle={styles.iconStyle}/>
                     </RippleHOC>

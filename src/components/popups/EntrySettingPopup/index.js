@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { saveSetting, useSetting } from '../../../state/entry';
 
 const EntrySettingPopup = props => {
+  console.log("entry settinfgpopup", props);
   const popup = useRef(null);
   
   const tagRef = useRef(null);
@@ -58,14 +59,14 @@ const setting =useSetting()
     hide();
   }
   const onPressDelete=()=>{
-    if (props?.onPressDelete) {
-      props?.onPressDelete();
+    if (props?.onPressEntryDelete) {
+      props?.onPressEntryDelete();
     }
     hide();
   }
   const getCommentValue=(value)=>{
-    // props.setComment(value)
-    dispatch(saveSetting({...setting,comment: value}))
+    props.setComment(value)
+    // dispatch(saveSetting({...setting,comment: value}))
 
   }
   return (
@@ -82,7 +83,7 @@ const setting =useSetting()
       <RippleHOC onPress={onPressVisiblity} style={styles.settingContainer}>
         <RobotoRegular style={styles.pageTxt}>Visiblity</RobotoRegular>
         <View style={styles.rightContainer}>
-          <RobotoRegular style={styles.privateText}>{setting?.visiblity}</RobotoRegular>
+          <RobotoRegular style={styles.privateText}>{props?.visiblity}</RobotoRegular>
           <Image source={icons.rightArrow} style={styles.arrowStyle} />
         </View>
       </RippleHOC>
@@ -92,7 +93,8 @@ const setting =useSetting()
       >
         <RobotoRegular style={styles.pageTxt}>Tags</RobotoRegular>
         <View style={styles.rightContainer}>
-         {setting?.hashtags.slice(0,2).map((value,index)=>{
+         {
+         props?.hashtags&&props?.hashtags.slice(0,2).map((value,index)=>{
           return(
 
           <RobotoRegular style={styles.privateText}>
@@ -106,14 +108,17 @@ const setting =useSetting()
       </RippleHOC>
       <View style={styles.settingContainer}>
         <RobotoRegular style={styles.pageTxt}>Comments</RobotoRegular>
-        <CustomGoldenSwitch updateData={getCommentValue} status={setting?.comment}/>
+        <CustomGoldenSwitch updateData={getCommentValue} status={props?.comment}/>
       </View>
+      {props.onPressEntryDelete&&
       <RippleHOC onPress={onPressDelete} style={styles.settingContainer}>
         <RobotoRegular style={styles.pageTxt}>Delete</RobotoRegular>
         <View style={styles.crossContainer}>
           <Image source={icons.cross} style={styles.crossIcon} />
         </View>
       </RippleHOC>
+      
+      }
    
     </PopupWrapper>
   );

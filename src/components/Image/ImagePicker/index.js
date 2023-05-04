@@ -5,6 +5,7 @@ import BottomSheetHOC from '../../popups/BottomSheetHOC';
 import useProfile from '../../../hooks/useProfile';
 import { useDispatch } from 'react-redux';
 import { toggleInlineLoader } from '../../../state/general';
+import LikeCommentCard from '../../Cards/LikeCommentCard';
 
 const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUploading, options,updateImages,type="general" }) => {
   const {uploadImage} =useProfile()
@@ -27,7 +28,7 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
   ];
   const getImage = async (image) => {
     try {
-      console.log("type,type",type);
+      // console.log("type,type",type);
       dispatch(toggleInlineLoader(true))
       let data = {
         image: image
@@ -35,6 +36,9 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
       const formData = new FormData();
       formData.append('image', data?.image);
       formData.append('entityType', type);
+
+
+      console.log("formData",formData);
       uploadImage(formData).then((res)=>{
         setImage(res?.image)
       dispatch(toggleInlineLoader(false))
@@ -44,6 +48,7 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
           updateImages(res?.image)
         }
       })
+      dispatch(toggleInlineLoader(false))
 
 
     } catch (e) {

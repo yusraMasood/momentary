@@ -15,12 +15,16 @@ const Hashtags = props => {
   const setting = useSetting();
   const [search,setSearch]=useState("")
   const handleSubmitHashtags = () => {
-    console.log("sjsjios",search);
+    // console.log("sjsjios",search);
     console.log(props?.hashtags.includes(search));
     if (!props?.hashtags.includes(search)) {
-      console.log("hdhdiuhid");
+      console.log(search);
+      // console.log("hdhdiuhid");
+     
       props.setHashtags([...props.hashtags, search]);
+     
     }
+    setSearch("")
   };
   const deleteItem = (value) => {
     const tempDelete = [...props.hashtags];
@@ -38,7 +42,7 @@ const Hashtags = props => {
           // label={"search"}
           placeholder={'Enter Hashtag'}
           onSubmitEditing={handleSubmitHashtags}
-          onEndEditing={handleSubmitHashtags}
+          // onEndEditing={handleSubmitHashtags}
           value={search}
           onChangeText={setSearch}
         />

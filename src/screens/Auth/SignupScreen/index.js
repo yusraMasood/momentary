@@ -20,7 +20,7 @@ import {
 } from '../../../utils/Validations';
 import Toast from 'react-native-toast';
 import useAuth from '../../../hooks/useAuth';
-import {useGlobalLoader} from '../../../state/general';
+import {useGlobalLoader, useInlineLoader} from '../../../state/general';
 import ButtonLoading from '../../../components/Loaders/ButtonLoading';
 import {useGetUsernameSuggestionQuery} from '../../../state/auth';
 import useProfile from '../../../hooks/useProfile';
@@ -40,6 +40,7 @@ const SignupScreen = props => {
   const [username, setUsername] = useState(
     data?.usernames ? data?.usernames[0] : '',
   );
+  const imageLoader =useInlineLoader()
   const {data, isLoading, refetch, error} = useGetUsernameSuggestionQuery({
     fullName,
   });
@@ -123,6 +124,9 @@ const SignupScreen = props => {
           <DamionRegular style={styles.momentaryText}>Momentary</DamionRegular>
         </View>
         <RobotoMedium style={styles.signinText}>Sign Up</RobotoMedium>
+          {imageLoader?
+        <ButtonLoading/>
+        :
         <View>
           <Image
             source={
@@ -139,7 +143,11 @@ const SignupScreen = props => {
               <Image source={icons.camera} style={styles.cameraIcon} />
             </LinearGradient>
           </RippleHOC>
-        </View>
+
+          </View>  
+        }
+          
+    
         <InputField
           placeholder={'Enter Full Name'}
           questionIcon
@@ -234,6 +242,7 @@ const SignupScreen = props => {
         setImage={setImage}
         imageSelection={imageSelection}
         setImageSelection={setImageSelection}
+        entityType={"profile"}
       />
     </ScreenWrapper>
   );

@@ -19,7 +19,7 @@ const MyProfile = (props) => {
   const profileArray = [
     {
       title: 'Name',
-      value: data?.user?.firstName,
+      value: data?.user?.fullName,
     },
     {
       title: 'Phone No',

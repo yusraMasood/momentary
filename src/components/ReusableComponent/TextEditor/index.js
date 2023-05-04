@@ -68,7 +68,7 @@ const TextEditor = props => {
                   <EuclidCircularARegular
                     numberOfLines={1}
                     style={styles.fontActionStyle}>
-                    {fontStyle.fontName ? fontStyle.fontName : 'Font'}
+                    {fontStyle?.fontName ? fontStyle?.fontName : 'Font'}
                   </EuclidCircularARegular>
                   <Image source={icons.arrowDown} style={styles.arrowStyle} />
                 </View>

@@ -18,14 +18,25 @@ const styles = StyleSheet.create({
     width: vh*3 ,
     resizeMode: "contain",
 
-  },
-  backIcon:{
-    height: vh*3,
-    width: vh*3 ,
-    resizeMode: "contain",
-
   }
   ,
+  rightContainer:{
+    flexDirection: "row",
+    alignItems: "center",
+    // justifyContent: "space-between"
+  },
+  entryIcon:{
+    height: vh*2.2,
+    width: vh*2.2,
+    marginLeft: vw*2,
+    resizeMode: "contain"
+  },
+  saveIcon:{
+    height: vh*1.9,
+    width: vh*1.9,
+    marginLeft: vw*2,
+    resizeMode: "contain"
+  },
   editContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',

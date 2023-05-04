@@ -17,6 +17,16 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
         body:data,
       }),
     }),
+    postUpdateEntry: builder.mutation({
+      query: (data) => ({
+        url: `${endpoints.entry.update}/${data?.id}`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body:data,
+      }),
+    }),
     getHashtags: builder.query({
       query: (queryArg) => ({
         url: endpoints.entry.hashtag,
@@ -30,6 +40,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
 
   
   getEntries: builder.query({
+    
     query: (queryArg) => ({
       url: endpoints.entry.allEntries,
       method: 'GET',
@@ -37,7 +48,8 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
         'Content-Type': 'application/json',
       },
       params: {...queryArg},
-    }),}),
+    }),
+  }),
     postDeleteEntry: builder.mutation({
       query: (queryArg) => ({
         url: `${endpoints.entry.deleteEntry}/${queryArg}`,
@@ -50,12 +62,12 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
     }),
     getEntryById: builder.query({
       query: (queryArg) => ({
-        url: endpoints.entry.entryById,
+        url: `${endpoints.entry.entryById}/${queryArg}`,
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        params: {...queryArg},
+        // params: queryArg,
       }),}),
   
 })})
@@ -65,7 +77,8 @@ export const {
   useGetHashtagsQuery,
   useGetEntriesQuery,
   usePostDeleteEntryMutation,
-  useGetEntryByIdQuery
+  useGetEntryByIdQuery,
+  usePostUpdateEntryMutation
   
 } = entendedEntrySlice;
 

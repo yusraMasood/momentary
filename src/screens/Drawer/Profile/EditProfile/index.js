@@ -13,16 +13,19 @@ import styles from './styles';
 import { useGetProfileQuery, usePostImageMutation, usePostProfileMutation } from '../../../../state/account';
 import ImagePicker from '../../../../components/Image/ImagePicker';
 import { jsonToFormdata } from '../../../../Api/APIHelpers';
+import { useInlineLoader } from '../../../../state/general';
+import ButtonLoading from '../../../../components/Loaders/ButtonLoading';
 
 const EditProfile = props => {
 
   const {data} =useGetProfileQuery()
   const [postProfile,{isLoading,error}] =usePostProfileMutation()
-  const [name,setName]=useState(data?.user?.firstName)
+  const [name,setName]=useState(data?.user?.fullName)
   const [phone,setPhone] =useState(data?.user?.phone)
   const [image,setImage] =useState({uri: data?.user?.image?.thumbnail})
   const [imageSelection,setImageSelection] =useState(false)
   const [postImage,message] =usePostImageMutation()
+  const imageLoader =useInlineLoader()
   const phoneRef = useRef(null);
 
   const onSubmit = () => {
@@ -40,6 +43,10 @@ const EditProfile = props => {
 
   return (
     <ScreenWrapper style={styles.container}>
+      {
+        imageLoader?
+        <ButtonLoading/>:
+
       <View>
         <Image source={image?.uri?{uri:image?.uri}: generalImages.userImage} style={styles.userImg} />
         <RippleHOC style={styles.cameraMainContainer} onPress={()=> setImageSelection(true)}>
@@ -48,6 +55,7 @@ const EditProfile = props => {
         </LinearGradient>
         </RippleHOC>
       </View>
+      }
       <RippleHOC onPress={()=> props.navigation.navigate("ChangePassword")}>
       <RobotoMedium style={styles.passwordText}>Change Password</RobotoMedium>
       </RippleHOC>

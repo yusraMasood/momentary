@@ -16,6 +16,15 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       },
       params: {...queryArg},
     }),}),
+    getFeed: builder.query({
+      query: (queryArg) => ({
+        url: endpoints.friend.feed,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        params: {...queryArg},
+      }),}),
     getFriendRequest: builder.query({
         query: (queryArg) => ({
           url: endpoints.friend.friendRequest,
@@ -25,11 +34,35 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
           },
           params: {...queryArg},
         }),}),
+        postAddFriend: builder.mutation({
+          query: (data) => ({
+            url: `${endpoints.friend.respondFriendRequest}/${data?.id}`,
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body:data,
+          }),
+        }),
+        postRemoveFriend: builder.mutation({
+          query: (queryArg) => ({
+            url: `${endpoints.friend.removeFriend}/${queryArg}`,
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            // body:data,
+          }),
+        }),
 })})
 
 export const {
+    // useGetMyFriendsQuery,
+    useGetFriendRequestQuery,
+    useGetFeedQuery,
+    usePostAddFriendMutation,
     useGetMyFriendsQuery,
-    useGetFriendRequestQuery
+    usePostRemoveFriendMutation
  
   
 } = entendedEntrySlice;

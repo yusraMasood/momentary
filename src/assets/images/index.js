@@ -75,6 +75,7 @@ export const generalImages = {
     phone:require('./icons/phone.png'),
     reload:require('./icons/reload.png'),
     customFont:require('./icons/customFont.png'),
+    mapLoc:require('./icons/mapLoc.png'),
 
   };
   

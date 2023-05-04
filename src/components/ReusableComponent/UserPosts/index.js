@@ -4,6 +4,7 @@ import { generalImages } from '../../../assets/images';
 import FriendNetworkCard from '../../Cards/FriendNetworkCard';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
+import EmptyComponent from '../../EmptyComponent';
 
 const UserPosts = props => {
   const navigation =useNavigation()
@@ -22,13 +23,19 @@ const UserPosts = props => {
       />
     );
   };
+  const renderEmpty=()=>{
+    return(
+      <EmptyComponent text="No friends Posts to show "/>
+    )
+  }
   return (
       <FlatList
-        data={[1, 2, 3, 4, 5]}
+        data={props.array}
         key={'friendArar'}
         keyExtractor={(item, index) => index}
         contentContainerStyle={styles.flatListContainer}
         renderItem={renderFriendCard}
+        ListEmptyComponent={renderEmpty}
       />
   );
 };

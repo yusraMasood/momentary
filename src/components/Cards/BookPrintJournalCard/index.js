@@ -5,18 +5,21 @@ import RobotoMedium from '../../Texts/RobotoMedium'
 import RobotoRegular from '../../Texts/RobotoRegular'
 import RippleHOC from '../../wrappers/Ripple'
 import styles from './styles'
+import moment from 'moment'
 
 const BookPrintJournalCard=(props)=>{
     return(
         <RippleHOC onPress={props.onPress} style={styles.cardContainer}>
         <View style={styles.journalContainer}>
           <RobotoMedium style={styles.headingText}>
-            My First Journal
+           {props.title}
           </RobotoMedium>
-          <RobotoRegular style={styles.dateText}>January 12, '23</RobotoRegular>
+          <RobotoRegular style={styles.dateText}>
+          {moment(props.createdAt).format("MMMM DD, 'YY")}
+            </RobotoRegular>
         </View>
         <View style={styles.bookImageContainer}>
-          <Image source={generalImages.books} style={styles.bookImage} />
+          <Image source={props.image?{uri:props.image }: generalImages.books} style={styles.bookImage} />
         </View>
       </RippleHOC>
     )

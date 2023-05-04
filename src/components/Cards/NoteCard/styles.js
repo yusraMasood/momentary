@@ -74,7 +74,12 @@ const styles = StyleSheet.create({
   alignFooter:{
     // alignItems: "flex-end"
     flex:1,
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    paddingBottom: vh*1
+  },
+  htmlBaseStyle:{
+    // height: vh*15
+    
   }
 });
 

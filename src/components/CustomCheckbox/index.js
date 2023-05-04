@@ -7,14 +7,18 @@ import EuclidCircularARegular from '../Texts/EuclidCircularARegular';
 import RecoletaDemoRegular from '../Texts/RobotoMedium';
 
 const CustomCheckBox=(props)=>{
-    const [checkbox,setCheckbox] =useState(false)
+    const [checkbox,setCheckbox] =useState(props.value)
+
 
     const onPressCheck=()=>{
         setCheckbox(!checkbox)
         if(props.updateData)
         {
             props.updateData(!checkbox)
-
+        }
+        if(props.updateDataWithId)
+        {
+            props.updateDataWithId(props.id,!checkbox)
         }
 
     }

@@ -13,7 +13,13 @@ const styles =StyleSheet.create({
     },
     iconStyle:{
         tintColor: colors.themeColor.yellow
-    }
+    },
+    backIcon:{
+        height: vh*3,
+        width: vh*3 ,
+        resizeMode: "contain",
+    
+      }
 
 })
 export default styles 

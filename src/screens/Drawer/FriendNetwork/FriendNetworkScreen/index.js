@@ -9,8 +9,11 @@ import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import { colors } from '../../../../utils/appTheme';
 import styles from './styles';
+import { useGetFeedQuery } from '../../../../state/friends';
 
 const FriendNetworkScreen = (props) => {
+  const {data,isLoading,originalArgs} =useGetFeedQuery({type:"myNetwork"})
+console.log("data", data);
   // const renderFriendCard = () => {
   //   return <FriendNetworkCard 
   //   onPress={()=> props.navigation.navigate("FriendDetails")}
@@ -23,6 +26,7 @@ const FriendNetworkScreen = (props) => {
     
   //   />;
   // };
+  console.log("lddhiod",data);
 const renderHeader=()=>{
     return(
       <View>
@@ -47,7 +51,7 @@ const renderHeader=()=>{
   return (
     <ScreenWrapper style={styles.container}>
       {renderHeader()}
-<UserPosts/>
+<UserPosts loading={isLoading} array={data?.feeds}/>
       {/* <FlatList data={[1, 2, 3, 4, 5]} 
       ListHeaderComponent={renderHeader}
       key={"friendArar"}

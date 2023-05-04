@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Image, useWindowDimensions} from 'react-native';
 import {icons} from '../../../assets/images';
-import CustomCheckBox from '../../CustomCheckbox';
 import RobotoMedium from '../../Texts/RobotoMedium';
 import RobotoRegular from '../../Texts/RobotoRegular';
 import RippleHOC from '../../wrappers/Ripple';

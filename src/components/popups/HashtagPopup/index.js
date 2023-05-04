@@ -36,6 +36,7 @@ const HashtagPopup = props => {
 
   const onYes = () => {
     dispatch(saveSetting({...setting, hashtags:hashtagsArray }))
+    // props.setMyHashtags([...props.myhashtags,])
     if (props?.onAccept) {
       props?.onAccept();
     }
@@ -46,7 +47,8 @@ const HashtagPopup = props => {
    
       if (!setting?.hashtags.includes(search)) {
         // props.setMyHashtags([...props.myhashtags, search]);
-        dispatch(saveSetting({...setting,hashtags:[...setting?.hashtags,search] }))
+        // dispatch(saveSetting({...setting,hashtags:[...setting?.hashtags,search] }))
+
       }
     
   }
@@ -64,8 +66,8 @@ const HashtagPopup = props => {
           <Hashtags 
           isLoading={hashtagData?.isLoading}
           
-          hashtags={hashtagsArray} 
-          setHashtags={setHashtagsArray}      
+          hashtags={props.myhashtags} 
+          setHashtags={props.setMyHashtags}      
           />
         </View>
         <CustomButton text={"Publish"}

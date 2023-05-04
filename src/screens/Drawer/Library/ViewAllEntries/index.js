@@ -9,8 +9,11 @@ import SuccessPopup from '../../../../components/popups/SuccessPopup';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
+import { useGetJournalByIdQuery } from '../../../../state/journal';
 
 const ViewAllEntries = (props) => {
+  const {getJournalById} =useGetJournalByIdQuery(props?.route?.params?.id)
+
   const deleteRef=useRef(null)
   const successRef=useRef(null)
 

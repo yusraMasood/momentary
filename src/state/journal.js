@@ -26,6 +26,18 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       },
       params: {...queryArg},
     }),
+    // serializeQueryArgs: ({ endpointName }) => {
+    //   console.log("endpointName",endpointName);
+    //   return endpointName
+    // },
+    // merge: (currentCache, newItems) => {
+    //   // console.log("currentCache, newItems in merge",currentCache, newItems);
+    //   currentCache.push(...newItems)
+    // },
+    // forceRefetch({ currentArg, previousArg }) {
+    //   return currentArg !== previousArg
+    // },
+    
     // transformResponse: (response, meta, arg) => response.data,
   }),
     postDeleteJournal: builder.mutation({
@@ -40,12 +52,12 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
     }),
     getJournalById: builder.query({
       query: (queryArg) => ({
-        url: endpoints.journal.journalDetails,
+        url: `${endpoints.journal.journalDetails}/${queryArg}`,
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        params: {...queryArg},
+        // params: {...queryArg},
       }),}),
       postUpdateJournal: builder.mutation({
         query: (queryArg) => ({

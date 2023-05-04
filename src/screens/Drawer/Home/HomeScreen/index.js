@@ -12,12 +12,18 @@ import { LATITUDE_DELTA, LONGITUDE_DELTA, checkLocationPermissions, getCurrentLo
 import { useDispatch } from 'react-redux';
 import { Toast } from '../../../../Api/APIHelpers';
 import moment from 'moment';
+import CustomSkeleton from '../../../../components/Loaders/CustomSkeleton';
+import { vh,vw } from '../../../../utils/dimensions';
 
 const HomeScreen = props => {
-  const {data, isLoading, refetch, error} = useGetEntriesQuery({},{
+  const {data, isLoading, refetch, error} = useGetEntriesQuery({
+    page:1,
+    // limit:1
+  },{
     refetchOnFocus: true
   });
-  const lastItem = data?.journalEntries[1]
+  console.log("data dhdk",data);
+  const lastItem = data?.journalEntries[0]?data?.journalEntries[0]: null
   const dispatch =useDispatch()
   const setting =useSetting()
   const getUserLocation = async () => {
@@ -53,13 +59,34 @@ const HomeScreen = props => {
      
     setupMethods();
   }, []);
+  useEffect(()=>{
+    const unsubscribe = props.navigation.addListener('focus', () => {
+      // The screen is focused
+      // Call any action
+      refetch()
+    });
+
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+
+  },[props.navigation])
+  // console.log("lastItem",lastItem);
  
 
   return (
     <ScreenWrapper style={styles.container}>
-      <RippleHOC
+      {isLoading?
+    <CustomSkeleton
+    height={15}
+    width={90}
+    marginLeft={vw*4}
+    marginTop={vh*3}
+    />  :
+
+    <View>
+       <RippleHOC
         onPress={() =>
-          props.navigation.navigate('NewEntry', {type: 'New Entry'})
+          props.navigation.navigate('NewEntry', {type: 'New Entry',lastItem})
         }
         style={styles.newCardContainer}>
         <RobotoBold style={styles.headingText}>New Entry</RobotoBold>
@@ -67,25 +94,35 @@ const HomeScreen = props => {
           "Sed ut perspiciatis unde omnis iste
         </RobotoRegular>
       </RippleHOC>
+      {lastItem &&
       <RippleHOC
-        onPress={() =>
-          props.navigation.navigate('EditEntry', {type: 'Resume Entry', lastItem})
-        }
-        style={styles.newCardContainer}>
-        <RobotoBold style={styles.headingText}>Resume Entry</RobotoBold>
+      onPress={() =>
+        props.navigation.navigate('EditEntry', {type: 'resume',id: lastItem?._id})
+      }
+      style={styles.newCardContainer}>
+      <RobotoBold style={styles.headingText}>Resume Entry</RobotoBold>
+      <View style={styles.calendarContainer}>
         <View style={styles.calendarContainer}>
-          <View style={styles.calendarContainer}>
-            <Image source={icons.calendar} style={styles.calendarIcon} />
-            <RobotoRegular style={styles.entryDescText}>
-              {moment(lastItem?.updatedAt).format("DD/MM/YYYY")}{'  '}
-            </RobotoRegular>
-          </View>
-          <View style={styles.calendarContainer}>
-            <Image source={icons.clock} style={styles.calendarIcon} />
-            <RobotoRegular style={styles.entryDescText}>{moment(lastItem?.updatedAt).format("HH:MM")}</RobotoRegular>
-          </View>
+          <Image source={icons.calendar} style={styles.calendarIcon} />
+          <RobotoRegular style={styles.entryDescText}>
+            {moment(lastItem?.updatedAt).format("DD/MM/YYYY")}{'  '}
+          </RobotoRegular>
         </View>
-      </RippleHOC>
+        <View style={styles.calendarContainer}>
+          <Image source={icons.clock} style={styles.calendarIcon} />
+          <RobotoRegular style={styles.entryDescText}>{moment(lastItem?.updatedAt).format("HH:MM")}</RobotoRegular>
+        </View>
+      </View>
+    </RippleHOC>
+      
+      
+      }
+      
+    </View>
+    
+    }
+      
+     
     </ScreenWrapper>
   );
 };

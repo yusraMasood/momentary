@@ -29,11 +29,17 @@ export const endpoints = {
     hashtag:"hashTags/all",
     allEntries:"user/journal/entries",
     deleteEntry:"user/journal/entries/delete" ,
-    entryById:"user/journal/entries/" 
+    entryById:"user/journal/entries" ,
+    update:"user/journal/entries/update"
   },
   friend:{
     myFriends:"user/my-friends/all",
-    friendRequest:"user/friend-requests/all"
+    friendRequest:"user/friend-requests/all",
+    feed:"feeds/all",
+    respondFriendRequest:"user/friend-requests/respond",
+    sendRequest:"user/friend-requests/send",
+    removeFriend:"user/my-friends/remove",
+    decline:"user/friend-requests/remove"
 
 
   },

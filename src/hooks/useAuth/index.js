@@ -13,11 +13,13 @@ import {Toast, getMessage} from '../../Api/APIHelpers';
 import {toggleGlobalLoader} from '../../state/general';
 
 export default () => {
-  const [postLogin] = usePostLoginMutation();
-  const [postSignup,message] = usePostSignupMutation();
+  const [postLogin,message] = usePostLoginMutation();
+  const [postSignup] = usePostSignupMutation();
   const [postVerifyEmail]=usePostVerifyEmailMutation()
   const [postResetPassword] = usePostResetPasswordMutation();
   const dispatch = useDispatch();
+
+  console.log("message",message);
     const loginUser = async ({email, password}) => {
     dispatch(toggleGlobalLoader(true));
 

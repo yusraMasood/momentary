@@ -13,6 +13,8 @@ import styles from './styles';
 
 const CustomDropdown = props => {
   const [dropdown, setDropdown] = useState(false);
+
+  // console.log("props.array",props?.array);
   const savedropdownValue = item => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
     props.setDropdownValue(item);
@@ -37,7 +39,7 @@ const CustomDropdown = props => {
             props.titleStyle,
           ]}
         >
-          {props.dropdownValue ? props.dropdownValue : props.dropdownTitle}
+          {props.dropdownValue?.title ? props.dropdownValue?.title : props.dropdownTitle}
         </RobotoMedium>
         <Image
           source={icons.arrowDown}
@@ -54,7 +56,7 @@ const CustomDropdown = props => {
                   onPress={() => savedropdownValue(item)}
                   style={styles.noOfTimes}
                 >
-                  <Text style={styles.noOfTimesText}>{item}</Text>
+                  <Text style={styles.noOfTimesText}>{item?.title}</Text>
                 </TouchableOpacity>
               );
             })}

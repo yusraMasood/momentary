@@ -22,39 +22,45 @@ import {useGetEntriesQuery, useGetEntryByIdQuery, useSetting} from '../../../../
 import useEntry from '../../../../hooks/useEntry';
 import { useInlineLoader } from '../../../../state/general';
 import ButtonLoading from '../../../../components/Loaders/ButtonLoading';
+import { useGetJournalsQuery } from '../../../../state/journal';
+import { useGetMyFriendsQuery } from '../../../../state/friends';
 
 const NewEntry = props => {
-  // const message = useGetEntryByIdQuery({id: props.route?.params?.id});
-  const [entryText, setEntryText] = useState(
-     '',
-  );
+  const {lastItem} =props?.route?.params
+  const [entryText, setEntryText] = useState('');
+  const [background, setBackground] = useState(false);
+  const [imageSelection, setImageSelection] = useState(false);
+  const [imageArray, setImageArray] = useState([]);
+  const [imageIdArray,setImageIdArray] =useState([])
+  const [myhashtags, setMyHashtags] = useState(lastItem?.hashtags?lastItem?.hashtags:[]);
+  const [pageDesign, setPageDesign] = useState(null);
+  const [visiblity,setVisiblity] =useState(lastItem?.privacy?lastItem?.privacy:"Public")
+  const [selectedPeople,setSelectedPeople] =useState([])
+  const [selectedPeopleId,setSelectedPeopleId] =useState(lastItem?.selectedPeople)
+  const [comment,setComment] =useState(lastItem?.comment?lastItem?.comment:true)
   const {addEntry} = useEntry();
   const imageLoader =useInlineLoader()
-
-  const [background, setBackground] = useState(false);
-  const [privacy, setPrivacy] = useState('Private');
-  const [dropdownValue, setDropdownValue] = useState('');
-  const documentsArray = ['text1', 'text2', 'text3'];
-  const [imageSelection, setImageSelection] = useState(false);
-  const [myhashtags, setMyHashtags] = useState([]);
-
-  const [pageDesign, setPageDesign] = useState(null);
-
-  const dispatch = useDispatch();
-  const setting = useSetting();
-
+  const {data}=useGetJournalsQuery()
   const globalRef = useRef(null);
   const imagePopupRef = useRef(null);
   const deleteRef = useRef(null);
   const [image, setImage] = useState(null);
   const publishEntry = useRef(null);
-  const [imageArray, setImageArray] = useState([]);
+
   const networkPopup = useRef(null);
   const globalPopup = useRef(null);
   const hashTagRef = useRef(null);
   const successPopup = useRef(null);
   const settingRef = useRef(null);
+  console.log("imageee ",image);
 
+
+  const [dropdownValue, setDropdownValue] = useState(null);
+
+
+const handleRoute = data => {
+   setVisiblity(data);
+   };
   useLayoutEffect(() => {
     props.navigation.setOptions({
       headerLeft: () => {
@@ -64,28 +70,44 @@ const NewEntry = props => {
           </RippleHOC>
         );
       },
-      headerTitle: () => {
-        return (
-          <DamionRegular style={styles.titleCenterText}>
-            {props.route?.params?.type}
-          </DamionRegular>
-        );
-      },
+      headerRight:()=>{
+          return (
+            <View style={styles.rightContainer}>
+              <RippleHOC onPress={() => props.navigation.navigate('MyEntries')}>
+                <Image source={icons.pin} style={styles.entryIcon} />
+              </RippleHOC>
+              <RippleHOC onPress={onPressBack}>
+                <Image source={icons.save} style={styles.saveIcon} />
+              </RippleHOC>
+              <RippleHOC >
+                <Image source={icons.cloud} style={styles.entryIcon} />
+              </RippleHOC>
+            </View>
+          );
+        
+      }
     });
   }, [props.navigation]);
+
+  
 
   const renderImage = ({item}) => {
     return <ImageComponent uri={item?.thumbnail} />;
   };
-
   const updateItemImages = img => {
-    // setImageIds(p=>[...p,img?._id])
+    console.log("img",img);
+    setImageIdArray([...imageIdArray,img?._id])
     setImageArray(p => [...p, img]);
+
   };
   const onPressSend = () => {
-    if (setting?.visiblity == '') {
+    if (visiblity === '') {
       publishEntry.current.show();
-    } else {
+    }
+    if (visiblity === 'My Network') {
+      networkPopup.current.show();
+    }
+    else {
       hashTagRef.current.show();
     }
   };
@@ -94,24 +116,39 @@ const NewEntry = props => {
       // log
       props.navigation.goBack();
     } else {
-      addEntry({entryText, imageArray}).then(res => {
-        if (res) {
-          props.navigation.goBack();
-        }
-      });
+      addEntry({entryText, imageArray:imageIdArray,journal:dropdownValue?._id,
+        visiblity,comment,hashtags:myhashtags,
+        selectedPeople:selectedPeopleId,
+        status: "draft"
+        }).then(res => {
+          if (res) {
+            props.navigation.goBack()
+          }
+        });
     }
   };
   const addEntryFunc = () => {
-    addEntry({entryText, imageArray}).then(res => {
-      if (res) {
+    addEntry({entryText, imageArray:imageIdArray,
+      journal:dropdownValue?._id,
+    visiblity,comment,
+    hashtags:myhashtags,
+    selectedPeople:selectedPeopleId,
+    status:"published"
+    }).then(res => {
+      
         successPopup.current.show();
-      }
+      
     });
   };
   const renderImageFooter=()=>{
+    if(imageLoader)
+    {
+      return(
+        <ButtonLoading/>
+      )
+    }
     return(
       <View>
-        {imageLoader &&<ButtonLoading/>}
       </View>
     )
   }
@@ -119,7 +156,7 @@ const NewEntry = props => {
     <ScreenWrapper style={styles.container}>
       <ContentContainer usecontainer={true} aware>
         <CustomDropdown
-          array={documentsArray}
+          array={data?.journal}
           dropdownValue={dropdownValue}
           dropdownTitle={'No Journal Selected'}
           setDropdownValue={setDropdownValue}
@@ -164,12 +201,16 @@ const NewEntry = props => {
           onReject={() => globalRef.current.show()}
           yesBtn={'My Network'}
           noBtn={'Global Network'}
-          setPrivacy={setPrivacy}
-          // privacy={privacy}
+          setPrivacy={setVisiblity}
+          privacy={visiblity}
         />
         <MyNetworkPopup
           reference={networkPopup}
-          // onAccept={() => hashTagRef.current.show()}
+          onAccept={() => hashTagRef.current.show()}
+          selectedPeople={selectedPeople}
+          setSelectedPeople={setSelectedPeople}
+          selectedPeopleId={selectedPeopleId}
+          setSeelectedPeopleId={setSelectedPeopleId}
         />
         <HashtagPopup
           reference={hashTagRef}
@@ -188,13 +229,17 @@ const NewEntry = props => {
           reference={settingRef}
           // onPressDesign={() => pageDesignRef.current.show()}
           onPressVisiblity={() =>
-            props.navigation.navigate('Visiblity', {privacy})
+            props.navigation.navigate('Visiblity', {type:"add",visiblity,handleRoute})
           }
           // onPressTag={() => hashTagRef.current.show()}
           onPressTag={() => hashTagRef.current.show()}
           onPressDelete={() => deleteRef.current.show()}
+          visiblity={visiblity}
+            hashtags={myhashtags}
+            comment={comment}
           // comment={comment}
-          // setComment={setComment}
+          setComment={setComment}
+         
         />
         <PublishQuestionPopup
           reference={globalRef}
