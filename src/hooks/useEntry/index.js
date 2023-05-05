@@ -4,10 +4,11 @@ import {Toast, getMessage} from '../../Api/APIHelpers';
 import { usePostAddEntryMutation, usePostUpdateEntryMutation, useSetting } from '../../state/entry';
 
 export default () => {
-  const [postAddEntry,message] = usePostAddEntryMutation();
-  const [postUpdateEntry] =usePostUpdateEntryMutation()
+  const [postAddEntry] = usePostAddEntryMutation();
+  const [postUpdateEntry,message] =usePostUpdateEntryMutation()
   const setting =useSetting()
   const dispatch = useDispatch();
+  console.log("message",message);
   const addEntry = async data => {
     console.log(data);
     const body={
@@ -58,7 +59,8 @@ export default () => {
       journal:data?.journal,
       content:data?.entryText,
       hashtags:data?.hashtags,
-      privacy:data?.visiblity=="Private"?"private":setting?.visiblity=="My Network"?"myNetwork": "public",
+      // privacy:data?.visiblity=="Private"?"private":setting?.visiblity=="My Network"?"myNetwork": "public",
+      privacy: data?.visiblity,
       images: data?.imageArray,
       // selectedPeople:[],
       location:setting?.location,
@@ -68,11 +70,11 @@ export default () => {
       multiComment: data?.comment,
       status: data?.status?data?.status: "draft"
   } 
-  if(data?.visiblity!=="Global Network")
-  {
-    body.selectedPeople=data?.selectedPeople
+  // if(data?.visiblity!=="Global Network")
+  // {
+  //   body.selectedPeople=data?.selectedPeople?data?.selectedPeople:[]
 
-  }
+  // }
     try {
       if (data?.entryText.trim() === '') {
         Toast.error('Please Enter Your Entry');

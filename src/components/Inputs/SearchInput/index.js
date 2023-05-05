@@ -11,6 +11,7 @@ const SearchInput = props => {
         placeholder={props.placeholder}
         placeholderTextColor={colors.text.grey}
         style={[styles.input,props.inputStyle]}
+        cursorColor={colors.themeColor.yellow}
         value={props.value}
         onChangeText={props.onChangeText}
       />

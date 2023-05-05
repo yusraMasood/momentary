@@ -1,5 +1,5 @@
-import React,{useRef} from 'react';
-import {View, FlatList} from 'react-native';
+import React,{useRef,useState} from 'react';
+import {View, FlatList, useWindowDimensions,} from 'react-native';
 import BasicButton from '../../../../components/Buttons/BasicButton';
 import CustomButton from '../../../../components/Buttons/CustomButton';
 import FriendNetworkCard from '../../../../components/Cards/FriendNetworkCard';
@@ -8,22 +8,34 @@ import PublishQuestionPopup from '../../../../components/popups/PublishQuestionP
 import SuccessPopup from '../../../../components/popups/SuccessPopup';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
+
 import styles from './styles';
-import { useGetJournalByIdQuery } from '../../../../state/journal';
+import { useGetEntriesQuery } from '../../../../state/entry';
 
 const ViewAllEntries = (props) => {
-  const {getJournalById} =useGetJournalByIdQuery(props?.route?.params?.id)
+  const [search,setSearch]=useState("")
+  const {data,isError,isFetching,isLoading,isSuccess,error,refetch} = useGetEntriesQuery({
+    keyword: search,
+    page:1,
+    limit: 5,
+  });
+  console.log("journal etries", data);
 
   const deleteRef=useRef(null)
   const successRef=useRef(null)
 
-  const renderFriendCard = () => {
+  const renderFriendCard = ({item}) => {
     return (
-      <FriendNetworkCard
+      <FriendNetworkCard 
+      content={item.content}
         onPress={() => props.navigation.navigate('MyProfile')}
-        location={" Exact location of user"}
-        hashtags={"#trends #fashion"}
+        location={item?.location?.name}
+        hashtags={item?.hashtags}
+        createdAt={item?.createdAt}
         clickText={"Remove Entry"}
+        id={item?._id}
+        refetch={refetch}
+        loader={isLoading}
       />
     );
   };
@@ -41,7 +53,10 @@ const ViewAllEntries = (props) => {
   const renderHeader=()=>{
     return(
       <View>
-        <SearchInput placeholder={"Search .."}/>
+        <SearchInput placeholder={"Search .."}
+        value={search}
+        onChangeText={setSearch}
+        />
       <View style={styles.entriesContainer}>
         <RobotoMedium style={styles.entryText}>Entries</RobotoMedium>
         <CustomButton text={"Delete Journal"} style={styles.deleteBtn}
@@ -55,7 +70,7 @@ const ViewAllEntries = (props) => {
   return (
     <ScreenWrapper style={styles.container}> 
       <FlatList
-        data={[1, 2, 3, 4, 5]}
+        data={isLoading?[1,2,3,4,5]: data?.journalEntries}
           ListHeaderComponent={renderHeader}
         key={'friendArar'}
         showsVerticalScrollIndicator={false}

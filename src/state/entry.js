@@ -48,7 +48,15 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
         'Content-Type': 'application/json',
       },
       params: {...queryArg},
+      transformResponse: (response, previousData) => {
+        console.log("response,previousData",response,previousData);
+        return [...previousData?.journalEntries, ...response.data?.journalEntries];
+      },
+      pagination: {
+        perPage: 10,
+      },
     }),
+    
   }),
     postDeleteEntry: builder.mutation({
       query: (queryArg) => ({

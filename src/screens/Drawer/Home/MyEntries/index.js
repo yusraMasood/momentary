@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Image, FlatList} from 'react-native';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
@@ -13,11 +13,11 @@ import NoteCardList from '../../../../components/Cards/NoteCardList';
 import CustomSkeleton from '../../../../components/Loaders/CustomSkeleton';
 import {vh, vw} from '../../../../utils/dimensions';
 import EmptyComponent from '../../../../components/EmptyComponent';
-import { usePaginatedQuery } from '@reduxjs/toolkit/query';
 
 const MyEntries = props => {
   const [search, setSearch] = useState('');
   const [list, setList] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [page, setPage] = useState(1);
 
   const entriesApi = useGetEntriesQuery({
@@ -25,25 +25,34 @@ const MyEntries = props => {
     page,
     limit: 5,
   });
-  console.log("entriesApi",entriesApi);
-  // const {
-  //   data,
-  //   isLoading,
-  //   isFetchingNextPage,
-  //   fetchNextPage,
-  //   hasNextPage,
-  // } = usePaginatedQuery('entriesData', {
-  //   query: (page = 1) => `user/journal/entries/?page=${page}&pageSize=${PAGE_SIZE}`,
-  //   getNextPageParam: lastPage => lastPage.nextPage,
-  // });
+  // const entriesApi= usePaginatedQuery("getEntries")
+  useEffect(() => {
+    const unsubscribe = props.navigation.addListener('focus', () => {
+      entriesApi?.refetch();
+    });
+    return unsubscribe;
+  }, [props.navigation]);
+
+  // console.log();
   const handleOnEndReached = () => {
-    if (entriesApi?.data?.journalEntries.length > 5) {
+    if (entriesApi?.data?.journalEntries.length > 4) {
       if(entriesApi?.data?.totalPages!=page)
       {
         setPage(page + 1);
-
       }
     }
+  };
+  const onPressNew = () => {
+    if (entriesApi?.data?.journalEntries.length > 0) {
+      props.navigation.navigate('NewEntry', {
+        lastItem: entriesApi?.data?.journalEntries[0],
+      });
+    }
+  };
+  const handleEntriesRefresh = () => {
+    setRefreshing(true);
+    entriesApi?.refetch();
+    setRefreshing(false);
   };
 
   const renderHeader = () => {
@@ -57,7 +66,12 @@ const MyEntries = props => {
     return (
       <View>
         {entriesApi?.isLoading ? (
-          <CustomSkeleton height={15} width={95} marginLeft={vw*3} marginTop={vh * 2} />
+          <CustomSkeleton
+            height={15}
+            width={93}
+            marginLeft={vw * 2}
+            marginTop={vh * 2}
+          />
         ) : (
           <NoteCard
             isLoading={entriesApi?.isLoading}
@@ -81,10 +95,7 @@ const MyEntries = props => {
       <View>
         {entriesApi?.data?.journalEntries.length - 1 == index ? (
           <View style={styles.lastEntryContainer}>
-            <RippleHOC
-              onPress={props.onPressNewEntry}
-              style={styles.alignEntryText}
-            >
+            <RippleHOC onPress={onPressNew} style={styles.alignEntryText}>
               <RobotoMedium style={styles.lastEntryText}>
                 Add Entry
               </RobotoMedium>
@@ -94,7 +105,13 @@ const MyEntries = props => {
         ) : (
           <View>
             {entriesApi?.isLoading ? (
-              <CustomSkeleton height={15} width={40} marginTop={vh * 2} />
+              <CustomSkeleton
+                height={15}
+                width={40}
+                marginTop={vh * 2}
+                marginRight={vw * 4}
+                marginLeft={vw * 4}
+              />
             ) : (
               <NoteCard
                 list={true}
@@ -121,25 +138,23 @@ const MyEntries = props => {
   const renderAddEntry = () => {
     return (
       <View>
-        <RippleHOC
-          onPress={props.onPressNewEntry}
-          style={styles.addEntryContainer}
-        >
+        <RippleHOC onPress={onPressNew} style={styles.addEntryContainer}>
           <RobotoMedium style={styles.entryText}>Add Entry</RobotoMedium>
         </RippleHOC>
         <Image source={generalImages.girl} style={styles.girlImg} />
       </View>
     );
   };
- const renderEmpty=()=>{
-  return(
-    <EmptyComponent text="No Entries to show"/>
-  )
- }
+  const renderEmpty = () => {
+    return <EmptyComponent text="No Entries to show" />;
+  };
+
   const renderAddEntryCard = () => {
     return (
       <View>
         <FlatList
+          onRefresh={handleEntriesRefresh}
+          refreshing={refreshing}
           data={
             entriesApi?.isLoading
               ? [1, 2, 3, 4, 5]
@@ -166,6 +181,8 @@ const MyEntries = props => {
             ? [1, 2, 3, 4, 5]
             : entriesApi?.data?.journalEntries
         }
+        onRefresh={handleEntriesRefresh}
+        refreshing={refreshing}
         renderItem={renderGridNotes}
         contentContainerStyle={styles.contentContainer}
         key={'gridArray'}

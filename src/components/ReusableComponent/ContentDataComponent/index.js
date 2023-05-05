@@ -14,7 +14,7 @@ const ContentDataComponent = props => {
       <CustomSkeleton
       height={2}
       width={40}
-      marginLeft={vw*3}
+      marginLeft={vw*1}
       />  :
       <RobotoRegular style={styles.valueText}>{item?.value}</RobotoRegular>
 

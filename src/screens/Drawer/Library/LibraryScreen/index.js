@@ -78,6 +78,8 @@ const LibraryScreen = props => {
           text=" Add New Entry"
           style={styles.btn}
           textStyle={styles.btnText}
+          onPress={() => props.navigation.navigate('NewEntry')}
+
         />
       </View>
     );

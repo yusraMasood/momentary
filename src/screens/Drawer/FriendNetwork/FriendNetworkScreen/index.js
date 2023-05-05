@@ -12,8 +12,12 @@ import styles from './styles';
 import { useGetFeedQuery } from '../../../../state/friends';
 
 const FriendNetworkScreen = (props) => {
-  const {data,isLoading,originalArgs} =useGetFeedQuery({type:"myNetwork"})
-console.log("data", data);
+  const {data,isLoading,originalArgs, refetch} =useGetFeedQuery({
+    page:1,
+    limit:10,
+    privacy:"myNetwork"})
+
+console.log("data", data); 
   // const renderFriendCard = () => {
   //   return <FriendNetworkCard 
   //   onPress={()=> props.navigation.navigate("FriendDetails")}
@@ -26,7 +30,6 @@ console.log("data", data);
     
   //   />;
   // };
-  console.log("lddhiod",data);
 const renderHeader=()=>{
     return(
       <View>
@@ -51,7 +54,7 @@ const renderHeader=()=>{
   return (
     <ScreenWrapper style={styles.container}>
       {renderHeader()}
-<UserPosts loading={isLoading} array={data?.feeds}/>
+<UserPosts  loading={isLoading} array={data?.feeds} refetch={refetch}/>
       {/* <FlatList data={[1, 2, 3, 4, 5]} 
       ListHeaderComponent={renderHeader}
       key={"friendArar"}

@@ -18,29 +18,43 @@ import {icons} from '../../../../assets/images';
 import ImageComponent from '../../../../components/Image/ImageComponent';
 import {useDispatch} from 'react-redux';
 import ContentContainer from '../../../../components/wrappers/ContentContainer';
-import {useGetEntriesQuery, useGetEntryByIdQuery, useSetting} from '../../../../state/entry';
+import {
+  useGetEntriesQuery,
+  useGetEntryByIdQuery,
+  useSetting,
+} from '../../../../state/entry';
 import useEntry from '../../../../hooks/useEntry';
-import { useInlineLoader } from '../../../../state/general';
+import {useInlineLoader} from '../../../../state/general';
 import ButtonLoading from '../../../../components/Loaders/ButtonLoading';
-import { useGetJournalsQuery } from '../../../../state/journal';
-import { useGetMyFriendsQuery } from '../../../../state/friends';
+import {useGetJournalsQuery} from '../../../../state/journal';
+import {useGetMyFriendsQuery} from '../../../../state/friends';
+import { Toast } from '../../../../Api/APIHelpers';
 
 const NewEntry = props => {
-  const {lastItem} =props?.route?.params
+  const {lastItem} = props?.route?.params;
+  const setting =useSetting()
   const [entryText, setEntryText] = useState('');
   const [background, setBackground] = useState(false);
   const [imageSelection, setImageSelection] = useState(false);
   const [imageArray, setImageArray] = useState([]);
-  const [imageIdArray,setImageIdArray] =useState([])
-  const [myhashtags, setMyHashtags] = useState(lastItem?.hashtags?lastItem?.hashtags:[]);
+  const [imageIdArray, setImageIdArray] = useState([]);
+  const [myhashtags, setMyHashtags] = useState(
+    setting?.hashtags,
+  );
   const [pageDesign, setPageDesign] = useState(null);
-  const [visiblity,setVisiblity] =useState(lastItem?.privacy?lastItem?.privacy:"Public")
-  const [selectedPeople,setSelectedPeople] =useState([])
-  const [selectedPeopleId,setSelectedPeopleId] =useState(lastItem?.selectedPeople)
-  const [comment,setComment] =useState(lastItem?.comment?lastItem?.comment:true)
+  const [visiblity, setVisiblity] = useState(
+    setting?.visiblity,
+  );
+  const [selectedPeople, setSelectedPeople] = useState([]);
+  const [selectedPeopleId, setSelectedPeopleId] = useState(
+   setting?.selectedPeople,
+  );
+  const [comment, setComment] = useState(
+    setting?.comment
+  );
   const {addEntry} = useEntry();
-  const imageLoader =useInlineLoader()
-  const {data}=useGetJournalsQuery()
+  const imageLoader = useInlineLoader();
+  const {data} = useGetJournalsQuery();
   const globalRef = useRef(null);
   const imagePopupRef = useRef(null);
   const deleteRef = useRef(null);
@@ -52,15 +66,14 @@ const NewEntry = props => {
   const hashTagRef = useRef(null);
   const successPopup = useRef(null);
   const settingRef = useRef(null);
-  console.log("imageee ",image);
-
+  // console.log('lastItem?.privacy', lastItem?.privacy,setting?.visiblity);
+  console.log("settongf",setting);
 
   const [dropdownValue, setDropdownValue] = useState(null);
 
-
-const handleRoute = data => {
-   setVisiblity(data);
-   };
+  const handleRoute = data => {
+    setVisiblity(data);
+  };
   useLayoutEffect(() => {
     props.navigation.setOptions({
       headerLeft: () => {
@@ -70,35 +83,31 @@ const handleRoute = data => {
           </RippleHOC>
         );
       },
-      headerRight:()=>{
-          return (
-            <View style={styles.rightContainer}>
-              <RippleHOC onPress={() => props.navigation.navigate('MyEntries')}>
-                <Image source={icons.pin} style={styles.entryIcon} />
-              </RippleHOC>
-              <RippleHOC onPress={onPressBack}>
-                <Image source={icons.save} style={styles.saveIcon} />
-              </RippleHOC>
-              <RippleHOC >
-                <Image source={icons.cloud} style={styles.entryIcon} />
-              </RippleHOC>
-            </View>
-          );
-        
-      }
+      headerRight: () => {
+        return (
+          <View style={styles.rightContainer}>
+            <RippleHOC onPress={() => props.navigation.navigate('MyEntries')}>
+              <Image source={icons.pin} style={styles.entryIcon} />
+            </RippleHOC>
+            <RippleHOC onPress={onPressSave}>
+              <Image source={icons.save} style={styles.saveIcon} />
+            </RippleHOC>
+            <RippleHOC>
+              <Image source={icons.cloud} style={styles.entryIcon} />
+            </RippleHOC>
+          </View>
+        );
+      },
     });
   }, [props.navigation]);
-
-  
 
   const renderImage = ({item}) => {
     return <ImageComponent uri={item?.thumbnail} />;
   };
   const updateItemImages = img => {
-    console.log("img",img);
-    setImageIdArray([...imageIdArray,img?._id])
+    console.log('img', img);
+    setImageIdArray([...imageIdArray, img?._id]);
     setImageArray(p => [...p, img]);
-
   };
   const onPressSend = () => {
     if (visiblity === '') {
@@ -106,52 +115,78 @@ const handleRoute = data => {
     }
     if (visiblity === 'My Network') {
       networkPopup.current.show();
-    }
-    else {
+    } else {
       hashTagRef.current.show();
     }
   };
+  const onPressSave=()=>{
+    addEntry({
+      entryText,
+      imageArray: imageIdArray,
+      journal: dropdownValue?._id,
+      visiblity,
+      comment,
+      hashtags: myhashtags,
+      selectedPeople: selectedPeopleId,
+      status: 'draft',
+    }).then(res => {
+      if(res){
+        Toast.success("Your Entry is Saved")
+
+      }
+    });
+  }
+
+  
   const onPressBack = () => {
     if (entryText == '') {
       // log
       props.navigation.goBack();
     } else {
-      addEntry({entryText, imageArray:imageIdArray,journal:dropdownValue?._id,
-        visiblity,comment,hashtags:myhashtags,
-        selectedPeople:selectedPeopleId,
-        status: "draft"
-        }).then(res => {
-          if (res) {
-            props.navigation.goBack()
-          }
-        });
+      addEntry({
+        entryText,
+        imageArray: imageIdArray,
+        journal: dropdownValue?._id,
+        visiblity,
+        comment,
+        hashtags: myhashtags,
+        selectedPeople: selectedPeopleId,
+        status: 'draft',
+      }).then(res => {
+        if (res) {
+          props.navigation.goBack();
+        }
+      });
     }
   };
   const addEntryFunc = () => {
-    addEntry({entryText, imageArray:imageIdArray,
-      journal:dropdownValue?._id,
-    visiblity,comment,
-    hashtags:myhashtags,
-    selectedPeople:selectedPeopleId,
-    status:"published"
+    addEntry({
+      entryText,
+      imageArray: imageIdArray,
+      journal: dropdownValue?._id,
+      visiblity,
+      comment,
+      hashtags: myhashtags,
+      selectedPeople: selectedPeopleId,
+      status: 'published',
     }).then(res => {
-      
-        successPopup.current.show();
-      
+      successPopup.current.show();
     });
   };
-  const renderImageFooter=()=>{
-    if(imageLoader)
-    {
-      return(
-        <ButtonLoading/>
-      )
+  const renderImageFooter = () => {
+    if (imageLoader) {
+      return <ButtonLoading />;
     }
-    return(
-      <View>
-      </View>
-    )
-  }
+    return <View></View>;
+  };
+  const onPressMyNetwork = () => {
+    setVisiblity('My Network');
+    hashTagRef.current.show();
+  };
+  const onPressGlobalNetwork = () => {
+    setVisiblity('Global Network');
+    globalRef.current.show();
+  };
   return (
     <ScreenWrapper style={styles.container}>
       <ContentContainer usecontainer={true} aware>
@@ -193,12 +228,12 @@ const handleRoute = data => {
         <PulishEntryPopup
           reference={publishEntry}
           // onAccept={() => networkPopup.current.show()}
-          onAccept={() => hashTagRef.current.show()}
+          onAccept={onPressMyNetwork}
           title={'Publish To'}
           desc={
             'Entries published on the Momentary Global Network are anonymized and will not include your user information or metadata from your photos.\n\nIdentifying information you have written in the entry itself will still be visible, as we do not censor or otherwise modify your writing. '
           }
-          onReject={() => globalRef.current.show()}
+          // onReject={() => globalRef.current.show()}
           yesBtn={'My Network'}
           noBtn={'Global Network'}
           setPrivacy={setVisiblity}
@@ -229,17 +264,20 @@ const handleRoute = data => {
           reference={settingRef}
           // onPressDesign={() => pageDesignRef.current.show()}
           onPressVisiblity={() =>
-            props.navigation.navigate('Visiblity', {type:"add",visiblity,handleRoute})
+            props.navigation.navigate('Visiblity', {
+              type: 'add',
+              visiblity,
+              handleRoute,
+            })
           }
           // onPressTag={() => hashTagRef.current.show()}
           onPressTag={() => hashTagRef.current.show()}
           onPressDelete={() => deleteRef.current.show()}
           visiblity={visiblity}
-            hashtags={myhashtags}
-            comment={comment}
+          hashtags={myhashtags}
+          comment={comment}
           // comment={comment}
           setComment={setComment}
-         
         />
         <PublishQuestionPopup
           reference={globalRef}
@@ -260,7 +298,7 @@ const handleRoute = data => {
           updateImages={updateItemImages}
           imageSelection={imageSelection}
           setImageSelection={setImageSelection}
-          type={"journalEntry"}
+          type={'journalEntry'}
         />
       </ContentContainer>
     </ScreenWrapper>

@@ -39,7 +39,7 @@ export const endpoints = {
     respondFriendRequest:"user/friend-requests/respond",
     sendRequest:"user/friend-requests/send",
     removeFriend:"user/my-friends/remove",
-    decline:"user/friend-requests/remove"
+    removeFriendRequest:"user/friend-requests/remove",
 
 
   },

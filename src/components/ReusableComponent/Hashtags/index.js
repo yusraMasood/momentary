@@ -9,6 +9,7 @@ import {saveSetting, useSetting} from '../../../state/entry';
 import {useDispatch} from 'react-redux';
 import InputField from '../../Inputs/InputField';
 import RobotoRegular from '../../Texts/RobotoRegular';
+import { Toast } from '../../../Api/APIHelpers';
 
 const Hashtags = props => {
   const dispatch = useDispatch();
@@ -17,6 +18,10 @@ const Hashtags = props => {
   const handleSubmitHashtags = () => {
     // console.log("sjsjios",search);
     console.log(props?.hashtags.includes(search));
+    if(search =="")
+    {
+     return Toast.error("Please write hashtag before submitting...")
+    }
     if (!props?.hashtags.includes(search)) {
       console.log(search);
       // console.log("hdhdiuhid");

@@ -34,8 +34,8 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
         image: image
       }
       const formData = new FormData();
-      formData.append('image', data?.image);
       formData.append('entityType', type);
+      formData.append('image', data?.image);
 
 
       console.log("formData",formData);

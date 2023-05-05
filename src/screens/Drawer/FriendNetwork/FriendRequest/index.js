@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState,useEffect} from 'react';
 import {View, FlatList} from 'react-native';
 import PagerView from 'react-native-pager-view';
 import {generalImages} from '../../../../assets/images';
@@ -22,76 +22,55 @@ import {Toast, showToast} from '../../../../Api/APIHelpers';
 
 const FriendRequest = props => {
   const pagerRef = useRef();
-  const [friendPage, setFriendPage] = useState(0);
+  const [friendPage, setFriendPage] = useState(1);
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(0);
+  const [friendRequestPage,setFriendRequest] =useState(1)
   const [refreshing, setRefreshing] = useState(false);
   const requestArray = ['My Connections', 'Incoming', 'Outgoing'];
   const requestRef = useRef(null);
   const addFriendRef = useRef(null);
-  const friendsData = useGetMyFriendsQuery({keyword: search});
-
+  const friendsData = useGetMyFriendsQuery({keyword: search,page:friendPage,limit:10,
+  });
   const friendRequest = useGetFriendRequestQuery({
     requestType: page == 1 ? 'received' : 'sent',
     keyword: search,
+    page:friendRequestPage,
+    limit:10
   });
-  const [postAddFriend, addfriend] = usePostAddFriendMutation();
-  const [postRemoveFriend,removeFriendMessage] =usePostRemoveFriendMutation()
+  console.log(friendsData);
+useEffect(()=>{
+  friendsData?.refetch()
+  friendRequest?.refetch()
 
-  const removeFriend=(id)=>{
-
-    postRemoveFriend(id).then((res)=>{
-      if (res?.data) {
-        Toast.success(res?.data);
-        friendsData?.refetch();
-      }
-      if (res?.error?.data) {
-        Toast.error(res?.error?.data);
-      }
-
-    })
+},[page])
 
 
 
-  }
 
   const renderConnectionCard = ({item}) => {
-    // console.log("item",item);
     return (
       <FriendRequestCard
         name={item?.friend?.fullName}
         image={item?.friend?.image?.thumbnail}
         job={'Last Entry on mm/dd/yyyy'}
         request={'Remove'}
+        friendRequestId={item?._id}
         onPress={() => props.navigation.navigate('FriendDetails')}
+        refetch={friendsData?.refetch}
         loader={friendsData?.isLoading}
-        onPressRequest={()=> removeFriend(item?._id)}
-        removeFriendLoader={removeFriendMessage?.isLoading}
       />
     );
   };
 
-  const respondRequest = (id, action) => {
-    postAddFriend({id, action}).then(res => {
-      if (res?.data) {
-        Toast.success(res?.data);
-        friendRequest?.refetch();
-      }
-      if (res?.error?.data) {
-        Toast.error(res?.error?.data);
-      }
-    });
-  };
+
   const renderIncomingCard = ({item}) => {
     return (
       <FriendRequestCard
         name={item?.friend?.fullName}
         image={item?.friend?.image?.thumbnail}
-        // image={}
-        // onAccept={() => requestRef.current.show()}
-        onAccept={() => respondRequest(item?._id, 'accept')}
-        onReject={() => respondRequest(item?._id, 'decline')}
-        acceptLoader={addfriend?.isLoading}
+        friendRequestId={item?._id}
+        refetch={friendRequest?.refetch}
         job={'Content Writer'}
         onPress={() => props.navigation.navigate('FriendDetails')}
         loader={friendRequest?.isLoading}
@@ -104,6 +83,8 @@ const FriendRequest = props => {
         name={item?.friend?.fullName}
         image={item?.friend?.image?.thumbnail}
         job={'Content Writer'}
+        refetch={friendRequest?.refetch}
+        friendRequestId={item?._id}
         request={'Cancel'}
         onPressRequest={() => addFriendRef.current.show()}
         onPress={() => props.navigation.navigate('FriendDetails')}
@@ -155,6 +136,7 @@ const FriendRequest = props => {
           <FlatList
             onRefresh={handleFriendDataRefresh}
             refreshing={refreshing}
+
             data={
               friendsData?.isLoading ? [1, 2, 3] : friendsData?.data?.friends
             }

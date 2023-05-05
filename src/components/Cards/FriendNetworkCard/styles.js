@@ -23,7 +23,8 @@ const styles =StyleSheet.create({
     },
     userImageContainer:{
         borderRadius: vh*5,
-        overflow: "hidden"
+        overflow: "hidden",
+        marginRight: vw*3
     },
     editIcon:{
         height: vh*2,
@@ -35,6 +36,10 @@ const styles =StyleSheet.create({
         width: vw*3.9,
         resizeMode: "contain"
     },
+    hashtagContainer:{
+        flexDirection: "row",
+        alignItems: "center"
+    },
     locationIcon:{
         height: vh*1.65,
         width: vw*3,
@@ -44,6 +49,7 @@ const styles =StyleSheet.create({
         color: colors.text.darkGrey,
         fontSize: vh*1.48,
         paddingLeft: vw*1,
+        width: vw*40
     },
     nameText:{
         color: colors.general.white,
@@ -83,6 +89,7 @@ const styles =StyleSheet.create({
         fontSize: vh*1.7,
         color: colors.themeColor.yellow,
         paddingTop: vh*0.5,
+        marginRight: vw*2
     }
 })
 export default styles

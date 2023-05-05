@@ -54,6 +54,16 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
             // body:data,
           }),
         }),
+        postRemoveFriendRequest: builder.mutation({
+          query: (queryArg) => ({
+            url: `${endpoints.friend.removeFriendRequest}/${queryArg}`,
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            // body:data,
+          }),
+        }),
 })})
 
 export const {
@@ -62,7 +72,9 @@ export const {
     useGetFeedQuery,
     usePostAddFriendMutation,
     useGetMyFriendsQuery,
-    usePostRemoveFriendMutation
+    usePostRemoveFriendMutation,
+    usePostRemoveFriendRequestMutation
+     
  
   
 } = entendedEntrySlice;

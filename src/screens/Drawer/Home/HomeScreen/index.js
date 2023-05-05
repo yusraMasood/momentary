@@ -22,7 +22,6 @@ const HomeScreen = props => {
   },{
     refetchOnFocus: true
   });
-  console.log("data dhdk",data);
   const lastItem = data?.journalEntries[0]?data?.journalEntries[0]: null
   const dispatch =useDispatch()
   const setting =useSetting()
@@ -61,8 +60,6 @@ const HomeScreen = props => {
   }, []);
   useEffect(()=>{
     const unsubscribe = props.navigation.addListener('focus', () => {
-      // The screen is focused
-      // Call any action
       refetch()
     });
 
@@ -76,17 +73,28 @@ const HomeScreen = props => {
   return (
     <ScreenWrapper style={styles.container}>
       {isLoading?
-    <CustomSkeleton
-    height={15}
-    width={90}
-    marginLeft={vw*4}
-    marginTop={vh*3}
-    />  :
+      [1,2].map(()=>{
+        return(
+
+          <CustomSkeleton
+          height={18}
+          width={88}
+          marginLeft={vw*4}
+          marginTop={vh*3}
+          /> 
+        )
+      })
+    
+     :
 
     <View>
        <RippleHOC
-        onPress={() =>
+        onPress={() =>{
+          dispatch(saveSetting({...setting,hashtags: lastItem?.hashtags,selectedPeople:lastItem?.selectedPeople,
+            visiblity:lastItem?.privacy,comment: lastItem?.comment
+          }))
           props.navigation.navigate('NewEntry', {type: 'New Entry',lastItem})
+        }
         }
         style={styles.newCardContainer}>
         <RobotoBold style={styles.headingText}>New Entry</RobotoBold>
@@ -127,3 +135,11 @@ const HomeScreen = props => {
   );
 };
 export default HomeScreen;
+{/* <View>
+<CustomSkeleton
+height={18}
+width={88}
+marginLeft={vw*4}
+marginTop={vh*3}
+/> 
+</View> */}

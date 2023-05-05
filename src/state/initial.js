@@ -19,7 +19,8 @@ const entry = {
     visiblity: "",
     hashtags:[],
     comment: false,
-    location: null
+    location: null,
+    selectedPeople:[]
   }
     
   },

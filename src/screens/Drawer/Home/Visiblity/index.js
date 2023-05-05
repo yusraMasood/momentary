@@ -9,9 +9,10 @@ import { useDispatch } from 'react-redux'
 import { saveSetting, useSetting } from '../../../../state/entry'
 
 const Visiblity =(props)=>{
-
+const setting =useSetting()
     const {type,visiblity} =props?.route?.params
-    const [itemValue,setItemValue] =useState(visiblity?visiblity:"Global Network")
+    const [itemValue,setItemValue] =useState(visiblity=="public"?"Global Network":visiblity=="private"?"private":"My Network")
+    const dispatch =useDispatch()
     const locationArray=[
         "Global Network","Private","My Network",
     ]
@@ -53,7 +54,7 @@ else{
                 return(
                     <RippleHOC key={index} onPress={()=> {
                         setItemValue(item)
-                        // dispatch(saveSetting({...setting,visiblity: item}))
+                        dispatch(saveSetting({...setting,visiblity: item}))
 
                         }} style={styles.buttonContainer}>
                     <RadioButton title={item} focus={focus} image={item?.img} iconStyle={styles.iconStyle}/>

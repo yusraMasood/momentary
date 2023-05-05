@@ -55,6 +55,7 @@ const InputField = props => {
             // onChangeText={props.onChangeText}
             style={[styles.input, props.inputContainer]}
             maxLength={props.maxLength}
+            cursorColor={colors.themeColor.yellow}
             placeholder={props.placeholder}
             placeholderTextColor={colors.general.white}
             returnKeyLabel={props.returnKeyLabel}
@@ -90,7 +91,7 @@ const InputField = props => {
               props.multiline && styles.inputMultiLine,
             ]}
             placeholder={props.placeholder}
-            cursorColor={colors.blueBtn}
+            cursorColor={colors.themeColor.yellow}
             multiline={props.multiline}
             // returnKeyLabel={props.returnKeyLabel}
             // returnKeyType={props.returnKeyType}

@@ -14,7 +14,6 @@ import { useDispatch } from 'react-redux';
 import { saveSetting, useSetting } from '../../../state/entry';
 
 const EntrySettingPopup = props => {
-  console.log("entry settinfgpopup", props);
   const popup = useRef(null);
   
   const tagRef = useRef(null);
@@ -83,7 +82,7 @@ const setting =useSetting()
       <RippleHOC onPress={onPressVisiblity} style={styles.settingContainer}>
         <RobotoRegular style={styles.pageTxt}>Visiblity</RobotoRegular>
         <View style={styles.rightContainer}>
-          <RobotoRegular style={styles.privateText}>{props?.visiblity}</RobotoRegular>
+          <RobotoRegular style={styles.privateText}>{props?.visiblity=="public"?"Global Network":props?.visiblity=="myNetwork"?"My Network": props.visiblity=="private"?"Private":""}</RobotoRegular>
           <Image source={icons.rightArrow} style={styles.arrowStyle} />
         </View>
       </RippleHOC>
