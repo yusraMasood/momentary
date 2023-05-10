@@ -68,6 +68,16 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
         // params: queryArg,
       }),
     }),
+    postPinEntry: builder.mutation({
+      query: (queryArg) => ({
+        url: `${endpoints.entry.pinEntry}/${queryArg}`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        params: queryArg,
+      }),
+    }),
     getEntryById: builder.query({
       query: (queryArg) => ({
         url: `${endpoints.entry.entryById}/${queryArg}`,
@@ -75,7 +85,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
         headers: {
           'Content-Type': 'application/json',
         },
-        // params: queryArg,
+        params: queryArg,
       }),}),
   
 })})
@@ -86,7 +96,8 @@ export const {
   useGetEntriesQuery,
   usePostDeleteEntryMutation,
   useGetEntryByIdQuery,
-  usePostUpdateEntryMutation
+  usePostUpdateEntryMutation,
+  usePostPinEntryMutation
   
 } = entendedEntrySlice;
 

@@ -79,7 +79,7 @@ const HomeScreen = props => {
           <CustomSkeleton
           height={18}
           width={88}
-          marginLeft={vw*4}
+          marginLeft={vw*2}
           marginTop={vh*3}
           /> 
         )

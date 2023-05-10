@@ -17,6 +17,7 @@ export default ButtonLoading
 
 const styles =StyleSheet.create({
     indicatorContainer:{
-        marginVertical: vh*2
+        marginVertical: vh*2,
+        // backgroundColor: "red"
     }
 })

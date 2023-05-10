@@ -64,8 +64,8 @@ const setting =useSetting()
     hide();
   }
   const getCommentValue=(value)=>{
-    props.setComment(value)
-    // dispatch(saveSetting({...setting,comment: value}))
+    // props.setComment(value)
+    dispatch(saveSetting({...setting,comment: value}))
 
   }
   return (
@@ -82,7 +82,7 @@ const setting =useSetting()
       <RippleHOC onPress={onPressVisiblity} style={styles.settingContainer}>
         <RobotoRegular style={styles.pageTxt}>Visiblity</RobotoRegular>
         <View style={styles.rightContainer}>
-          <RobotoRegular style={styles.privateText}>{props?.visiblity=="public"?"Global Network":props?.visiblity=="myNetwork"?"My Network": props.visiblity=="private"?"Private":""}</RobotoRegular>
+          <RobotoRegular style={styles.privateText}>{props?.visiblity=="public"?"Global Network":props?.visiblity=="myNetwork"?"My Network": props.visiblity=="private"?"Private":props.visiblity}</RobotoRegular>
           <Image source={icons.rightArrow} style={styles.arrowStyle} />
         </View>
       </RippleHOC>

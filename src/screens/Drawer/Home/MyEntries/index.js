@@ -18,40 +18,57 @@ const MyEntries = props => {
   const [search, setSearch] = useState('');
   const [list, setList] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [myEntries,setMyEntries]=useState([])
   const [page, setPage] = useState(1);
 
-  const entriesApi = useGetEntriesQuery({
+  const {data,refetch,isLoading,isFetching,error} = useGetEntriesQuery({
     keyword: search,
     page,
-    limit: 5,
+    limit: 7,
   });
   // const entriesApi= usePaginatedQuery("getEntries")
   useEffect(() => {
     const unsubscribe = props.navigation.addListener('focus', () => {
-      entriesApi?.refetch();
+      refetch();
     });
     return unsubscribe;
   }, [props.navigation]);
+  console.log(myEntries);
 
-  // console.log();
+  useEffect(() => {
+    if(!isFetching){
+      if(page===1)
+      {
+        setMyEntries(data?.journalEntries)
+
+        
+      }
+      else{
+        setMyEntries([...myEntries,...data?.journalEntries])
+      }
+    }
+   
+  }, [data]);
+
   const handleOnEndReached = () => {
-    if (entriesApi?.data?.journalEntries.length > 4) {
-      if(entriesApi?.data?.totalPages!=page)
+    if (myEntries.length > 6) {
+      if(data?.totalPages!=page)
       {
         setPage(page + 1);
       }
     }
   };
   const onPressNew = () => {
-    if (entriesApi?.data?.journalEntries.length > 0) {
-      props.navigation.navigate('NewEntry', {
-        lastItem: entriesApi?.data?.journalEntries[0],
-      });
-    }
+    // if (data?.journalEntries.length > 0) {
+      props.navigation.navigate('NewEntry',);
+    // }
+    // {
+    //   lastItem: data?.journalEntries[0],
+    // }
   };
   const handleEntriesRefresh = () => {
     setRefreshing(true);
-    entriesApi?.refetch();
+    refetch();
     setRefreshing(false);
   };
 
@@ -65,7 +82,7 @@ const MyEntries = props => {
   const renderNotes = ({item, index}) => {
     return (
       <View>
-        {entriesApi?.isLoading ? (
+        {isLoading ? (
           <CustomSkeleton
             height={15}
             width={93}
@@ -74,11 +91,11 @@ const MyEntries = props => {
           />
         ) : (
           <NoteCard
-            isLoading={entriesApi?.isLoading}
+            isLoading={isLoading}
             pin
             id={item?._id}
             hashtag={item?.hashtags}
-            refetch={entriesApi?.refetch}
+            refetch={refetch}
             delete
             content={item?.content}
             listStyle={[styles.noteGridContainer]}
@@ -93,7 +110,7 @@ const MyEntries = props => {
   const renderGridNotes = ({item, index}) => {
     return (
       <View>
-        {entriesApi?.data?.journalEntries.length - 1 == index ? (
+        {item?.plus ? (
           <View style={styles.lastEntryContainer}>
             <RippleHOC onPress={onPressNew} style={styles.alignEntryText}>
               <RobotoMedium style={styles.lastEntryText}>
@@ -104,7 +121,7 @@ const MyEntries = props => {
           </View>
         ) : (
           <View>
-            {entriesApi?.isLoading ? (
+            {isLoading ? (
               <CustomSkeleton
                 height={15}
                 width={40}
@@ -118,7 +135,7 @@ const MyEntries = props => {
                 index={index}
                 delete
                 pin
-                refetch={entriesApi?.refetch}
+                refetch={refetch}
                 id={item?._id}
                 content={item?.content}
                 descStyle={styles.descText}
@@ -148,7 +165,43 @@ const MyEntries = props => {
   const renderEmpty = () => {
     return <EmptyComponent text="No Entries to show" />;
   };
+  // console.log("data?.journalEntries",data?.journalEntries);
+const renderListFooter=()=>{
+  return(
+    <View>
+      {isLoading && [1,2,3,4].map((value,index)=>{
+        return(
+          <CustomSkeleton
+            height={15}
+            width={93}
+            marginLeft={vw * 2}
+            marginTop={vh * 2}
+          />
+          
+        )
+      })}
+    </View>
+  )
+}
 
+const renderGridFooter=()=>{
+  return(
+    <View>
+      {isLoading && [1,2,3,4].map((value,index)=>{
+        return(
+          <CustomSkeleton
+          height={15}
+          width={40}
+          marginTop={vh * 2}
+          marginRight={vw * 4}
+          marginLeft={vw * 4}
+        />
+          
+        )
+      })}
+    </View>
+  )
+}
   const renderAddEntryCard = () => {
     return (
       <View>
@@ -156,9 +209,9 @@ const MyEntries = props => {
           onRefresh={handleEntriesRefresh}
           refreshing={refreshing}
           data={
-            entriesApi?.isLoading
+            isLoading
               ? [1, 2, 3, 4, 5]
-              : entriesApi?.data?.journalEntries
+              : myEntries
           }
           key={'listArray'}
           //   numColumns={2}
@@ -166,6 +219,7 @@ const MyEntries = props => {
           contentContainerStyle={styles.contentContainer}
           keyExtractr={(item, index) => index}
           ListEmptyComponent={renderEmpty}
+          ListFooterComponent={renderListFooter}
           renderItem={renderNotes}
           onEndReached={handleOnEndReached}
         />
@@ -177,9 +231,11 @@ const MyEntries = props => {
     return (
       <FlatList
         data={
-          entriesApi?.isLoading
+          isLoading
             ? [1, 2, 3, 4, 5]
-            : entriesApi?.data?.journalEntries
+            :
+            // data?.journalEntries 
+            [...myEntries,{plus: true}]
         }
         onRefresh={handleEntriesRefresh}
         refreshing={refreshing}
@@ -189,10 +245,14 @@ const MyEntries = props => {
         numColumns={2}
         ListEmptyComponent={renderEmpty}
         keyExtractr={(item, index) => index}
+        ListFooterComponent={renderGridFooter}
         onEndReached={handleOnEndReached}
       />
     );
   };
+  const onSearch=( )=>{
+    setPage(1)
+  }
 
   return (
     <ScreenWrapper style={styles.container}>
@@ -201,6 +261,9 @@ const MyEntries = props => {
         style={styles.searchInput}
         value={search}
         onChangeText={setSearch}
+        onTouchStart={onSearch}
+        // onEndEditing={onSubmitSearch}
+        // onSubmitEditing={onSubmitSearch}
       />
       {renderHeader()}
       {list ? renderAddEntryCard() : renderGridCard()}

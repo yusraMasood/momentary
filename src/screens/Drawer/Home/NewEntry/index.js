@@ -19,6 +19,7 @@ import ImageComponent from '../../../../components/Image/ImageComponent';
 import {useDispatch} from 'react-redux';
 import ContentContainer from '../../../../components/wrappers/ContentContainer';
 import {
+  saveSetting,
   useGetEntriesQuery,
   useGetEntryByIdQuery,
   useSetting,
@@ -31,7 +32,7 @@ import {useGetMyFriendsQuery} from '../../../../state/friends';
 import { Toast } from '../../../../Api/APIHelpers';
 
 const NewEntry = props => {
-  const {lastItem} = props?.route?.params;
+  // const {lastItem} = props?.route?.params;
   const setting =useSetting()
   const [entryText, setEntryText] = useState('');
   const [background, setBackground] = useState(false);
@@ -39,18 +40,18 @@ const NewEntry = props => {
   const [imageArray, setImageArray] = useState([]);
   const [imageIdArray, setImageIdArray] = useState([]);
   const [myhashtags, setMyHashtags] = useState(
-    setting?.hashtags,
+    setting?.hashtags?setting?.hashtags:[],
   );
   const [pageDesign, setPageDesign] = useState(null);
   const [visiblity, setVisiblity] = useState(
-    setting?.visiblity,
+    setting?.visiblity?setting?.visiblity:"",
   );
   const [selectedPeople, setSelectedPeople] = useState([]);
   const [selectedPeopleId, setSelectedPeopleId] = useState(
-   setting?.selectedPeople,
+   setting?.selectedPeople?setting?.selectedPeople:[],
   );
   const [comment, setComment] = useState(
-    setting?.comment
+    setting?.comment?setting?.comment:true
   );
   const {addEntry} = useEntry();
   const imageLoader = useInlineLoader();
@@ -66,12 +67,14 @@ const NewEntry = props => {
   const hashTagRef = useRef(null);
   const successPopup = useRef(null);
   const settingRef = useRef(null);
+  const dispatch =useDispatch()
   // console.log('lastItem?.privacy', lastItem?.privacy,setting?.visiblity);
-  console.log("settongf",setting);
+  // console.log("settongf",setting);
 
   const [dropdownValue, setDropdownValue] = useState(null);
 
   const handleRoute = data => {
+
     setVisiblity(data);
   };
   useLayoutEffect(() => {
@@ -105,18 +108,21 @@ const NewEntry = props => {
     return <ImageComponent uri={item?.thumbnail} />;
   };
   const updateItemImages = img => {
-    console.log('img', img);
+    // console.log('img', img);
     setImageIdArray([...imageIdArray, img?._id]);
     setImageArray(p => [...p, img]);
   };
+  console.log("setting",setting);
   const onPressSend = () => {
-    if (visiblity === '') {
-      publishEntry.current.show();
+    console.log("type of setting  ",typeof(setting?.visiblity));
+    if (visiblity == "") {
+    return  publishEntry.current.show();
     }
-    if (visiblity === 'My Network') {
-      networkPopup.current.show();
-    } else {
-      hashTagRef.current.show();
+    if (visiblity=== 'My Network') {
+      return  networkPopup.current.show();
+    } 
+    else {
+      return  hashTagRef.current.show();
     }
   };
   const onPressSave=()=>{
@@ -131,6 +137,7 @@ const NewEntry = props => {
       status: 'draft',
     }).then(res => {
       if(res){
+        // setEntryText("")
         Toast.success("Your Entry is Saved")
 
       }
@@ -140,7 +147,6 @@ const NewEntry = props => {
   
   const onPressBack = () => {
     if (entryText == '') {
-      // log
       props.navigation.goBack();
     } else {
       addEntry({
@@ -180,10 +186,14 @@ const NewEntry = props => {
     return <View></View>;
   };
   const onPressMyNetwork = () => {
+    // dispatch(saveSetting({...setting,visiblity: "My Network"}))
+    
     setVisiblity('My Network');
     hashTagRef.current.show();
   };
   const onPressGlobalNetwork = () => {
+    // dispatch(saveSetting({...setting,visiblity: "Global Network"}))
+
     setVisiblity('Global Network');
     globalRef.current.show();
   };
@@ -234,8 +244,14 @@ const NewEntry = props => {
             'Entries published on the Momentary Global Network are anonymized and will not include your user information or metadata from your photos.\n\nIdentifying information you have written in the entry itself will still be visible, as we do not censor or otherwise modify your writing. '
           }
           // onReject={() => globalRef.current.show()}
+          // onAccept={()=>{
+
+          // }}
+          onReject={onPressGlobalNetwork}
           yesBtn={'My Network'}
           noBtn={'Global Network'}
+          
+
           setPrivacy={setVisiblity}
           privacy={visiblity}
         />
@@ -266,7 +282,7 @@ const NewEntry = props => {
           onPressVisiblity={() =>
             props.navigation.navigate('Visiblity', {
               type: 'add',
-              visiblity,
+              // visiblity,
               handleRoute,
             })
           }

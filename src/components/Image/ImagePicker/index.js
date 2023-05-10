@@ -40,15 +40,15 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
 
       console.log("formData",formData);
       uploadImage(formData).then((res)=>{
+        dispatch(toggleInlineLoader(false))
         setImage(res?.image)
-      dispatch(toggleInlineLoader(false))
 
         if(updateImages){
 
           updateImages(res?.image)
         }
       })
-      dispatch(toggleInlineLoader(false))
+      // dispatch(toggleInlineLoader(false))
 
 
     } catch (e) {

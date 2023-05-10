@@ -17,21 +17,21 @@ import {vh} from '../../../../utils/dimensions';
 const MyJournals = props => {
   const [search, setSearch] = useState('');
   const [list, setList] = useState(false);
+  const [refreshing,setRefreshing] =useState(false)
   const [page, setPage] = useState(1);
-  const journalApi = useGetJournalsQuery(
+  const [journalData,setJournalData] =useState([])
+  const {data,isFetching,isLoading,error,refetch} = useGetJournalsQuery(
     {
       keyword: search,
       page,
       limit: 5,
     },
-    // {
-    //   selectFromResult
-    // }
   );
+  console.log("data",data);
   useEffect(()=>{
     const unsubscribe = props.navigation.addListener('focus', () => {
       // The screen is focused
-      journalApi.refetch()
+      refetch()
       // Call any action
     });
 
@@ -39,9 +39,28 @@ const MyJournals = props => {
     return unsubscribe;
 
   },[props.navigation])
+  console.log(data,journalData);
 
-  // const [journalData,setJournalData] =useState(journalApi?.data?.journal)
-  console.log('journalApi  ', journalApi);
+  useEffect(() => {
+    if(!isFetching){
+      if(page===1)
+      {
+        setJournalData(data?.journal)
+      }
+      else{
+        setJournalData([...journalData,...data?.journal])
+      }
+    }
+   
+  }, [data]);
+  const handleJournalRefresh=()=>{
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  }
+
+  // const [journalData,setJournalData] =useState(data)
+  // console.log('journalApi  ', journalApi);
   const renderHeader = () => {
     return (
       <View>
@@ -72,7 +91,7 @@ const MyJournals = props => {
   const renderBookPrint = ({item}) => {
     return (
       <View>
-        {journalApi?.isLoading ? (
+        {isLoading ? (
           <CustomSkeleton height={23} width={92} marginTop={vh * 2} />
         ) : (
           <BookPrintJournalCard
@@ -86,8 +105,8 @@ const MyJournals = props => {
     );
   };
   const handleOnEndReached = () => {
-    if (journalApi?.data?.journal.length > 10) {
-if(journalApi?.data?.totalPages!==page)
+    if (data.length > 10) {
+if(data?.totalPages!==page)
 {
   setPage(page + 1);
 
@@ -98,8 +117,10 @@ if(journalApi?.data?.totalPages!==page)
     return (
       <FlatList
         data={
-          journalApi?.isLoading ? [1, 2, 3, 4, 5] : journalApi?.data?.journal
+          isLoading ? [1, 2, 3, 4, 5] : journalData
         }
+        onRefresh={handleJournalRefresh}
+        refreshing={refreshing}
         ListEmptyComponent={renderEmpty}
         ListHeaderComponent={renderHeader}
         keyExtractor={(item, index) => index}
@@ -113,7 +134,7 @@ if(journalApi?.data?.totalPages!==page)
   const renderJournalGrid = ({item}) => {
     return (
       <View>
-        {journalApi?.isLoading ? (
+        {isLoading ? (
           <CustomSkeleton height={20.7} width={40} marginTop={vh * 2} />
         ) : (
           <JournalInGridCard
@@ -130,9 +151,12 @@ if(journalApi?.data?.totalPages!==page)
     return (
       <FlatList
         data={
-          journalApi?.isLoading ? [1, 2, 3, 4, 5] : journalApi?.data?.journal
+          isLoading ? [1, 2, 3, 4, 5] : journalData
         }
+        refreshing={refreshing}
         ListEmptyComponent={renderEmpty}
+        onRefresh={handleJournalRefresh}
+
         ListHeaderComponent={renderHeader}
         keyExtractor={(item, index) => index}
         columnWrapperStyle={styles.columnStyle}

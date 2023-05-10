@@ -11,26 +11,29 @@ import { saveSetting, useSetting } from '../../../../state/entry'
 const Visiblity =(props)=>{
 const setting =useSetting()
     const {type,visiblity} =props?.route?.params
-    const [itemValue,setItemValue] =useState(visiblity=="public"?"Global Network":visiblity=="private"?"private":"My Network")
+    const [itemValue,setItemValue] =useState(visiblity=="public"?"Global Network":visiblity=="private"?"Private":visiblity=="myNetwork"?"My Network":visiblity)
     const dispatch =useDispatch()
     const locationArray=[
         "Global Network","Private","My Network",
     ]
     const onPressBack=()=>{
-        if(type=="add")
-{
-    props.route?.params?.handleRoute(itemValue)
-    // props.navigation.navigate("NewEntry",{privacy: itemValue})
-    props.navigation.goBack()
-}
-else{
-    props.route?.params?.handleRoute(itemValue)
-    props.navigation.goBack()
+      props.navigation.goBack()
 
 
-    // props.navigation.navigate("EditEntry",{privacy: itemValue})
+//         if(type=="add")
+// {
+//     props.route?.params?.handleRoute(itemValue)
+//     // props.navigation.navigate("NewEntry",{privacy: itemValue})
+//     props.navigation.goBack()
+// }
+// else{
+//     props.route?.params?.handleRoute(itemValue)
+//     props.navigation.goBack()
 
-}
+
+//     // props.navigation.navigate("EditEntry",{privacy: itemValue})
+
+// }
     }
     useLayoutEffect(() => {
         props.navigation.setOptions({
@@ -49,8 +52,6 @@ else{
         <ScreenWrapper style={styles.container}>
              {locationArray.map((item,index)=>{
                 const focus = item==itemValue
-
-
                 return(
                     <RippleHOC key={index} onPress={()=> {
                         setItemValue(item)

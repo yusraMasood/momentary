@@ -21,11 +21,16 @@ const styles = StyleSheet.create({
     width: vw * 4,
   },
   alignPin: {
-    alignItems: 'flex-end',
+    // alignItems: 'flex-end',
+    position: 'absolute',
+    right :vw*2,
+    top:vh*1.2,
+
+    // backgroundColor: "red"
   },
   pinIcon: {
     height: vh * 2.6,
-    position: 'absolute',
+
     width: vh * 2.6,
     resizeMode: 'contain',
   },

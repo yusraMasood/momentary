@@ -36,17 +36,18 @@ import {useGetJournalsQuery} from '../../../../state/journal';
 
 const EditEntry = props => {
   const {id} = props?.route?.params;
-  
-  const {data, isLoading, error, refetch} = useGetEntryByIdQuery(id);
+
+  const {data, isLoading, error,isFetching, refetch,originalArgs} = useGetEntryByIdQuery(id);
 
   const [refreshing, setRefreshing] = useState(false);
-  console.log('error', error);
+  // console.log('error', originalArgs);
   console.log('data iun edit entry', data);
 
   const [entryText, setEntryText] = useState(data?.journalEntry?.content);
 
   const [background, setBackground] = useState(false);
   // const [privacy, setPrivacy] = useState('Private');
+  const setting=useSetting()
   const [imageSelection, setImageSelection] = useState(false);
 
   const journal = useGetJournalsQuery();
@@ -55,8 +56,12 @@ const EditEntry = props => {
   const [imageIdArray, setImageIdArray] = useState([]);
   const [postDeleteEntry] = usePostDeleteEntryMutation(data?.journalEntry?._id);
   const [myhashtags, setMyHashtags] = useState(data?.journalEntry?.hashtags);
-  const [visiblity, setVisiblity] = useState(data?.journalEntry?.privacy);
+  const [visiblity, setVisiblity] = useState(setting?.visiblity);
   const [comment, setComment] = useState(data?.journalEntry?.comment);
+  const [selectedPeople, setSelectedPeople] = useState(data?.journalEntry?.selectedPeople);
+  const [selectedPeopleId, setSelectedPeopleId] = useState(
+   [],
+  );
   const globalRef = useRef(null);
   const imagePopupRef = useRef(null);
   const deleteRef = useRef(null);
@@ -68,32 +73,41 @@ const EditEntry = props => {
   const settingRef = useRef(null);
   const {updateEntry} = useEntry();
 
-  useLayoutEffect(() => {
-    props.navigation.setOptions({
-      headerTitle: () => {
-        return (
-          <DamionRegular style={styles.titleCenterText}>
-            {props.route?.params?.type}
-          </DamionRegular>
-        );
-      },
-    });
-  }, [props.navigation]);
+  // useLayoutEffect(() => {
+  //   props.navigation.setOptions({
+  //     headerTitle: () => {
+  //       return (
+  //         <DamionRegular style={styles.titleCenterText}>
+  //           {props.route?.params?.type}
+  //         </DamionRegular>
+  //       );
+  //     },
+  //   });
+  // }, [props.navigation]);
 
   useEffect(() => {
     // const unsubscribe = props.navigation.addListener('focus', () => {
     //   refetch();
-      if (data?.journalEntry) {
-        data?.journalEntry?.images.map((value, index) => {
-          
-          setImageIdArray([...imageIdArray, value?._id]);
-        });
-      }
+    if (data?.journalEntry) {
+      setMyHashtags(data?.journalEntry?.hashtags);
+      setDropdownValue(journal?.data?.journal[0]);
+      setVisiblity(data?.journalEntry?.privacy);
+      setComment(data?.journalEntry?.comment);
+      setEntryText(data?.journalEntry?.content)
+
+      setImageArray(data?.journalEntry?.images);
+      data?.journalEntry?.images.map((value, index) => {
+        setImageIdArray([...imageIdArray, value?._id]);
+      });
+      data?.journalEntry?.selectedPeople.map((value, index) => {
+        setSelectedPeopleId([...selectedPeopleId, value?._id]);
+      });
+    }
     // });
 
     // Return the function to unsubscribe from the event so it gets removed on unmount
     // return unsubscribe;
-  }, []);
+  }, [data]);
 
   const renderImage = ({item}) => {
     return <ImageComponent uri={item?.thumbnail} />;
@@ -104,19 +118,31 @@ const EditEntry = props => {
     setImageArray(p => [...p, img]);
   };
   const updateEntryFuc = () => {
-    updateEntry({
+    if(visiblity=="My Network")
+    {
+      networkPopup.current.show()
+    }
+    else{
+      updateEntry({
+      id,
       entryText,
       visiblity: data?.journalEntry?.privacy,
       hashtags: myhashtags,
       comment,
       journal: dropdownValue?._id,
       imageArray: imageIdArray,
+      selectedPeople: selectedPeopleId,
       status: 'published',
     }).then(res => {
-      if (res?.data) {
+      if (res) {
         successPopup.current.show();
       }
     });
+
+    }
+
+
+    
   };
   const onPressEntryDelete = () => {
     postDeleteEntry(data?.journalEntry?._id).then(res => {
@@ -176,7 +202,12 @@ const EditEntry = props => {
           </RippleHOC>
         </View>
         <MyNetworkPopup
-          reference={networkPopup}
+         reference={networkPopup}
+          onAccept={() => hashTagRef.current.show()}
+          selectedPeople={selectedPeople}
+          setSelectedPeople={setSelectedPeople}
+          selectedPeopleId={selectedPeopleId}
+          setSeelectedPeopleId={setSelectedPeopleId} 
           // onAccept={() => hashTagRef.current.show()}
         />
         <HashtagPopup

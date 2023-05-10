@@ -5,7 +5,8 @@ export const colors = {
     red:"#FF0000",
     lightBlack:"#0E0E0E",
     green:"#58DFA2",
-    lightRed:"#FF6E6E"
+    lightRed:"#FF6E6E",
+    circleGrey:"rgba(0,0,0,0.0.5)"
 
   },
   themeColor:{

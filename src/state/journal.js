@@ -85,19 +85,19 @@ export const {
     usePostUpdateJournalMutation
 } = entendedEntrySlice;
 
-export const entrySliceToken = createSlice({
-  name: initial.entry.name,
-  initialState: initial.entry.state,
-  reducers: {
-    saveSetting: (state, action) => {
-      state.setting = action.payload;
-    },
+// export const entrySliceToken = createSlice({
+//   name: initial.jout.name,
+//   initialState: initial.entry.state,
+//   reducers: {
+//     // saveSetting: (state, action) => {
+//     //   state.setting = action.payload;
+//     // },
   
-  },
-});
-export const {saveSetting} = entrySliceToken.actions;
-export default entrySliceToken.reducer;
-export const useSetting = () => {
-  const setting = useSelector(state => state.entry.setting);
-  return setting;
-};
+//   },
+// });
+// export const {saveSetting} = entrySliceToken.actions;
+// export default entrySliceToken.reducer;
+// export const useSetting = () => {
+//   const setting = useSelector(state => state.entry.setting);
+//   return setting;
+// };

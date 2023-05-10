@@ -56,19 +56,20 @@ export default () => {
   const updateEntry = async (data) => {
     console.log(" update entrydata", data);
     const body={
-      journal:data?.journal,
+      journal:data?.journal?data?.journal:null,
       content:data?.entryText,
       hashtags:data?.hashtags,
-      // privacy:data?.visiblity=="Private"?"private":setting?.visiblity=="My Network"?"myNetwork": "public",
-      privacy: data?.visiblity,
+      privacy:data?.visiblity==="Private"?"private":data?.visiblity==="My Network"?"myNetwork":data?.visiblity==="Global Network"? "public":data?.visiblity,
+      // privacy: data?.visiblity,
       images: data?.imageArray,
-      // selectedPeople:[],
+      selectedPeople:data?.selectedPeople?data?.selectedPeople:[],
       location:setting?.location,
       pageDesign:null,
       comment:data?.comment,
       share:false,
       multiComment: data?.comment,
-      status: data?.status?data?.status: "draft"
+      status: data?.status?data?.status: "draft",
+      id: data?.id
   } 
   // if(data?.visiblity!=="Global Network")
   // {
@@ -92,8 +93,8 @@ export default () => {
 
       const response = await postUpdateEntry(body).unwrap()
 
-      console.log(response,"response");
-      return response?.data;
+      // console.log(response,"response");
+      return response;
     } catch (e) {
       console.log("eerrror",e);
       Toast.error(getMessage(e?.data?.message));

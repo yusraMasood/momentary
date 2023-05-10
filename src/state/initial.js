@@ -18,7 +18,7 @@ const entry = {
   setting:{
     visiblity: "",
     hashtags:[],
-    comment: false,
+    comment: true,
     location: null,
     selectedPeople:[]
   }

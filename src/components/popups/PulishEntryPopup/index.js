@@ -8,10 +8,13 @@ import RobotoRegular from '../../Texts/RobotoRegular';
 import RippleHOC from '../../wrappers/Ripple';
 import PopupWrapper from '../PopupWrapper';
 import styles from './styles';
+import { saveSetting, useSetting } from '../../../state/entry';
+import { useDispatch } from 'react-redux';
 
 const PulishEntryPopup = props => {
   const popup = useRef(null);
-
+  const setting =useSetting()
+const dispatch =useDispatch()
   useImperativeHandle(props?.reference, () => ({
     hide: hide,
     show: show,
@@ -29,20 +32,23 @@ const PulishEntryPopup = props => {
     if (props?.onAccept) {
       props?.onAccept();
     }
-    if(props.setPrivacy)
-    {
-      props.setPrivacy("private")
-    }
+    // if(props.setPrivacy)
+    // {
+    //   props.setPrivacy("My Network")
+    //   // dispatch(saveSetting({...setting,visiblity:"My Network"}))
+
+    // }
     hide();
   };
   const onNo = () => {
     if (props?.onReject) {
       props?.onReject();
     }
-    if(props.setPrivacy)
-    {
-      props.setPrivacy("public")
-    }
+    // if(props.setPrivacy)
+    // {
+    //   props.setPrivacy("Global Network")
+    //   // dispatch(saveSetting({...setting,visiblity:"Global Network"}))
+    // }
     hide();
   };
 

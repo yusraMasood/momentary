@@ -8,23 +8,31 @@ import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import MapView, {Marker} from 'react-native-maps';
 import styles from './styles';
 import AddressInput from '../../../../components/Inputs/AddressInput';
-import { colors } from '../../../../utils/appTheme';
+import { colors, linearColors } from '../../../../utils/appTheme';
 import { LATITUDE_DELTA, LONGITUDE_DELTA } from '../../../../utils/HelperFunction';
+import { useGetFeedQuery } from '../../../../state/friends';
+import LinearGradient from 'react-native-linear-gradient';
+import MarkerDetailCard from '../../../../components/Cards/MarkerDetailCard';
 // import "../../../../utils/mapDarkMode.json"
 
 const GlobalNetworkScreen = (props) => {
+  const [showDetail,setShowDetail] =useState(false)
+
   const [initialRegion, setInitialRegion] = useState({
     latitude: 24.8607,
     longitude: 67.0011,
     latitudeDelta: 5,
     longitudeDelta: 5,
   });
-  
+    const {data,isLoading,originalArgs, refetch} =useGetFeedQuery({
+    page:1,
+    limit:10,
+    privacy:"public"
+  })
+  console.log("publicddd",data);
   const [location,setLocation] =useState(null)
 
   const mapRef =useRef(null)
-
-  const imagesArray = [1, 2, 3, 4];
 
   const animateToRegion = location => {
     mapRef.current.animateToRegion(
@@ -37,6 +45,7 @@ const GlobalNetworkScreen = (props) => {
       1000,
     );
   };
+
 
   const onLocationSearch = async data => {
     const locationData={
@@ -56,7 +65,8 @@ const GlobalNetworkScreen = (props) => {
 
   return (
     <ScreenWrapper style={styles.container}>
- 
+ <View style={styles.searchContainer}>
+  
       <AddressInput
         location={location}
         setLocation={setLocation}
@@ -64,6 +74,7 @@ const GlobalNetworkScreen = (props) => {
         onLocationSearch={onLocationSearch}
         style={styles.addressInput}
       />
+ </View>
       <MapView
         style={styles.mapView}
         ref={mapRef}
@@ -73,7 +84,25 @@ const GlobalNetworkScreen = (props) => {
         zoomEnabled
         customMapStyle={require("../../../../utils/mapDarkMode.json")}
      >
-      {location && (
+      {data?.feeds.map((marker,index)=>{
+        return(
+          <Marker
+            coordinate={{
+              latitude: marker?.location?.latitude,
+              longitude: marker?.location?.longitude
+            }}
+            // draggable={true}
+            // onDragEnd={onMarkerDragEnd}
+          >
+              <MarkerDetailCard/>
+          
+         
+          </Marker>
+
+        )
+      })}
+
+      {/* {location && (
           <Marker
             coordinate={location}
             draggable={true}
@@ -104,7 +133,7 @@ const GlobalNetworkScreen = (props) => {
         </View>
       </RippleHOC>
           </Marker>
-        )}
+        )} */}
      </MapView>
 
      
