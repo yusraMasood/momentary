@@ -36,9 +36,10 @@ const HomeScreen = props => {
     try {
       const response = await dispatch(getAddressByLatLong(locationData));
       dispatch(saveSetting({...setting,location:{
-        latitude: location.latitude,
-        longitude: location.longitude,
+        // latitude: location.latitude,
+        // longitude: location.longitude,
         name: response?.results[0]?.formatted_address,
+        coordinates: [location.longitude,location.latitude]
       } }))
     } catch (e) {
       Toast.error(e);

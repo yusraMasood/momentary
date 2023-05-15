@@ -4,9 +4,9 @@ import { vh } from '../../../utils/dimensions'
 import { colors } from '../../../utils/appTheme'
 
 
-const ButtonLoading=()=>{
+const ButtonLoading=(props)=>{
     return(
-        <View style={styles.indicatorContainer}>
+        <View style={[styles.indicatorContainer,props.style]}>
             <ActivityIndicator size={20} color={colors.themeColor.yellow} />
 
         </View>

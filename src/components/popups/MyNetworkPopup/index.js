@@ -81,7 +81,6 @@ const MyNetworkPopup = props => {
   //     </View>
   //   );
   // };
-  console.log(props.selectedPeople,props.selectedPeopleId);
 
   return (
     <PopupWrapper
@@ -121,7 +120,7 @@ const MyNetworkPopup = props => {
     </View>
     {/* <FlatList data={[1, 2, 3]} renderItem={renderSelectPeople} /> */}
     {data?.friends.slice(0,3).map((item,index)=>{
-      console.log(item?.friend?._id);
+      // console.log(item?.friend?._id);
       return(
         <View style={styles.friendSelectContainer}>
           <View style={styles.checkboxWithUserImageContainer}>
@@ -131,6 +130,7 @@ const MyNetworkPopup = props => {
           if(value && id==item?.friend?._id)
           {
             if (!props?.selectedPeople.includes(item)) {
+              
 
             props.setSelectedPeople([...props.selectedPeople,item])
             props.setSeelectedPeopleId([...props.selectedPeopleId,item?.friend?._id])}

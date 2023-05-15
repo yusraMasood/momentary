@@ -26,6 +26,7 @@ const MyEntries = props => {
     page,
     limit: 7,
   });
+  console.log("entries", data);
   // const entriesApi= usePaginatedQuery("getEntries")
   useEffect(() => {
     const unsubscribe = props.navigation.addListener('focus', () => {
@@ -33,7 +34,6 @@ const MyEntries = props => {
     });
     return unsubscribe;
   }, [props.navigation]);
-  console.log(myEntries);
 
   useEffect(() => {
     if(!isFetching){

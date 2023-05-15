@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
   publishPopup: {
     height: vh * 49.3,
   },
+  buttonLoading:{
+    marginVertical: 0
+  },
   backIcon:{
     height: vh*3,
     width: vh*3 ,

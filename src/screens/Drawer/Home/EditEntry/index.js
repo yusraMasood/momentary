@@ -33,6 +33,8 @@ import useEntry from '../../../../hooks/useEntry';
 import ContentLoader from '../../../../components/Loaders/ContentLoader';
 import {Toast} from '../../../../Api/APIHelpers';
 import {useGetJournalsQuery} from '../../../../state/journal';
+import { useGlobalLoader } from '../../../../state/general';
+import ButtonLoading from '../../../../components/Loaders/ButtonLoading';
 
 const EditEntry = props => {
   const {id} = props?.route?.params;
@@ -41,7 +43,8 @@ const EditEntry = props => {
 
   const [refreshing, setRefreshing] = useState(false);
   // console.log('error', originalArgs);
-  console.log('data iun edit entry', data);
+  // console.log('data iun edit entry', data);
+  
 
   const [entryText, setEntryText] = useState(data?.journalEntry?.content);
 
@@ -72,6 +75,7 @@ const EditEntry = props => {
   const successPopup = useRef(null);
   const settingRef = useRef(null);
   const {updateEntry} = useEntry();
+  const entryLoader= useGlobalLoader()
 
   // useLayoutEffect(() => {
   //   props.navigation.setOptions({
@@ -197,9 +201,14 @@ const EditEntry = props => {
           <RippleHOC onPress={() => settingRef.current.show()}>
             <Image source={icons.settingEntry} style={styles.textIcon} />
           </RippleHOC>
+          {
+            entryLoader?
+            <ButtonLoading style={styles.loadingStyle}/>:
           <RippleHOC onPress={updateEntryFuc}>
             <Image source={icons.send} style={styles.textIcon} />
           </RippleHOC>
+
+          }
         </View>
         <MyNetworkPopup
          reference={networkPopup}

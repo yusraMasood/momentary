@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
 
   },
+  loadingStyle:{
+    marginVertical: 0
+  },
   backIcon:{
     height: vh*3,
     width: vh*3 ,

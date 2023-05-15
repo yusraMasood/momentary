@@ -31,7 +31,8 @@ export const endpoints = {
     deleteEntry:"user/journal/entries/delete" ,
     entryById:"user/journal/entries" ,
     update:"user/journal/entries/update",
-    pinEntry:"user/journal/entries/pin"
+    pinEntry:"user/journal/entries/pin",
+    addToLibrary:"user/journal/entries/favorite"
   },
   friend:{
     myFriends:"user/my-friends/all",
@@ -41,6 +42,7 @@ export const endpoints = {
     sendRequest:"user/friend-requests/send",
     removeFriend:"user/my-friends/remove",
     removeFriendRequest:"user/friend-requests/remove",
+    friendDetails:"user/my-friends"
 
 
   },

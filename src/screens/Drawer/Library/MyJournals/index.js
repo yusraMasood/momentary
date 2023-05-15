@@ -27,7 +27,7 @@ const MyJournals = props => {
       limit: 5,
     },
   );
-  console.log("data",data);
+  // console.log("data",data);
   useEffect(()=>{
     const unsubscribe = props.navigation.addListener('focus', () => {
       // The screen is focused
@@ -39,7 +39,6 @@ const MyJournals = props => {
     return unsubscribe;
 
   },[props.navigation])
-  console.log(data,journalData);
 
   useEffect(() => {
     if(!isFetching){
@@ -60,7 +59,6 @@ const MyJournals = props => {
   }
 
   // const [journalData,setJournalData] =useState(data)
-  // console.log('journalApi  ', journalApi);
   const renderHeader = () => {
     return (
       <View>

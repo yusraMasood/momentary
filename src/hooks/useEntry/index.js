@@ -2,20 +2,20 @@ import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {Toast, getMessage} from '../../Api/APIHelpers';
 import { usePostAddEntryMutation, usePostUpdateEntryMutation, useSetting } from '../../state/entry';
+import { toggleGlobalLoader } from '../../state/general';
 
 export default () => {
   const [postAddEntry] = usePostAddEntryMutation();
   const [postUpdateEntry,message] =usePostUpdateEntryMutation()
   const setting =useSetting()
   const dispatch = useDispatch();
-  console.log("message",message);
   const addEntry = async data => {
-    console.log(data);
+    dispatch(toggleGlobalLoader(true))
     const body={
         journal:data?.journal,
         content:data?.entryText,
         hashtags:data?.hashtags,
-        privacy:data?.visiblity=="Private"?"private":setting?.visiblity=="My Network"?"myNetwork": "public",
+        privacy:data?.visiblity=="Private"?"private":data?.visiblity=="My Network"?"myNetwork": "public",
         images: data?.imageArray,
         // selectedPeople:[],
         location:setting?.location,
@@ -23,7 +23,8 @@ export default () => {
         comment:data?.comment,
         share:false,
         multiComment: data?.comment,
-        status: data?.status?data?.status: "draft"
+        status: data?.status?data?.status: "draft",
+        pin: false
     } 
     if(data?.visiblity!=="Global Network")
     {
@@ -46,17 +47,22 @@ export default () => {
     
 
       const response = await postAddEntry(body).unwrap()
-      console.log("response of add Entry",response);
-      return response?.data;
+      // console.log("response of add Entry",response);
+    dispatch(toggleGlobalLoader(false))
+
+      return response;
     } catch (e) {
+      // console.log("error",e);
       Toast.error(getMessage(e?.data?.message));
+      dispatch(toggleGlobalLoader(false))
       throw new Error(getMessage(e?.data?.message));
     }
   };
   const updateEntry = async (data) => {
-    console.log(" update entrydata", data);
+    // console.log(" update entrydata", data);
+    dispatch(toggleGlobalLoader(true))
     const body={
-      journal:data?.journal?data?.journal:null,
+      journal:null,
       content:data?.entryText,
       hashtags:data?.hashtags,
       privacy:data?.visiblity==="Private"?"private":data?.visiblity==="My Network"?"myNetwork":data?.visiblity==="Global Network"? "public":data?.visiblity,
@@ -69,8 +75,10 @@ export default () => {
       share:false,
       multiComment: data?.comment,
       status: data?.status?data?.status: "draft",
-      id: data?.id
+      id: data?.id,
+      pin: false
   } 
+  // console.log(" update entry data", body);
   // if(data?.visiblity!=="Global Network")
   // {
   //   body.selectedPeople=data?.selectedPeople?data?.selectedPeople:[]
@@ -92,11 +100,12 @@ export default () => {
     
 
       const response = await postUpdateEntry(body).unwrap()
-
+      dispatch(toggleGlobalLoader(false))
       // console.log(response,"response");
-      return response;
+      return response?.message;
     } catch (e) {
       console.log("eerrror",e);
+      dispatch(toggleGlobalLoader(false))
       Toast.error(getMessage(e?.data?.message));
       throw new Error(getMessage(e?.message));
     }

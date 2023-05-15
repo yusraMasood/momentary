@@ -1,4 +1,4 @@
-import React, { useRef,useState } from 'react';
+import React, { useEffect, useRef,useState } from 'react';
 import {View, Image} from 'react-native';
 import {generalImages, icons} from '../../../../assets/images';
 import SearchInput from '../../../../components/Inputs/SearchInput';
@@ -9,14 +9,16 @@ import MapView, {Marker} from 'react-native-maps';
 import styles from './styles';
 import AddressInput from '../../../../components/Inputs/AddressInput';
 import { colors, linearColors } from '../../../../utils/appTheme';
-import { LATITUDE_DELTA, LONGITUDE_DELTA } from '../../../../utils/HelperFunction';
+import { LATITUDE_DELTA, LONGITUDE_DELTA, distance, getBoundingBox } from '../../../../utils/HelperFunction';
 import { useGetFeedQuery } from '../../../../state/friends';
 import LinearGradient from 'react-native-linear-gradient';
 import MarkerDetailCard from '../../../../components/Cards/MarkerDetailCard';
 // import "../../../../utils/mapDarkMode.json"
 
 const GlobalNetworkScreen = (props) => {
+  const [location,setLocation] =useState(null)
   const [showDetail,setShowDetail] =useState(false)
+  const [region,setRegion] =useState(null)
 
   const [initialRegion, setInitialRegion] = useState({
     latitude: 24.8607,
@@ -27,12 +29,25 @@ const GlobalNetworkScreen = (props) => {
     const {data,isLoading,originalArgs, refetch} =useGetFeedQuery({
     page:1,
     limit:10,
-    privacy:"public"
+    privacy:"public",
+    // distance:region,
+    // latitude: location?.latitude,
+    // longitude: location?.longitude
+    // latitude: 40.7127837,
+    // longitude: -74.0059413,
   })
-  console.log("publicddd",data);
-  const [location,setLocation] =useState(null)
+  // useEffect(()=>{
+  //   animateToRegion({
+  //     latitude: 40.7127837,
+  //   longitude: -74.0059413,
+  //   })
+
+  // },[])
+  // console.log("region",region);
+
 
   const mapRef =useRef(null)
+  console.log("publicddd",data,originalArgs);
 
   const animateToRegion = location => {
     mapRef.current.animateToRegion(
@@ -63,6 +78,14 @@ const GlobalNetworkScreen = (props) => {
 
   };
 
+  const handleOnRegionChange = async region => { 
+    const boundingBox = getBoundingBox(region);
+     const radius = distance( boundingBox.minLat,
+       region.latitude, boundingBox.minLng,
+        region.longitude, ) 
+      setRegion(radius)
+      }
+  
   return (
     <ScreenWrapper style={styles.container}>
  <View style={styles.searchContainer}>
@@ -78,21 +101,21 @@ const GlobalNetworkScreen = (props) => {
       <MapView
         style={styles.mapView}
         ref={mapRef}
+        // onRegionChangeComplete={setRegion}
+        onRegionChange={handleOnRegionChange}
         loadingEnabled
         loadingIndicatorColor={colors.black}
         initialRegion={{...initialRegion}}
         zoomEnabled
         customMapStyle={require("../../../../utils/mapDarkMode.json")}
      >
-      {data?.feeds.map((marker,index)=>{
+      {/* {data?.feeds.map((marker,index)=>{
         return(
           <Marker
             coordinate={{
-              latitude: marker?.location?.latitude,
-              longitude: marker?.location?.longitude
+              latitude: marker?.location?.coordinates[0],
+              longitude: marker?.location?.coordinates[1]
             }}
-            // draggable={true}
-            // onDragEnd={onMarkerDragEnd}
           >
               <MarkerDetailCard/>
           
@@ -100,7 +123,7 @@ const GlobalNetworkScreen = (props) => {
           </Marker>
 
         )
-      })}
+      })} */}
 
       {/* {location && (
           <Marker

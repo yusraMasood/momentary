@@ -11,6 +11,9 @@ import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 
 import styles from './styles';
 import { useGetEntriesQuery } from '../../../../state/entry';
+import { usePostDeleteJournalMutation } from '../../../../state/journal';
+import { Toast } from '../../../../Api/APIHelpers';
+import EmptyComponent from '../../../../components/EmptyComponent';
 
 const ViewAllEntries = (props) => {
   const [search,setSearch]=useState("")
@@ -19,7 +22,8 @@ const ViewAllEntries = (props) => {
     page:1,
     limit: 5,
   });
-  console.log("journal etries", data);
+  const [postDeleteJournal,deleteJournal]= usePostDeleteJournalMutation()
+  console.log("journal delete ", deleteJournal);
 
   const deleteRef=useRef(null)
   const successRef=useRef(null)
@@ -67,6 +71,24 @@ const ViewAllEntries = (props) => {
       </View>
     )
   }
+  const onDeleteJournal=()=>{
+    postDeleteJournal(props?.route?.params?.id).then((res)=>{
+      if(res?.data?.message)
+      {
+        Toast.success(res?.data?.message)
+        props.navigation.goBack()
+      }
+      if(res?.error?.data)
+      {
+        Toast.error("Something went wrong")
+      }
+    })
+  }
+  const renderEmpty=()=>{
+    return(
+      <EmptyComponent text="No entries in this Journal"/>
+    )
+  }
   return (
     <ScreenWrapper style={styles.container}> 
       <FlatList
@@ -78,12 +100,14 @@ const ViewAllEntries = (props) => {
         ListFooterComponent={renderFooter}
         contentContainerStyle={styles.flatListContainer}
         renderItem={renderFriendCard}
+        ListEmptyComponent={renderEmpty}
       />
       <PublishQuestionPopup
           reference={deleteRef}
           title={'Delete Journal'}
           desc={"Are you sure you want to delete journal?"}     
-          onAccept={()=> successRef.current.show()}
+          // onAccept={()=> successRef.current.show()}
+          onAccept={onDeleteJournal}
           />
               <SuccessPopup
           reference={successRef}

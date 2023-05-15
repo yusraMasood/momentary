@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {View, Image} from 'react-native';
+import {View, Image,LayoutAnimation} from 'react-native';
 import {generalImages, icons} from '../../../../assets/images';
 import CustomButton from '../../../../components/Buttons/CustomButton';
 import CustomGoldenSwitch from '../../../../components/Buttons/CustomGoldenSwitch';
@@ -41,6 +41,7 @@ const AddNewJournal = props => {
     });
   };
   const getSwitchValue = value => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
     setLifeTime(value);
   };
   return (
@@ -64,28 +65,32 @@ const AddNewJournal = props => {
         <RobotoMedium style={styles.imgText}>Life time journal</RobotoMedium>
         <CustomGoldenSwitch updateData={getSwitchValue} />
       </View>
-      <CalendarStrip
-        showMonth={true}
-        style={[styles.calendar, props.calendarStyle]}
-        dateNumberStyle={styles.dateNumber}
-        dateNameStyle={styles.dateName}
-        dayContainerStyle={styles.dayContainer}
-        iconStyle={{tintColor: '#FFF', paddingHorizontal: 20}}
-        highlightDateContainerStyle={styles.selectedDateContainer}
-        // calendarHeaderFormat={moment().format("MMMM, YYYY")}
-        calendarHeaderStyle={styles.calendarHeader}
-        dateContainerStyle={[styles.dateContainer, props.dateStyle]}
-        highlightDateNameStyle={styles.selectedDateName}
-        highlightDateNumberStyle={styles.selectedDateNumber}
-        highlightDateNumberContainerStyle={styles.dateNumberContainer}
-        // startingDate={props.date}
-        // scrollable={true}
-        // scrollerPaging={true}
-        selectedDate={date}
-        onDateSelected={res => {
-          setDate(res);
-        }}
-      />
+      {lifeTime &&
+       <CalendarStrip
+       showMonth={true}
+       style={[styles.calendar, props.calendarStyle]}
+       dateNumberStyle={styles.dateNumber}
+       dateNameStyle={styles.dateName}
+       dayContainerStyle={styles.dayContainer}
+       iconStyle={{tintColor: '#FFF', paddingHorizontal: 20}}
+       highlightDateContainerStyle={styles.selectedDateContainer}
+       // calendarHeaderFormat={moment().format("MMMM, YYYY")}
+       calendarHeaderStyle={styles.calendarHeader}
+       dateContainerStyle={[styles.dateContainer, props.dateStyle]}
+       highlightDateNameStyle={styles.selectedDateName}
+       highlightDateNumberStyle={styles.selectedDateNumber}
+       highlightDateNumberContainerStyle={styles.dateNumberContainer}
+       // startingDate={props.date}
+       // scrollable={true}
+       // scrollerPaging={true}
+       selectedDate={date}
+       onDateSelected={res => {
+         setDate(res);
+       }}
+     />
+      
+      }
+     
       <View style={styles.journalContainer}>
         <RobotoMedium style={styles.imgText}>Image</RobotoMedium>
         <RippleHOC onPress={() => setImageSelection(true)}>

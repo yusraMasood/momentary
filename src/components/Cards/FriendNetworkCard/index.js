@@ -9,12 +9,13 @@ import RippleHOC from '../../wrappers/Ripple';
 import styles from './styles';
 import moment from 'moment';
 import { Toast } from '../../../Api/APIHelpers';
-import { usePostDeleteEntryMutation } from '../../../state/entry';
+import { usePostAddToLibraryMutation, usePostDeleteEntryMutation } from '../../../state/entry';
 import { vw } from '../../../utils/dimensions';
 import CustomSkeleton from '../../Loaders/CustomSkeleton';
 import vh from '../../AddressField/AddressPicker/Units/vh';
 const FriendNetworkCard = (props) => {
   const [postDeleteEntry, message] = usePostDeleteEntryMutation();
+  const [postAddToLibrary,addtoLibraryMessage]= usePostAddToLibraryMutation()
   // const {width} = useWindowDimensions();
   const source = {
     html: `${props.content}`,
@@ -28,7 +29,27 @@ const FriendNetworkCard = (props) => {
       {
         Toast.success(res?.data?.message)
         if (props.refetch) {
-          // Toast.success("Journal Entry Deleted Successfully!")
+          props.refetch();
+        }
+      }
+      if(res?.error?.data)
+      {
+        Toast.error(res?.data?.data)
+      }
+      
+    });
+
+   
+  };
+  console.log("addtoLibraryMessage",addtoLibraryMessage);
+  const addToLibrary=()=>{
+    console.log(props.id);
+    postAddToLibrary(props.id).then((res)=>{
+      console.log("tresss",res);
+      if(res?.data?.message)
+      {
+        Toast.success(res?.data?.message)
+        if (props.refetch) {
           props.refetch();
         }
       }
@@ -39,8 +60,21 @@ const FriendNetworkCard = (props) => {
       
     });
 
-   
-  };
+  }
+  const onClickText=()=>{
+    console.log(props.clickText);
+    if(props.clickText=="Remove Entry")
+    {
+      // deleteEntry()
+
+    }
+    // if()
+    else{
+      console.log("jrojro");
+      addToLibrary()
+
+    }
+  }
   return (
     <View style={[styles.container,props.style]}>
       {props.loader?
@@ -58,7 +92,7 @@ const FriendNetworkCard = (props) => {
         </View>}
         
         <View>
-          {props.name &&<RobotoRegular style={styles.nameText}>Amelia Isabell</RobotoRegular>}
+          {props.name &&<RobotoRegular style={styles.nameText}>{props.name}</RobotoRegular>}
           <View style={styles.editContainer}>
             <Image source={icons.edit} style={styles.editIcon} />
             <RobotoRegular style={styles.dateText}>
@@ -112,10 +146,13 @@ const FriendNetworkCard = (props) => {
       })}
       </View>
       </RippleHOC>
-      <RippleHOC onPress={()=> deleteEntry()} style={styles.alignComment}>
-        
+      {
+        props.clickText &&
+
+      <RippleHOC onPress={onClickText} style={styles.alignComment}>
       <RobotoMedium style={styles.headerText}>{props.clickText}</RobotoMedium>
       </RippleHOC>
+      }
 
       {/* <View style={styles.alignComment}>
         <View style={styles.commentContainer}>

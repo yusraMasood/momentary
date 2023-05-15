@@ -7,7 +7,6 @@ const geocodeUrl =
 
 export const AddressApi = {
   getAddressByLatlng: (data, callback) => {
-    console.log(data, 'datadatadata')
     let latlng = data.lat + ',' + data.lng;
     let full_url =
       geoBase +

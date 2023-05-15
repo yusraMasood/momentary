@@ -17,7 +17,6 @@ const FriendNetworkScreen = (props) => {
     limit:10,
     privacy:"myNetwork"})
 
-console.log("data", data); 
   // const renderFriendCard = () => {
   //   return <FriendNetworkCard 
   //   onPress={()=> props.navigation.navigate("FriendDetails")}
@@ -51,10 +50,15 @@ const renderHeader=()=>{
         </View>
     )
 }
+console.log("hello,data?.feeds",data?.feeds);
   return (
     <ScreenWrapper style={styles.container}>
       {renderHeader()}
-<UserPosts  loading={isLoading} array={data?.feeds} refetch={refetch}/>
+<UserPosts
+clickText={'Add To library'}
+loading={isLoading} array={data?.feeds} refetch={refetch}
+
+/>
       {/* <FlatList data={[1, 2, 3, 4, 5]} 
       ListHeaderComponent={renderHeader}
       key={"friendArar"}

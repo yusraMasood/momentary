@@ -33,7 +33,6 @@ const FriendRequestCard=(props)=>{
       
   const removeFriend=()=>{
     setRemoveFriendLoader(true)
-    console.log(props.friendRequestId);
 
     postRemoveFriend(props.friendRequestId).then((res)=>{
         console.log("response remove friend",res);

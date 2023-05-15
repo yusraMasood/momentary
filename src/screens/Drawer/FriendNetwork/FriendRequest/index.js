@@ -38,7 +38,6 @@ const FriendRequest = props => {
     page:friendRequestPage,
     limit:10
   });
-  console.log(friendsData);
 useEffect(()=>{
   friendsData?.refetch()
   friendRequest?.refetch()

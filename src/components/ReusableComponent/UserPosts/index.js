@@ -14,9 +14,9 @@ const UserPosts = props => {
     console.log(" item ",item);
     return (
       <FriendNetworkCard
-      onPressFriend={()=>navigation.navigate('FriendDetails')}
+      onPressFriend={()=>navigation.navigate('FriendDetails',{id: item?.user?._id})}
         onPress={() => navigation.navigate('PostByLocation')}
-        clickText={'Add To library'}
+        clickText={props.clickText}
         name={item?.user?.fullName}
         content={item?.content}
         location={item?.location?.name}
@@ -24,6 +24,8 @@ const UserPosts = props => {
         createdAt={item?.createdAt}
         image={generalImages.userImage}
         style={styles.friendNetworkStyle}
+        id={item?._id}
+        friendId={item?.friend?._id}
       />
     );
   };

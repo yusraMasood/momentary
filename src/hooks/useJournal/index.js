@@ -17,6 +17,7 @@ export default () => {
         hashtags,
         lifeTime,
         date: moment(date).format("YYYY-MM-DD"),
+        pin: false
     } 
     // console.log(image,"image");
     dispatch(toggleGlobalLoader(true))

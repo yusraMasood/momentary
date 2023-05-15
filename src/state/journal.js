@@ -27,11 +27,9 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       params: {...queryArg},
     }),
     // serializeQueryArgs: ({ endpointName }) => {
-    //   console.log("endpointName",endpointName);
     //   return endpointName
     // },
     // merge: (currentCache, newItems) => {
-    //   // console.log("currentCache, newItems in merge",currentCache, newItems);
     //   currentCache.push(...newItems)
     // },
     // forceRefetch({ currentArg, previousArg }) {

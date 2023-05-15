@@ -1,4 +1,4 @@
-import React, {useState,useLayoutEffect,useRef} from 'react';
+import React, {useState,useLayoutEffect,useRef,useEffect} from 'react';
 import {View, Image, FlatList,LayoutAnimation} from 'react-native';
 import {generalImages, icons} from '../../../../assets/images';
 import BasicButton from '../../../../components/Buttons/BasicButton';
@@ -11,67 +11,77 @@ import RobotoRegular from '../../../../components/Texts/RobotoRegular';
 import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
+import { useGetFeedQuery, useGetFriendDetailsQuery, usePostRemoveFriendMutation } from '../../../../state/friends';
+import ContentLoader from '../../../../components/Loaders/ContentLoader';
+import { Toast } from '../../../../Api/APIHelpers';
 
 const FriendDetails = props => {
+  const [search,setSearch]=useState("")
+  const [entryPage,setEntryPage] =useState(1)
+  const [entriesData,setEntriesData] =useState([])
+  const {data,isLoading} =useGetFriendDetailsQuery(props?.route?.params?.id)
+  const {data: friendAEntries,isFetching} =useGetFeedQuery({
+    page:entryPage,
+    limit:5,
+    privacy:"",
+    friend:props?.route?.params?.id,
+    keyword: search
+  })
+  const [postRemoveFriend,removeFriendMessage] = usePostRemoveFriendMutation()
+  console.log("remove friend",removeFriendMessage);
+
+
   const [journals, setJournals] = useState(false);
   const removeRef=useRef(null)
+  // console.log("friend id ", friendDetails);
+
   const contactArray = [
     {
       id: 1,
       image: icons.email,
-      value: 'Abc@email.com',
+      value: data?.friendDetails?.email,
     },
     {
       id: 2,
       image: icons.phone,
-      value: '123-446-78790',
+      value: data?.friendDetails?.phone,
     },
   ];
-  const entryArray=[
-    {
-      heading:"Shared On",
-      publish:"January 31, 2022 - 03:00 pm",
-      desc:"Lorem ipsum dolor sit amet, consectetur are it adipiscing  elit. Aenean euismod bibendum laoreet. Proin gravida dolor  sitom"
-    },
-    {
-      heading:"Shared On",
-      publish:"January 31, 2022 - 03:00 pm",
-      desc:"Lorem ipsum dolor sit amet, consectetur are it adipiscing  elit. Aenean euismod bibendum laoreet. Proin gravida dolor  sitom"
-    },
-    {
-      heading:"Shared On",
-      publish:"January 31, 2022 - 03:00 pm",
-      desc:"Lorem ipsum dolor sit amet, consectetur are it adipiscing  elit. Aenean euismod bibendum laoreet. Proin gravida dolor  sitom"
+  useEffect(() => {
+    if(!isFetching){
+      if(entryPage===1)
+      {
+        setEntriesData(friendAEntries?.feeds)
+
+        
+      }
+      else{
+        setEntriesData([...entriesData,...friendAEntries?.feeds])
+      }
     }
-  ]
-  const journalArray=[
-    {
-      heading:"Journal Name: Journal ABC",
-      publish:"Published on: January 04, '22 - 00:30 pm",
-      desc:"Total Entries: 32"
-    },
-    {
-      heading:"Journal Name: Journal ABC",
-      publish:"Published on: January 04, '22 - 00:30 pm",
-      desc:"Total Entries: 32"
-    },
-    {
-      heading:"Journal Name: Journal ABC",
-      publish:"Published on: January 04, '22 - 00:30 pm",
-      desc:"Total Entries: 32"
-    },
-    {
-      heading:"Journal Name: Journal ABC",
-      publish:"Published on: January 04, '22 - 00:30 pm",
-      desc:"Total Entries: 32"
-    },
-  ]
+   
+  }, [friendAEntries]);
+  const onRemoveFriend=()=>{
+// console.log("props?.route?.params?.id",props?.route?.params?.id);
+    postRemoveFriend(props?.route?.params?.id).then((res)=>{
+     console.log("res remove friend",res);
+      if(res?.data?.message)
+      {
+        Toast.success(res?.data?.message)
+        props.navigation.goBack()
+      }
+      if(res?.error?.data)
+      {
+        Toast.error(res?.data?.data)
+      }
+    })
+  }
   useLayoutEffect(() => {
     props.navigation.setOptions({
         headerTitle: () => {
         return (
           <DamionRegular style={styles.titleCenterText}>
-            Abigale Wilson
+            {data?.friendDetails?.fullName}
           </DamionRegular>
         );
       },
@@ -96,7 +106,7 @@ const FriendDetails = props => {
             textStyle={styles.removeText}
           />
         </View>
-        <RobotoMedium style={styles.usernameText}>Abigale Wilson</RobotoMedium>
+        <RobotoMedium style={styles.usernameText}>{data?.friendDetails?.fullName}</RobotoMedium>
         <RobotoRegular style={styles.descText}>
           Lorem ipsum dolor sit amet, consectetur{'\n'}adipiscing elit.{' '}
         </RobotoRegular>
@@ -117,7 +127,7 @@ const FriendDetails = props => {
         </View>
         <View style={styles.entryHeadContainer}>
           <RobotoMedium style={styles.entriesText}>Entries</RobotoMedium>
-          <View style={styles.browseContainer}>
+          {/* <View style={styles.browseContainer}>
             <RippleHOC onPress={changeJournal}>
               <RobotoRegular style={[styles.browseEntryText, 
                 !journals&& styles.entryFocusText]}>
@@ -131,10 +141,13 @@ const FriendDetails = props => {
                 Browse Journals
               </RobotoRegular>
             </RippleHOC>
-          </View>
+          </View> */}
         </View>
         <View style={styles.inputContainer}>
-          <SearchInput placeholder={"Search"} style={styles.searchInput}  />
+          <SearchInput placeholder={"Search"}
+          value={search}
+          onChangeText={setSearch}
+          style={styles.searchInput}  />
         </View>
       </View>
     );
@@ -142,21 +155,31 @@ const FriendDetails = props => {
   const renderListCard = ({item}) => {
     return <JournalCard 
     heading={item?.heading}
-    publish={item?.publish}
-    desc={item?.desc}
+    publish={item?.createdAt}
+    // desc={item?.desc}
+    desc={item?.content}
 
 
     
     />;
   };
+  const handleOnEndReached=()=>{
+    if (entriesData.length > 4) {
+      if(friendAEntries?.totalPages!=entryPage)
+      {
+        setEntryPage(entryPage + 1);
+      }
+    }
+  }
   const renderEntryList = () => {
     return (
       <View>
         <FlatList
-          data={entryArray}
+          data={entriesData}
           key={"entryArray"}
           keyExtractor={(item,index)=> index}
           renderItem={renderListCard}
+          onEndReached={handleOnEndReached}
           ListHeaderComponent={renderUserProfileDetails}
         />
       </View>
@@ -166,9 +189,9 @@ const FriendDetails = props => {
     return (
       <View>
         <FlatList
-          data={journalArray}
+          data={[1,2,3,4]}
           keyExtractor={(item,index)=> index}
-          key={journalArray}
+          key={"journalArray"}
 
           ListHeaderComponent={renderUserProfileDetails}
           renderItem={renderListCard}
@@ -178,13 +201,18 @@ const FriendDetails = props => {
   };
   return (
     <ScreenWrapper style={styles.container}>
-      {journals ? renderJournalist() : renderEntryList()}
+      {isLoading?
+    <ContentLoader/>:
+    renderEntryList()
+    }
+       
 
       <PublishQuestionPopup
         reference={removeRef}
         title={'Remove Friend'}
         desc={`Are you sure you wish to remove the\nfriend?`}
         contentStye={styles.popupStyle}
+        onAccept={onRemoveFriend}
       />
     </ScreenWrapper>
   );

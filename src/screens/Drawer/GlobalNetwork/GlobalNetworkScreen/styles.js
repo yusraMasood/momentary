@@ -11,6 +11,11 @@ const styles = StyleSheet.create({
     height: vh*100,
     // width: vw*100
 },
+markerIcon:{
+  height: vh*10,
+  width: vh*10,
+  resizeMode: "contain"
+}
 
 });
 export default styles;

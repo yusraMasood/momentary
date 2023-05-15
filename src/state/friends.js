@@ -16,6 +16,15 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       },
       params: {...queryArg},
     }),}),
+    getFriendDetails: builder.query({
+      query: (queryArg) => ({
+        url: `${endpoints.friend.friendDetails}/${queryArg}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        params: {...queryArg},
+      }),}),
     getFeed: builder.query({
       query: (queryArg) => ({
         url: endpoints.friend.feed,
@@ -73,7 +82,7 @@ export const {
     usePostAddFriendMutation,
     useGetMyFriendsQuery,
     usePostRemoveFriendMutation,
-    usePostRemoveFriendRequestMutation
+    usePostRemoveFriendRequestMutation,useGetFriendDetailsQuery
      
  
   

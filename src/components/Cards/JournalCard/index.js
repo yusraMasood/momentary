@@ -4,6 +4,7 @@ import {icons} from '../../../assets/images';
 import PoppinsRegular from '../../Texts/PoppinsRegular';
 import RobotoRegular from '../../Texts/RobotoRegular';
 import styles from './styles';
+import moment from 'moment';
 
 const JournalCard = (props) => {
   return (
@@ -12,7 +13,7 @@ const JournalCard = (props) => {
       <View style={styles.editContainer}>
         <Image source={icons.edit} style={styles.editIcon} />
         <RobotoRegular style={styles.dateText}>
-          {''}{props.publish}
+          {''}{moment(props.publish).format("MMMM DD,YYYY - HH:MM A")}
         </RobotoRegular>
       </View>
       <RobotoRegular style={styles.descText}>

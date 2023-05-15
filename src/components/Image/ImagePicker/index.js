@@ -38,7 +38,7 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
       formData.append('image', data?.image);
 
 
-      console.log("formData",formData);
+      // console.log("formData",formData);
       uploadImage(formData).then((res)=>{
         dispatch(toggleInlineLoader(false))
         setImage(res?.image)
@@ -52,7 +52,7 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
 
 
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       dispatch(toggleInlineLoader(false))
 
       setUploading(false)

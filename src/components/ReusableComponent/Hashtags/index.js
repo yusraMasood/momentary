@@ -16,8 +16,6 @@ const Hashtags = props => {
   const setting = useSetting();
   const [search,setSearch]=useState("")
   const handleSubmitHashtags = () => {
-    // console.log("sjsjios",search);
-    console.log(props?.hashtags.includes(search));
     if(search =="")
     {
      return Toast.error("Please write hashtag before submitting...")

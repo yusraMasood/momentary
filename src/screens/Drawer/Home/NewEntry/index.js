@@ -25,7 +25,7 @@ import {
   useSetting,
 } from '../../../../state/entry';
 import useEntry from '../../../../hooks/useEntry';
-import {useInlineLoader} from '../../../../state/general';
+import {useGlobalLoader, useInlineLoader} from '../../../../state/general';
 import ButtonLoading from '../../../../components/Loaders/ButtonLoading';
 import {useGetJournalsQuery} from '../../../../state/journal';
 import {useGetMyFriendsQuery} from '../../../../state/friends';
@@ -34,7 +34,7 @@ import { Toast } from '../../../../Api/APIHelpers';
 const NewEntry = props => {
   // const {lastItem} = props?.route?.params;
   const setting =useSetting()
-  const [entryText, setEntryText] = useState('');
+  const [entryText, setEntryText] = useState('<h1>DDHHDHD</h2>');
   const [background, setBackground] = useState(false);
   const [imageSelection, setImageSelection] = useState(false);
   const [imageArray, setImageArray] = useState([]);
@@ -55,7 +55,11 @@ const NewEntry = props => {
   );
   const {addEntry} = useEntry();
   const imageLoader = useInlineLoader();
-  const {data} = useGetJournalsQuery();
+  const {data} = useGetJournalsQuery(   {
+    // keyword: search,
+    page:1,
+    limit: 10,
+  },);
   const globalRef = useRef(null);
   const imagePopupRef = useRef(null);
   const deleteRef = useRef(null);
@@ -68,8 +72,7 @@ const NewEntry = props => {
   const successPopup = useRef(null);
   const settingRef = useRef(null);
   const dispatch =useDispatch()
-  // console.log('lastItem?.privacy', lastItem?.privacy,setting?.visiblity);
-  // console.log("settongf",setting);
+  const entryLoader= useGlobalLoader()
 
   const [dropdownValue, setDropdownValue] = useState(null);
 
@@ -108,13 +111,10 @@ const NewEntry = props => {
     return <ImageComponent uri={item?.thumbnail} />;
   };
   const updateItemImages = img => {
-    // console.log('img', img);
     setImageIdArray([...imageIdArray, img?._id]);
     setImageArray(p => [...p, img]);
   };
-  console.log("setting",setting);
   const onPressSend = () => {
-    console.log("type of setting  ",typeof(setting?.visiblity));
     if (visiblity == "") {
     return  publishEntry.current.show();
     }
@@ -146,24 +146,25 @@ const NewEntry = props => {
 
   
   const onPressBack = () => {
-    if (entryText == '') {
-      props.navigation.goBack();
-    } else {
-      addEntry({
-        entryText,
-        imageArray: imageIdArray,
-        journal: dropdownValue?._id,
-        visiblity,
-        comment,
-        hashtags: myhashtags,
-        selectedPeople: selectedPeopleId,
-        status: 'draft',
-      }).then(res => {
-        if (res) {
-          props.navigation.goBack();
-        }
-      });
-    }
+    props.navigation.goBack()
+    // if (entryText == '') {
+    //   props.navigation.goBack();
+    // } else {
+    //   addEntry({
+    //     entryText,
+    //     imageArray: imageIdArray,
+    //     journal: dropdownValue?._id,
+    //     visiblity,
+    //     comment,
+    //     hashtags: myhashtags,
+    //     selectedPeople: selectedPeopleId,
+    //     status: 'draft',
+    //   }).then(res => {
+    //     if (res) {
+    //       props.navigation.goBack();
+    //     }
+    //   });
+    // }
   };
   const addEntryFunc = () => {
     addEntry({
@@ -176,6 +177,7 @@ const NewEntry = props => {
       selectedPeople: selectedPeopleId,
       status: 'published',
     }).then(res => {
+      console.log("response add entry in screemn",res);
       successPopup.current.show();
     });
   };
@@ -186,13 +188,15 @@ const NewEntry = props => {
     return <View></View>;
   };
   const onPressMyNetwork = () => {
-    // dispatch(saveSetting({...setting,visiblity: "My Network"}))
     
     setVisiblity('My Network');
-    hashTagRef.current.show();
+    dispatch(saveSetting({...setting,visiblity: "My Network"}))
+
+    networkPopup.current.show()
+    // hashTagRef.current.show();
   };
   const onPressGlobalNetwork = () => {
-    // dispatch(saveSetting({...setting,visiblity: "Global Network"}))
+    dispatch(saveSetting({...setting,visiblity: "Global Network"}))
 
     setVisiblity('Global Network');
     globalRef.current.show();
@@ -230,9 +234,14 @@ const NewEntry = props => {
           <RippleHOC onPress={() => settingRef.current.show()}>
             <Image source={icons.settingEntry} style={styles.textIcon} />
           </RippleHOC>
+          {
+            entryLoader?
+            <ButtonLoading style={styles.buttonLoading}/>:
           <RippleHOC onPress={onPressSend}>
             <Image source={icons.send} style={styles.textIcon} />
           </RippleHOC>
+
+          }
         </View>
 
         <PulishEntryPopup
