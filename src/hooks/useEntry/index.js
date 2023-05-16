@@ -1,14 +1,16 @@
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {Toast, getMessage} from '../../Api/APIHelpers';
-import { usePostAddEntryMutation, usePostUpdateEntryMutation, useSetting } from '../../state/entry';
+import { usePostAddEntryMutation, usePostShareEntryMutation, usePostUpdateEntryMutation, useSetting } from '../../state/entry';
 import { toggleGlobalLoader } from '../../state/general';
 
 export default () => {
-  const [postAddEntry] = usePostAddEntryMutation();
+  const [postAddEntry,addEntryM] = usePostAddEntryMutation();
   const [postUpdateEntry,message] =usePostUpdateEntryMutation()
+  const [postShareEntry] =usePostShareEntryMutation()
   const setting =useSetting()
   const dispatch = useDispatch();
+  // console.log("addEntryM",addEntryM);
   const addEntry = async data => {
     dispatch(toggleGlobalLoader(true))
     const body={
@@ -109,9 +111,45 @@ export default () => {
       Toast.error(getMessage(e?.data?.message));
       throw new Error(getMessage(e?.message));
     }
+
+  };
+  const shareEntry = async data => {
+    // console.log(" data in share entry",data);
+    dispatch(toggleGlobalLoader(true))
+    const body={
+        journal:data?.journalEntry?.journal,
+        content:data?.journalEntry?.content,
+        // hashtags:data?.hashtags,
+        // privacy:data?.visiblity=="Private"?"private":data?.visiblity=="My Network"?"myNetwork": "public",
+        // images: data?.imageArray,
+        // // selectedPeople:[],
+        // location:setting?.location,
+        // pageDesign:null,
+        // comment:data?.comment,
+        // share:false,
+        // multiComment: data?.comment,
+        // status: data?.status?data?.status: "draft",
+        // pin: false
+    } 
+    console.log(" body in share entry", body);
+    try {
+    
+
+      const response = await postShareEntry(body).unwrap()
+      // console.log("response of add Entry",response);
+    dispatch(toggleGlobalLoader(false))
+
+      return response;
+    } catch (e) {
+      // console.log("error",e);
+      Toast.error(getMessage(e?.data?.message));
+      dispatch(toggleGlobalLoader(false))
+      throw new Error(getMessage(e?.data?.message));
+    }
   };
   return {
     addEntry,
-    updateEntry
+    updateEntry,
+    shareEntry
   };
 };

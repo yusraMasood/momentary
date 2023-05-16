@@ -5,19 +5,21 @@ import SearchInput from '../../../../components/Inputs/SearchInput';
 import RobotoRegular from '../../../../components/Texts/RobotoRegular';
 import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
-import MapView, {Marker} from 'react-native-maps';
+import MapView, {Callout, Marker} from 'react-native-maps';
 import styles from './styles';
 import AddressInput from '../../../../components/Inputs/AddressInput';
 import { colors, linearColors } from '../../../../utils/appTheme';
 import { LATITUDE_DELTA, LONGITUDE_DELTA, distance, getBoundingBox } from '../../../../utils/HelperFunction';
 import { useGetFeedQuery } from '../../../../state/friends';
 import LinearGradient from 'react-native-linear-gradient';
-import MarkerDetailCard from '../../../../components/Cards/MarkerDetailCard';
+import moment from 'moment';
+import RenderHtmlComponent from '../../../../components/ReusableComponent/RenderHtmlComponent';
 // import "../../../../utils/mapDarkMode.json"
 
 const GlobalNetworkScreen = (props) => {
   const [location,setLocation] =useState(null)
   const [showDetail,setShowDetail] =useState(false)
+  const [postsData,setPostsData] =useState([])
   const [region,setRegion] =useState(null)
 
   const [initialRegion, setInitialRegion] = useState({
@@ -26,7 +28,7 @@ const GlobalNetworkScreen = (props) => {
     latitudeDelta: 5,
     longitudeDelta: 5,
   });
-    const {data,isLoading,originalArgs, refetch} =useGetFeedQuery({
+    const {data,isLoading,originalArgs,isFetching, refetch} =useGetFeedQuery({
     page:1,
     limit:10,
     privacy:"public",
@@ -36,18 +38,9 @@ const GlobalNetworkScreen = (props) => {
     // latitude: 40.7127837,
     // longitude: -74.0059413,
   })
-  // useEffect(()=>{
-  //   animateToRegion({
-  //     latitude: 40.7127837,
-  //   longitude: -74.0059413,
-  //   })
-
-  // },[])
-  // console.log("region",region);
 
 
   const mapRef =useRef(null)
-  console.log("publicddd",data,originalArgs);
 
   const animateToRegion = location => {
     mapRef.current.animateToRegion(
@@ -64,11 +57,11 @@ const GlobalNetworkScreen = (props) => {
 
   const onLocationSearch = async data => {
     const locationData={
-      pinlocation: true,
+      // pinlocation: true,
       latitude: data?.geometry?.location?.lat,
       longitude: data?.geometry?.location?.lng,
-      latitudeDelta: LATITUDE_DELTA,
-      longitudeDelta: LONGITUDE_DELTA,
+      // latitudeDelta: LATITUDE_DELTA,
+      // longitudeDelta: LONGITUDE_DELTA,
       address: data?.formatted_address,
     }
     // dispatch(destinationLocation(locationData))
@@ -77,6 +70,7 @@ const GlobalNetworkScreen = (props) => {
     
 
   };
+  // console.log("location",location);
 
   const handleOnRegionChange = async region => { 
     const boundingBox = getBoundingBox(region);
@@ -109,58 +103,64 @@ const GlobalNetworkScreen = (props) => {
         zoomEnabled
         customMapStyle={require("../../../../utils/mapDarkMode.json")}
      >
-      {/* {data?.feeds.map((marker,index)=>{
-        return(
+        {data?.feeds.map((marker,index)=>{
+     return(
           <Marker
+          key={index}
             coordinate={{
-              latitude: marker?.location?.coordinates[0],
-              longitude: marker?.location?.coordinates[1]
-            }}
-          >
-              <MarkerDetailCard/>
-          
-         
-          </Marker>
+              latitude: marker?.location?.coordinates[1],
+              longitude: marker?.location?.coordinates[0]
+            }}  
+            onSelect={()=> showDetail(true)}
+       >
+       {showDetail && <Image source={icons.mapPinAnimation} style={styles.markerIcon} />} 
+        <View style={styles.circleOuter}>
+        <LinearGradient colors={linearColors.yellow} style={styles.circleImg}></LinearGradient>
+              </View>
+           
+              <Callout  tooltip onPress={() => props.navigation.navigate('PostByLocation',{id: marker?._id})}>
+            
+          <View
+              style={styles.locationPopcontainer}
+              
+            >
+              <RobotoRegular style={styles.locationText}>
+                Location: {marker.location?.name}
+              </RobotoRegular>
+              <RobotoRegular style={styles.locationText}>
+                {moment(marker.createdAt).format("MMMM DD, YYYY - HH:MM A")}
+              </RobotoRegular>
+            <RenderHtmlComponent content={marker?.content}/>
+               
+              <View style={styles.imgArrayContainer}>
+               
+              </View>
+            </View>
+            </Callout>
+        </Marker>
+              
 
         )
-      })} */}
+      })}
 
-      {/* {location && (
-          <Marker
-            coordinate={location}
-            draggable={true}
-            // onDragEnd={onMarkerDragEnd}
-          >
-            <Image source={icons.mapLoc} style={styles.markerIcon} />
-            <RippleHOC
-        style={styles.locationPopcontainer}
-        onPress={() => props.navigation.navigate('PostByLocation')}
-      >
-        <RobotoRegular style={styles.locationText}>
-          Location: City, Country
-        </RobotoRegular>
-        <RobotoRegular style={styles.locationText}>
-          January 31, 2022 - 03:00 pm
-        </RobotoRegular>
-        <RobotoRegular style={styles.locationText}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </RobotoRegular>
-        <View style={styles.imgArrayContainer}>
-          {imagesArray.map((item, index) => {
-            return (
-              <View key={index} style={styles.printContainer}>
-                <Image source={generalImages.print} style={styles.printimg} />
-              </View>
-            );
-          })}
-        </View>
-      </RippleHOC>
-          </Marker>
-        )} */}
+
      </MapView>
+    
 
      
     </ScreenWrapper>
   );
 };
 export default GlobalNetworkScreen;
+{/* <MarkerDetailCard/>
+          
+         
+          </Marker> */}
+
+           {/* {marker.images&&marker.image.map((item, index) => {
+                  return (
+                    <View key={index} style={styles.printContainer}>
+                      <Image source={item?.thumbnail?{uri: item?.thumbnail}: generalImages?.defaultImage} style={styles.printimg} />
+                    </View>
+                  );
+                })} */}

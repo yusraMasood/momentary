@@ -32,7 +32,10 @@ export const endpoints = {
     entryById:"user/journal/entries" ,
     update:"user/journal/entries/update",
     pinEntry:"user/journal/entries/pin",
-    addToLibrary:"user/journal/entries/favorite"
+    addToLibrary:"user/journal/entries/favorite",
+    like:"feeds/react",
+    comment:"feeds/comment",
+    share:"feeds/share"
   },
   friend:{
     myFriends:"user/my-friends/all",

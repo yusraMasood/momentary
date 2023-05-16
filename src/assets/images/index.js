@@ -13,7 +13,7 @@ export const generalImages = {
     existingJournal:require('./generalImages/existingJournal.png'),
     ebook:require('./generalImages/ebook.png'),
     yearbook:require('./generalImages/yearbook.png'),
-    // education: require('./generalImages/education.png'),
+    defaultImage: require('./generalImages/defaultImage.png'),
     // avatar: require('./generalImages/avatar.png'),
   };
   export const icons = {

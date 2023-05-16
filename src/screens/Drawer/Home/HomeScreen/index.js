@@ -68,16 +68,18 @@ const HomeScreen = props => {
     return unsubscribe;
 
   },[props.navigation])
-  // console.log("lastItem",lastItem);
+  
  
 
   return (
     <ScreenWrapper style={styles.container}>
       {isLoading?
-      [1,2].map(()=>{
+      [1,2].map((item,index)=>{
         return(
 
           <CustomSkeleton
+          key={index}
+
           height={18}
           width={88}
           marginLeft={vw*2}

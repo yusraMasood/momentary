@@ -88,6 +88,37 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
         params: queryArg,
       }),
     }),
+    postLikeEntry: builder.mutation({
+      query: (queryArg) => ({
+        url: `${endpoints.entry.like}/${queryArg}`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        params: queryArg,
+      }),
+    }),
+    postCommentEntry: builder.mutation({
+      query: (queryArg) => ({
+        url: `${endpoints.entry.comment}/${queryArg?.id}`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        params: queryArg,
+      }),
+    }),
+    postShareEntry: builder.mutation({
+      query: (queryArg) => ({
+        url: `${endpoints.entry.share}/${queryArg}`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        params: queryArg,
+      }),
+    }),
+
     getEntryById: builder.query({
       query: (queryArg) => ({
         url: `${endpoints.entry.entryById}/${queryArg}`,
@@ -108,7 +139,10 @@ export const {
   useGetEntryByIdQuery,
   usePostUpdateEntryMutation,
   usePostPinEntryMutation,
-  usePostAddToLibraryMutation
+  usePostAddToLibraryMutation,
+  usePostLikeEntryMutation,
+  usePostCommentEntryMutation,
+  usePostShareEntryMutation
   
 } = entendedEntrySlice;
 

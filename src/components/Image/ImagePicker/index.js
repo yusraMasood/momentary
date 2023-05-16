@@ -5,7 +5,6 @@ import BottomSheetHOC from '../../popups/BottomSheetHOC';
 import useProfile from '../../../hooks/useProfile';
 import { useDispatch } from 'react-redux';
 import { toggleInlineLoader } from '../../../state/general';
-import LikeCommentCard from '../../Cards/LikeCommentCard';
 
 const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUploading, options,updateImages,type="general" }) => {
   const {uploadImage} =useProfile()

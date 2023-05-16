@@ -41,7 +41,6 @@ const FriendNetworkCard = (props) => {
 
    
   };
-  console.log("addtoLibraryMessage",addtoLibraryMessage);
   const addToLibrary=()=>{
     console.log(props.id);
     postAddToLibrary(props.id).then((res)=>{

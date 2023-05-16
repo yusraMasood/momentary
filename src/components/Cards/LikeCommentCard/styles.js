@@ -4,6 +4,9 @@ import {colors} from '../../../utils/appTheme';
 import {vh, vw} from '../../../utils/dimensions';
 
 const styles = StyleSheet.create({
+  container:{
+    // marginBottom: vh*7,
+  },
   likeCountContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -32,6 +35,7 @@ const styles = StyleSheet.create({
   likeMainContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginBottom: vh*2
   },
   likeBtnContaienr: {
     flexDirection: 'row',
@@ -39,7 +43,7 @@ const styles = StyleSheet.create({
   },
   iconLike: {
     height: vh * 2.7,
-    width: vw * 5.5,
+    width: vh * 2.7,
     resizeMode: 'contain',
   },
   commentText: {
@@ -48,16 +52,20 @@ const styles = StyleSheet.create({
     paddingLeft: vw * 2,
   },
   likeFocusIcon: {
-    // tintColor: colors.themeColor.yellow
+    color: colors.button.likeBlue
   },
   textInputContainer: {
+    position: "absolute",
+    bottom: 0,
+    zIndex: 999,
+    backgroundColor: "black",
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: vh * 2,
+    marginVertical: vh * 2,
   },
   userImage: {
     height: vh * 5,
-    width: vw * 10,
+    width: vh * 5,
     resizeMode: 'contain',
     borderRadius: vh * 4,
   },
@@ -85,5 +93,27 @@ const styles = StyleSheet.create({
     width: vw * 3,
     resizeMode: 'contain',
   },
+  commentMainContainer:{
+    marginVertical: vh*1.5,
+    flexDirection: "row",
+    justifyContent: "space-between"
+
+  },
+  commentInnerContainer:{
+    backgroundColor: colors.input.greyBackground,
+    borderRadius: vh*1,
+    marginLeft: vw*2,
+    paddingHorizontal: vw*2,
+    paddingVertical: vh*2
+  },
+  usernameText:{
+    color: colors.general.white,
+    fontSize: vh*1.65
+  },
+  userCommentText:{
+    color: colors.general.white,
+    fontSize: vh*1.5,
+    width: vw*65
+  }
 });
 export default styles;

@@ -15,6 +15,7 @@ import CustomSkeleton from '../../Loaders/CustomSkeleton';
 import {vh} from '../../../utils/dimensions';
 import ButtonLoading from '../../Loaders/ButtonLoading';
 import { Toast } from '../../../Api/APIHelpers';
+import RenderHtmlComponent from '../../ReusableComponent/RenderHtmlComponent';
 
 const NoteCard = props => {
   const [postDeleteEntry, message] = usePostDeleteEntryMutation(props.id);
@@ -63,30 +64,7 @@ if(res?.data?.message)
         <Image source={icons.pinned} style={styles.pinIcon} />
       </RippleHOC>
       <RippleHOC onPress={props.onPress} style={styles.titleDescContainer}>
-        <RenderHtml
-          contentWidth={width}
-          // allowedStyles={{height: 100}}
-          source={source}
-          baseStyle={styles.htmlBaseStyle}
-          defaultTextProps={defaultTextProps}
-          tagsStyles={{
-            p: styles.descText,
-            b: styles.descText,
-            div: styles.descText,
-            i: styles.descText,
-            u: styles.descText,
-            s: styles.descText,
-            // div: styles.descText,
-
-            // h1:styles.descText,
-            // h2:styles.descText,
-            // h3:styles.descText,
-            // h4:styles.descText,
-            // h5:styles.descText,
-            // h6:styles.descText,
-            // h7:styles.descText,
-          }}
-        />
+        <RenderHtmlComponent content={props.content}/>
       </RippleHOC>
       <View style={styles.alignFooter}>
         <View style={styles.hashtagDeeleteContainer}>

@@ -4,17 +4,20 @@ import { colors } from '../../../utils/appTheme'
 
 const styles=StyleSheet.create({
     circleImg:{
-        height:vh*1.6,
-        width: vh*1.6,
+        height:vh*1.5,
+        width: vh*1.5,
         borderRadius: (vh*1.6)/2
       },
       circleOuter:{
-        height: vh*5.5,
-        width: vh*5.5,
+        height: vh*5,
+        width: vh*5,
         borderRadius: (vh*5.5)/2,
         backgroundColor:colors.general.circleGrey,
+        // backgroundColor: "red",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        // marginLeft: vw*6
+
       
       },
       searchContainer:{
@@ -35,6 +38,7 @@ const styles=StyleSheet.create({
           paddingVertical: vh * 2.5,
           borderRadius: vh * 2,
           paddingHorizontal: vw * 4,
+          marginTop: vh*0.5
         },
         locationText: {
           color: colors.text.grey,
@@ -57,10 +61,14 @@ const styles=StyleSheet.create({
           marginTop: vh * 1.5,
         },
         markerIcon:{
-          height: vh*6.5,
-          width: vh*6.5,
+          height: vh*5,
+          // position: "absolute",
+          // bottom: -vh*2,
+          // zIndex: 999,
+          width: vh*5,
           resizeMode: "contain",
-          marginLeft: vw*6
+          // backgroundColor: "red",
+          // marginLeft: vw*6
           // marginBottom: vh*1
         },
 })

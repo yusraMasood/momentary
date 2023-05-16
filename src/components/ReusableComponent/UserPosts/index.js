@@ -25,7 +25,7 @@ const UserPosts = props => {
         image={generalImages.userImage}
         style={styles.friendNetworkStyle}
         id={item?._id}
-        friendId={item?.friend?._id}
+        // friendId={item?.friend?._id}
       />
     );
   };

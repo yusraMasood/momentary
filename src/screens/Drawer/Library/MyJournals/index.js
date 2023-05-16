@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Image, FlatList} from 'react-native';
 import {generalImages} from '../../../../assets/images';
 import CustomButton from '../../../../components/Buttons/CustomButton';
@@ -17,46 +17,40 @@ import {vh} from '../../../../utils/dimensions';
 const MyJournals = props => {
   const [search, setSearch] = useState('');
   const [list, setList] = useState(false);
-  const [refreshing,setRefreshing] =useState(false)
+  const [refreshing, setRefreshing] = useState(false);
   const [page, setPage] = useState(1);
-  const [journalData,setJournalData] =useState([])
-  const {data,isFetching,isLoading,error,refetch} = useGetJournalsQuery(
-    {
-      keyword: search,
-      page,
-      limit: 5,
-    },
-  );
+  const [journalData, setJournalData] = useState([]);
+  const {data, isFetching, isLoading, error, refetch} = useGetJournalsQuery({
+    keyword: search,
+    page,
+    limit: 5,
+  });
   // console.log("data",data);
-  useEffect(()=>{
+  useEffect(() => {
     const unsubscribe = props.navigation.addListener('focus', () => {
       // The screen is focused
-      refetch()
+      refetch();
       // Call any action
     });
 
     // Return the function to unsubscribe from the event so it gets removed on unmount
     return unsubscribe;
-
-  },[props.navigation])
+  }, [props.navigation]);
 
   useEffect(() => {
-    if(!isFetching){
-      if(page===1)
-      {
-        setJournalData(data?.journal)
-      }
-      else{
-        setJournalData([...journalData,...data?.journal])
+    if (!isFetching) {
+      if (page === 1) {
+        setJournalData(data?.journal);
+      } else {
+        setJournalData([...journalData, ...data?.journal]);
       }
     }
-   
   }, [data]);
-  const handleJournalRefresh=()=>{
+  const handleJournalRefresh = () => {
     setRefreshing(true);
     refetch();
     setRefreshing(false);
-  }
+  };
 
   // const [journalData,setJournalData] =useState(data)
   const renderHeader = () => {
@@ -80,8 +74,9 @@ const MyJournals = props => {
     return (
       <View style={styles.emptyContainer}>
         <RobotoMedium style={styles.emptyText}>No Journal Found</RobotoMedium>
-        <CustomButton text={'Create Journal '} 
-        onPress={()=> props.navigation.navigate("AddNewJournal")}
+        <CustomButton
+          text={'Create Journal '}
+          onPress={() => props.navigation.navigate('AddNewJournal')}
         />
       </View>
     );
@@ -96,27 +91,25 @@ const MyJournals = props => {
             title={item?.title}
             image={item?.image?.thumbnail}
             date={item?.createdAt}
-            onPress={() => props.navigation.navigate('ViewAllEntries',{id:item?._id})}
+            onPress={() =>
+              props.navigation.navigate('ViewAllEntries', {id: item?._id})
+            }
           />
         )}
       </View>
     );
   };
   const handleOnEndReached = () => {
-    if (data.length > 10) {
-if(data?.totalPages!==page)
-{
-  setPage(page + 1);
-
-}
+    if (journalData.length > 10) {
+      if (data?.totalPages !== page) {
+        setPage(page + 1);
+      }
     }
   };
   const renderList = () => {
     return (
       <FlatList
-        data={
-          isLoading ? [1, 2, 3, 4, 5] : journalData
-        }
+        data={isLoading ? [1, 2, 3, 4, 5] : journalData}
         onRefresh={handleJournalRefresh}
         refreshing={refreshing}
         ListEmptyComponent={renderEmpty}
@@ -139,7 +132,9 @@ if(data?.totalPages!==page)
             title={item?.title}
             image={item?.image?.thumbnail}
             date={item?.createdAt}
-            onPress={() => props.navigation.navigate('ViewAllEntries',{id:item?._id})}
+            onPress={() =>
+              props.navigation.navigate('ViewAllEntries', {id: item?._id})
+            }
           />
         )}
       </View>
@@ -148,13 +143,10 @@ if(data?.totalPages!==page)
   const renderGrid = () => {
     return (
       <FlatList
-        data={
-          isLoading ? [1, 2, 3, 4, 5] : journalData
-        }
+        data={isLoading ? [1, 2, 3, 4, 5] : journalData}
         refreshing={refreshing}
         ListEmptyComponent={renderEmpty}
         onRefresh={handleJournalRefresh}
-
         ListHeaderComponent={renderHeader}
         keyExtractor={(item, index) => index}
         columnWrapperStyle={styles.columnStyle}

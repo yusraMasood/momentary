@@ -6,7 +6,8 @@ export const colors = {
     lightBlack:"#0E0E0E",
     green:"#58DFA2",
     lightRed:"#FF6E6E",
-    circleGrey:"rgba(0,0,0,0.0.5)"
+    // circleGrey:"rgba(0,0,0,0.0.9)",
+    circleGrey: "rgba(0,0,0,0.0.4)"
 
   },
   themeColor:{
@@ -16,7 +17,8 @@ export const colors = {
 
   },
   button:{
-    grey:'rgba(196,196,196,0.41)'
+    grey:'rgba(196,196,196,0.41)',
+    likeBlue:"#315486"
   },
   text:{
     offwhite:"#DADADA",

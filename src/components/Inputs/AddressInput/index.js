@@ -14,8 +14,8 @@ const AddressInput = props => {
       style={props.style}
     >
       <View style={styles.inputContainer}>
-        <RobotoRegular style={styles.placeholderText}>
-        Search Locations or Tags
+        <RobotoRegular numberOfLines={2} style={styles.placeholderText}>
+        {props.location?.address?props.location?.address:"Search Locations or Tags"}
         </RobotoRegular>
 
 
