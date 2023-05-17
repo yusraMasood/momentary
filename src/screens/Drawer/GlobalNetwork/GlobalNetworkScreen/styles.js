@@ -11,25 +11,20 @@ const styles = StyleSheet.create({
     height: vh*100,
     // width: vw*100
 },
-markerIcon:{
-  height: vh*8,
-  width: vh*8,
-  resizeMode: "contain"
-},
+
 circleImg:{
   height:vh*1.5,
   width: vh*1.5,
   borderRadius: (vh*1.6)/2
 },
 circleOuter:{
-  height: vh*3,
-  width: vh*3,
+  height: vh*5,
+  width: vh*5,
   borderRadius: (vh*5.5)/2,
-  backgroundColor:colors.general.circleGrey,
-  // backgroundColor: "red",
+  // backgroundColor:colors.general.circleGrey,
+  backgroundColor: colors.skeleton.background,
   alignItems: "center",
   justifyContent: "center",
-  // marginLeft: vw*6
 
 
 },
@@ -42,7 +37,7 @@ locationPopcontainer: {
   paddingVertical: vh * 2.5,
   borderRadius: vh * 2,
   paddingHorizontal: vw * 4,
-  marginTop: vh*0.5,
+  // marginTop: vh*0.5,
   // marginBottom: vh*2
 },
 locationText: {
@@ -58,7 +53,8 @@ printContainer: {
 },
 printimg: {
   height: vh * 3,
-  width: vw * 14,
+  width: vh * 3,
+  backgroundColor: "red",
   resizeMode: 'cover',
 },
 imgArrayContainer: {
@@ -67,14 +63,9 @@ imgArrayContainer: {
 },
 markerIcon:{
   height: vh*5,
-  // position: "absolute",
-  // bottom: -vh*2,
-  // zIndex: 999,
   width: vh*5,
-  resizeMode: "contain",
-  // backgroundColor: "red",
-  // marginLeft: vw*6
-  // marginBottom: vh*1
+  marginBottom: vh*0.5,
+  resizeMode: "contain"
 },
 
 });

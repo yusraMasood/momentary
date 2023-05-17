@@ -88,10 +88,14 @@ export const authSliceToken = createSlice({
     setFont:(state,action)=>{
       state.fontStyle = action.payload;
 
-    }
+    },
+    setProfile: (state, action) => {
+      state.profile = action.payload;
+    },
+    
   },
 });
-export const {setToken,setFont} = authSliceToken.actions;
+export const {setToken,setFont,setProfile} = authSliceToken.actions;
 export default authSliceToken.reducer;
 export const useToken = () => {
   const token = useSelector(state => state.auth.token);
@@ -99,6 +103,10 @@ export const useToken = () => {
 };
 export const useFont = () => {
   const token = useSelector(state => state.auth.fontStyle);
+  return token;
+};
+export const userProfile = () => {
+  const token = useSelector(state => state.auth.profile);
   return token;
 };
 

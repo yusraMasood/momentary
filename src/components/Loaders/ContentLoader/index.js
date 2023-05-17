@@ -18,8 +18,8 @@ const ContentLoader = props => {
        <SkeletonPlaceholder.Item
         borderRadius={4}
         {...props}
-        width={vw * 90}
-        height={vw * 90 * 0.4}
+        width={vw * 88}
+        height={vw * 88 * 0.4}
         // marginTop={3}
         marginVertical={vh*3}
 

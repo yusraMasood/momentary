@@ -4,6 +4,7 @@ import { generalImages, icons } from '../../../assets/images'
 import styles from './styles'
 import { colors } from '../../../utils/appTheme'
 import RippleHOC from '../../wrappers/Ripple'
+import ButtonLoading from '../../Loaders/ButtonLoading'
 
 const CommentInput=(props)=>{
     return(
@@ -17,11 +18,16 @@ const CommentInput=(props)=>{
         value={props.value}
         multiline={true}
         onChangeText={props.onChangeText}
+        onSubmitEditing={props.onSubmitEditing}
         />
-        <RippleHOC onPress={props.addComment}>
+        {props.loader?
+      <ButtonLoading/>:
+        <RippleHOC  onPress={props.addComment}>
         <Image source={icons.send} style={styles.sendIcon}/>
 
         </RippleHOC>
+
+      }
         </View>
       </View>
 

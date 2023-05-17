@@ -15,6 +15,7 @@ import ErrorMessage from '../../../components/Error/ErrorMessage';
 import useAuth from '../../../hooks/useAuth';
 import { useGlobalLoader } from '../../../state/general';
 import { getBiometricData } from '../../../utils/Validations';
+import { useGetProfileQuery } from '../../../state/account';
 
 const LoginScreen = props => {
   const passwordRef = useRef(null);
@@ -23,11 +24,14 @@ const LoginScreen = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [deviceId,setDeviceId] =useState("1234")
+
   const [thumb,setThumb] =useState(false)
   // console.log(message);
 
   const onSubmit = () => {
-    loginUser({email,password})
+    loginUser({email,password}).then((res)=> {
+      
+    })
   };
   const biometric=()=>{
     // getBiometricData()

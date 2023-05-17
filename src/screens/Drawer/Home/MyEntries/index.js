@@ -52,7 +52,7 @@ const MyEntries = props => {
 
   const handleOnEndReached = () => {
     if (myEntries.length > 6) {
-      if(data?.totalPages!=page)
+      if(data?.totalPages<page+1 )
       {
         setPage(page + 1);
       }
@@ -169,7 +169,7 @@ const MyEntries = props => {
 const renderListFooter=()=>{
   return(
     <View>
-      {isLoading && [1,2,3,4].map((value,index)=>{
+      {isFetching && [1,2,3,4].map((value,index)=>{
         return(
           <CustomSkeleton
             height={15}
@@ -187,7 +187,7 @@ const renderListFooter=()=>{
 const renderGridFooter=()=>{
   return(
     <View>
-      {isLoading && [1,2,3,4].map((value,index)=>{
+      {isFetching && [1,2,3,4].map((value,index)=>{
         return(
           <CustomSkeleton
           height={15}
@@ -221,6 +221,7 @@ const renderGridFooter=()=>{
           ListEmptyComponent={renderEmpty}
           ListFooterComponent={renderListFooter}
           renderItem={renderNotes}
+          
           onEndReached={handleOnEndReached}
         />
       </View>

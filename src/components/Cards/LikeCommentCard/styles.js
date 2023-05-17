@@ -99,6 +99,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
 
   },
+  commentOuterContainer:{
+    marginBottom: vh*9
+  },
   commentInnerContainer:{
     backgroundColor: colors.input.greyBackground,
     borderRadius: vh*1,
@@ -113,7 +116,8 @@ const styles = StyleSheet.create({
   userCommentText:{
     color: colors.general.white,
     fontSize: vh*1.5,
-    width: vw*65
+    width: vw*65,
+    marginTop: vh*0.5
   }
 });
 export default styles;

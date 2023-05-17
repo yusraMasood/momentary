@@ -5,13 +5,14 @@ import FriendNetworkCard from '../../Cards/FriendNetworkCard';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import EmptyComponent from '../../EmptyComponent';
+import CustomSkeleton from '../../Loaders/CustomSkeleton';
+import { vh, vw } from '../../../utils/dimensions';
 
 const UserPosts = props => {
   const [refreshing,setRefreshing] =useState()
   const navigation =useNavigation()
   
   const renderFriendCard = ({item}) => {
-    console.log(" item ",item);
     return (
       <FriendNetworkCard
       onPressFriend={()=>navigation.navigate('FriendDetails',{id: item?.user?._id})}
@@ -39,6 +40,35 @@ const UserPosts = props => {
     props?.refetch();
     setRefreshing(false)
   }, []);
+  const handleOnEndReached=()=>{
+    console.log(" hgello");
+    if (props.array.length > 6) {
+    console.log(" hgello 2",props.page<=props?.totalPages,props.page,props?.totalPages);
+
+      if(props.page<=props?.totalPages )
+      {
+    console.log(" hgello 3");
+
+        props.setPage(props.page + 1);
+      }
+    }
+  }
+  const renderFooter=()=>{
+    <View>
+    {props.isFetching && [1,2,3,4].map((value,index)=>{
+      return(
+        <CustomSkeleton
+        height={88}
+        width={30}
+        marginTop={vh * 2}
+        // marginRight={vw * 4}
+        marginLeft={vw * 2}
+      />
+        
+      )
+    })}
+  </View>
+  }
   return (
       <FlatList
         data={props.array}
@@ -47,9 +77,11 @@ const UserPosts = props => {
         }
         key={'friendArar'}
         keyExtractor={(item, index) => index}
+        onEndReached={handleOnEndReached}
         contentContainerStyle={styles.flatListContainer}
         renderItem={renderFriendCard}
         ListEmptyComponent={renderEmpty}
+        ListFooterComponent={renderFooter}
       />
   );
 };

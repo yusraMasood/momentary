@@ -32,7 +32,7 @@ export const endpoints = {
     entryById:"user/journal/entries" ,
     update:"user/journal/entries/update",
     pinEntry:"user/journal/entries/pin",
-    addToLibrary:"user/journal/entries/favorite",
+    addToLibrary:"feeds/favorite",
     like:"feeds/react",
     comment:"feeds/comment",
     share:"feeds/share"
@@ -41,6 +41,7 @@ export const endpoints = {
     myFriends:"user/my-friends/all",
     friendRequest:"user/friend-requests/all",
     feed:"feeds/all",
+    feedDetails: "feeds",
     respondFriendRequest:"user/friend-requests/respond",
     sendRequest:"user/friend-requests/send",
     removeFriend:"user/my-friends/remove",

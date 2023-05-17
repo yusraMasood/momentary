@@ -48,6 +48,7 @@ useEffect(()=>{
 
 
   const renderConnectionCard = ({item}) => {
+    // console.log(" item",item);
     return (
       <FriendRequestCard
         name={item?.friend?.fullName}
@@ -55,7 +56,7 @@ useEffect(()=>{
         job={'Last Entry on mm/dd/yyyy'}
         request={'Remove'}
         friendRequestId={item?._id}
-        onPress={() => props.navigation.navigate('FriendDetails')}
+        onPress={() => props.navigation.navigate('FriendDetails', {id: item?.friend?._id})}
         refetch={friendsData?.refetch}
         loader={friendsData?.isLoading}
       />
@@ -71,12 +72,13 @@ useEffect(()=>{
         friendRequestId={item?._id}
         refetch={friendRequest?.refetch}
         job={'Content Writer'}
-        onPress={() => props.navigation.navigate('FriendDetails')}
+        onPress={() => props.navigation.navigate('FriendDetails', {id: item?.friend?._id})}
         loader={friendRequest?.isLoading}
       />
     );
   };
   const renderOutgoingCard = ({item}) => {
+    // console.log(" item",item);
     return (
       <FriendRequestCard
         name={item?.friend?.fullName}
@@ -86,7 +88,7 @@ useEffect(()=>{
         friendRequestId={item?._id}
         request={'Cancel'}
         onPressRequest={() => addFriendRef.current.show()}
-        onPress={() => props.navigation.navigate('FriendDetails')}
+        onPress={() => props.navigation.navigate('FriendDetails', {id: item?.friend?._id})}
         loader={friendRequest?.isLoading}
       />
     );

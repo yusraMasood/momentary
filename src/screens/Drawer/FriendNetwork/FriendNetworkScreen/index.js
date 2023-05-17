@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {View, Image, FlatList,TextInput} from 'react-native';
 import { generalImages, icons } from '../../../../assets/images';
 import FriendNetworkCard from '../../../../components/Cards/FriendNetworkCard';
@@ -12,8 +12,9 @@ import styles from './styles';
 import { useGetFeedQuery } from '../../../../state/friends';
 
 const FriendNetworkScreen = (props) => {
-  const {data,isLoading,originalArgs, refetch} =useGetFeedQuery({
-    page:1,
+  const [page,setPage] =useState(1)
+  const {data,isLoading,originalArgs,error, refetch} =useGetFeedQuery({
+    page:page,
     limit:10,
     privacy:"myNetwork"})
 
@@ -57,6 +58,8 @@ console.log("hello,data?.feeds",data?.feeds);
 <UserPosts
 clickText={'Add To library'}
 loading={isLoading} array={data?.feeds} refetch={refetch}
+page={page}
+setPage={setPage}
 
 />
       {/* <FlatList data={[1, 2, 3, 4, 5]} 

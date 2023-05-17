@@ -11,6 +11,7 @@ import {
 import {validateEmail} from '../../utils/Validations';
 import {Toast, getMessage} from '../../Api/APIHelpers';
 import {toggleGlobalLoader} from '../../state/general';
+import { useGetProfileQuery } from '../../state/account';
 
 export default () => {
   const [postLogin,message] = usePostLoginMutation();
@@ -19,7 +20,7 @@ export default () => {
   const [postResetPassword] = usePostResetPasswordMutation();
   const dispatch = useDispatch();
 
-  console.log("message",message);
+  // console.log("message",message);
     const loginUser = async ({email, password}) => {
     dispatch(toggleGlobalLoader(true));
 
@@ -36,16 +37,21 @@ export default () => {
         Toast.error('Please Enter Your Password');
         throw new Error('Please Enter Your Password');
       }
-      await postLogin({email, password, role: 'user'}).then(res => {
+    const response =  await postLogin({email, password, role: 'user'}).then(res => {
         dispatch(toggleGlobalLoader(false));
-        if (res?.error?.data) {
+        if (res?.error) {
           Toast.error(res?.error?.data?.message);
         } else {
           dispatch(setToken(res?.data?.token));
         }
+        return res
       });
+      // console.log(" response ", response );
+      return response?.data
     } catch (e) {
+      
       dispatch(toggleGlobalLoader(false));
+      console.log("error", e);
       Toast.error(getMessage(e));
       throw new Error(getMessage(e?.message));
     }

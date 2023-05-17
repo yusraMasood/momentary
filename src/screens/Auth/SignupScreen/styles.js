@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   cameraMainContainer: {
     position: 'absolute',
     bottom: vh * 0.6,
-    left: vw * 16,
+    left: vw * 14,
   },
   // usernameArrayContainer:{
   //     flexDirection: "row",

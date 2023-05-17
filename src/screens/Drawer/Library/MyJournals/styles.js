@@ -18,6 +18,10 @@ const styles=StyleSheet.create({
     //     fontSize: vh*1.85
 
     // },
+    footerContainer:{
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
     emptyText:{
         color: colors.text.offwhite,
         fontSize: vh*2.5

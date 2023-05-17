@@ -89,6 +89,7 @@ const EditEntry = props => {
   //   });
   // }, [props.navigation]);
 
+  // console.log("data?.journalEntry?.images",data?.journalEntry?.images);
   useEffect(() => {
     // const unsubscribe = props.navigation.addListener('focus', () => {
     //   refetch();

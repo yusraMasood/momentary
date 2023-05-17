@@ -7,8 +7,8 @@ import LibraryCollection from '../../screens/Drawer/Library/LibraryCollection';
 import MyJournals from '../../screens/Drawer/Library/MyJournals';
 import ViewAllEntries from '../../screens/Drawer/Library/ViewAllEntries';
 import AddEntryInJournal from '../../screens/Drawer/Library/AddEntryInJournal';
-import LibraryFavouriteContent from '../../screens/Drawer/Library/LibraryFavouriteContent';
-import LibraryFavouritePost from '../../screens/Drawer/Library/LibraryFavouritePost';
+import LibraryConnectContent from '../../screens/Drawer/Library/LibraryConnectContent';
+import LibraryGlobalContent from '../../screens/Drawer/Library/LibraryGlobalContent';
 const Stack = createStackNavigator();
 
 const LibraryNavigator = () => {
@@ -22,8 +22,8 @@ const LibraryNavigator = () => {
       <Stack.Screen name={"MyJournals"} component={MyJournals}/>
       <Stack.Screen name={"ViewAllEntries"} component={ViewAllEntries}/>
       <Stack.Screen name={"AddEntryInJournal"} component={AddEntryInJournal}/>
-      <Stack.Screen name={"LibraryFavouriteContent"} component={LibraryFavouriteContent}/>
-      <Stack.Screen name={"LibraryFavouritePost"} component={LibraryFavouritePost}/>
+      <Stack.Screen name={"LibraryConnectContent"} component={LibraryConnectContent}/>
+      <Stack.Screen name={"LibraryGlobalContent"} component={LibraryGlobalContent}/>
     </Stack.Navigator>
   );
 };

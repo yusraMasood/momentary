@@ -9,36 +9,40 @@ import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
 import { useGetProfileQuery } from '../../../../state/account';
+import { userProfile } from '../../../../state/auth';
 
 const MyProfile = (props) => {
 
-  const {data,isLoading, isFetching, isError} =useGetProfileQuery()
-  useEffect(()=>{
-    // getProfile()
-  },[])
+  // const {data,isLoading, isFetching, isError} =useGetProfileQuery()
+  const profile=userProfile()
+
+  // console.log("profile redux", profile);
+  // useEffect(()=>{
+  //   getProfile()
+  // },[])
   const profileArray = [
     {
       title: 'Name',
-      value: data?.user?.fullName,
+      value: profile?.fullName,
     },
     {
       title: 'Phone No',
-      value: data?.user?.phone,
+      value: profile?.phone,
     },
     {
       title: 'Email',
-      value: data?.user?.email,
+      value: profile?.email,
     },
   ];
   return (
     <ScreenWrapper style={styles.container}>
-      <Image source={data?.user?.image?.thumbnail?{uri:data?.user?.image?.thumbnail}: generalImages.userImage} style={styles.userImg} />
+      <Image source={profile?.image?.thumbnail?{uri:profile?.image?.thumbnail}: generalImages.userImage} style={styles.userImg} />
       <RippleHOC onPress={()=>props.navigation.navigate("ChangePassword")}>
       <RobotoMedium style={styles.passwordText}>Change Password</RobotoMedium>
       </RippleHOC>
       <View>
         <ContentDataComponent
-        loader={isLoading}
+        // loader={isLoading}
         array={profileArray}
         />
       </View>

@@ -14,6 +14,7 @@ const ContentContainer = props => {
       showsVerticalScrollIndicator={false}
       bounces={false}
       refreshControl={props.refreshControl}
+      
       {...props}
       contentContainerStyle={[{flexGrow: 1}, props.contentContainerStyle]}
       style={[styles.container, props.style]}>

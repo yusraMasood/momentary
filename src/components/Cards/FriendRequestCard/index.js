@@ -17,7 +17,7 @@ const FriendRequestCard=(props)=>{
 
     const respondRequest = ( action) => {
         postAddFriend({id:props.friendRequestId, action}).then(res => {
-        console.log("response accept or decline Request",res);
+
 
           if (res?.data) {
             Toast.success(res?.data?.message);
@@ -55,7 +55,6 @@ const FriendRequestCard=(props)=>{
   const cancelRequest=()=>{
     setRemoveFriendLoader(true)
     postRemoveFriendRequest(props.friendRequestId).then((res)=>{
-        console.log("response cancel Request",res);
     setRemoveFriendLoader(false)
 
         if (res?.data) {

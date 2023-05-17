@@ -14,8 +14,11 @@ import { Toast } from '../../../../Api/APIHelpers';
 import moment from 'moment';
 import CustomSkeleton from '../../../../components/Loaders/CustomSkeleton';
 import { vh,vw } from '../../../../utils/dimensions';
+import { useGetProfileQuery } from '../../../../state/account';
+import { setProfile } from '../../../../state/auth';
 
 const HomeScreen = props => {
+  const {data:profile} =useGetProfileQuery()
   const {data, isLoading, refetch, error} = useGetEntriesQuery({
     page:1,
     // limit:1
@@ -54,7 +57,10 @@ const HomeScreen = props => {
         console.log('catch', e);
       });
   };
+  // console.log("profile?.",profile);
   useEffect(() => {
+ 
+    dispatch(setProfile(profile?.user))
   
      
     setupMethods();

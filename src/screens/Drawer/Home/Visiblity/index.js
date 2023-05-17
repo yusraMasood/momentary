@@ -10,8 +10,8 @@ import { saveSetting, useSetting } from '../../../../state/entry'
 
 const Visiblity =(props)=>{
 const setting =useSetting()
-    const {type,visiblity} =props?.route?.params
-    const [itemValue,setItemValue] =useState(visiblity=="public"?"Global Network":visiblity=="private"?"Private":visiblity=="myNetwork"?"My Network":visiblity)
+
+    const [itemValue,setItemValue] =useState(setting?.visiblity)
     const dispatch =useDispatch()
     const locationArray=[
         "Global Network","Private","My Network",

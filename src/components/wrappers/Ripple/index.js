@@ -13,6 +13,7 @@ const RippleHOC = props => {
       onPress={handleOnPress}
       style={[props?.style]}
       rippleColor="gray"
+      
       rippleOpacity={props.rippleOpacity ? props.rippleOpacity : 0.3}>
       {props?.children}
     </Ripple>

@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
       placeholderText:{
         color: colors.input.greyBorder,
         fontSize: vh*1.7,
+        width: vw*80,
       },
       imgIcon: {
         height: vh * 1.9,

@@ -20,8 +20,6 @@ import {useDispatch} from 'react-redux';
 import ContentContainer from '../../../../components/wrappers/ContentContainer';
 import {
   saveSetting,
-  useGetEntriesQuery,
-  useGetEntryByIdQuery,
   useSetting,
 } from '../../../../state/entry';
 import useEntry from '../../../../hooks/useEntry';
@@ -34,7 +32,7 @@ import { Toast } from '../../../../Api/APIHelpers';
 const NewEntry = props => {
   // const {lastItem} = props?.route?.params;
   const setting =useSetting()
-  const [entryText, setEntryText] = useState('<h1>DDHHDHD</h2>');
+  const [entryText, setEntryText] = useState('');
   const [background, setBackground] = useState(false);
   const [imageSelection, setImageSelection] = useState(false);
   const [imageArray, setImageArray] = useState([]);
@@ -110,15 +108,22 @@ const NewEntry = props => {
   const renderImage = ({item}) => {
     return <ImageComponent uri={item?.thumbnail} />;
   };
+  
   const updateItemImages = img => {
-    setImageIdArray([...imageIdArray, img?._id]);
+    // console.log("image",img);
+   
+
+
+    setImageIdArray(i=> [...i, img?._id]);
     setImageArray(p => [...p, img]);
   };
+  // console.log("image",imageIdArray);
+  // console.log("image",imageArray);
   const onPressSend = () => {
-    if (visiblity == "") {
+    if (setting?.visiblity == "") {
     return  publishEntry.current.show();
     }
-    if (visiblity=== 'My Network') {
+    if (setting?.visiblity=== 'My Network') {
       return  networkPopup.current.show();
     } 
     else {
@@ -130,7 +135,7 @@ const NewEntry = props => {
       entryText,
       imageArray: imageIdArray,
       journal: dropdownValue?._id,
-      visiblity,
+      visiblity: setting?.visiblity,
       comment,
       hashtags: myhashtags,
       selectedPeople: selectedPeopleId,
@@ -171,7 +176,7 @@ const NewEntry = props => {
       entryText,
       imageArray: imageIdArray,
       journal: dropdownValue?._id,
-      visiblity,
+      visiblity: setting?.visiblity,
       comment,
       hashtags: myhashtags,
       selectedPeople: selectedPeopleId,
@@ -298,7 +303,7 @@ const NewEntry = props => {
           // onPressTag={() => hashTagRef.current.show()}
           onPressTag={() => hashTagRef.current.show()}
           onPressDelete={() => deleteRef.current.show()}
-          visiblity={visiblity}
+          visiblity={setting?.visiblity}
           hashtags={myhashtags}
           comment={comment}
           // comment={comment}

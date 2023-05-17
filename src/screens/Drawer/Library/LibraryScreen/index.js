@@ -33,8 +33,9 @@ const LibraryScreen = props => {
         generalImages?.bookCover3,
       ],
       onPress: () =>
-        props.navigation.navigate('LibraryFavouriteContent', {
+        props.navigation.navigate('LibraryGlobalContent', {
           type: 'Favorite Connect Content',
+          type:"myNetwork"
         }),
     },
     {
@@ -46,8 +47,10 @@ const LibraryScreen = props => {
         generalImages?.bookCover3,
       ],
       onPress: () =>
-        props.navigation.navigate('LibraryFavouriteContent', {
+        props.navigation.navigate('LibraryGlobalContent', {
           type: 'Favorite Global Content',
+          type:"public"
+
         }),
     },
     {

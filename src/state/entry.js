@@ -99,23 +99,24 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       }),
     }),
     postCommentEntry: builder.mutation({
-      query: (queryArg) => ({
-        url: `${endpoints.entry.comment}/${queryArg?.id}`,
+      query: (data) => ({
+        url: `${endpoints.entry.comment}/${data?.id}`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        params: queryArg,
+        
+        body: data,
       }),
     }),
     postShareEntry: builder.mutation({
-      query: (queryArg) => ({
-        url: `${endpoints.entry.share}/${queryArg}`,
+      query: (data) => ({
+        url: `${endpoints.entry.share}/${data?.id}`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        params: queryArg,
+        body: data,
       }),
     }),
 

@@ -12,27 +12,37 @@ import CommentInput from '../../Inputs/CommentInput'
 import SharePopup from '../../popups/SharePopup'
 import MyNetworkPopup from '../../popups/MyNetworkPopup'
 import useEntry from '../../../hooks/useEntry'
+import SuccessPopup from '../../popups/SuccessPopup'
+import { useNavigation } from '@react-navigation/native'
+import useProfile from '../../../hooks/useProfile'
 
 
  const LikeCommentCard=(props)=>{
+  const navigation =useNavigation()
+  const profile=useProfile()
   const [visiblity,setVisiblity]=useState("")
   const [postShareEntry] = usePostShareEntryMutation()
   const {shareEntry} =useEntry()
 
   const [postCommentEntry] =usePostCommentEntryMutation()
   const [postLikeEntry,message]=usePostLikeEntryMutation()
-    const [like,setLike] =useState(false)
+    const [like,setLike] =useState(props.isReacted)
     const [selectedPeople,setSelectedPeople] =useState([])
     const [selectedPeopleId,setSelectedPeopleId] =useState([])
   const [comment,setComment] =useState("")
   const shareRef=useRef(null)
   const networkRef=useRef(null)
+  const successRef=useRef(null)
   
+  console.log("profile",props.isReacted);
   const onPressLike=()=>{
     postLikeEntry(props?.id).then(res=>{
+      console.log("res",res);
       if(res?.data)
       {
+       props.refetch()
         setLike(!like)
+        
       }
       else{
         Toast.error("Something went wrong")
@@ -58,12 +68,16 @@ import useEntry from '../../../hooks/useEntry'
   }
   const onGlobalPeople=()=>{
     // setVisiblity("public")
-    shareEntry({journalEntry: props.entryDetail,privacy:"public"})
+    shareEntry({journalEntry: props.entryDetail,privacy:"public"}).then((res)=>{
+      successRef.current.show()
+    })
 
   }
   const onMyNetwork=()=>{
     // setVisiblity("myNetwork")
-    shareEntry({journalEntry: props.entryDetail,privacy:"myNetwork", selectedPeopleId})
+    shareEntry({journalEntry: props.entryDetail,privacy:"myNetwork", selectedPeopleId}).then((res)=>{
+      successRef.current.show()
+    })
     // networkRef.current.show()
   }
     return(
@@ -91,19 +105,20 @@ import useEntry from '../../../hooks/useEntry'
           </RippleHOC>
 
         </View>
-          {[1,2,3,4,5,6,7].map((value,index)=>{
+        <View style={styles.commentOuterContainer}>
+          {props.comments &&props.comments.map((value,index)=>{
             return(
               <View style={styles.commentMainContainer}>
-                <Image source={generalImages?.userImage} style={styles.userImage}/>
+                <Image source={value?.user?.image?.thumbnail?{uri: value?.user?.image?.thumbnail}:generalImages?.userImage} style={styles.userImage}/>
                 <View style={styles.commentInnerContainer}>
-                  <RobotoRegular style={styles.usernameText}>Oliver James</RobotoRegular>
+                  <RobotoRegular style={styles.usernameText}>{value?.user?.fullName}</RobotoRegular>
                   <RobotoRegular style={styles.userCommentText}> 
-                  Lorem ipsum dolor sit amet, consectetur are it adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sitom
-                  </RobotoRegular>
+                 {value?.content} </RobotoRegular>
                   </View>
               </View>
             )
           })}
+          </View>
       <SharePopup
       reference={shareRef}
       onPressSpecific={onSpecificPeople}
@@ -119,6 +134,13 @@ import useEntry from '../../../hooks/useEntry'
       selectedPeopleId={selectedPeopleId}
       setSeelectedPeopleId={setSelectedPeopleId} 
       
+      />
+      <SuccessPopup
+      reference={successRef}
+      desc={"Entry is Shared Successfully! "}
+      title={"Entry Shared"}
+      onAccept={()=> navigation.goBack()}
+
       />
       {/* <CommentInput/> */}
         </View>

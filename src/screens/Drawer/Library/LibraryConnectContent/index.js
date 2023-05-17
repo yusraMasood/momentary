@@ -4,7 +4,7 @@ import DamionRegular from '../../../../components/Texts/DamionRegular';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
 
-const LibraryFavouriteContent = props => {
+const LibraryConnectContent = props => {
   useLayoutEffect(() => {
     props.navigation.setOptions({
       headerTitle: () => {
@@ -18,8 +18,10 @@ const LibraryFavouriteContent = props => {
   }, [props.navigation]);
   return (
     <ScreenWrapper style={styles.container}>
-      <UserPosts/>
+      <UserPosts loading={isLoading} array={data?.feeds} refetch={refetch}
+            page={page}
+            setPage={setPage}/>
     </ScreenWrapper>
   );
 };
-export default LibraryFavouriteContent;
+export default LibraryConnectContent;

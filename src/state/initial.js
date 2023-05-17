@@ -9,6 +9,7 @@ const auth = {
   state: {
     token: null,
     fontStyle:null,
+    profile:null
     
   },
   name: 'auth',
@@ -16,7 +17,7 @@ const auth = {
 const entry = {
   state: {
   setting:{
-    visiblity: "",
+    visiblity: "Global Network",
     hashtags:[],
     comment: true,
     location: null,

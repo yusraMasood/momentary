@@ -122,7 +122,7 @@ const routesWithBackIcon = {
   BookPrintingPayment:"BookPrintingPayment",
   BookPrintingOrderSummary:"BookPrintingOrderSummary",
   ViewLegacyContact:"ViewLegacyContact",
-  LibraryFavouriteContent:"LibraryFavouriteContent"
+  LibraryGlobalContent:"LibraryGlobalContent"
 };
 const routesWithImage = {};
 const routesWithSetting = {

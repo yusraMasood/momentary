@@ -5,6 +5,7 @@ import PoppinsRegular from '../../Texts/PoppinsRegular';
 import RobotoRegular from '../../Texts/RobotoRegular';
 import styles from './styles';
 import moment from 'moment';
+import RenderHtmlComponent from '../../ReusableComponent/RenderHtmlComponent';
 
 const JournalCard = (props) => {
   return (
@@ -16,9 +17,10 @@ const JournalCard = (props) => {
           {''}{moment(props.publish).format("MMMM DD,YYYY - HH:MM A")}
         </RobotoRegular>
       </View>
-      <RobotoRegular style={styles.descText}>
+      {/* <RobotoRegular style={styles.descText}>
     {props.desc}
-      </RobotoRegular>
+      </RobotoRegular> */}
+      <RenderHtmlComponent content={props.desc} />
       <View style={styles.alignComment}>
 
       <View style={styles.commentContainer}>

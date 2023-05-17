@@ -17,6 +17,8 @@ export const generalImages = {
     // avatar: require('./generalImages/avatar.png'),
   };
   export const icons = {
+    requestSent:require('./icons/requestSent.png'),
+    addfriend:require('./icons/addfriend.png'),
     mapPinAnimation:require('./icons/mapPinAnimation.gif'), 
     eyeClose: require('./icons/eyeClose.png'),
     faceRecognition: require('./icons/faceRecognition.png'),

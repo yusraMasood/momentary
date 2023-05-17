@@ -42,9 +42,7 @@ const FriendNetworkCard = (props) => {
    
   };
   const addToLibrary=()=>{
-    console.log(props.id);
     postAddToLibrary(props.id).then((res)=>{
-      console.log("tresss",res);
       if(res?.data?.message)
       {
         Toast.success(res?.data?.message)
@@ -61,7 +59,6 @@ const FriendNetworkCard = (props) => {
 
   }
   const onClickText=()=>{
-    console.log(props.clickText);
     if(props.clickText=="Remove Entry")
     {
       // deleteEntry()

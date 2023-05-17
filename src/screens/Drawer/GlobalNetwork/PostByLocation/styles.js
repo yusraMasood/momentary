@@ -2,13 +2,15 @@ import {StyleSheet} from 'react-native';
 import { fonts } from '../../../../assets/fonts';
 import {colors} from '../../../../utils/appTheme';
 import {vh, vw} from '../../../../utils/dimensions';
-// import { colors } from '../../../utils/appTheme'
-// import { vh, vw } from '../../../utils/dimensions'
 
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: vw * 6,
     paddingTop: vh*5.5
+  },
+  hashtagMainContainer:{
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
 
   userDetailsContainer: {
@@ -16,6 +18,12 @@ const styles = StyleSheet.create({
     paddingBottom: vh * 2.9 ,
     justifyContent: 'space-between',
     alignItems: "flex-start"
+  },
+  addFriendIcon:{
+    tintColor: colors.themeColor.yellow,
+    height: vh*2.5,
+    width: vh*2.5,
+    resizeMode: "contain"
   },
   editIcon: {
     height: vh * 2,
@@ -36,7 +44,7 @@ const styles = StyleSheet.create({
     color: colors.text.darkGrey,
     fontSize: vh * 1.54,
     paddingLeft: vw * 1,
-    // width: vw*20
+    width: vw*34
   },
   nameText: {
     color: colors.general.white,
@@ -59,7 +67,7 @@ const styles = StyleSheet.create({
   },
   bookImage:{
     height: vh*25,
-    width: vw*90,
+    width: vw*87,
     resizeMode: "cover",
     borderRadius: vh*1.3,
     marginTop: vh*2,
@@ -78,124 +86,8 @@ const styles = StyleSheet.create({
     marginTop: vh*2,
     justifyContent: "space-between"
   },
-  // textInputContainer: {
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  //   position: "absolute",
-  //   zIndex: 999,
-  //   bottom: 0,
-  //   backgroundColor: colors.general.black,
-  //   marginVertical: vh * 2,
-  // }, 
-  // inputContainer: {
-  //   // marginTop: vh*2,
-  //   marginLeft: vw * 3,
-  //   // width: vw*80,
-  //   backgroundColor: colors.input.greyBackground,
-  //   borderRadius: vh * 4,
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  //   paddingHorizontal: vw * 4,
-  // },
-  // sendIcon: {
-  //   height: vh * 1.7,
-  //   width: vw * 3,
-  //   resizeMode: 'contain',
-  // },
-  // userImage: {
-  //   height: vh * 5,
-  //   width: vh * 5,
-  //   resizeMode: 'contain',
-  //   borderRadius: vh * 4,
-  // },
-  // input: {
-  //   // flex: 1,
-  //   width: vw * 63,
-  //   color: colors.general.white,
-  //   paddingVertical: vh * 1.5,
-  //   // backgroundColor: "red",
-  //   fontFamily: fonts.roboto.regular,
-  //   // backgroundColor: "red"
-  // },
-  // likeIcon:{
-  //   height: vh*3,
-  //   width: vw*6,
-  //   marginRight: vw*2,
-  //   resizeMode: "contain"
-  // },
-  // likeContainer:{
-  //   flexDirection: "row",
-  //   alignItems: "center"
-  // },
-  // likeText:{
-  //   color: colors.text.grey,
-  //   fontSize: vh*1.7
-  // },
-  // likeCountContainer:{
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   justifyContent: "space-between",
-  //   marginTop: vh*2,
-  //   paddingRight: vw*3,
-  //   paddingBottom: vh*1,
-  //   marginBottom: vh*1.2,
-  //   borderBottomColor: colors.text.greyBorder,
-  //   borderBottomWidth: 1,
-  // },
-  // iconLike:{
-  //   height: vh*2.7,
-  //   width: vw*5.5,
-  //   resizeMode: "contain"
-
-  // },
-  // commentText:{
-  //   color: colors.text.grey,
-  //   fontSize: vh*2,
-  //   paddingLeft: vw*2,
-  // },
-  // likeFocusIcon:{},
-  // likeBtnContaienr:{
-
-  //   flexDirection: "row",
-  //   alignItems: "center"
-  // },
-  // likeMainContainer:{
-  //   flexDirection: "row",
-  //   justifyContent: "space-between"
-  // },
-  //  userImage:{
-  //       height: vh*5,
-  //       width: vw*10,
-  //       resizeMode: "contain",
-  //       borderRadius: vh*4,
-  //   },
-    // textInputContainer:{
-    //     flexDirection: "row",
-    //     alignItems: "center",
-    //     marginTop: vh*2,
-    // },
-    // input:{
-    //     // flex:1,
-    //     width: vw*63,
-    //     color: colors.general.white,
-    //     // backgroundColor: "red",
-    //     fontFamily: fonts.roboto.regular
-    //     // backgroundColor: "red"
-    // },
-  //   inputContainer:{
-  //     // marginTop: vh*2,
-  //     marginLeft: vw*3,
-  //     // width: vw*80,
-  //     backgroundColor: colors.input.greyBackground,
-  //     borderRadius: vh*4,
-  //     flexDirection: "row",
-  //     alignItems: "center",
-  //     paddingHorizontal: vw*4,
-  // },
-  // sendIcon:{
-  //     height: vh*1.7,
-  //     width: vw*3,
-  //     resizeMode: "contain"
-  // }
+  footerContainer:{
+    alignItems: "center"
+  },
 });
 export default styles;

@@ -19,7 +19,7 @@ const FriendDetails = props => {
   const [search,setSearch]=useState("")
   const [entryPage,setEntryPage] =useState(1)
   const [entriesData,setEntriesData] =useState([])
-  const {data,isLoading} =useGetFriendDetailsQuery(props?.route?.params?.id)
+  const {data,isLoading,error} =useGetFriendDetailsQuery(props?.route?.params?.id)
   const {data: friendAEntries,isFetching} =useGetFeedQuery({
     page:entryPage,
     limit:5,
@@ -28,7 +28,7 @@ const FriendDetails = props => {
     keyword: search
   })
   const [postRemoveFriend,removeFriendMessage] = usePostRemoveFriendMutation()
-  console.log("remove friend",removeFriendMessage);
+  console.log("remove friend",error);
 
 
   const [journals, setJournals] = useState(false);
@@ -108,7 +108,7 @@ const FriendDetails = props => {
         </View>
         <RobotoMedium style={styles.usernameText}>{data?.friendDetails?.fullName}</RobotoMedium>
         <RobotoRegular style={styles.descText}>
-          Lorem ipsum dolor sit amet, consectetur{'\n'}adipiscing elit.{' '}
+          {/* Lorem ipsum dolor sit amet, consectetur{'\n'}adipiscing elit.{' '} */}
         </RobotoRegular>
         <View style={styles.contact}>
           {contactArray.map((item, index) => {
@@ -199,10 +199,15 @@ const FriendDetails = props => {
       </View>
     );
   };
+  // console.log();
   return (
     <ScreenWrapper style={styles.container}>
       {isLoading?
+      error?
+      <RobotoMedium style={styles.usernameText}>Something went wrong</RobotoMedium>
+      :
     <ContentLoader/>:
+    
     renderEntryList()
     }
        

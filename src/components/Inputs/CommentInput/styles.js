@@ -8,10 +8,9 @@ const styles =StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         position: "absolute",
-        zIndex: 999,
         bottom: 0,
         backgroundColor: colors.general.black,
-        marginVertical: vh * 2,
+        // marginVertical: vh * 2,
       }, 
       inputContainer: {
         // marginTop: vh*2,
@@ -24,8 +23,9 @@ const styles =StyleSheet.create({
         paddingHorizontal: vw * 4,
       },
       sendIcon: {
-        height: vh * 1.7,
-        width: vw * 3,
+        height: vh * 1.8,
+        width: vh * 1.8,
+margin:vh*1,
         resizeMode: 'contain',
       },
       userImage: {
