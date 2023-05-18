@@ -7,7 +7,7 @@ export const colors = {
     green:"#58DFA2",
     lightRed:"#FF6E6E",
     // circleGrey:"rgba(0,0,0,0.0.9)",
-    circleGrey: "rgba(0,0,0,0.0.8)"
+    circleGrey: "rgba(0,0,0,0.0.5)"
 
   },
   themeColor:{

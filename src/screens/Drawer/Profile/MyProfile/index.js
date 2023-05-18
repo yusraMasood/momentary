@@ -4,7 +4,6 @@ import {generalImages} from '../../../../assets/images';
 import CustomButton from '../../../../components/Buttons/CustomButton';
 import ContentDataComponent from '../../../../components/ReusableComponent/ContentDataComponent';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
-import RobotoRegular from '../../../../components/Texts/RobotoRegular';
 import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
@@ -13,36 +12,32 @@ import { userProfile } from '../../../../state/auth';
 
 const MyProfile = (props) => {
 
-  // const {data,isLoading, isFetching, isError} =useGetProfileQuery()
-  const profile=userProfile()
-
-  // console.log("profile redux", profile);
-  // useEffect(()=>{
-  //   getProfile()
-  // },[])
+  const {data:profile,isLoading, isFetching, isError} =useGetProfileQuery()
+  const profileData=userProfile()
   const profileArray = [
     {
       title: 'Name',
-      value: profile?.fullName,
+      value: profile?.user?.fullName,
     },
     {
       title: 'Phone No',
-      value: profile?.phone,
+      value: profile?.user?.phone,
     },
     {
       title: 'Email',
-      value: profile?.email,
+      value: profile?.user?.email,
     },
   ];
+  console.log(" profile", profile,profileData);
   return (
     <ScreenWrapper style={styles.container}>
-      <Image source={profile?.image?.thumbnail?{uri:profile?.image?.thumbnail}: generalImages.userImage} style={styles.userImg} />
+      <Image source={profile?.user?.image?.thumbnail?{uri:profile?.user?.image?.thumbnail}: generalImages.userImage} style={styles.userImg} />
       <RippleHOC onPress={()=>props.navigation.navigate("ChangePassword")}>
       <RobotoMedium style={styles.passwordText}>Change Password</RobotoMedium>
       </RippleHOC>
       <View>
         <ContentDataComponent
-        // loader={isLoading}
+        loader={isLoading}
         array={profileArray}
         />
       </View>

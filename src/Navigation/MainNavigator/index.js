@@ -11,6 +11,7 @@ import FriendRequest from '../../screens/Drawer/FriendNetwork/FriendRequest';
 import PostByLocation from '../../screens/Drawer/GlobalNetwork/PostByLocation';
 import { setFont } from '../../state/auth';
 import { useDispatch } from 'react-redux';
+import EditEntry from '../../screens/Drawer/Home/EditEntry';
 
 const Stack = createStackNavigator();
 
@@ -50,6 +51,7 @@ const MainNavigator = () => {
       <Stack.Screen name={'ChangePassword'} component={ChangePassword} />
       <Stack.Screen name={'FriendRequest'} component={FriendRequest} />
       <Stack.Screen name={'PostByLocation'} component={PostByLocation} />
+      <Stack.Screen name={"EditEntry"} component={EditEntry}/>
 
     </Stack.Navigator>
   );

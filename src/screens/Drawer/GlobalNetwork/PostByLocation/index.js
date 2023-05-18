@@ -1,5 +1,5 @@
-import React, {useState,useCallback} from 'react';
-import {View, Image, TextInput,RefreshControl} from 'react-native';
+import React, {useState, useCallback} from 'react';
+import {View, Image, TextInput, RefreshControl} from 'react-native';
 import {generalImages, icons} from '../../../../assets/images';
 import LikeCommentCard from '../../../../components/Cards/LikeCommentCard';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
@@ -13,27 +13,33 @@ import moment from 'moment';
 import RenderHtmlComponent from '../../../../components/ReusableComponent/RenderHtmlComponent';
 import CommentInput from '../../../../components/Inputs/CommentInput';
 import {Toast, showToast} from '../../../../Api/APIHelpers';
-import {useGetFeedDetailsQuery, usePostSendFriendRequestMutation} from '../../../../state/friends';
-import CustomButton from '../../../../components/Buttons/CustomButton';
+import ImageView from 'react-native-image-viewing';
+import {
+  useGetFeedDetailsQuery,
+  usePostSendFriendRequestMutation,
+} from '../../../../state/friends';
 import RippleHOC from '../../../../components/wrappers/Ripple';
 import ButtonLoading from '../../../../components/Loaders/ButtonLoading';
+import useProfile from '../../../../hooks/useProfile';
 
 const PostByLocation = props => {
-  // console.log("post by id",props?.route?.params?.id);
   const [comment, setComment] = useState('');
-  const [refreshing,setRefreshing] =useState(false)
+  const [visible, setIsVisible] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [postCommentEntry, commentDetails] = usePostCommentEntryMutation();
-  const [postSendFriendRequest, requestInfo]= usePostSendFriendRequestMutation()
-  const [requestSent,setRequestSent] =useState(false)
+  const [
+    postSendFriendRequest,
+    requestInfo,
+  ] = usePostSendFriendRequestMutation();
+  const [requestSent, setRequestSent] = useState(false);
 
   const {
-    data: postDetail, 
+    data: postDetail,
     isLoading,
     isFetching,
     error,
     refetch,
   } = useGetFeedDetailsQuery(props?.route?.params?.id);
-  // console.log("postDetail error",postDetail);
   const addComment = () => {
     if (comment === '') {
       return Toast.error('Please Write Comment before submitting..');
@@ -52,27 +58,22 @@ const PostByLocation = props => {
       }
     });
   };
-  const sendFriendRequest=()=>{
-    // console.log("ddpdjodjopd",postDetail);
-    postSendFriendRequest({friend: postDetail?.feed?.user?._id}).then((res)=>{
-      console.log("send friend request",res);
-      if(res?.data){
-        showToast(res?.data?.message)
-        setRequestSent(true)
+  const sendFriendRequest = () => {
+    postSendFriendRequest({friend: postDetail?.feed?.user?._id}).then(res => {
+      if (res?.data) {
+        Toast.success(res?.data?.message);
+        setRequestSent(true);
       }
-      if(res?.error)
-      {
-        Toast.error(res?.error?.data?.message)
+      if (res?.error) {
+        Toast.error(res?.error?.data?.message);
       }
-
-    })
-
-
-  }
+    });
+  };
+  console.log("postDetail",postDetail);
 
   const renderImages = () => {
     return (
-      <View>
+      <RippleHOC onPress={() => setIsVisible(true)}>
         {postDetail?.feed?.images.length > 0 && (
           <Image
             source={
@@ -83,35 +84,52 @@ const PostByLocation = props => {
             style={styles.bookImage}
           />
         )}
-
         <View style={styles.bookImagecontainer}>
           {postDetail?.feed?.images.length > 1 &&
-            postDetail?.feed?.images.slice(1).map((value, item) => {
+            postDetail?.feed?.images.slice(1).map((value, index) => {
               return (
                 <View style={styles.smallBookImageContainer}>
-                  <Image
-                    source={
-                      value?.thumbnail
-                        ? {uri: value?.thumbnail}
-                        : generalImages.defaultImage
-                    }
-                    style={styles.bookSmallImage}
-                  />
+                  {index === 2 ? (
+                    <View>
+                      <Image
+                        style={[styles.bookSmallImage]}
+                        source={
+                          value?.thumbnail
+                            ? {uri: value?.thumbnail}
+                            : generalImages.defaultImage
+                        }
+                      />
+                      <View style={styles.imgStyle}>
+                        <RobotoMedium style={styles.numberText}>
+                          +{postDetail?.feed?.images.length - 2}
+                        </RobotoMedium>
+                      </View>
+                    </View>
+                  ) : (
+                    <Image
+                      source={
+                        value?.thumbnail
+                          ? {uri: value?.thumbnail}
+                          : generalImages.defaultImage
+                      }
+                      style={styles.bookSmallImage}
+                    />
+                  )}
                 </View>
               );
             })}
         </View>
-      </View>
+      </RippleHOC>
     );
   };
-// const handlePostRefresh=()=>{
-//   setRefreshing(true);
-//   refetch();
-//   setRefreshing(false);
-// }
-const onRefresh = useCallback(() => {
-  refetch();
-}, []);
+  // const handlePostRefresh=()=>{
+  //   setRefreshing(true);
+  //   refetch();
+  //   setRefreshing(false);
+  // }
+  const onRefresh = useCallback(() => {
+    refetch();
+  }, []);
   return (
     <ScreenWrapper style={styles.container}>
       <ContentContainer
@@ -123,21 +141,24 @@ const onRefresh = useCallback(() => {
       >
         {isLoading ? (
           <ContentLoader />
-        ) :error?
-        <RobotoRegular style={styles.nameText}>{error?.data?.message}</RobotoRegular>
-        : (
+        ) : error ? (
+          <RobotoRegular style={styles.nameText}>
+            {error?.data?.message}
+          </RobotoRegular>
+        ) : (
           <View>
-             {/* <CustomButton text="Add Friend"/> */}
+            {/* <CustomButton text="Add Friend"/> */}
             <View style={styles.userDetailsContainer}>
-              {
-                requestInfo.isLoading?
-<ButtonLoading/>
-:
-              <RippleHOC onPress={sendFriendRequest}>
-                
-            <Image source={requestSent?icons.requestSent:  icons.addfriend} style={styles.addFriendIcon}/>
-              </RippleHOC>
-              }
+              {requestInfo.isLoading ? (
+                <ButtonLoading />
+              ) : (
+                <RippleHOC onPress={sendFriendRequest}>
+                  <Image
+                    source={requestSent ? icons.requestSent : icons.addfriend}
+                    style={styles.addFriendIcon}
+                  />
+                </RippleHOC>
+              )}
               <View>
                 <RobotoRegular style={styles.nameText}>
                   {postDetail?.feed?.user?.fullName}
@@ -151,7 +172,7 @@ const onRefresh = useCallback(() => {
                   </RobotoRegular>
                 </View>
               </View>
-            
+
               <View style={styles.editContainer}>
                 <Image source={icons.mapPin} style={styles.locationIcon} />
                 <RobotoRegular style={styles.dateText} numberOfLines={1}>
@@ -187,15 +208,21 @@ const onRefresh = useCallback(() => {
         )}
       </ContentContainer>
       <View style={styles.footerContainer}>
-
-      <CommentInput
-        value={comment}
-        onChangeText={setComment}
-        addComment={addComment}
-        onSubmitEditing={addComment}
-        loader={commentDetails?.isLoading}
-      />
+        <CommentInput
+          value={comment}
+          onChangeText={setComment}
+          addComment={addComment}
+          onSubmitEditing={addComment}
+          loader={commentDetails?.isLoading}
+          // image={profile?.image?.thumbnail}
+        />
       </View>
+      <ImageView
+        images={postDetail?.feed?.images}
+        imageIndex={0}
+        visible={visible}
+        onRequestClose={() => setIsVisible(false)}
+      />
     </ScreenWrapper>
   );
 };

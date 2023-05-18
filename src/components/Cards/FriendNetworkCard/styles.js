@@ -51,6 +51,13 @@ const styles =StyleSheet.create({
         paddingLeft: vw*1,
         width: vw*40
     },
+    locationText:{
+        color: colors.text.darkGrey,
+        fontSize: vh*1.48,
+        paddingLeft: vw*1,
+        width: vw*30
+
+    },
     nameText:{
         color: colors.general.white,
         fontSize: vh*2.1,

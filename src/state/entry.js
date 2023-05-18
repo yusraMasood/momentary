@@ -3,6 +3,7 @@ import { endpoints } from "../Api/configs";
 import { apiSlice } from "./apiSlice";
 import initial from "./initial";
 import { useSelector } from "react-redux";
+import { headerJson } from "../utils/Constants";
 
 
 export const entendedEntrySlice = apiSlice.injectEndpoints({
@@ -11,9 +12,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       query: (data) => ({
         url: endpoints.entry.add,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         body:data,
       }),
     }),
@@ -21,9 +20,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       query: (data) => ({
         url: `${endpoints.entry.update}/${data?.id}`,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         body:data,
       }),
     }),
@@ -31,9 +28,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       query: (queryArg) => ({
         url: endpoints.entry.hashtag,
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         params: {...queryArg},
       }),
     }),
@@ -44,9 +39,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
     query: (queryArg) => ({
       url: endpoints.entry.allEntries,
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: headerJson,
       params: {...queryArg},
       transformResponse: (response, previousData) => {
         console.log("response,previousData",response,previousData);
@@ -62,9 +55,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       query: (queryArg) => ({
         url: `${endpoints.entry.deleteEntry}/${queryArg}`,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         // params: queryArg,
       }),
     }),
@@ -72,9 +63,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       query: (queryArg) => ({
         url: `${endpoints.entry.addToLibrary}/${queryArg}`,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         // params: queryArg,
       }),
     }),
@@ -82,9 +71,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       query: (queryArg) => ({
         url: `${endpoints.entry.pinEntry}/${queryArg}`,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         params: queryArg,
       }),
     }),
@@ -92,9 +79,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       query: (queryArg) => ({
         url: `${endpoints.entry.like}/${queryArg}`,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         params: queryArg,
       }),
     }),
@@ -102,9 +87,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       query: (data) => ({
         url: `${endpoints.entry.comment}/${data?.id}`,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         
         body: data,
       }),
@@ -113,9 +96,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       query: (data) => ({
         url: `${endpoints.entry.share}/${data?.id}`,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         body: data,
       }),
     }),
@@ -124,9 +105,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       query: (queryArg) => ({
         url: `${endpoints.entry.entryById}/${queryArg}`,
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         params: queryArg,
       }),}),
   

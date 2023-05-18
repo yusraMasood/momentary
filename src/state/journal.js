@@ -1,8 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
 import { endpoints } from "../Api/configs";
 import { apiSlice } from "./apiSlice";
-import initial from "./initial";
-import { useSelector } from "react-redux";
+import { headerJson } from "../utils/Constants";
 
 
 export const entendedEntrySlice = apiSlice.injectEndpoints({
@@ -11,9 +9,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       query: (data) => ({
         url: endpoints.journal.add,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         body:data,
       }),
     }),
@@ -21,11 +17,10 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
     query: (queryArg) => ({
       url: endpoints.journal.allJournals,
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: headerJson,
       params: {...queryArg},
     }),
+  
     // serializeQueryArgs: ({ endpointName }) => {
     //   return endpointName
     // },
@@ -38,13 +33,18 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
     
     // transformResponse: (response, meta, arg) => response.data,
   }),
+  getLibrary: builder.query({
+    query: (queryArg) => ({
+      url: endpoints.library.library,
+      method: 'GET',
+      headers: headerJson,
+      params: {...queryArg},
+    }),}),
     postDeleteJournal: builder.mutation({
       query: (queryArg) => ({
         url: `${endpoints.journal.delete}/${queryArg}`,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         // params: queryArg,
       }),
     }),
@@ -52,18 +52,14 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       query: (queryArg) => ({
         url: `${endpoints.journal.journalDetails}/${queryArg}`,
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         // params: {...queryArg},
       }),}),
       postUpdateJournal: builder.mutation({
         query: (queryArg) => ({
           url: `${endpoints.journal.update}/${queryArg}`,
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: headerJson,
           // params: queryArg,
         }),
 
@@ -80,7 +76,8 @@ export const {
     useGetJournalsQuery,
     usePostAddJournalMutation,
     usePostDeleteJournalMutation,
-    usePostUpdateJournalMutation
+    usePostUpdateJournalMutation,
+    useGetLibraryQuery
 } = entendedEntrySlice;
 
 // export const entrySliceToken = createSlice({

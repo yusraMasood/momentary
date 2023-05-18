@@ -7,7 +7,8 @@ import PoppinsRegular from '../../../components/Texts/PoppinsRegular';
 import RobotoRegular from '../../../components/Texts/RobotoRegular';
 import RippleHOC from '../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../components/wrappers/ScreenWrapper';
-import styles from './styles';
+import styles from './styles'; 
+import { useGetFriendRequestQuery } from '../../../state/friends';
 const items = [
   {
     read: false,
@@ -42,10 +43,14 @@ const items = [
 ];
 
 const NotificationScreen = (props) => {
+  const {data: friendRequest} = useGetFriendRequestQuery({
+    requestType: 'received' ,
+    page:1,
+    limit:3
+  });
   const [showItems,setShowItems] =useState([])
   const [isMore, setIsMore] = useState(false);
-  
-  const friendRequestArray = [1, 2, 3];
+  // console.log("friendRequest",friendRequest);
   useEffect(()=>{
     // setShowItems(items.slice(0, showItems.length + 3))
     setShowItems([...items.slice(0, 3)]);
@@ -102,11 +107,23 @@ const NotificationScreen = (props) => {
 
             </RippleHOC>
           </View>
-          {friendRequestArray.map((item, index) => {
+          {friendRequest?.friendRequests.map((item, index) => {
+            console.log("hello");
+            if(friendRequest?.friendRequests?.length===0)
+            {
+              return(
+                <RobotoRegular style={styles.descText}>No friend Request Currently.</RobotoRegular>
+              )
+            }
             return (
               <FriendRequestCard
-                name={'Kamila Thompson'}
+                name={item?.friend?.fullName}
+                image={item?.friend?.image?.thumbnail}
+                friendRequestId={item?._id}
+                refetch={friendRequest?.refetch}
                 job={'Content Writer'}
+                onPress={() => props.navigation.navigate('FriendDetails', {id: item?.friend?._id})}
+                loader={friendRequest?.isLoading}
               />
             );
           })}

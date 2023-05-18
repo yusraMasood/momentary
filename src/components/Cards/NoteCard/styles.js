@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     // alignItems: 'flex-end',
     position: 'absolute',
     right :vw*2,
-    top:vh*1.2,
+    top:vh*3,
 
     // backgroundColor: "red"
   },
@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   titleDescContainer: {
-    marginTop: vh * 1.5,
+    // marginTop: vh * 1.5,
+    flex:1
   },
   healthyText: {
     color: colors.text.offwhite,
@@ -72,6 +73,11 @@ const styles = StyleSheet.create({
     width: vh * 1.9,
     resizeMode: 'contain',
   },
+  deleteContainer:{
+    position: "absolute",
+    bottom: vh*2,
+    right: vw*2
+  },
   evenContainer: {
     marginTop: vh * 3,
     backgroundColor: 'red',
@@ -79,6 +85,7 @@ const styles = StyleSheet.create({
   alignFooter:{
     // alignItems: "flex-end"
     flex:1,
+    marginTop: vh*1,
     justifyContent: "flex-end",
     paddingBottom: vh*1
   },

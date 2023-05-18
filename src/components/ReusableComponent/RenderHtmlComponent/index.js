@@ -12,12 +12,15 @@ const RenderHtmlComponent=(props)=>{
         numberOfLines: 4,
       };
     return(
+      <View style={props.style}>
         <RenderHtml
         contentWidth={width}
+        
         // allowedStyles={{height: 100}}
         source={source}
-        baseStyle={styles.htmlBaseStyle}
+        // baseStyle={{backgroundColor: "red"}}
         defaultTextProps={defaultTextProps}
+        enableExperimentalMarginCollapsing={true}
         tagsStyles={{
           p: styles.descText,
           b: styles.descText,
@@ -35,6 +38,7 @@ const RenderHtmlComponent=(props)=>{
           h7:styles.descText,
         }}
       />
+      </View>
     )
 }
 export default RenderHtmlComponent

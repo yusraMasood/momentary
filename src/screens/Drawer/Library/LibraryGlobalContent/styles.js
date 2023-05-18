@@ -3,7 +3,7 @@ import { vw } from '../../../../utils/dimensions'
 
 const styles =StyleSheet.create({
     container:{
-        paddingHorizontal: vw*2
+        paddingHorizontal: vw*4
     }
 
 })

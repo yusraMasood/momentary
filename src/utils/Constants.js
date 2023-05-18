@@ -16,3 +16,7 @@ export const max_lengths = {
   export const minAgeInDays = 8 * 365;
   export const DEFAULT_COUNTRY_CODE = '+966';
 export const DEFAULT_COUNTRY_FLAG = 'flag-sa';
+
+export const headerJson={
+  'Content-Type': 'application/json',
+}

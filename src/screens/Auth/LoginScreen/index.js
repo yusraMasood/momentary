@@ -16,6 +16,8 @@ import useAuth from '../../../hooks/useAuth';
 import { useGlobalLoader } from '../../../state/general';
 import { getBiometricData } from '../../../utils/Validations';
 import { useGetProfileQuery } from '../../../state/account';
+import { setToken, useToken } from '../../../state/auth';
+import { useDispatch } from 'react-redux';
 
 const LoginScreen = props => {
   const passwordRef = useRef(null);
@@ -24,12 +26,13 @@ const LoginScreen = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [deviceId,setDeviceId] =useState("1234")
+  const dispatch =useDispatch()
 
   const [thumb,setThumb] =useState(false)
-  // console.log(message);
 
   const onSubmit = () => {
     loginUser({email,password}).then((res)=> {
+      dispatch(setToken(res?.token));
       
     })
   };

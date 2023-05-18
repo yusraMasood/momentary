@@ -8,7 +8,6 @@ import PublishQuestionPopup from '../../../../components/popups/PublishQuestionP
 import DamionRegular from '../../../../components/Texts/DamionRegular';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import RobotoRegular from '../../../../components/Texts/RobotoRegular';
-import RippleHOC from '../../../../components/wrappers/Ripple';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
 import { useGetFeedQuery, useGetFriendDetailsQuery, usePostRemoveFriendMutation } from '../../../../state/friends';
@@ -153,11 +152,14 @@ const FriendDetails = props => {
     );
   };
   const renderListCard = ({item}) => {
+    console.log(" item",item);
     return <JournalCard 
     heading={item?.heading}
     publish={item?.createdAt}
     // desc={item?.desc}
     desc={item?.content}
+    commentCount={item?.comments?.length}
+    id={item?._id}
 
 
     

@@ -5,11 +5,15 @@ import styles from './styles'
 import { colors } from '../../../utils/appTheme'
 import RippleHOC from '../../wrappers/Ripple'
 import ButtonLoading from '../../Loaders/ButtonLoading'
+import useProfile from '../../../hooks/useProfile'
+import { userProfile } from '../../../state/auth'
 
 const CommentInput=(props)=>{
+  const profile =userProfile()
+  console.log("props.image", profile);
     return(
         <View style={styles.textInputContainer}>
-        <Image source={generalImages.userImage} style={styles.userImage}/>
+        <Image source={profile?.image?.thumbnail?{uri: profile?.image?.thumbnail}:generalImages.userImage} style={styles.userImage}/>
         <View style={styles.inputContainer}>
         <TextInput
         placeholder='Write a comment..'

@@ -8,7 +8,6 @@ import React, {
 import {View, Image, FlatList, RefreshControl} from 'react-native';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
-import DamionRegular from '../../../../components/Texts/DamionRegular';
 import TextEditor from '../../../../components/ReusableComponent/TextEditor';
 import CustomDropdown from '../../../../components/Dropdowns/CustomDropdown';
 import ImagePicker from '../../../../components/Image/ImagePicker';
@@ -18,7 +17,6 @@ import EntrySettingPopup from '../../../../components/popups/EntrySettingPopup';
 import SuccessPopup from '../../../../components/popups/SuccessPopup';
 import HashtagPopup from '../../../../components/popups/HashtagPopup';
 import MyNetworkPopup from '../../../../components/popups/MyNetworkPopup';
-import PulishEntryPopup from '../../../../components/popups/PulishEntryPopup';
 import RippleHOC from '../../../../components/wrappers/Ripple';
 import {icons} from '../../../../assets/images';
 import ImageComponent from '../../../../components/Image/ImageComponent';
@@ -42,8 +40,6 @@ const EditEntry = props => {
   const {data, isLoading, error,isFetching, refetch,originalArgs} = useGetEntryByIdQuery(id);
 
   const [refreshing, setRefreshing] = useState(false);
-  // console.log('error', originalArgs);
-  // console.log('data iun edit entry', data);
   
 
   const [entryText, setEntryText] = useState(data?.journalEntry?.content);
@@ -54,7 +50,7 @@ const EditEntry = props => {
   const [imageSelection, setImageSelection] = useState(false);
 
   const journal = useGetJournalsQuery();
-  const [dropdownValue, setDropdownValue] = useState(journal?.data?.journal[0]);
+  const [dropdownValue, setDropdownValue] = useState("");
   const [imageArray, setImageArray] = useState(data?.journalEntry?.images);
   const [imageIdArray, setImageIdArray] = useState([]);
   const [postDeleteEntry] = usePostDeleteEntryMutation(data?.journalEntry?._id);
@@ -88,14 +84,12 @@ const EditEntry = props => {
   //     },
   //   });
   // }, [props.navigation]);
-
-  // console.log("data?.journalEntry?.images",data?.journalEntry?.images);
   useEffect(() => {
     // const unsubscribe = props.navigation.addListener('focus', () => {
     //   refetch();
     if (data?.journalEntry) {
       setMyHashtags(data?.journalEntry?.hashtags);
-      setDropdownValue(journal?.data?.journal[0]);
+      setDropdownValue(data?.journalEntry?.journal);
       setVisiblity(data?.journalEntry?.privacy);
       setComment(data?.journalEntry?.comment);
       setEntryText(data?.journalEntry?.content)
@@ -163,9 +157,18 @@ const EditEntry = props => {
   const handleRoute = value => {
     setVisiblity(value);
   };
-
+  // console.log("data?.journalEntry?.content",data?.journalEntry?.content);
+if(isLoading)
+{
+  return(
+    <ScreenWrapper style={styles.container}>
+      <ContentLoader/>
+    </ScreenWrapper>
+  )
+}
   return (
     <ScreenWrapper style={styles.container}>
+     
       <ContentContainer
         usecontainer={true}
         aware
@@ -183,6 +186,7 @@ const EditEntry = props => {
           background={background}
           entryText={entryText}
           setEntryText={setEntryText}
+          initialContent={data?.journalEntry?.content}
         />
         <FlatList
           data={imageArray}

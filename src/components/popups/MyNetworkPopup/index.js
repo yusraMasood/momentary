@@ -113,9 +113,9 @@ const MyNetworkPopup = props => {
     </View>
     <View style={styles.friendContainer}>
       <RobotoMedium style={styles.selectedText}>Friends</RobotoMedium>
-      <RippleHOC onPress={()=> setSelect(true)}>
+      <RippleHOC onPress={()=> setSelect(!select)}>
 
-      <RobotoRegular style={styles.selectText}>Select All</RobotoRegular>
+      <RobotoRegular style={styles.selectText}>{select ?"Selected All":"Select All"}</RobotoRegular>
       </RippleHOC>
     </View>
     {/* <FlatList data={[1, 2, 3]} renderItem={renderSelectPeople} /> */}

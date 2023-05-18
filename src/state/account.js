@@ -1,4 +1,5 @@
 import { endpoints } from "../Api/configs";
+import { headerJson } from "../utils/Constants";
 import { apiSlice } from "./apiSlice";
 
 
@@ -8,9 +9,7 @@ export const extendedProfileSlice = apiSlice.injectEndpoints({
       query: (queryArg) => ({
         url: endpoints.account.profile,
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         params: {...queryArg},
       }),
     }),
@@ -18,9 +17,7 @@ export const extendedProfileSlice = apiSlice.injectEndpoints({
       query: (queryArg) => ({
         url: endpoints.account.update,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         body: {...queryArg},
       }),
     }),
@@ -28,9 +25,7 @@ export const extendedProfileSlice = apiSlice.injectEndpoints({
       query: (queryArg) => ({
         url: endpoints.account.changePassword,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         body: {...queryArg},
       }),
     }),

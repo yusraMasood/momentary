@@ -1,4 +1,4 @@
-import React, {useRef, useState, useCallback} from 'react';
+import React, {useRef, useState, useCallback, useEffect} from 'react';
 import {View, ScrollView, Image, FlatList, Keyboard} from 'react-native';
 import {RichEditor, actions, RichToolbar} from 'react-native-pell-rich-editor';
 import {colors} from '../../../utils/appTheme';
@@ -36,8 +36,17 @@ const TextEditor = props => {
     richText.current?.insertText(emoji);
     richText.current?.blurContentEditor();
   }, []);
+  console.log("nital",props.initialContent);
   // {cssText: `${FontFamilyStylesheet.damion}`, contentCSSText: `font-family: ${fontFamily}`}
-  return (
+  const changeHTML = () => richText.current?.setContentHTML(props.initialContent) 
+  // useEffect(()=>{
+  //   if(props.initialContent){
+
+  //     changeHTML()
+  //   }
+    
+  // },[])
+   return (
     <View>
       <View style={styles.textEditorContainer}>
         <RichToolbar
@@ -97,6 +106,7 @@ const TextEditor = props => {
           initialContentHTML={props.entryText}
           placeholder={'Type here...'}
           initialHeight={vh * 50}
+          
           onChange={props.setEntryText}
           focusable
         />

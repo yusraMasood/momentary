@@ -50,6 +50,9 @@ export const endpoints = {
 
 
   },
+  library:{
+    library:"user/library?page=1&limit=4"
+  },
   journal:{
     add:"user/journals/create",
     allJournals:"user/journals/all",

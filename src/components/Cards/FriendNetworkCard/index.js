@@ -13,9 +13,10 @@ import { usePostAddToLibraryMutation, usePostDeleteEntryMutation } from '../../.
 import { vw } from '../../../utils/dimensions';
 import CustomSkeleton from '../../Loaders/CustomSkeleton';
 import vh from '../../AddressField/AddressPicker/Units/vh';
+import ButtonLoading from '../../Loaders/ButtonLoading';
 const FriendNetworkCard = (props) => {
-  const [postDeleteEntry, message] = usePostDeleteEntryMutation();
-  const [postAddToLibrary,addtoLibraryMessage]= usePostAddToLibraryMutation()
+  const [postDeleteEntry, deleteInfo] = usePostDeleteEntryMutation();
+  const [postAddToLibrary,addLibrrayInfo]= usePostAddToLibraryMutation()
   // const {width} = useWindowDimensions();
   const source = {
     html: `${props.content}`,
@@ -61,12 +62,12 @@ const FriendNetworkCard = (props) => {
   const onClickText=()=>{
     if(props.clickText=="Remove Entry")
     {
-      // deleteEntry()
+      deleteEntry()
 
     }
     // if()
     else{
-      console.log("jrojro");
+      // console.log("jrojro");
       addToLibrary()
 
     }
@@ -76,7 +77,7 @@ const FriendNetworkCard = (props) => {
       {props.loader?
     <CustomSkeleton
     height={15}
-    width={88}
+    width={90}
     marginTop={vh*2}
     />  :
 
@@ -98,7 +99,7 @@ const FriendNetworkCard = (props) => {
         </View>
         <View style={styles.editContainer}>
           <Image source={icons.mapPin} style={styles.locationIcon} />
-          <RobotoRegular style={styles.dateText} numberOfLines={1}>
+          <RobotoRegular style={styles.locationText} numberOfLines={1}>
            {props.location}
           </RobotoRegular>
         </View>
@@ -143,10 +144,15 @@ const FriendNetworkCard = (props) => {
       </View>
       </RippleHOC>
       {
-        props.clickText &&
-
+        props.clickText  &&
       <RippleHOC onPress={onClickText} style={styles.alignComment}>
+        {
+           addLibrrayInfo.isLoading ?
+           <ButtonLoading/>:
+           deleteInfo.isLoading ?
+           <ButtonLoading/>:
       <RobotoMedium style={styles.headerText}>{props.clickText}</RobotoMedium>
+        }
       </RippleHOC>
       }
 

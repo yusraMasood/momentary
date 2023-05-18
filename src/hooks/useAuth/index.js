@@ -20,7 +20,7 @@ export default () => {
   const [postResetPassword] = usePostResetPasswordMutation();
   const dispatch = useDispatch();
 
-  // console.log("message",message);
+  console.log("message",message);
     const loginUser = async ({email, password}) => {
     dispatch(toggleGlobalLoader(true));
 
@@ -38,11 +38,14 @@ export default () => {
         throw new Error('Please Enter Your Password');
       }
     const response =  await postLogin({email, password, role: 'user'}).then(res => {
+      console.log(" respoonse of login ", res);
         dispatch(toggleGlobalLoader(false));
         if (res?.error) {
           Toast.error(res?.error?.data?.message);
         } else {
-          dispatch(setToken(res?.data?.token));
+          Toast.success(res?.data?.message);
+
+          // dispatch(setToken(res?.data?.token));
         }
         return res
       });

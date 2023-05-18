@@ -12,6 +12,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between"
   },
+  imgStyle:{
+    backgroundColor: colors.general.circleGrey,
+    // backgroundColor: "red",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    zIndex:1,
+    height: "100%",
+    width: "100%"
+    // zIndex:1
+  },
+  numberText:{
+    color: colors.general.white,
+    fontSize: vh*3,
+    // position: "absolute"
+  },
 
   userDetailsContainer: {
     flexDirection: 'row',
@@ -80,11 +96,12 @@ const styles = StyleSheet.create({
   smallBookImageContainer:{
     overflow: "hidden",
     borderRadius: vh*1,
+    marginRight: vw*3
   },
   bookImagecontainer:{
     flexDirection: "row",
     marginTop: vh*2,
-    justifyContent: "space-between"
+    // justifyContent: "space-between"
   },
   footerContainer:{
     alignItems: "center"

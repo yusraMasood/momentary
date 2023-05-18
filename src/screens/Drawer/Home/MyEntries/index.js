@@ -26,7 +26,7 @@ const MyEntries = props => {
     page,
     limit: 7,
   });
-  console.log("entries", data);
+  // console.log("entries", data);
   // const entriesApi= usePaginatedQuery("getEntries")
   useEffect(() => {
     const unsubscribe = props.navigation.addListener('focus', () => {
@@ -80,6 +80,7 @@ const MyEntries = props => {
     );
   };
   const renderNotes = ({item, index}) => {
+    console.log(" item", item);
     return (
       <View>
         {isLoading ? (
@@ -92,16 +93,18 @@ const MyEntries = props => {
         ) : (
           <NoteCard
             isLoading={isLoading}
-            pin
+            pin={item?.pin}
             id={item?._id}
             hashtag={item?.hashtags}
             refetch={refetch}
+            style={styles.containerHtml}
             delete
             content={item?.content}
             listStyle={[styles.noteGridContainer]}
             onPress={() =>
               props.navigation.navigate('EditEntry', {id: item?._id})
             }
+           
           />
         )}
       </View>
@@ -134,8 +137,10 @@ const MyEntries = props => {
                 list={true}
                 index={index}
                 delete
-                pin
+                pin={item?.pin}
+                style={styles.containerHtml}
                 refetch={refetch}
+
                 id={item?._id}
                 content={item?.content}
                 descStyle={styles.descText}
@@ -169,7 +174,7 @@ const MyEntries = props => {
 const renderListFooter=()=>{
   return(
     <View>
-      {isFetching && [1,2,3,4].map((value,index)=>{
+      {isFetching && [1,2,3,4].map(()=>{
         return(
           <CustomSkeleton
             height={15}
@@ -219,6 +224,7 @@ const renderGridFooter=()=>{
           contentContainerStyle={styles.contentContainer}
           keyExtractr={(item, index) => index}
           ListEmptyComponent={renderEmpty}
+          showsVerticalScrollIndicator={false}
           ListFooterComponent={renderListFooter}
           renderItem={renderNotes}
           
@@ -241,6 +247,7 @@ const renderGridFooter=()=>{
         onRefresh={handleEntriesRefresh}
         refreshing={refreshing}
         renderItem={renderGridNotes}
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.contentContainer}
         key={'gridArray'}
         numColumns={2}

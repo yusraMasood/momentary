@@ -24,6 +24,8 @@ const LibraryNavigator = () => {
       <Stack.Screen name={"AddEntryInJournal"} component={AddEntryInJournal}/>
       <Stack.Screen name={"LibraryConnectContent"} component={LibraryConnectContent}/>
       <Stack.Screen name={"LibraryGlobalContent"} component={LibraryGlobalContent}/>
+      {/* <Stack.Screen name={"LibraryGlobalContent"} component={LibraryGlobalContent}/> */}
+
     </Stack.Navigator>
   );
 };

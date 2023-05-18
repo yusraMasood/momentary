@@ -109,7 +109,7 @@ const MyJournals = props => {
   const renderListFooter=()=>{
     return(
       <View>
-        {isFetching && [1,2,3,4].map((value,index)=>{
+        {isFetching && [1,2].map((value,index)=>{
           return(
             <CustomSkeleton
             height={23} width={92} marginTop={vh * 2} 
@@ -124,7 +124,7 @@ const MyJournals = props => {
   const renderGridFooter=()=>{
     return(
       <View style={styles.footerContainer}>
-        {isFetching && [1,2,3,4].map((value,index)=>{
+        {isFetching && [1,2].map((value,index)=>{
           return(
             <CustomSkeleton
             height={20.7} width={40} marginTop={vh * 2}
@@ -145,6 +145,7 @@ const MyJournals = props => {
         ListHeaderComponent={renderHeader}
         keyExtractor={(item, index) => index}
         key={'bookPrintingScreenArray'}
+        showsVerticalScrollIndicator={false}
         ListFooterComponent={renderListFooter}
 
         // contentContainerStyle={styles.contentContainer}
@@ -181,6 +182,7 @@ const MyJournals = props => {
         ListFooterComponent={renderGridFooter}
         ListHeaderComponent={renderHeader}
         keyExtractor={(item, index) => index}
+        showsVerticalScrollIndicator={false}
         columnWrapperStyle={styles.columnStyle}
         numColumns={2}
         key={'bookPrintingGridScreenArray'}

@@ -15,16 +15,19 @@ import moment from 'moment';
 import CustomSkeleton from '../../../../components/Loaders/CustomSkeleton';
 import { vh,vw } from '../../../../utils/dimensions';
 import { useGetProfileQuery } from '../../../../state/account';
-import { setProfile } from '../../../../state/auth';
+import { setProfile, useToken } from '../../../../state/auth';
 
 const HomeScreen = props => {
   const {data:profile} =useGetProfileQuery()
+  // const token =useToken()
   const {data, isLoading, refetch, error} = useGetEntriesQuery({
     page:1,
     // limit:1
   },{
     refetchOnFocus: true
   });
+
+  console.log(" token" ,profile);
   const lastItem = data?.journalEntries[0]?data?.journalEntries[0]: null
   const dispatch =useDispatch()
   const setting =useSetting()
@@ -59,12 +62,12 @@ const HomeScreen = props => {
   };
   // console.log("profile?.",profile);
   useEffect(() => {
- 
+ console.log("hello");
     dispatch(setProfile(profile?.user))
   
      
     setupMethods();
-  }, []);
+  }, [profile]);
   useEffect(()=>{
     const unsubscribe = props.navigation.addListener('focus', () => {
       refetch()

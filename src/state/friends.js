@@ -1,8 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
 import { endpoints } from "../Api/configs";
 import { apiSlice } from "./apiSlice";
-import initial from "./initial";
-import { useSelector } from "react-redux";
+import { headerJson } from "../utils/Constants";
 
 
 export const entendedEntrySlice = apiSlice.injectEndpoints({
@@ -11,27 +9,21 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
     query: (queryArg) => ({
       url: endpoints.friend.myFriends,
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: headerJson,
       params: {...queryArg},
     }),}),
     getFriendDetails: builder.query({
       query: (queryArg) => ({
         url: `${endpoints.friend.friendDetails}/${queryArg}`,
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         params: {...queryArg},
       }),}),
     getFeed: builder.query({
       query: (queryArg) => ({
         url: endpoints.friend.feed,
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         params: {...queryArg},
       }),}),
     
@@ -39,27 +31,21 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
         query: (queryArg) => ({
           url: `${endpoints.friend.feedDetails}/${queryArg}`,
           method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: headerJson,
           // params: {...queryArg},
         }),}),
     getFriendRequest: builder.query({
         query: (queryArg) => ({
           url: endpoints.friend.friendRequest,
           method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: headerJson,
           params: {...queryArg},
         }),}),
         postAddFriend: builder.mutation({
           query: (data) => ({
             url: `${endpoints.friend.respondFriendRequest}/${data?.id}`,
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
+            headers: headerJson,
             body:data,
           }),
         }),
@@ -67,9 +53,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
           query: (data) => ({
             url: endpoints.friend.sendRequest,
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
+            headers: headerJson,
             body:data,
           }),
         }),
@@ -77,9 +61,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
           query: (queryArg) => ({
             url: `${endpoints.friend.removeFriend}/${queryArg}`,
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
+            headers: headerJson,
             // body:data,
           }),
         }),
@@ -87,9 +69,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
           query: (queryArg) => ({
             url: `${endpoints.friend.removeFriendRequest}/${queryArg}`,
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
+            headers: headerJson,
             // body:data,
           }),
         }),

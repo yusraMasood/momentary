@@ -55,10 +55,11 @@ useEffect(()=>{
         image={item?.friend?.image?.thumbnail}
         job={'Last Entry on mm/dd/yyyy'}
         request={'Remove'}
-        friendRequestId={item?._id}
+        friendRequestId={item?.friend?._id}
         onPress={() => props.navigation.navigate('FriendDetails', {id: item?.friend?._id})}
         refetch={friendsData?.refetch}
         loader={friendsData?.isLoading}
+
       />
     );
   };
@@ -137,7 +138,6 @@ useEffect(()=>{
           <FlatList
             onRefresh={handleFriendDataRefresh}
             refreshing={refreshing}
-
             data={
               friendsData?.isLoading ? [1, 2, 3] : friendsData?.data?.friends
             }

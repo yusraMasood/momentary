@@ -1,8 +1,9 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import { createSlice} from '@reduxjs/toolkit';
 import {endpoints} from '../Api/configs';
 import {apiSlice} from './apiSlice';
 import initial from './initial';
 import {useSelector} from 'react-redux';
+import { headerJson } from '../utils/Constants';
 
 export const authSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
@@ -10,9 +11,7 @@ export const authSlice = apiSlice.injectEndpoints({
       query: data => ({
         url: endpoints.auth.login,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         body: data,
         credentials: 'include',
       }),
@@ -21,9 +20,7 @@ export const authSlice = apiSlice.injectEndpoints({
       query: data => ({
         url: endpoints.auth.register,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         body: data,
       }),
     }),
@@ -31,9 +28,7 @@ export const authSlice = apiSlice.injectEndpoints({
       query: data => ({
         url: endpoints.passwordRecovery.verifyEmail,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         body: data,
       }),
     }),
@@ -41,9 +36,7 @@ export const authSlice = apiSlice.injectEndpoints({
       query: data => ({
         url: endpoints.passwordRecovery.verifyCode,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         body: data,
       }),
     }),
@@ -51,9 +44,7 @@ export const authSlice = apiSlice.injectEndpoints({
       query: data => ({
         url: endpoints.passwordRecovery.updatePassword,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         body: data,
       }),
     }),
@@ -61,9 +52,7 @@ export const authSlice = apiSlice.injectEndpoints({
       query: (queryArg) => ({
         url: endpoints.auth.usernameSuggestion,
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headerJson,
         params: {...queryArg},
       }),
     }),

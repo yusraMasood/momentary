@@ -21,7 +21,7 @@ const HomeNavigator = () => {
       <Stack.Screen name={"SaveLocation"} component={SaveLocation}/>
       <Stack.Screen name={"Visiblity"} component={Visiblity}/>
       <Stack.Screen name={"ViewEntry"} component={ViewEntry}/>
-      <Stack.Screen name={"EditEntry"} component={EditEntry}/>
+      
 
     </Stack.Navigator>
   );
