@@ -69,7 +69,7 @@ const PostByLocation = props => {
       }
     });
   };
-  console.log("postDetail",postDetail);
+  // console.log("postDetail",postDetail);
 
   const renderImages = () => {
     return (
@@ -133,8 +133,6 @@ const PostByLocation = props => {
   return (
     <ScreenWrapper style={styles.container}>
       <ContentContainer
-        //  onRefresh={handlePostRefresh}
-        //  refreshing={refreshing}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
@@ -190,7 +188,6 @@ const PostByLocation = props => {
                 );
               })}
             </View>
-            {/* <RobotoMedium style={styles.hashtagText}>#trends #fashion</RobotoMedium> */}
             {renderImages()}
 
             <LikeCommentCard
@@ -202,7 +199,9 @@ const PostByLocation = props => {
               id={props?.route?.params?.id}
               entryDetail={postDetail?.feed}
               refetch={refetch}
-              isReacted={postDetail?.feed?.isReacted}
+              // isReacted={postDetail?.feed?.isReacted}
+              reactions={postDetail?.feed?.reactions}
+              
             />
           </View>
         )}

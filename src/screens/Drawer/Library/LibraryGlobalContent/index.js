@@ -14,7 +14,8 @@ const LibraryGlobalContent=(props)=>{
     const {data,isLoading,originalArgs,error,isFetching, refetch} =useGetFeedQuery({
       page,
       limit:8,
-      privacy:props?.route?.params?.type
+      privacy:props?.route?.params?.type,
+      type: "favorite"
     })
     // console.log(" data", data,originalArgs );
       useEffect(() => {

@@ -54,7 +54,6 @@ const NewEntry = props => {
   const [comment, setComment] = useState(
     setting?.comment?setting?.comment:true
   );
-  console.log("setting?.selectedPeople ", setting?.selectedPeople);
   const {addEntry} = useEntry();
   const imageLoader = useInlineLoader();
   const {data} = useGetJournalsQuery(   {

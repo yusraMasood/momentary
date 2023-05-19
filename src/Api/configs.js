@@ -61,9 +61,18 @@ export const endpoints = {
     delete:"user/journals/delete"
   }
 };
-export const headers={
+// export const headers={
           
-  json: `'Content-Type': 'application/json'`
+//   json: `'Content-Type': 'application/json'`
+// }
+export const apiHeaders={
+  get:"GET",
+  post:"POST",
+
+  headerjson:{
+    'Content-Type': 'application/json',
+
+  }
 }
 export default {
   endpoints: endpoints,

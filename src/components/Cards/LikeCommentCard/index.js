@@ -15,11 +15,12 @@ import useEntry from '../../../hooks/useEntry'
 import SuccessPopup from '../../popups/SuccessPopup'
 import { useNavigation } from '@react-navigation/native'
 import useProfile from '../../../hooks/useProfile'
+import { userProfile } from '../../../state/auth'
 
 
  const LikeCommentCard=(props)=>{
   const navigation =useNavigation()
-  const profile=useProfile()
+  const profile=userProfile()
   const [visiblity,setVisiblity]=useState("")
   const [postShareEntry] = usePostShareEntryMutation()
   const {shareEntry} =useEntry()
@@ -33,8 +34,7 @@ import useProfile from '../../../hooks/useProfile'
   const shareRef=useRef(null)
   const networkRef=useRef(null)
   const successRef=useRef(null)
-  
-  console.log("profile",props.isReacted);
+  console.log("props reactions", props.reactions,profile);
   const onPressLike=()=>{
     postLikeEntry(props?.id).then(res=>{
       console.log("res",res);
@@ -49,36 +49,20 @@ import useProfile from '../../../hooks/useProfile'
       }
     })
   }
-  // const addComment=()=>{
-  //   if(comment==="")
-  //   {
-  //    return Toast.error("Please Write Comment before submitting..")
-  //   }
-  //   postCommentEntry({id: props?.id, comment}).then((res)=>{
-  //     console.log("res",res);
-  //     if(res?.data)
-  //     {
-  //     }
-  //   })
-  // }
   const onSpecificPeople=()=>{
     networkRef.current.show()
-    // setVisiblity("")
 
   }
   const onGlobalPeople=()=>{
-    // setVisiblity("public")
     shareEntry({journalEntry: props.entryDetail,privacy:"public"}).then((res)=>{
       successRef.current.show()
     })
 
   }
   const onMyNetwork=()=>{
-    // setVisiblity("myNetwork")
     shareEntry({journalEntry: props.entryDetail,privacy:"myNetwork", selectedPeopleId}).then((res)=>{
       successRef.current.show()
     })
-    // networkRef.current.show()
   }
     return(
         <View style={styles.container}>

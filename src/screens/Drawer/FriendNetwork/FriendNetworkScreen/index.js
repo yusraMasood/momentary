@@ -14,9 +14,10 @@ import { useGetFeedQuery } from '../../../../state/friends';
 const FriendNetworkScreen = (props) => {
   const [page,setPage] =useState(1)
   const {data,isLoading,originalArgs,error, refetch} =useGetFeedQuery({
-    page:page,
-    limit:10,
-    privacy:"myNetwork"})
+    page,
+    limit:8,
+    privacy:"myNetwork"
+  })
 
   // const renderFriendCard = () => {
   //   return <FriendNetworkCard 
@@ -30,6 +31,7 @@ const FriendNetworkScreen = (props) => {
     
   //   />;
   // };
+  console.log(" friwend network feedsa", data,originalArgs);
 const renderHeader=()=>{
     return(
       <View>

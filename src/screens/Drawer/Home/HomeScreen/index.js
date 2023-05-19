@@ -18,7 +18,7 @@ import { useGetProfileQuery } from '../../../../state/account';
 import { setProfile, useToken } from '../../../../state/auth';
 
 const HomeScreen = props => {
-  const {data:profile} =useGetProfileQuery()
+  const {data:profile,refetch: profileRefetch} =useGetProfileQuery()
   // const token =useToken()
   const {data, isLoading, refetch, error} = useGetEntriesQuery({
     page:1,
@@ -27,7 +27,7 @@ const HomeScreen = props => {
     refetchOnFocus: true
   });
 
-  console.log(" token" ,profile);
+  // console.log(" token" ,profile);
   const lastItem = data?.journalEntries[0]?data?.journalEntries[0]: null
   const dispatch =useDispatch()
   const setting =useSetting()
@@ -59,12 +59,15 @@ const HomeScreen = props => {
       });
   };
   useEffect(() => {
+
     dispatch(setProfile(profile?.user))
+
     setupMethods();
   }, [profile]);
 
   useEffect(()=>{
     const unsubscribe = props.navigation.addListener('focus', () => {
+      profileRefetch()
       refetch()
     });
     return unsubscribe;

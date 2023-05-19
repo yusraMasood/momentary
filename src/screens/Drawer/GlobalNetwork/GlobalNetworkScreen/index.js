@@ -45,7 +45,7 @@ const GlobalNetworkScreen = props => {
     // latitude: 40.7127837,
     // longitude: -74.0059413,
   });
-console.log("user posts with location", data,originalArgs);
+// console.log("user posts with location", data,originalArgs);
   const mapRef = useRef(null);
 
   const animateToRegion = location => {

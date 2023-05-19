@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { endpoints } from "../Api/configs";
+import { apiHeaders, endpoints } from "../Api/configs";
 import { apiSlice } from "./apiSlice";
 import initial from "./initial";
 import { useSelector } from "react-redux";
-import { headerJson } from "../utils/Constants";
 
 
 export const entendedEntrySlice = apiSlice.injectEndpoints({
@@ -11,24 +10,24 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
     postAddEntry: builder.mutation({
       query: (data) => ({
         url: endpoints.entry.add,
-        method: 'POST',
-        headers: headerJson,
+        method: apiHeaders.post,
+        headers: apiHeaders.headerjson,
         body:data,
       }),
     }),
     postUpdateEntry: builder.mutation({
       query: (data) => ({
         url: `${endpoints.entry.update}/${data?.id}`,
-        method: 'POST',
-        headers: headerJson,
+        method: apiHeaders.post,
+        headers: apiHeaders.headerjson,
         body:data,
       }),
     }),
     getHashtags: builder.query({
       query: (queryArg) => ({
         url: endpoints.entry.hashtag,
-        method: 'GET',
-        headers: headerJson,
+        method: apiHeaders.get,
+        headers: apiHeaders.headerjson,
         params: {...queryArg},
       }),
     }),
@@ -38,8 +37,8 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
     
     query: (queryArg) => ({
       url: endpoints.entry.allEntries,
-      method: 'GET',
-      headers: headerJson,
+      method: apiHeaders.get,
+      headers: apiHeaders.headerjson,
       params: {...queryArg},
       transformResponse: (response, previousData) => {
         console.log("response,previousData",response,previousData);
@@ -54,40 +53,40 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
     postDeleteEntry: builder.mutation({
       query: (queryArg) => ({
         url: `${endpoints.entry.deleteEntry}/${queryArg}`,
-        method: 'POST',
-        headers: headerJson,
+        method: apiHeaders.post,
+        headers: apiHeaders.headerjson,
         // params: queryArg,
       }),
     }),
     postAddToLibrary: builder.mutation({
       query: (queryArg) => ({
         url: `${endpoints.entry.addToLibrary}/${queryArg}`,
-        method: 'POST',
-        headers: headerJson,
+        method: apiHeaders.post,
+        headers: apiHeaders.headerjson,
         // params: queryArg,
       }),
     }),
     postPinEntry: builder.mutation({
       query: (queryArg) => ({
         url: `${endpoints.entry.pinEntry}/${queryArg}`,
-        method: 'POST',
-        headers: headerJson,
+        method: apiHeaders.post,
+        headers: apiHeaders.headerjson,
         params: queryArg,
       }),
     }),
     postLikeEntry: builder.mutation({
       query: (queryArg) => ({
         url: `${endpoints.entry.like}/${queryArg}`,
-        method: 'POST',
-        headers: headerJson,
+        method: apiHeaders.post,
+        headers: apiHeaders.headerjson,
         params: queryArg,
       }),
     }),
     postCommentEntry: builder.mutation({
       query: (data) => ({
         url: `${endpoints.entry.comment}/${data?.id}`,
-        method: 'POST',
-        headers: headerJson,
+        method: apiHeaders.post,
+        headers: apiHeaders.headerjson,
         
         body: data,
       }),
@@ -95,7 +94,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
     postShareEntry: builder.mutation({
       query: (data) => ({
         url: `${endpoints.entry.share}/${data?.id}`,
-        method: 'POST',
+        method: apiHeaders.post,
         headers: headerJson,
         body: data,
       }),
@@ -104,7 +103,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
     getEntryById: builder.query({
       query: (queryArg) => ({
         url: `${endpoints.entry.entryById}/${queryArg}`,
-        method: 'GET',
+        method: apiHeaders.get,
         headers: headerJson,
         params: queryArg,
       }),}),

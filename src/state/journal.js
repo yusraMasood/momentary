@@ -1,23 +1,22 @@
-import { endpoints } from "../Api/configs";
+import { apiHeaders, endpoints } from "../Api/configs";
 import { apiSlice } from "./apiSlice";
-import { headerJson } from "../utils/Constants";
 
 
-export const entendedEntrySlice = apiSlice.injectEndpoints({
+export const extendedJournalSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
     postAddJournal: builder.mutation({
       query: (data) => ({
         url: endpoints.journal.add,
-        method: 'POST',
-        headers: headerJson,
+        method: apiHeaders.headerjson,
+        headers: apiHeaders.headerjson,
         body:data,
       }),
     }),
   getJournals: builder.query({
     query: (queryArg) => ({
       url: endpoints.journal.allJournals,
-      method: 'GET',
-      headers: headerJson,
+      method: apiHeaders.get,
+      headers: apiHeaders.headerjson,
       params: {...queryArg},
     }),
   
@@ -36,30 +35,30 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
   getLibrary: builder.query({
     query: (queryArg) => ({
       url: endpoints.library.library,
-      method: 'GET',
-      headers: headerJson,
+      method: apiHeaders.get,
+      headers: apiHeaders.headerjson,
       params: {...queryArg},
     }),}),
     postDeleteJournal: builder.mutation({
       query: (queryArg) => ({
         url: `${endpoints.journal.delete}/${queryArg}`,
-        method: 'POST',
-        headers: headerJson,
+        method: apiHeaders.headerjson,
+        headers: apiHeaders.headerjson,
         // params: queryArg,
       }),
     }),
     getJournalById: builder.query({
       query: (queryArg) => ({
         url: `${endpoints.journal.journalDetails}/${queryArg}`,
-        method: 'GET',
-        headers: headerJson,
+        method: apiHeaders.get,
+        headers: apiHeaders.headerjson,
         // params: {...queryArg},
       }),}),
       postUpdateJournal: builder.mutation({
         query: (queryArg) => ({
           url: `${endpoints.journal.update}/${queryArg}`,
-          method: 'POST',
-          headers: headerJson,
+          method: apiHeaders.headerjson,
+          headers: apiHeaders.headerjson,
           // params: queryArg,
         }),
 
@@ -78,7 +77,7 @@ export const {
     usePostDeleteJournalMutation,
     usePostUpdateJournalMutation,
     useGetLibraryQuery
-} = entendedEntrySlice;
+} = extendedJournalSlice;
 
 // export const entrySliceToken = createSlice({
 //   name: initial.jout.name,
