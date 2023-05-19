@@ -103,6 +103,44 @@ const styles = StyleSheet.create({
         paddingVertical: vh*1.1,
         paddingHorizontal: vw*10,
         borderRadius: vh*1.2,
+    },
+    checkboxContainer:{
+        height: vh*2.3,
+        width: vw*4.6,
+        // backgroundColor: "red"
+        borderColor: colors.input.greyBorder,
+
+        borderWidth: 1,
+        borderRadius: vh*0.5,
+        alignItems: "center",
+        justifyContent: "center"
+
+    },
+    checkboxInnerContainer:{
+        height: vh*1.6,
+        width: vw*3.3,
+        borderRadius: vh*0.5,
+        borderColor: colors.input.greyBorder,
+
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    checkboxRipple:{
+        flexDirection: "row",
+        alignItems: "center",
+        marginVertical: vh*1.5,
+        marginRight: vw*3
+    },
+    title:{
+        marginLeft: vw*1.5,
+        fontSize: vh*1.45,
+        color:colors.text.grey
+    },
+    tickImg:{
+        height: vh*1.3,
+        width: vh*1.3,
+        resizeMode: "contain",
+        // tintColor: colors.black
     }
 });
 

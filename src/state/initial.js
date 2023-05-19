@@ -21,7 +21,8 @@ const entry = {
     hashtags:[],
     comment: true,
     location: null,
-    selectedPeople:[]
+    selectedPeople:[],
+    selectedPeopleId:[]
   }
     
   },

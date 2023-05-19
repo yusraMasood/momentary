@@ -86,6 +86,7 @@ const TextEditor = props => {
           }}
         />
         <RichEditor
+        androidHardwareAccelerationDisabled={true}
           onCursorPosition={() => {
             scrollRef.current.scrollTo({y: scrollY - 30, animated: true});
           }}

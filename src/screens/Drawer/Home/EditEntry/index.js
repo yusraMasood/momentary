@@ -57,7 +57,7 @@ const EditEntry = props => {
   const [myhashtags, setMyHashtags] = useState(data?.journalEntry?.hashtags);
   const [visiblity, setVisiblity] = useState(setting?.visiblity);
   const [comment, setComment] = useState(data?.journalEntry?.comment);
-  const [selectedPeople, setSelectedPeople] = useState(data?.journalEntry?.selectedPeople);
+  const [selectedPeople, setSelectedPeople] = useState([]);
   const [selectedPeopleId, setSelectedPeopleId] = useState(
    [],
   );
@@ -72,6 +72,7 @@ const EditEntry = props => {
   const settingRef = useRef(null);
   const {updateEntry} = useEntry();
   const entryLoader= useGlobalLoader()
+  // console.log(" data entry", data);
 
   // useLayoutEffect(() => {
   //   props.navigation.setOptions({
@@ -84,6 +85,8 @@ const EditEntry = props => {
   //     },
   //   });
   // }, [props.navigation]);
+  const tempId=[]
+  const tempIdFriend=[]
   useEffect(() => {
     // const unsubscribe = props.navigation.addListener('focus', () => {
     //   refetch();
@@ -99,8 +102,11 @@ const EditEntry = props => {
         setImageIdArray([...imageIdArray, value?._id]);
       });
       data?.journalEntry?.selectedPeople.map((value, index) => {
-        setSelectedPeopleId([...selectedPeopleId, value?._id]);
+        tempId.push(value?._id)
+        tempIdFriend.push(value)
       });
+      setSelectedPeopleId(tempId);
+      setSelectedPeople(tempIdFriend);
     }
     // });
 
@@ -116,12 +122,23 @@ const EditEntry = props => {
     setImageIdArray(p => [...p, img?._id]);
     setImageArray(p => [...p, img]);
   };
-  const updateEntryFuc = () => {
-    if(visiblity=="My Network")
+  const onPressSend = () => {
+    if(visiblity=="myNetwork")
     {
       networkPopup.current.show()
     }
     else{
+      hashTagRef.current.show()
+      
+    
+
+    }
+
+
+    
+  };
+  console.log(" seletced", selectedPeople,selectedPeopleId,data?.journalEntry?.selectedPeople);
+  const updateEntryFunc=()=>{
       updateEntry({
       id,
       entryText,
@@ -137,12 +154,7 @@ const EditEntry = props => {
         successPopup.current.show();
       }
     });
-
-    }
-
-
-    
-  };
+  }
   const onPressEntryDelete = () => {
     postDeleteEntry(data?.journalEntry?._id).then(res => {
       if (res?.data) {
@@ -209,7 +221,7 @@ if(isLoading)
           {
             entryLoader?
             <ButtonLoading style={styles.loadingStyle}/>:
-          <RippleHOC onPress={updateEntryFuc}>
+          <RippleHOC onPress={onPressSend}>
             <Image source={icons.send} style={styles.textIcon} />
           </RippleHOC>
 
@@ -226,7 +238,7 @@ if(isLoading)
         />
         <HashtagPopup
           reference={hashTagRef}
-          onAccept={updateEntryFuc}
+          onAccept={updateEntryFunc}
           setMyHashtags={setMyHashtags}
           myhashtags={myhashtags}
         />

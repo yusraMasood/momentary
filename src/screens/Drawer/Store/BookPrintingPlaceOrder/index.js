@@ -82,12 +82,13 @@ const BookPrintingPlaceOrder = props => {
           label={'Zip Code'}
           onSubmitEditing={onSubmit}
         />
-        <CustomCheckBox
+        
+        {/* <CustomCheckBox
           updateData={getCheckboxData}
           //   checkbox={sameAddressValue}
           //   setCheckbox={setSameAddressValue}
           para={'Different Shipping Address'}
-        />
+        /> */}
         {shipping && (
           <View>
             <RobotoMedium style={styles.billingText}>

@@ -44,13 +44,17 @@ const NewEntry = props => {
   const [visiblity, setVisiblity] = useState(
     setting?.visiblity?setting?.visiblity:"",
   );
-  const [selectedPeople, setSelectedPeople] = useState([]);
-  const [selectedPeopleId, setSelectedPeopleId] = useState(
+  const [selectedPeople, setSelectedPeople] = useState(
    setting?.selectedPeople?setting?.selectedPeople:[],
+
+  );
+  const [selectedPeopleId, setSelectedPeopleId] = useState(
+   setting?.selectedPeopleId?setting?.selectedPeopleId:[],
   );
   const [comment, setComment] = useState(
     setting?.comment?setting?.comment:true
   );
+  console.log("setting?.selectedPeople ", setting?.selectedPeople);
   const {addEntry} = useEntry();
   const imageLoader = useInlineLoader();
   const {data} = useGetJournalsQuery(   {
@@ -131,6 +135,7 @@ const NewEntry = props => {
     }
   };
   const onPressSave=()=>{
+    // console.log(selectedPeopleId);
     addEntry({
       entryText,
       imageArray: imageIdArray,

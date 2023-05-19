@@ -10,6 +10,7 @@ import { saveSetting, useSetting } from '../../../../state/entry'
 
 const Visiblity =(props)=>{
 const setting =useSetting()
+console.log("setting?.visiblity",setting?.visiblity);
 
     const [itemValue,setItemValue] =useState(setting?.visiblity)
     const dispatch =useDispatch()

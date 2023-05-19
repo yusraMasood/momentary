@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import {View, Image, FlatList} from 'react-native';
 import {icons} from '../../../../assets/images';
 import RobotoBold from '../../../../components/Texts/RobotoBold';
@@ -42,8 +42,6 @@ const HomeScreen = props => {
     try {
       const response = await dispatch(getAddressByLatLong(locationData));
       dispatch(saveSetting({...setting,location:{
-        // latitude: location.latitude,
-        // longitude: location.longitude,
         name: response?.results[0]?.formatted_address,
         coordinates: [location.longitude,location.latitude]
       } }))
@@ -60,24 +58,33 @@ const HomeScreen = props => {
         console.log('catch', e);
       });
   };
-  // console.log("profile?.",profile);
   useEffect(() => {
- console.log("hello");
     dispatch(setProfile(profile?.user))
-  
-     
     setupMethods();
   }, [profile]);
+
   useEffect(()=>{
     const unsubscribe = props.navigation.addListener('focus', () => {
       refetch()
     });
-
-    // Return the function to unsubscribe from the event so it gets removed on unmount
     return unsubscribe;
 
   },[props.navigation])
   
+  const getFriendIds=()=>{
+    const tempFriendId=[]
+    const tempFriend=[]
+    lastItem?.selectedPeople.map((value)=>{
+      tempFriendId.push(value?._id)
+      tempFriend.push(value)
+    })
+    dispatch(saveSetting({...setting,hashtags: lastItem?.hashtags,
+      selectedPeople:tempFriend,
+      selectedPeopleId: tempFriendId,
+      visiblity:lastItem?.privacy==="public"?"Global Network": lastItem?.privacy==="private"?"Private": "My Network"
+      ,comment: lastItem?.comment
+    }))
+  }
  
 
   return (
@@ -85,10 +92,8 @@ const HomeScreen = props => {
       {isLoading?
       [1,2].map((item,index)=>{
         return(
-
           <CustomSkeleton
           key={index}
-
           height={18}
           width={88}
           marginLeft={vw*2}
@@ -96,15 +101,12 @@ const HomeScreen = props => {
           /> 
         )
       })
-    
      :
-
     <View>
        <RippleHOC
         onPress={() =>{
-          dispatch(saveSetting({...setting,hashtags: lastItem?.hashtags,selectedPeople:lastItem?.selectedPeople,
-            visiblity:lastItem?.privacy,comment: lastItem?.comment
-          }))
+          getFriendIds()
+         
           props.navigation.navigate('NewEntry', {type: 'New Entry',lastItem})
         }
         }

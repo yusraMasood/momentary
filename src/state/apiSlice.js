@@ -9,7 +9,7 @@ export const apiSlice = createApi({
     prepareHeaders: (headers, {getState}) => {
       const token =getState()?.auth?.token
 
-      console.log(" token in api slice", token);
+      // console.log(" token in api slice", token);
     
 
       if(token){
