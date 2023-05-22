@@ -39,13 +39,13 @@ const GlobalNetworkScreen = props => {
     page: 1,
     limit: 30,
     privacy: 'public',
-    distance:region,
+    distance:1000,
     latitude: location?.latitude,
     longitude: location?.longitude
     // latitude: 40.7127837,
     // longitude: -74.0059413,
   });
-// console.log("user posts with location", region);
+console.log("user posts with location", data);
   const mapRef = useRef(null);
 
   const animateToRegion = location => {

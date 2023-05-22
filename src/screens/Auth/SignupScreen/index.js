@@ -14,7 +14,6 @@ import styles from './styles';
 import ImagePicker from '../../../components/Image/ImagePicker';
 import ContentContainer from '../../../components/wrappers/ContentContainer';
 import {
-  getCountryCode,
   validateEmail,
   validateName,
 } from '../../../utils/Validations';

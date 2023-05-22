@@ -15,10 +15,10 @@ export default () => {
   const [postShareEntry, shareDetail] = usePostShareEntryMutation();
   const setting = useSetting();
   const dispatch = useDispatch();
-  // console.log('shareDetail', shareDetail);
+  console.log('shareDetail', addEntryM);
   const addEntry = async data => {
-    dispatch(toggleGlobalLoader(true));
-    console.log("data?.visiblity",data?.visiblity);
+ 
+    // console.log("data?.visiblity",data?.visiblity);
     const body = {
       journal: data?.journal,
       content: data?.entryText,
@@ -62,22 +62,24 @@ export default () => {
         Toast.error('Please enable location in setting');
         throw new Error('Please enable location in setting');
       }
+      dispatch(toggleGlobalLoader(true));
 
       const response = await postAddEntry(body).unwrap();
       console.log("response of add Entry",response);
       dispatch(toggleGlobalLoader(false));
-
       return response;
     } catch (e) {
       console.log("error",e);
-      Toast.error(getMessage(e?.data?.message));
       dispatch(toggleGlobalLoader(false));
-      throw new Error(getMessage(e?.data?.message));
+      Toast.error(getMessage(e?.data));
+
+     
+      throw new Error(getMessage(e?.data));
     }
   };
   const updateEntry = async data => {
     // console.log(" update entrydata", data);
-    dispatch(toggleGlobalLoader(true));
+    
     const body = {
       journal: null,
       content: data?.entryText,
@@ -121,6 +123,7 @@ export default () => {
         Toast.error('Please set visiblity');
         throw new Error('Please set visiblity');
       }
+      dispatch(toggleGlobalLoader(true));
 
       const response = await postUpdateEntry(body).unwrap();
       dispatch(toggleGlobalLoader(false));
@@ -135,7 +138,7 @@ export default () => {
   };
   const shareEntry = async data => {
     console.log(' data in share entry', data);
-    dispatch(toggleGlobalLoader(true));
+   
     const body = {
       id: data?.journalEntry?._id,
       journal: data?.journalEntry?.journal,
@@ -156,16 +159,18 @@ export default () => {
       pin: false,
     };
     try {
+      dispatch(toggleGlobalLoader(true));
       const response = await postShareEntry(body).unwrap();
       dispatch(toggleGlobalLoader(false));
 
       return response?.message;
     } catch (e) {
+      dispatch(toggleGlobalLoader(false));
       console.log('error of share Entry', e);
 
       // console.log("error",e);
       Toast.error(getMessage(e?.data?.message));
-      dispatch(toggleGlobalLoader(false));
+     
       throw new Error(getMessage(e?.data?.message));
     }
   };

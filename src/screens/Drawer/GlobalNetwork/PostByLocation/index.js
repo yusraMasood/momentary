@@ -184,6 +184,7 @@ const PostByLocation = props => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
+        aware
       >
         {isLoading ? (
           <ContentLoader />
@@ -243,8 +244,7 @@ const PostByLocation = props => {
             />
           </View>
         )}
-      </ContentContainer>
-      <View style={styles.footerContainer}>
+        <View style={styles.footerContainer}>
         <CommentInput
           value={comment}
           onChangeText={setComment}
@@ -254,6 +254,8 @@ const PostByLocation = props => {
           // image={profile?.image?.thumbnail}
         />
       </View>
+      </ContentContainer>
+      
       <ImageView
         images={postDetail?.feed?.images}
         imageIndex={0}

@@ -1699,13 +1699,6 @@
   resolved "https://registry.yarnpkg.com/@react-native-masked-view/masked-view/-/masked-view-0.2.8.tgz#34405a4361882dae7c81b1b771fe9f5fbd545a97"
   integrity sha512-+1holBPDF1yi/y0uc1WB6lA5tSNHhM7PpTMapT3ypvSnKQ9+C6sy/zfjxNxRA/llBQ1Ci6f94EaK56UCKs5lTA==
 
-"@react-native-seoul/masonry-list@^1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@react-native-seoul/masonry-list/-/masonry-list-1.4.1.tgz#5af42c1eed58b162027a4c23cbc9d10d4d828ff9"
-  integrity sha512-7eYrbwq4R8rz6LwG23VaE4SPZxl9Kn7luFAPzR3gjc3T50P1S1WViyw2cWlA7WqKmQenpVYDSjKmxMDdmHgIHA==
-  dependencies:
-    dooboolab-welcome "^1.3.2"
-
 "@react-native/assets@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@react-native/assets/-/assets-1.0.0.tgz#c6f9bf63d274bafc8e970628de24986b30a55c8e"
@@ -2125,11 +2118,6 @@ acorn@^8.5.0, acorn@^8.8.0:
   version "8.8.2"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.8.2.tgz#1b2f25db02af965399b9776b0c2c391276d37c4a"
   integrity sha512-xjIYgE8HBrkpd/sJqOGNspf8uHG+NOHGOw6a/Urj8taM2EXfdNAH2oFcPeIFfsv3+kz/mJrS5VuMqbNLjCa2vw==
-
-add@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
-  integrity sha512-j5QzrmsokwWWp6kUcJQySpbG+xfOBqqKnup3OIk1pz+kB/80SLorZ9V8zHFLO92Lcd+hbvq8bT+zOGoPkmBV0Q==
 
 ajv@^6.10.0, ajv@^6.12.4:
   version "6.12.6"
@@ -3165,11 +3153,6 @@ domutils@^3.0.1:
     dom-serializer "^2.0.0"
     domelementtype "^2.3.0"
     domhandler "^5.0.1"
-
-dooboolab-welcome@^1.3.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/dooboolab-welcome/-/dooboolab-welcome-1.3.2.tgz#4928595312f0429b4ea1b485ba8767bae6acdab7"
-  integrity sha512-2NbMaIIURElxEf/UAoVUFlXrO+7n/FRhLCiQlk4fkbGRh9cJ3/f8VEMPveR9m4Ug2l2Zey+UCXjd6EcBqHJ5bw==
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -5169,11 +5152,6 @@ levn@^0.4.1:
   dependencies:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
-
-libphonenumber-js@^1.10.26:
-  version "1.10.26"
-  resolved "https://registry.yarnpkg.com/libphonenumber-js/-/libphonenumber-js-1.10.26.tgz#3e6604357b3434b0005f85778b44153f4fadeecd"
-  integrity sha512-oB3l4J5gEhMV+ymmlIjWedsbCpsNRqbEZ/E/MpN2QVyinKNra6DcuXywxSk/72M3DZDoH/6kzurOq1erznBMwQ==
 
 lines-and-columns@^1.1.6:
   version "1.2.4"

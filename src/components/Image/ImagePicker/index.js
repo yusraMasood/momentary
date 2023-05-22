@@ -28,7 +28,7 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
   const getImage = async (image) => {
     try {
       // console.log("type,type",type);
-      dispatch(toggleInlineLoader(true))
+     
       let data = {
         image: image
       }
@@ -38,6 +38,7 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
 
 
       // console.log("formData",formData);
+      dispatch(toggleInlineLoader(true))
       uploadImage(formData).then((res)=>{
         dispatch(toggleInlineLoader(false))
         setImage(res?.image)
@@ -47,11 +48,9 @@ const ImagePicker = ({ imageSelection, setImageSelection, image, setImage, setUp
           updateImages(res?.image)
         }
       })
-      // dispatch(toggleInlineLoader(false))
-
-
+      return res?.image
     } catch (e) {
-      // console.log(e);
+      console.log(e);
       dispatch(toggleInlineLoader(false))
 
       setUploading(false)

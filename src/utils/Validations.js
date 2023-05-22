@@ -2,8 +2,6 @@ import { containNumberReg, emailReg, leadingZeros, lowerReg, nameReg, numberReg,
 import moment from 'moment'
 import { minAgeInDays } from "./Constants"
 import ReactNativeBiometrics, { BiometryTypes } from 'react-native-biometrics'
-import libphonenumber from 'libphonenumber-js'
-import Toast from "react-native-toast"
 
 export const validateEmail = email => {
     return emailReg.test(email)
@@ -79,29 +77,7 @@ export const  getBiometricData=async()=>{
 
   
   }
-export const getCountryCode=( input )=> {
-    // Set default country code to US if no real country code is specified
-    const defaultCountryCode = input.substr( 0, 1 ) !== '+' ? 'US' : null;
-    let formatted = new libphonenumber.asYouType( defaultCountryCode ).input( input );
-    let countryCode = '';
-    let withoutCountryCode = formatted;
-    
-    if ( defaultCountryCode === 'US' ) {
-      countryCode = '+1';
-      formatted = '+1 ' + formatted;
-    }
-    else {
-      const parts = formatted.split( ' ' );
-      countryCode = parts.length > 1 ? parts.shift() : '';
-      withoutCountryCode = parts.join( ' ' );
-    }
-    
-    return {
-      formatted,
-      withoutCountryCode,
-      countryCode,
-    }
-  }
+
 
 export const validateUpperCase = value => {
     return upperReg.test(value)

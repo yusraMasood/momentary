@@ -22,7 +22,7 @@ export default () => {
 
   console.log("message",message);
     const loginUser = async ({email, password}) => {
-    dispatch(toggleGlobalLoader(true));
+   
 
     try {
       if (email.trim() === '') {
@@ -37,6 +37,7 @@ export default () => {
         Toast.error('Please Enter Your Password');
         throw new Error('Please Enter Your Password');
       }
+      dispatch(toggleGlobalLoader(true));
     const response =  await postLogin({email, password, role: 'user'}).then(res => {
       console.log(" respoonse of login ", res);
         dispatch(toggleGlobalLoader(false));
@@ -70,7 +71,7 @@ export default () => {
     image
   }) => {
     let response;
-    dispatch(toggleGlobalLoader(true));
+   
     try {
       if (fullName.trim() === '') {
         Toast.error('Please Enter Your Full Name');
@@ -112,6 +113,7 @@ export default () => {
         deviceToken: '123',
         deviceType: Platform.OS,
       };
+      dispatch(toggleGlobalLoader(true));
     const response= await postSignup(body).unwrap()
 
     dispatch(toggleGlobalLoader(false));
@@ -146,7 +148,6 @@ export default () => {
     }
   };
   const resetPassword = async ({email,otp,confirmPassword,password}) => {
-    dispatch(toggleGlobalLoader(true));
 
     try {
       if (password.trim() === '') {
@@ -161,6 +162,8 @@ export default () => {
         Toast.error('Passwords Does Not Match');
         return;
       }
+    dispatch(toggleGlobalLoader(true));
+
      const response= await postResetPassword({email,otp,confirmPassword,password}).unwrap()
      Toast.success("Password Reset Successfully")
       dispatch(toggleGlobalLoader(false));
