@@ -16,6 +16,7 @@ import {Toast, showToast} from '../../../../Api/APIHelpers';
 import ImageView from 'react-native-image-viewing';
 import {
   useGetFeedDetailsQuery,
+  usePostRemoveFriendRequestMutation,
   usePostSendFriendRequestMutation,
 } from '../../../../state/friends';
 import RippleHOC from '../../../../components/wrappers/Ripple';
@@ -26,12 +27,12 @@ const PostByLocation = props => {
   const [comment, setComment] = useState('');
   const [visible, setIsVisible] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [postRemoveFriendRequest,removeRequestInfo]= usePostRemoveFriendRequestMutation()
   const [postCommentEntry, commentDetails] = usePostCommentEntryMutation();
   const [
     postSendFriendRequest,
     requestInfo,
   ] = usePostSendFriendRequestMutation();
-  const [requestSent, setRequestSent] = useState(false);
 
   const {
     data: postDetail,
@@ -40,6 +41,8 @@ const PostByLocation = props => {
     error,
     refetch,
   } = useGetFeedDetailsQuery(props?.route?.params?.id);
+  console.log("postDetail", postDetail?.feed);
+  
   const addComment = () => {
     if (comment === '') {
       return Toast.error('Please Write Comment before submitting..');
@@ -59,17 +62,31 @@ const PostByLocation = props => {
     });
   };
   const sendFriendRequest = () => {
+    // console.log(postDetail?.feed?.user?.network?.requestType==="sent",postDetail?.feed?.user?.network?.requestType);
+    postDetail?.feed?.user?.network?.requestType==="sent"?
+
+    postRemoveFriendRequest(postDetail?.feed?.user?._id).then((res)=>{
+      console.log("postDetail?.feed?.user?._id",postDetail?.feed?.user?._id)
+          if (res?.data) {
+            Toast.success(res?.data?.message);
+            refetch();
+          }
+          if (res?.error?.data) {
+            Toast.error(res?.error?.data);
+          }
+    
+        })
+    :postDetail?.feed?.user?.network===null?
     postSendFriendRequest({friend: postDetail?.feed?.user?._id}).then(res => {
       if (res?.data) {
         Toast.success(res?.data?.message);
-        setRequestSent(true);
+        refetch()
       }
       if (res?.error) {
         Toast.error(res?.error?.data?.message);
       }
-    });
+    }): null
   };
-  // console.log("postDetail",postDetail);
 
   const renderImages = () => {
     return (
@@ -130,6 +147,37 @@ const PostByLocation = props => {
   const onRefresh = useCallback(() => {
     refetch();
   }, []);
+  const userFriendRequest=()=>{
+    if(requestInfo.isLoading)
+    {
+      return(
+        <ButtonLoading />
+
+      )
+    }
+    if(removeRequestInfo.isLoading)
+    {
+      return(
+        <ButtonLoading />
+
+      )
+    }
+    return(
+      <RippleHOC onPress={sendFriendRequest}>
+        {
+          postDetail?.feed?.user?.network?.status!=="friend"&&
+          <Image
+            source={postDetail?.feed?.user?.network==null ? icons.addfriend:postDetail?.feed?.user?.network?.requestType==="sent"?icons.requestSent :icons.addfriend}
+            style={styles.addFriendIcon}
+          />
+
+        }
+      </RippleHOC>
+
+    )
+      
+    
+  }
   return (
     <ScreenWrapper style={styles.container}>
       <ContentContainer
@@ -145,18 +193,8 @@ const PostByLocation = props => {
           </RobotoRegular>
         ) : (
           <View>
-            {/* <CustomButton text="Add Friend"/> */}
             <View style={styles.userDetailsContainer}>
-              {requestInfo.isLoading ? (
-                <ButtonLoading />
-              ) : (
-                <RippleHOC onPress={sendFriendRequest}>
-                  <Image
-                    source={requestSent ? icons.requestSent : icons.addfriend}
-                    style={styles.addFriendIcon}
-                  />
-                </RippleHOC>
-              )}
+             {userFriendRequest()}
               <View>
                 <RobotoRegular style={styles.nameText}>
                   {postDetail?.feed?.user?.fullName}

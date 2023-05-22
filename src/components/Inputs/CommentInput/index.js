@@ -10,7 +10,6 @@ import { userProfile } from '../../../state/auth'
 
 const CommentInput=(props)=>{
   const profile =userProfile()
-  console.log("props.image", profile);
     return(
         <View style={styles.textInputContainer}>
         <Image source={profile?.image?.thumbnail?{uri: profile?.image?.thumbnail}:generalImages.userImage} style={styles.userImage}/>

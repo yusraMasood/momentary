@@ -34,7 +34,7 @@ import { userProfile } from '../../../state/auth'
   const shareRef=useRef(null)
   const networkRef=useRef(null)
   const successRef=useRef(null)
-  console.log("props reactions", props.reactions,profile);
+  // console.log("props reactions", props.reactions,profile);
   const onPressLike=()=>{
     postLikeEntry(props?.id).then(res=>{
       console.log("res",res);

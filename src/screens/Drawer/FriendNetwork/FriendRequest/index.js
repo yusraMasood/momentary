@@ -19,30 +19,98 @@ import {
 } from '../../../../state/friends';
 import EmptyComponent from '../../../../components/EmptyComponent';
 import {Toast, showToast} from '../../../../Api/APIHelpers';
+import ListLoader from '../../../../components/Loaders/ListLoader';
+import moment from 'moment';
 
 const FriendRequest = props => {
   const pagerRef = useRef();
   const [friendPage, setFriendPage] = useState(1);
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(0);
-  const [friendRequestPage,setFriendRequest] =useState(1)
+  const [friendRequestPage,setFriendRequestPage] =useState(1)
   const [refreshing, setRefreshing] = useState(false);
+  const [friendRequestData,setFriendRequestData] =useState([])
   const requestArray = ['My Connections', 'Incoming', 'Outgoing'];
+  const [myFriendsData,setMyFriendsData] =useState([])
   const requestRef = useRef(null);
   const addFriendRef = useRef(null);
-  const friendsData = useGetMyFriendsQuery({keyword: search,page:friendPage,limit:10,
+  const myFriends = useGetMyFriendsQuery({keyword: search,page:friendPage,limit:10,
   });
+
   const friendRequest = useGetFriendRequestQuery({
     requestType: page == 1 ? 'received' : 'sent',
     keyword: search,
     page:friendRequestPage,
     limit:10
   });
-useEffect(()=>{
-  friendsData?.refetch()
-  friendRequest?.refetch()
+// useEffect(()=>{
+//   // friendsData?.refetch()
+//   // friendRequest?.refetch()
 
-},[page])
+// },[page])
+useEffect(() => {
+  if(!myFriends?.isFetching){
+    if(friendPage===1)
+    {
+      setMyFriendsData(myFriends?.data?.friends)
+
+      
+    }
+    else{
+      setMyFriendsData([...myFriendsData,...myFriends?.data?.friends])
+    }
+  }
+ 
+}, [myFriends?.data]);
+useEffect(() => {
+  if(!friendRequest?.isFetching){
+    if(friendRequestPage===1)
+    {
+      setFriendRequestData(friendRequest?.data?.friendRequests) 
+    }
+    else{
+      setFriendRequestData([...friendRequestData,...friendRequest?.data?.friendRequests])
+    }
+  }
+ 
+}, [friendRequest?.data]);
+
+const updateData = data => {
+  setPage(data);
+};
+const renderEmpty = () => {
+  return <EmptyComponent text={'No Connections to show'} />;
+};
+const handleFriendRequestRefresh = () => {
+  setRefreshing(true);
+  // friendRequestPage(1)
+  friendRequest?.refetch()
+  
+  setRefreshing(false);
+};
+const handleFriendDataRefresh = () => {
+  setRefreshing(true);
+  // setFriendPage(1)
+  myFriends?.refetch()
+
+  setRefreshing(false);
+};
+const handleFriendReached = () => {
+  if (myFriends?.data?.friends?.length > 9) {
+    if(friendPage<=myFriends?.data?.totalPages){
+    setFriendPage(friendPage + 1);
+
+  }
+  }
+};
+const handleFriendRequestReached=()=>{
+  if (friendRequest?.data?.friendRequests?.length > 9) {
+    if(friendRequestPage<=friendRequest?.data?.totalPages){
+      setFriendRequestPage(friendRequestPage + 1);
+
+  }
+  }
+}
 
 
 
@@ -53,12 +121,12 @@ useEffect(()=>{
       <FriendRequestCard
         name={item?.friend?.fullName}
         image={item?.friend?.image?.thumbnail}
-        job={'Last Entry on mm/dd/yyyy'}
+        job={`Last Entry on ${moment(item?.lastFeedTime).format("DD/MM/YYYY")}`}
         request={'Remove'}
         friendRequestId={item?.friend?._id}
         onPress={() => props.navigation.navigate('FriendDetails', {id: item?.friend?._id})}
-        refetch={friendsData?.refetch}
-        loader={friendsData?.isLoading}
+        refetch={myFriends?.refetch}
+        loader={myFriends?.isLoading}
 
       />
     );
@@ -72,19 +140,18 @@ useEffect(()=>{
         image={item?.friend?.image?.thumbnail}
         friendRequestId={item?._id}
         refetch={friendRequest?.refetch}
-        job={'Content Writer'}
+        job={item?.description}
         onPress={() => props.navigation.navigate('FriendDetails', {id: item?.friend?._id})}
         loader={friendRequest?.isLoading}
       />
     );
   };
   const renderOutgoingCard = ({item}) => {
-    // console.log(" item",item);
     return (
       <FriendRequestCard
         name={item?.friend?.fullName}
         image={item?.friend?.image?.thumbnail}
-        job={'Content Writer'}
+        job={item?.description}
         refetch={friendRequest?.refetch}
         friendRequestId={item?._id}
         request={'Cancel'}
@@ -94,27 +161,30 @@ useEffect(()=>{
       />
     );
   };
-  const handleFriendReached = () => {
-    if (friendsData?.friends?.length > 8) {
-      setFriendPage(friendPage + 1);
+  
+ 
+  
+  const renderFooter=()=>{
+    if(myFriends?.isLoading)
+    {
+      return(
+        <ListLoader/>
+      )
     }
-  };
-  const updateData = data => {
-    setPage(data);
-  };
-  const renderEmpty = () => {
-    return <EmptyComponent text={'No Connections to show'} />;
-  };
-  const handleFriendRequestRefresh = () => {
-    setRefreshing(true);
-    friendRequest?.refetch();
-    setRefreshing(false);
-  };
-  const handleFriendDataRefresh = () => {
-    setRefreshing(true);
-    friendRequest?.refetch();
-    setRefreshing(false);
-  };
+    if(friendRequest?.isLoading)
+    {
+      return(
+        <ListLoader/>
+      )
+    }
+    return(
+      <View>
+
+      </View>
+    )
+    
+  }
+
   return (
     <ScreenWrapper style={styles.container}>
       <SearchInput
@@ -139,12 +209,13 @@ useEffect(()=>{
             onRefresh={handleFriendDataRefresh}
             refreshing={refreshing}
             data={
-              friendsData?.isLoading ? [1, 2, 3] : friendsData?.data?.friends
+              myFriends?.isLoading ? [1, 2, 3] : myFriendsData
             }
             key={'myconnectionArray'}
             keyExtractor={(item, index) => index}
             renderItem={renderConnectionCard}
             showsVerticalScrollIndicator={false}
+            ListFooterComponent={renderFooter}
             onEndReached={handleFriendReached}
             contentContainerStyle={styles.contentContainer}
             ListEmptyComponent={renderEmpty}
@@ -157,10 +228,13 @@ useEffect(()=>{
             data={
               friendRequest?.isLoading
                 ? [1, 2, 3]
-                : friendRequest?.data?.friendRequests
+                : friendRequestData
             }
             key={'incomingArray'}
             keyExtractor={(item, index) => index}
+            ListFooterComponent={renderFooter}
+            onEndReached={handleFriendRequestReached}
+
             renderItem={renderIncomingCard}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.contentContainer}
@@ -173,11 +247,13 @@ useEffect(()=>{
             data={
               friendRequest?.isLoading
                 ? [1, 2, 3]
-                : friendRequest?.data?.friendRequests
+                : friendRequestData
             }
             refreshing={refreshing}
             key={'outgoingArray'}
             keyExtractor={(item, index) => index}
+            ListFooterComponent={renderFooter}
+
             renderItem={renderOutgoingCard}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.contentContainer}

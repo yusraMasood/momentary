@@ -39,13 +39,13 @@ const GlobalNetworkScreen = props => {
     page: 1,
     limit: 30,
     privacy: 'public',
-    distance:496,
+    distance:region,
     latitude: location?.latitude,
     longitude: location?.longitude
     // latitude: 40.7127837,
     // longitude: -74.0059413,
   });
-// console.log("user posts with location", data,originalArgs);
+// console.log("user posts with location", region);
   const mapRef = useRef(null);
 
   const animateToRegion = location => {
@@ -76,13 +76,17 @@ const GlobalNetworkScreen = props => {
   // console.log("location",location);
 
   const handleOnRegionChange = async region => {
+    console.log("map region",region);
     const boundingBox = getBoundingBox(region);
+    console.log(" bouuncing box",boundingBox);
     const radius = distance(
       boundingBox.minLat,
       region.latitude,
       boundingBox.minLng,
       region.longitude,
     );
+    console.log(" radius",radius);
+
     setRegion(radius);
   };
 

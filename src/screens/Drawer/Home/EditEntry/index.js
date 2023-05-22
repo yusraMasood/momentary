@@ -33,6 +33,7 @@ import {Toast} from '../../../../Api/APIHelpers';
 import {useGetJournalsQuery} from '../../../../state/journal';
 import { useGlobalLoader } from '../../../../state/general';
 import ButtonLoading from '../../../../components/Loaders/ButtonLoading';
+import EmptyComponent from '../../../../components/EmptyComponent';
 
 const EditEntry = props => {
   const {id} = props?.route?.params;
@@ -72,7 +73,7 @@ const EditEntry = props => {
   const settingRef = useRef(null);
   const {updateEntry} = useEntry();
   const entryLoader= useGlobalLoader()
-  // console.log(" data entry", data);
+  console.log(" data entry", data,id,originalArgs,isFetching,isLoading,error);
 
   // useLayoutEffect(() => {
   //   props.navigation.setOptions({
@@ -89,7 +90,7 @@ const EditEntry = props => {
   const tempIdFriend=[]
   useEffect(() => {
     // const unsubscribe = props.navigation.addListener('focus', () => {
-    //   refetch();
+      // refetch();
     if (data?.journalEntry) {
       setMyHashtags(data?.journalEntry?.hashtags);
       setDropdownValue(data?.journalEntry?.journal);
@@ -137,7 +138,7 @@ const EditEntry = props => {
 
     
   };
-  console.log(" seletced", selectedPeople,selectedPeopleId,data?.journalEntry?.selectedPeople);
+  // console.log(" seletced", selectedPeople,selectedPeopleId,data?.journalEntry?.selectedPeople);
   const updateEntryFunc=()=>{
       updateEntry({
       id,
@@ -170,6 +171,9 @@ const EditEntry = props => {
     setVisiblity(value);
   };
   // console.log("data?.journalEntry?.content",data?.journalEntry?.content);
+  const editorInitializedCallback = () => {
+    RichText.current?.registerToolbar(function (items) {});
+  };
 if(isLoading)
 {
   return(
@@ -177,6 +181,12 @@ if(isLoading)
       <ContentLoader/>
     </ScreenWrapper>
   )
+}
+if(error){
+  <ScreenWrapper style={styles.container}>
+<EmptyComponent text={error?.message}/>
+</ScreenWrapper>
+
 }
   return (
     <ScreenWrapper style={styles.container}>
@@ -194,12 +204,16 @@ if(isLoading)
           dropdownTitle={'No Journal Selected'}
           setDropdownValue={setDropdownValue}
         />
+        {data?.journalEntry?.content &&
         <TextEditor
           background={background}
           entryText={entryText}
           setEntryText={setEntryText}
-          initialContent={data?.journalEntry?.content}
+          // initialContent={data?.journalEntry?.content}
+          initialContent={"dhhdo"}
         />
+        
+        } 
         <FlatList
           data={imageArray}
           key={'imageArray'}

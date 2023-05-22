@@ -36,7 +36,7 @@ const TextEditor = props => {
     richText.current?.insertText(emoji);
     richText.current?.blurContentEditor();
   }, []);
-  console.log("nital",props.initialContent);
+  // console.log("nital",props.initialContent);
   // {cssText: `${FontFamilyStylesheet.damion}`, contentCSSText: `font-family: ${fontFamily}`}
   const changeHTML = () => richText.current?.setContentHTML(props.initialContent) 
   // useEffect(()=>{
@@ -46,6 +46,9 @@ const TextEditor = props => {
   //   }
     
   // },[])
+  const editorInitializedCallback = () => {
+    richText.current?.registerToolbar(function (items) {});
+  };
    return (
     <View>
       <View style={styles.textEditorContainer}>
@@ -93,6 +96,7 @@ const TextEditor = props => {
             scrollRef.current.scrollTo({y: scrollY - 30, animated: true});
           }}
           ref={richText}
+          editorInitializedCallback={editorInitializedCallback}
           // editorStyle={[initialCSSText, styles.editorText]}
           editorStyle={{
             backgroundColor: props.background

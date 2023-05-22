@@ -68,6 +68,7 @@ const FriendNetworkCard = (props) => {
     // if()
     else{
       // console.log("jrojro");
+      
       addToLibrary()
 
     }

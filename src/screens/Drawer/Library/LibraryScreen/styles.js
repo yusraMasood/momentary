@@ -11,6 +11,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     // alignItems: "center"
   },
+  contentContainerStyle:{
+    // marginVertical: vh*2
+  },
   btn: {
     paddingVertical: vh * 1.4,
     paddingHorizontal: vw * 7,

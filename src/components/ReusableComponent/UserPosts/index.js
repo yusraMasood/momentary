@@ -13,13 +13,14 @@ const UserPosts = props => {
   const navigation = useNavigation();
 
   const renderFriendCard = ({item}) => {
+    console.log(" item",item?.content);
     return (
       <FriendNetworkCard
         onPressFriend={() =>
           navigation.navigate('FriendDetails', {id: item?.user?._id})
         }
         onPress={() => navigation.navigate('PostByLocation')}
-        clickText={props.clickText}
+        clickText={item?.isfavorite?"Added to Library": props.clickText}
         name={item?.user?.fullName}
         content={item?.content}
         location={item?.location?.name}

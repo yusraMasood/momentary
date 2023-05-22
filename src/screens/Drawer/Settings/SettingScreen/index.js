@@ -17,7 +17,7 @@ const SettingScreen = props => {
   const renderSettingCard = ({item}) => {
     return (
       <StoreCard
-        name={item?.name}
+        heading={item?.name}
         desc={item?.desc}
         onPress={() => props.navigation.navigate(item?.navigate)}
       />

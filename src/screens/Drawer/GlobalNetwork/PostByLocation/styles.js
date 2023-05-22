@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     color: colors.text.darkGrey,
     fontSize: vh * 1.54,
     paddingLeft: vw * 1,
-    width: vw*34
+    width: vw*36
   },
   nameText: {
     color: colors.general.white,

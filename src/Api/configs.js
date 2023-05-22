@@ -51,7 +51,7 @@ export const endpoints = {
 
   },
   library:{
-    library:"user/library?page=1&limit=4"
+    library:"user/library"
   },
   journal:{
     add:"user/journals/create",

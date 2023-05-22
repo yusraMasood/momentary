@@ -18,7 +18,7 @@ const LibraryConnectContent = props => {
   }, [props.navigation]);
   return (
     <ScreenWrapper style={styles.container}>
-      <UserPosts loading={isLoading} array={data?.feeds} refetch={refetch}
+      <UserPosts isLoading={isLoading} array={data?.feeds} refetch={refetch}
             page={page}
             setPage={setPage}/>
     </ScreenWrapper>

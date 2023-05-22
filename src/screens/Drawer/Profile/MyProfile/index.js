@@ -14,7 +14,7 @@ import ContentContainer from '../../../../components/wrappers/ContentContainer';
 const MyProfile = (props) => {
   const [refreshing,setRefreshing] =useState(false)
 
-  const profileMessage =useGetProfileQuery()
+  const {data, isLoading,isFetching,refetch} =useGetProfileQuery()
 
   const profile= userProfile()
 
@@ -35,7 +35,7 @@ const MyProfile = (props) => {
   ];
   const onRefresh = useCallback(() => {
     setRefreshing(true)
-   profileMessage?.refetch();
+   refetch();
    setRefreshing(false)
 
   }, []);
@@ -52,7 +52,7 @@ const MyProfile = (props) => {
       </RippleHOC>
       <View>
         <ContentDataComponent
-        // loader={isLoading}
+        loader={isLoading}
         array={profileArray}
         />
       </View>

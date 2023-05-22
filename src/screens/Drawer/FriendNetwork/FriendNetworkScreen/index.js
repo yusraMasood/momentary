@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import {View, Image, FlatList,TextInput} from 'react-native';
 import { generalImages, icons } from '../../../../assets/images';
 import FriendNetworkCard from '../../../../components/Cards/FriendNetworkCard';
@@ -19,19 +19,15 @@ const FriendNetworkScreen = (props) => {
     privacy:"myNetwork"
   })
 
-  // const renderFriendCard = () => {
-  //   return <FriendNetworkCard 
-  //   onPress={()=> props.navigation.navigate("FriendDetails")}
-  //   location={"Approximate Locations"}
-  //   // hashtags={"#trends #fashion"}
-  //   clickText={"Add To library"}
-  //   name={"Amelia Isabell"}
-  //   image={generalImages.userImage}
-  //   style={styles.friendNetworkStyle}
-    
-  //   />;
-  // };
-  console.log(" friwend network feedsa", data,originalArgs);
+
+  useEffect(()=>{
+    const unsubscribe = props.navigation.addListener('focus', () => {
+      refetch()
+    });
+    return unsubscribe;
+
+  },[props.navigation])
+
 const renderHeader=()=>{
     return(
       <View>
@@ -53,34 +49,17 @@ const renderHeader=()=>{
         </View>
     )
 }
-console.log("hello,data?.feeds",data?.feeds);
+// console.log("hello,data?.feeds",data?.feeds);
   return (
     <ScreenWrapper style={styles.container}>
       {renderHeader()}
 <UserPosts
 clickText={'Add To library'}
-loading={isLoading} array={data?.feeds} refetch={refetch}
+isLoading={isLoading} array={data?.feeds} refetch={refetch}
 page={page}
 setPage={setPage}
 
 />
-      {/* <FlatList data={[1, 2, 3, 4, 5]} 
-      ListHeaderComponent={renderHeader}
-      key={"friendArar"}
-      keyExtractor={(item,index)=> index}
-      contentContainerStyle={styles.flatListContainer}
-      renderItem={renderFriendCard} /> */}
-      {/* <View style={styles.textInputContainer}>
-        <Image source={generalImages.userImage} style={styles.userImage}/>
-        <View style={styles.inputContainer}>
-        <TextInput
-        placeholder='Write a comment..'
-        placeholderTextColor={colors.input.greyPlaceholder}
-        style={styles.input}
-        />
-        <Image source={icons.send} style={styles.sendIcon}/>
-        </View>
-      </View> */}
     </ScreenWrapper>
   );
 };

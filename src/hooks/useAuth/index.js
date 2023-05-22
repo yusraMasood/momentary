@@ -43,7 +43,7 @@ export default () => {
         if (res?.error) {
           Toast.error(res?.error?.data?.message);
         } else {
-          Toast.success(res?.data?.message);
+          // Toast.success(res?.data?.message);
 
           // dispatch(setToken(res?.data?.token));
         }

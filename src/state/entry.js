@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { apiHeaders, endpoints } from "../Api/configs";
 import { apiSlice } from "./apiSlice";
 import initial from "./initial";
 import { useSelector } from "react-redux";
+import { apiHeaders, endpoints } from "../Api/configs";
 
 
 export const entendedEntrySlice = apiSlice.injectEndpoints({
@@ -95,7 +95,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       query: (data) => ({
         url: `${endpoints.entry.share}/${data?.id}`,
         method: apiHeaders.post,
-        headers: headerJson,
+        headers: apiHeaders.headerjson,
         body: data,
       }),
     }),
@@ -104,7 +104,7 @@ export const entendedEntrySlice = apiSlice.injectEndpoints({
       query: (queryArg) => ({
         url: `${endpoints.entry.entryById}/${queryArg}`,
         method: apiHeaders.get,
-        headers: headerJson,
+        headers: apiHeaders.headerjson,
         params: queryArg,
       }),}),
   
