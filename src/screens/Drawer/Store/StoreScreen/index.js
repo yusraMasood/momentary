@@ -34,7 +34,7 @@ const StoreScreen = (props) => {
         return(
        <StoreCard
        onPress={()=> props.navigation.navigate(item?.navigate)}
-       name={item?.name}
+       heading={item?.name}
        style={styles.itemContainer}
        />
         )
