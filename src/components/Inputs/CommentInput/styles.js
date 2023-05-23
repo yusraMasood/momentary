@@ -31,7 +31,7 @@ margin:vh*1,
       userImage: {
         height: vh * 5,
         width: vh * 5,
-        resizeMode: 'contain',
+        resizeMode: 'cover',
         borderRadius: vh * 4,
       },
       input: {

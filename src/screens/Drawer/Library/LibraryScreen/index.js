@@ -16,18 +16,20 @@ import EmptyComponent from '../../../../components/EmptyComponent';
 
 const LibraryScreen = props => {
   const [refreshing, setRefreshing] = useState(false);
-  const {data, refetch, error} = useGetLibraryQuery({page: 1, limit: 5});
+  const {data, refetch, error,isLoading} = useGetLibraryQuery({page: 1, limit: 5});
   const handleDataRefresh = () => {
     setRefreshing(true);
     refetch();
     setRefreshing(false);
   };
   useEffect(() => {}, []);
+  console.log("error",error,data);
 
   const renderEntryCard = ({item}) => {
     // console.log('item?._id', item?._id);
     return (
       <LibraryCard
+      loader={isLoading}
         image={item?.images.length > 0 ? item?.images[0]?.thumbnail : null}
         onPress={() => props.navigation.navigate('EditEntry', {id: item?._id})}
       />
@@ -37,6 +39,8 @@ const LibraryScreen = props => {
     // console.log("item", item?.images);
     return (
       <LibraryCard
+      loader={isLoading}
+
         image={item?.image?.thumbnail}
         onPress={() =>
           props.navigation.navigate('ViewAllEntries', {id: item?._id})
@@ -48,6 +52,8 @@ const LibraryScreen = props => {
     // console.log("item", item?.images);
     return (
       <LibraryCard
+      loader={isLoading}
+
         image={item?.images.length > 0 ? item?.images[0]?.thumbnail : null}
         onPress={() =>
           props.navigation.navigate('PostByLocation', {id: item?._id})
@@ -59,6 +65,8 @@ const LibraryScreen = props => {
     // console.log("item", item?.images);
     return (
       <LibraryCard
+      loader={isLoading}
+
         image={item?.images.length > 0 ? item?.images[0]?.thumbnail : null}
         onPress={() =>
           props.navigation.navigate('PostByLocation', {id: item?._id})
@@ -68,7 +76,10 @@ const LibraryScreen = props => {
   };
   const renderInPrintCard = ({item}) => {
     // console.log("item", item?.images);
-    return <LibraryCard />;
+    return <LibraryCard 
+    loader={isLoading}
+    
+    />;
   };
 
   const renderEmpty = () => {
@@ -95,7 +106,7 @@ const LibraryScreen = props => {
   return (
     <ScreenWrapper style={styles.container}>
       {error ? (
-        <RobotoMedium>Something went wrong</RobotoMedium>
+        <RobotoMedium style={styles.errorText}>Something went wrong</RobotoMedium>
       ) : (
         <ContentContainer>
           <RippleHOC
@@ -117,7 +128,7 @@ const LibraryScreen = props => {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             // ListHeaderComponent={renderEntryHeader}
-            data={data?.library?.journalEntries}
+            data={isLoading?[1,2,3,4]: data?.library?.journalEntries}
             contentContainerStyle={styles.contentContainerStyle}
             renderItem={renderEntryCard}
             keyExtractor={(item, index) => index}
@@ -133,7 +144,7 @@ const LibraryScreen = props => {
             onRefresh={handleDataRefresh}
             showsHorizontalScrollIndicator={false}
             refreshing={refreshing}
-            data={data?.library?.journals}
+            data={isLoading?[1,2,3,4]:data?.library?.journals}
             ListEmptyComponent={renderEmpty}
             contentContainerStyle={styles.contentContainerStyle}
             renderItem={renderJournalCard}
@@ -154,7 +165,7 @@ const LibraryScreen = props => {
             onRefresh={handleDataRefresh}
             showsHorizontalScrollIndicator={false}
             refreshing={refreshing}
-            data={data?.library?.networkFavoriteFeeds}
+            data={ isLoading?[1,2,3,4]:data?.library?.networkFavoriteFeeds}
             renderItem={renderNetworkCard}
             horizontal={true}
             ListEmptyComponent={renderEmpty}
@@ -174,7 +185,7 @@ const LibraryScreen = props => {
           <FlatList
             onRefresh={handleDataRefresh}
             refreshing={refreshing}
-            data={data?.library?.globalFavoriteFeeds}
+            data={isLoading?[1,2,3,4]:data?.library?.globalFavoriteFeeds}
             horizontal={true}
             renderItem={renderGlobalCard}
             showsHorizontalScrollIndicator={false}
@@ -192,7 +203,7 @@ const LibraryScreen = props => {
             onRefresh={handleDataRefresh}
             refreshing={refreshing}
             showsHorizontalScrollIndicator={false}
-            data={data?.library?.inPrint}
+            data={isLoading?[1,2,3,4]:data?.library?.inPrint}
             renderItem={renderInPrintCard}
             horizontal={true}
             keyExtractor={(item, index) => index}

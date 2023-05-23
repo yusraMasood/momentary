@@ -14,6 +14,12 @@ const styles = StyleSheet.create({
   contentContainerStyle:{
     // marginVertical: vh*2
   },
+  errorText:{
+    fontSize: vh*2,
+    color: colors.general.white,
+    paddingLeft: vw*4,
+    paddingTop: vh*3
+  },
   btn: {
     paddingVertical: vh * 1.4,
     paddingHorizontal: vw * 7,

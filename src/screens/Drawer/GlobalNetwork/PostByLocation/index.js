@@ -41,7 +41,7 @@ const PostByLocation = props => {
     error,
     refetch,
   } = useGetFeedDetailsQuery(props?.route?.params?.id);
-  console.log("postDetail", postDetail?.feed);
+  console.log("postDetail", postDetail?.feed,error);
   
   const addComment = () => {
     if (comment === '') {
@@ -190,7 +190,7 @@ const PostByLocation = props => {
           <ContentLoader />
         ) : error ? (
           <RobotoRegular style={styles.nameText}>
-            {error?.data?.message}
+            Something Went Wrong
           </RobotoRegular>
         ) : (
           <View>
@@ -244,7 +244,9 @@ const PostByLocation = props => {
             />
           </View>
         )}
-        <View style={styles.footerContainer}>
+       
+      </ContentContainer>
+      <View style={styles.footerContainer}>
         <CommentInput
           value={comment}
           onChangeText={setComment}
@@ -254,8 +256,6 @@ const PostByLocation = props => {
           // image={profile?.image?.thumbnail}
         />
       </View>
-      </ContentContainer>
-      
       <ImageView
         images={postDetail?.feed?.images}
         imageIndex={0}

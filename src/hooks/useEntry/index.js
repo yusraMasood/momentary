@@ -71,10 +71,10 @@ export default () => {
     } catch (e) {
       console.log("error",e);
       dispatch(toggleGlobalLoader(false));
-      Toast.error(getMessage(e?.data));
+      Toast.error(getMessage(e?.data?.message));
 
      
-      throw new Error(getMessage(e?.data));
+      throw new Error(getMessage(e));
     }
   };
   const updateEntry = async data => {

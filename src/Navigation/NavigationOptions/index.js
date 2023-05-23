@@ -73,7 +73,7 @@ const routesWithDescription = {
   PaymentLogs: 'Total Subscription Payments: $2,000',
 };
 const routesWithBackIcon = {
-  LibraryScreen: 'LibraryScreen',
+  
   NewEntry: 'NewEntry',
   EditEntry:"EditEntry",
   NotificationScreen: 'NotificationScreen',
@@ -131,6 +131,7 @@ const routesWithSetting = {
   GlobalNetworkScreen: 'GlobalNetworkScreen',
   StoreScreen: 'StoreScreen',
   MyEntries: 'MyEntries',
+  LibraryScreen: 'LibraryScreen',
 };
 const routesWithNotification = {
   HomeScreen: 'HomeScreen',

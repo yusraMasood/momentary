@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
   nameText: {
     color: colors.general.white,
     fontSize: vh * 2.2,
+    // paddingTop: vh*3,
     paddingBottom: vh * 0.2,
   },
   editContainer: {
