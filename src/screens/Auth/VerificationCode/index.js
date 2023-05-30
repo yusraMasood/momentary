@@ -18,22 +18,25 @@ import {showToast} from '../../../Api/APIHelpers';
 import ButtonLoading from '../../../components/Loaders/ButtonLoading';
 import ErrorMessage from '../../../components/Error/ErrorMessage';
 import useAuth from '../../../hooks/useAuth';
-import { useGlobalLoader } from '../../../state/general';
+import { useGlobalLoader, useInlineLoader } from '../../../state/general';
 
 const VerificationCode = props => {
   const passwordRef = useRef(null);
   const {email} = props?.route?.params;
   const isLoadingGlobal=useGlobalLoader()
+  const isLoading=useInlineLoader()
   const [otp, setOtp] = useState(props?.route?.params?.otp);
-  const [postVerifyCode,{isLoading} ] = usePostVerifyCodeMutation();
+
   // const [postVerifyEmail, data] = usePostVerifyEmailMutation();
-  const {VerifyEmail} =useAuth()
+  const {VerifyEmail,VerifyCode} =useAuth()
   // {error,isLoading}
 
   const onSubmit = () => {
 
-    postVerifyCode({email, otp: Number(otp)}).then(res => {
-      if (res?.data?.message) {
+    VerifyCode({email, otp}).then(res => {
+
+      // console.log("response of verification code", res);
+      if (res?.message) {
         props.navigation.navigate('ResetPassword', {email, otp});
       }
     });

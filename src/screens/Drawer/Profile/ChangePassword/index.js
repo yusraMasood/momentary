@@ -6,6 +6,10 @@ import SuccessPopup from '../../../../components/popups/SuccessPopup';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
 import {usePostChangePasswordMutation} from '../../../../state/account';
+import ButtonLoading from '../../../../components/Loaders/ButtonLoading';
+import useProfile from '../../../../hooks/useProfile';
+import { useGlobalLoader } from '../../../../state/general';
+import { Toast } from '../../../../Api/APIHelpers';
 
 const ChangePassword = props => {
   const [password, setPassword] = useState('');
@@ -15,10 +19,15 @@ const ChangePassword = props => {
   const newPasswordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
   const successRef = useRef(null);
-  const [postChangePassword, message] = usePostChangePasswordMutation();
+  // const [postChangePassword, {isLoading}] = usePostChangePasswordMutation();
+  const isLoading= useGlobalLoader()
+  const {changePassword} =useProfile()
   const onSubmit = () => {
     // successRef.current.show();
-    postChangePassword({password, newPassword}).then(res => {
+    changePassword({password, newPassword,confirmPassword}).then(res => {
+      // console.log(" response of changePassword",res);
+      // Toast.success(res?.message)
+      props.navigation.goBack()
     });
   };
   return (
@@ -52,11 +61,15 @@ const ChangePassword = props => {
         onChangeText={setConfirmPassword}
         onSubmitEditing={onSubmit}
       />
-      <CustomButton
-        alignStyle={styles.btnContainer}
-        onPress={onSubmit}
-        text={'Update Password'}
-      />
+      {isLoading?
+    <ButtonLoading/>:
+    <CustomButton
+      alignStyle={styles.btnContainer}
+      onPress={onSubmit}
+      text={'Update Password'}
+    />
+
+    }
       <SuccessPopup
         title={'Success'}
         desc={'Your password has been updated\nsuccessfully.'}

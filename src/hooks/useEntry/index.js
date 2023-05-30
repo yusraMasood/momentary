@@ -141,17 +141,17 @@ export default () => {
    
     const body = {
       id: data?.journalEntry?._id,
-      journal: data?.journalEntry?.journal,
-      content: data?.journalEntry?.content,
-      hashtags: data?.journalEntry?.hashtags,
+      // journal: data?.journalEntry?.journal,
+      // content: data?.journalEntry?.content,
+      // hashtags: data?.journalEntry?.hashtags,
       privacy: data?.privacy,
-      images: data?.journalEntry?.images,
+      // images: data?.journalEntry?.images,
       selectedPeople: data?.selectedPeopleId,
-      location: {
-        name: data?.journalEntry?.location?.name,
-        coordinates: data?.journalEntry?.location?.coordinates,
-      },
-      pageDesign: data?.journalEntry?.pageDesign,
+      // location: {
+      //   name: data?.journalEntry?.location?.name,
+      //   coordinates: data?.journalEntry?.location?.coordinates,
+      // },
+      // pageDesign: data?.journalEntry?.pageDesign,
       comment: data?.journalEntry?.comment,
       share: data?.journalEntry?.share,
       multiComment: data?.journalEntry?.comment,

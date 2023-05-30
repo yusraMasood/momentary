@@ -23,7 +23,7 @@ const ForgotPassword = (props) => {
   // const [postVerifyEmail,{error,isLoading}]=usePostVerifyEmailMutation()
   const isLoading = useGlobalLoader();
   const onSubmit=()=>{
-    VerifyEmail({email  }).then((res)=>{
+    VerifyEmail({email}).then((res)=>{
       if(res?.otp){
             props.navigation.navigate("VerificationCode",{otp:res?.otp,email})
           }

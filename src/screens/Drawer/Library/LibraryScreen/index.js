@@ -30,7 +30,7 @@ const LibraryScreen = props => {
     return (
       <LibraryCard
       loader={isLoading}
-        image={item?.images.length > 0 ? item?.images[0]?.thumbnail : null}
+        image={item?.images?.length > 0 ? item?.images[0]?.thumbnail : null}
         onPress={() => props.navigation.navigate('EditEntry', {id: item?._id})}
       />
     );
@@ -54,7 +54,7 @@ const LibraryScreen = props => {
       <LibraryCard
       loader={isLoading}
 
-        image={item?.images.length > 0 ? item?.images[0]?.thumbnail : null}
+        image={item?.images?.length > 0 ? item?.images[0]?.thumbnail : null}
         onPress={() =>
           props.navigation.navigate('PostByLocation', {id: item?._id})
         }
@@ -67,7 +67,7 @@ const LibraryScreen = props => {
       <LibraryCard
       loader={isLoading}
 
-        image={item?.images.length > 0 ? item?.images[0]?.thumbnail : null}
+        image={item?.images?.length > 0 ? item?.images[0]?.thumbnail : null}
         onPress={() =>
           props.navigation.navigate('PostByLocation', {id: item?._id})
         }

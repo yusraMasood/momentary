@@ -17,6 +17,7 @@ import CustomDropdown from '../../../../components/Dropdowns/CustomDropdown';
 import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import {printingOptions, summaryData} from '../../../../utils/data';
 import SuccessPopup from '../../../../components/popups/SuccessPopup';
+import PhotoEditorPopup from '../../../../components/popups/PhotoEditorPopup';
 
 const BookPrintingSelectType = props => {
   const [progressCount, setProgressCount] = useState(15);
@@ -25,6 +26,7 @@ const BookPrintingSelectType = props => {
   const [dropdownFontValue, setDropdownFontValue] = useState('');
   const [fontIndex, setFontIndex] = useState(0);
   const [dropdownFontSizeValue, setDropdownFontSizeValue] = useState('');
+  const [pictureEditor,setPictureEditor] =useState(false)
   const successRef = useRef(null);
   const fontArray = ['Academic', 'Brutalist', 'Classical'];
   const [count, setCount] = useState(0);
@@ -86,7 +88,8 @@ const BookPrintingSelectType = props => {
         <CustomButton
           text={'Continue'}
           alignStyle={styles.alignBtn}
-          onPress={() => setProgressCount(progressCount + 15)}
+          // onPress={() => setProgressCount(progressCount + 15)}
+          onPress={()=> setPictureEditor(true)}
         />
       </View>
     );
@@ -318,6 +321,10 @@ const BookPrintingSelectType = props => {
         }
         onAccept={() => props.navigation.navigate('BookPrintingPlaceOrder')}
         styleContent={styles.popupStyle}
+      />
+      <PhotoEditorPopup
+      visible={pictureEditor}
+      onFinish={()=> console.log(" completed")}
       />
     </ScreenWrapper>
   );

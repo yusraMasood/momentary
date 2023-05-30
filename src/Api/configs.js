@@ -1,6 +1,6 @@
 export const urls = {
-  v1: `https://mobileapps.onlinetestingserver.com:1601/apis/`, //dev
-  v2: `https://mobileapps.onlinetestingserver.com:1601/`,
+  v1: `https://mobileapps.onlinetestingserver.com:1701/apis/`, //dev
+  v2: `https://mobileapps.onlinetestingserver.com:1701/`,
 };
 export const base_url = urls.v1;
 export const base_urlImage = urls.v2;
@@ -17,7 +17,7 @@ export const endpoints = {
     profile: 'user',
     update: 'user/edit',
     updateImage: 'upload/user',
-    changePassword:"user/changepassword/"
+    changePassword:"user/updatePassword"
   },
   passwordRecovery: {
     verifyEmail: 'user/forgotPassword/request',

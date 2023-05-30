@@ -12,7 +12,7 @@ import {linearColors} from '../../../../utils/appTheme';
 import styles from './styles';
 import { useGetProfileQuery, usePostImageMutation, usePostProfileMutation } from '../../../../state/account';
 import ImagePicker from '../../../../components/Image/ImagePicker';
-import { jsonToFormdata } from '../../../../Api/APIHelpers';
+import { Toast, jsonToFormdata } from '../../../../Api/APIHelpers';
 import { useInlineLoader } from '../../../../state/general';
 import ButtonLoading from '../../../../components/Loaders/ButtonLoading';
 
@@ -21,22 +21,25 @@ const EditProfile = props => {
   const {data} =useGetProfileQuery()
   const [postProfile,{isLoading,error}] =usePostProfileMutation()
   const [name,setName]=useState(data?.user?.fullName)
+  const [about,setAbout] =useState(data?.user?.about)
   const [phone,setPhone] =useState(data?.user?.phone)
-  const [image,setImage] =useState({uri: data?.user?.image?.thumbnail})
+  const [image,setImage] =useState( data?.user?.image)
   const [imageSelection,setImageSelection] =useState(false)
   const [postImage,message] =usePostImageMutation()
   const imageLoader =useInlineLoader()
   const phoneRef = useRef(null);
 
+  console.log("image", image);
   const onSubmit = () => {
-    if(image){
-      const formData = new FormData();
-      formData.append('image', image);
-      formData.append('entityType', "profile");
-      postImage(formData).then((res)=>{
-      })
-    }
-    postProfile({firstName:name,phone}).then((res)=>{
+    postProfile({firstName:name,phone,aboutimage: image?._id}).then((res)=>{
+      if(res?.data?.user)
+      {
+        Toast.success("Profile Updated Successfully")
+        props.navigation.goBack()
+      }
+      else{
+        Toast.error("Profile failed to update")
+      }
       // props.navigation.goBack();
     })
   };
@@ -48,7 +51,7 @@ const EditProfile = props => {
         <ButtonLoading/>:
 
       <View>
-        <Image source={image?.uri?{uri:image?.uri}: generalImages.userImage} style={styles.userImg} />
+        <Image source={image?.thumbnail?{uri:image?.thumbnail}: generalImages.userImage} style={styles.userImg} />
         <RippleHOC style={styles.cameraMainContainer} onPress={()=> setImageSelection(true)}>
         <LinearGradient colors={linearColors.yellow} style={styles.cameraContainer}>
           <Image source={icons.camera} style={styles.cameraStyle} />
@@ -67,6 +70,13 @@ const EditProfile = props => {
         onChangeText={setName}
       />
       <InputField
+        placeholder={'Write About Yourself'}
+        label={'About Yourself'}
+        onSubmitEditing={() => phoneRef.current.focus()}
+        value={about}
+        onChangeText={setAbout}
+      />
+      <InputField
         reference={phoneRef}
         placeholder={'Enter Phone No'}
         value={phone}
@@ -78,11 +88,16 @@ const EditProfile = props => {
         <RobotoRegular style={styles.titleText}>Email</RobotoRegular>
         <RobotoRegular style={styles.valueText}>{data?.user?.email}</RobotoRegular>
       </View>
-      <CustomButton
-        alignStyle={styles.btnContainer}
-        onPress={onSubmit}
-        text={'Update Profile'}
-      />
+      {
+        isLoading?
+        <ButtonLoading/>:
+        <CustomButton
+          alignStyle={styles.btnContainer}
+          onPress={onSubmit}
+          text={'Update Profile'}
+        />
+
+      }
       <ImagePicker
       image={image}
       setImage={setImage}

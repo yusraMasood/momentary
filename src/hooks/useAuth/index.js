@@ -6,11 +6,12 @@ import {
   usePostLoginMutation,
   usePostResetPasswordMutation,
   usePostSignupMutation,
+  usePostVerifyCodeMutation,
   usePostVerifyEmailMutation,
 } from '../../state/auth';
 import {validateEmail} from '../../utils/Validations';
 import {Toast, getMessage} from '../../Api/APIHelpers';
-import {toggleGlobalLoader} from '../../state/general';
+import {toggleGlobalLoader, toggleInlineLoader} from '../../state/general';
 import { useGetProfileQuery } from '../../state/account';
 
 export default () => {
@@ -18,12 +19,11 @@ export default () => {
   const [postSignup] = usePostSignupMutation();
   const [postVerifyEmail]=usePostVerifyEmailMutation()
   const [postResetPassword] = usePostResetPasswordMutation();
+  const [postVerifyCode] = usePostVerifyCodeMutation();
   const dispatch = useDispatch();
 
-  console.log("message",message);
+  // console.log("message",message);
     const loginUser = async ({email, password}) => {
-   
-
     try {
       if (email.trim() === '') {
         Toast.error('Please Enter Your Email');
@@ -126,7 +126,7 @@ export default () => {
     }
   };
   const VerifyEmail = async ({email}) => {
-    dispatch(toggleGlobalLoader(true));
+   
 
     try {
       if (email.trim() === '') {
@@ -137,14 +137,33 @@ export default () => {
         Toast.error('Please Enter Valid Email');
         throw new Error('Please Enter Valid Email');
       }
-
+      dispatch(toggleGlobalLoader(true));
      const response= await postVerifyEmail({email}).unwrap()
       dispatch(toggleGlobalLoader(false));
       return response
     } catch (e) {
       dispatch(toggleGlobalLoader(false));
-      Toast.error(getMessage(e));
-      throw new Error(getMessage(e?.message));
+      Toast.error(getMessage(e?.data));
+      throw new Error(getMessage(e?.data));
+    }
+  };
+  const VerifyCode = async ({email,otp}) => {
+    try {
+      if (otp.trim() === '') {
+        Toast.error('Please Enter Your code that has been sent to your email.');
+        throw new Error('Please Enter Your code that has been sent to your email.');
+      }
+      console.log("email,otp", email,otp);
+      dispatch(toggleInlineLoader(true));
+     const response= await postVerifyCode({ email,otp}).unwrap()
+      dispatch(toggleInlineLoader(false));
+      console.log("response ", response);
+      return response
+    } catch (e) {
+      dispatch(toggleInlineLoader(false));
+      // console.log("error", getMessage(e?.data));
+      Toast.error(getMessage(e?.data));
+      throw new Error(getMessage(e?.data));
     }
   };
   const resetPassword = async ({email,otp,confirmPassword,password}) => {
@@ -170,8 +189,8 @@ export default () => {
       return response
     } catch (e) {
       dispatch(toggleGlobalLoader(false));
-      Toast.error(getMessage(e));
-      throw new Error(getMessage(e?.message));
+      Toast.error(getMessage(e?.data));
+      throw new Error(getMessage(e?.data));
     }
   };
   
@@ -179,6 +198,7 @@ export default () => {
     loginUser,
     signupUser,
     VerifyEmail,
-    resetPassword
+    resetPassword,
+    VerifyCode
   };
 };
