@@ -1,12 +1,13 @@
 import React from 'react'
 import { View } from 'react-native'
-import { PhotoEditorModal } from "react-native-photoeditorsdk";
+// import { PhotoEditorModal } from "react-native-photoeditorsdk";
 import { generalImages, sampleImages } from '../../../assets/images';
 
 
 const PhotoEditorPopup=(props)=>{
     return(
-        <PhotoEditorModal
+      <View>
+        {/* <PhotoEditorModal
         // Add a photo from the assets directory.
         image={generalImages.bookcover2}
         // Determine whether the editor should be visible or not.
@@ -25,7 +26,8 @@ const PhotoEditorPopup=(props)=>{
           console.log(error);
           props.onFinish();
         }}
-      ></PhotoEditorModal>
+      ></PhotoEditorModal> */}
+      </View>
     )
 }
 export default PhotoEditorPopup
