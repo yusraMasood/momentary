@@ -2,11 +2,12 @@
 
 buildscript {
     ext {
+        kotlin_version = '1.6.21'
         buildToolsVersion = "33.0.0"
-        kotlinVersion = "1.4.0"
-        minSdkVersion = 21
+        minSdkVersion = 27
         compileSdkVersion = 33
         targetSdkVersion = 33
+
 
         // We use NDK 23 which has both M1 support and is the side-by-side NDK version from AGP.
         ndkVersion = "23.1.7779620"
@@ -15,11 +16,21 @@ buildscript {
         google()
         mavenCentral()
         maven { url "https://artifactory.img.ly/artifactory/imgly" }
+
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.3.1")
         classpath("com.facebook.react:react-native-gradle-plugin")
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath 'ly.img.android.sdk:plugin:10.7.1'
+        classpath 'ly.img.android.sdk:plugin:10.7.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+    }
+    allprojects {
+        repositories {
+            // Other repositories
+            maven {
+                url "https://artifactory.img.ly/artifactory/imgly"
+            }
+        }
     }
 }

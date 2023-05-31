@@ -88,19 +88,26 @@ const BookPrintingSelectType = props => {
         <CustomButton
           text={'Continue'}
           alignStyle={styles.alignBtn}
-          // onPress={() => setProgressCount(progressCount + 15)}
-          onPress={()=> setPictureEditor(true)}
+          onPress={() => {
+            setProgressCount(progressCount + 15)
+            setPictureEditor(true)
+          }}
         />
       </View>
     );
   };
   const renderStepThree = () => {
     return (
+      <View>
+        {pictureEditor &&
+        <PhotoEditorPopup/>
+        }
       <CustomButton
         text={'Continue'}
         alignStyle={styles.alignBtn}
         onPress={() => setProgressCount(progressCount + 15)}
       />
+      </View>
     );
   };
 

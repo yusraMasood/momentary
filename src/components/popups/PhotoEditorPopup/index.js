@@ -1,32 +1,81 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { View } from 'react-native'
-// import { PhotoEditorModal } from "react-native-photoeditorsdk";
-import { generalImages, sampleImages } from '../../../assets/images';
+import RNFS from 'react-native-fs';
+import {
+  PESDK,
+  PhotoEditorModal,
+  Configuration,
+} from "react-native-photoeditorsdk";
+import CustomButton from '../../Buttons/CustomButton';
+import { generalImages } from '../../../assets/images';
+
 
 
 const PhotoEditorPopup=(props)=>{
+  const [loading,setLoading] =useState(false)
+  PESDK.openEditor(generalImages.bookcover);
+
+//   PhotoEditor.Edit({
+//     path: RNFS.DocumentDirectoryPath + "https://www.gamespot.com/a/uploads/screen_kubrick/1603/16030002/4111613-mha-01.png"
+// });
     return(
       <View>
-        {/* <PhotoEditorModal
-        // Add a photo from the assets directory.
-        image={generalImages.bookcover2}
-        // Determine whether the editor should be visible or not.
-        visible={props.visible}
-        onExport={(result) => {
-          // The user exported a new photo successfully and the newly generated photo is located at `result.image`.
-          console.log(result.image);
-          props.onFinish();
+        {/* <CustomButton
+        text="Open Gallery"
+        onPress={()=>{
+          this.setState({loading: true});
+          ImagePicker.launchCamera(
+            {
+              storageOptions: {
+                skipBackup: true,
+                path: 'images',
+              },
+            },
+            response => {
+              if (response.didCancel) {
+                this.setState({loading: false});
+              } else if (response.error) {
+                this.setState({loading: false});
+              } else {
+                let photoPath =
+                  RNFS.DocumentDirectoryPath + '/' + response.fileName;
+                RNFS.moveFile(response.uri, photoPath)
+                  .then(() => {
+                    // console.log('FILE WRITTEN!');
+                    RNPhotoEditor.Edit({
+                      path:
+                        RNFS.DocumentDirectoryPath +
+                        '/' +
+                        response.fileName,
+                      hiddenControls: ['save', 'sticker'],
+                      onDone: resp => {
+                        let photoPathResp =
+                          Platform.OS === 'android'
+                            ? 'file://' + resp
+                            : 'file://' + resp;
+                        this.props.reduxActions.setPhoto(
+                          this.props.navigation,
+                          this.props.reduxState.photos,
+                          photoPathResp,
+                          () => {
+                            this.setState({loading: false});
+                          },
+                        );
+                      },
+                      onCancel: () => {
+                        this.setState({loading: false});
+                      },
+                    });
+                  })
+                  .catch(err => {
+                    this.setState({loading: false});
+                    console.log(err.message);
+                  });
+              }
+            },
+          );
         }}
-        onCancel={() => {
-          // The user tapped on the cancel button within the editor.
-          props.onFinish();
-        }}
-        onError={(error) => {
-          // There was an error generating the photo.
-          console.log(error);
-          props.onFinish();
-        }}
-      ></PhotoEditorModal> */}
+        /> */}
       </View>
     )
 }
