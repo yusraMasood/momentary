@@ -47,8 +47,6 @@ export const endpoints = {
     removeFriend:"user/my-friends/remove",
     removeFriendRequest:"user/friend-requests/remove",
     friendDetails:"user/my-friends"
-
-
   },
   library:{
     library:"user/library"

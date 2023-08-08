@@ -46,7 +46,7 @@ export const getMessage = json => {
       }
     }
     default: {
-      return message;
+      return json;
     }
   }
 };
