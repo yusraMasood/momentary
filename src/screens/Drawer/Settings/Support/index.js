@@ -13,15 +13,19 @@ const Support = props => {
       array: [
         {
          heading: 'Acceptable Use',   
-         navigate:"SupportDetails"
+         navigate:"SupportDetails",
+         params:"acceptableUse"
         },
         {
             heading:'Advertising and Sponsored Content',
-            navigate:"SupportDetails"
+            navigate:"SupportDetails",
+         params:"advertisingAndSponsoredContent"
+
         },
         {
             heading:'Tracking and Data Sharing',
-            navigate:"SupportDetails"
+            navigate:"SupportDetails",
+            params:"trackingAndDataSharing"
         },
       ],
     },
@@ -30,15 +34,18 @@ const Support = props => {
       array: [
         {
             heading: 'Account and Data Removal',   
-            navigate:"SupportDetails"
+            navigate:"SupportDetails",
+            params:"accountAndDataRemoval"
            },
            {
             heading: 'Annual Data Security Audit - 2022',
-            navigate:"SupportDetails"
+            navigate:"SupportDetails",
+            params:"acceptableUse"
            },
            {
             heading: 'Data Ownership and Security', 
-            navigate:"SupportDetails"
+            navigate:"SupportDetails",
+            params:"dataOwnershipAndSecurity"
            },
       ],
     },
@@ -66,7 +73,7 @@ const Support = props => {
             return(
                 <StoreCard
                 key={innerIndex}
-                  onPress={() => props.navigation.navigate(value?.navigate,{type: value?.heading})}
+                  onPress={() => props.navigation.navigate(value?.navigate,{type: value?.heading,params:value?.params})}
                   heading={value?.heading}
                   icon={value.arrow}
                   textStyle={styles.textCard}

@@ -7,47 +7,42 @@ import RobotoRegular from '../../../../components/Texts/RobotoRegular';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import { linearColors } from '../../../../utils/appTheme';
 import styles from './styles';
+import ContentLoader from '../../../../components/Loaders/ContentLoader';
+import { useGetSupportDetailsQuery } from '../../../../state/setting';
+import RenderHtmlComponent from '../../../../components/ReusableComponent/RenderHtmlComponent';
+import ContentContainer from '../../../../components/wrappers/ContentContainer';
 
 const SupportDetails = (props) => {
+  const {data,isLoading} =useGetSupportDetailsQuery(props?.route?.params?.params)
+
+  console.log(" data in spport", data);
     const pointsArray=[1,2,3,4,5]
-    // useLayoutEffect(() => {
-    //   props.navigation.setOptions({
-    //     headerTitle: () => {
-    //       return (
-    //         <DamionRegular style={styles.titleCenterText}>
-    //      {props.route?.params?.type}
-    //         </DamionRegular>
-    //       );
-    //     },
-    //   });
-    // }, [props.navigation]);
+
+
+    if(isLoading)
+    {
+      return(
+        <ScreenWrapper style={styles.container}>
+          <ContentLoader/>
+        </ScreenWrapper>
+      )
+    }
   return (
     <ScreenWrapper style={styles.container}>
-      <RobotoMedium style={styles.headingText}>{props.route?.params?.type}</RobotoMedium>
-      <RobotoRegular style={styles.descText}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod
-        bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra
-        justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque
-        penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam
-        fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci,
-        sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit ameeuismod
-        bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra
-        justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque
-        penatibus et magnis dis parturient Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin
-        gravida dolor sit amet lacus accumsan 
-      </RobotoRegular>
-      <RobotoMedium style={styles.headingText}>Uses</RobotoMedium>
-      {pointsArray.map((item,index)=>{
+      <ContentContainer>
+      <RobotoMedium style={styles.headingText}>{data?.content?.title}</RobotoMedium>
+      <RenderHtmlComponent content={data?.content?.content} removeNumberOfLines/>
+      <RobotoMedium style={styles.headingText}>{data?.content?.secondaryTitle}</RobotoMedium>
+      {data?.content?.secondaryContent.map((item,index)=>{
         return(
             <View key={index} style={styles.usesContainer}>
                 <LinearGradient colors={linearColors.yellow} style={styles.circleStyle}></LinearGradient>
-                <RobotoRegular style={styles.pointText}>Lorem ipsum dolor sit amet</RobotoRegular>
+                <RobotoRegular style={styles.pointText}>{item?.body}</RobotoRegular>
             </View>
 
         )
       })}
-
+</ContentContainer>
     </ScreenWrapper>
   );
 };

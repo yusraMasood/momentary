@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {View, Image} from 'react-native';
 import CustomButton from '../../../../components/Buttons/CustomButton';
 import InputField from '../../../../components/Inputs/InputField';
@@ -7,30 +7,54 @@ import RobotoMedium from '../../../../components/Texts/RobotoMedium';
 import RobotoRegular from '../../../../components/Texts/RobotoRegular';
 import ScreenWrapper from '../../../../components/wrappers/ScreenWrapper';
 import styles from './styles';
+import useSetting from '../../../../hooks/useSetting';
+import { Toast } from '../../../../Api/APIHelpers';
 
 const ContactUs = props => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  // const [loading,setLoading] =useState()
+
+  const {contactAdmin} = useSetting();
   const successRef = useRef(null);
   const emailRef = useRef(null);
   const subjectRef = useRef(null);
   const messageRef = useRef(null);
+
   const onSubmit = () => {
-    successRef.current.show();
+    try{
+      contactAdmin({name,email,subject,message}).then((res)=>{
+        console.log("res", res);
+        if(res?.message)
+        {
+          successRef.current.show();
+        }
+        // if(Res)
+      })
+
+    }finally{
+      
+
+
+    }
   };
   return (
     <ScreenWrapper style={styles.container}>
       <InputField
         placeholder={'Enter Name'}
         label={'Name'}
-        // value={email}
-        // onChangeText={setEmail}
+        value={name}
+        onChangeText={setName}
         onSubmitEditing={() => emailRef.current.focus()}
       />
       <InputField
         reference={emailRef}
         placeholder={'Enter Email Address'}
         label={'Email'}
-        // value={email}
-        // onChangeText={setEmail}
+        value={email}
+        onChangeText={setEmail}
         keyboardType={'email-address'}
         onSubmitEditing={() => subjectRef.current.focus()}
       />
@@ -38,8 +62,8 @@ const ContactUs = props => {
         reference={subjectRef}
         placeholder={'Enter Subject'}
         label={'Subject'}
-        // value={email}
-        // onChangeText={setEmail}
+        value={subject}
+        onChangeText={setSubject}
         onSubmitEditing={() => messageRef.current.focus()}
       />
       <InputField
@@ -47,11 +71,10 @@ const ContactUs = props => {
         placeholder={'Enter Message'}
         inputContainerIcon={styles.messageInput}
         numberOfLines={8}
-        // label={'Subject'}
         multiline={true}
         inputContainer={styles.input}
-        // value={email}
-        // onChangeText={setEmail}
+        value={message}
+        onChangeText={setMessage}
         onSubmitEditing={onSubmit}
       />
       <CustomButton text={'Submit'} onPress={onSubmit} />

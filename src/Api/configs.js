@@ -59,6 +59,10 @@ export const endpoints = {
     journalDetails:"user/journals",
     update:"user/journals/update",
     delete:"user/journals/delete"
+  },
+  setting:{
+    supportContent:"cms/support",
+    contact:"user/contactUs"
   }
 };
 // export const headers={

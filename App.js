@@ -8,6 +8,7 @@ import { persistor, store } from './src/state';
 
 const App = () => {
   useEffect(() => {
+
     AnimatedSplash.hide();
   }, []);
 

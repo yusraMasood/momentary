@@ -19,7 +19,7 @@ const RenderHtmlComponent=(props)=>{
         // allowedStyles={{height: 100}}
         source={source}
         // baseStyle={{backgroundColor: "red"}}
-        defaultTextProps={defaultTextProps}
+        defaultTextProps={props.removeNumberOfLines?{}: defaultTextProps}
         enableExperimentalMarginCollapsing={true}
         tagsStyles={{
           p: styles.descText,
